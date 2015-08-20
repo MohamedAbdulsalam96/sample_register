@@ -14,13 +14,13 @@ class Equipment(Document):
 		self.validate_serial_number()
 
 
-	# Generate equipment cod ewith combination of manufactured by and serial number
+	# Generate equipment code with combination of manufactured by and serial number
 	def generate_equipment_code(self):
 		if self.serial_number and self.manufactured_by:
 			self.equipment_code = self.manufactured_by + '-' + self.serial_number
 
 
-	# Generate model numbera s per the formula shared like HV?LV?LLV V; Rating1/Rating2 kVA ;/Phase
+	# Generate model number as per the formula shared like HV?LV?LLV V; Rating1/Rating2 kVA ;/Phase
 	def generate_model_no(self):
 		model_no = ''
 		s = '/'

@@ -15,7 +15,7 @@ def get_data():
 			]
 		},
 		{
-			"label": _("Master"),
+			"label": _("Masters"),
 			"icon": "icon-wrench",
 			"items": [
 				{
@@ -26,12 +26,17 @@ def get_data():
 				{
 					"type": "doctype",
 					"name": "Equipment Type",
-					"description":_("Equipment Type Details."),
+					"description":_("Equipment Type."),
 				},
 				{
 					"type": "doctype",
 					"name": "Equipment Make",
-					"description":_("Equipment Make Details."),
+					"description":_("Equipment Make."),
+				},
+				{
+					"type": "doctype",
+					"name": "Functional Location",
+					"description":_("Functional Location Details."),
 				},
 			]
 		},
