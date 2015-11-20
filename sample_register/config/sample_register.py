@@ -38,6 +38,31 @@ def get_data():
 					"name": "Functional Location",
 					"description":_("Functional Location Details."),
 				},
+				{
+					"type": "doctype",
+					"name": "Test Group",
+					"description":_("Test Group"),
+				},
+				{
+					"type": "doctype",
+					"name": "Test Name",
+					"description":_("Test Name"),
+				},
+				{
+					"type": "doctype",
+					"name": "Oil Type",
+					"description":_("Type Of oil"),
+				},
+				{
+					"type": "doctype",
+					"name": "Standard",
+					"description":_("Standard"),
+				},
+				{
+					"type": "doctype",
+					"name": "Test",
+					"description":_("Test Master"),
+				},
 			]
 		},
 
