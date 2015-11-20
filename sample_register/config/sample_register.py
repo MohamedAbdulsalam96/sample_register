@@ -35,7 +35,7 @@ def get_data():
 				},
 				{
 					"type": "doctype",
-					"name": "Functional Location",
+					"name": "Code Designation",
 					"description":_("Functional Location Details."),
 				},
 				{
