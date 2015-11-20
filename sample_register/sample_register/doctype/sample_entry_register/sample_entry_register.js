@@ -20,7 +20,8 @@ cur_frm.fields_dict['technical_contact'].get_query = function(doc) {
 	return {
 		filters: {
 			
-			"technical_contact": 1
+			"technical_contact": 1,
+			"customer":doc.customer
 		}
 	}
 }
@@ -50,7 +51,8 @@ cur_frm.fields_dict['order_id'].get_query = function(doc) {
 	return {
 		filters: {
 			
-			"customer": doc.customer
+			"customer": doc.customer,
+			"order_status" : ["in", ["In-Progress", "Open"]]
 		}
 	}
 }
@@ -74,9 +76,10 @@ cur_frm.cscript.technical_contact = function(doc,cdt,cdn){
 
 }
 
+//without specifying customer sample entry will not be taken
 cur_frm.cscript.container_id = function(doc,cdt,cdn){
 	var d = locals[cdt][cdn];
 	if(doc.customer == null)
 		msgprint(__("Please specify") + ": " +
-						"customer" + __("Without Customer details No sample can be entered."));
+						"customer" + __("Without Customer details No samples can be entered."));
 }
