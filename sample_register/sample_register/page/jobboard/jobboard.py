@@ -35,7 +35,7 @@ def get_support_ticket_data(args):
 @frappe.whitelist()
 def get_sample_data():
 	return {
-	"get_sample_data": frappe.db.sql("""select false, name, customer, type from `tabSample Entry Register`  order by name""", as_list=1)
+	"get_sample_data": frappe.db.sql("""select false, name, customer, type, priority, standards, test_group from `tabSample Entry Register`  order by name""", as_list=1)
 	}
 
 @frappe.whitelist()
@@ -65,13 +65,15 @@ def create_job_card_1(test_group,selectedData,test_list_unicode):
 	# frappe.msgprint("Job Card "+bank.name+" created successfuly for : "+test_group);
 	#frappe.msgprint(type(selectedData))
 	# print a
-	# frappe.msgprint(len(selectedData))
+	# frappe.msgprint(selectedData)
 	selectedData_json = json.loads(selectedData)
 	for r in selectedData_json:
 		doc_job_card_creation=frappe.new_doc("Job Card Creation")
 		doc_job_card_creation.sample_id = r.get("sampleid")
 		doc_job_card_creation.customer = r.get("customer")
 		doc_job_card_creation.type = r.get("type")
+		doc_job_card_creation.priority = r.get("priority")
+		doc_job_card_creation.standards = r.get("standard")
 		for test in test_list:
 			test_req={
 				"doctype": "Job Card Creation Test Details",
@@ -82,5 +84,19 @@ def create_job_card_1(test_group,selectedData,test_list_unicode):
 		doc_job_card_creation.save()
 		frappe.msgprint("Job Card "+doc_job_card_creation.name+" is created successfuly for sample : "+r.get("sampleid"));
 		# frappe.msgprint(r.get("sampleid")+r.get("type")+"customer "+r.get("customer"))
+
+@frappe.whitelist()
+def set_sample_data(priority,standards,test_group,selectedData):
+	frappe.msgprint(selectedData)
+	selectedData_json = json.loads(selectedData)
+	for r in selectedData_json:
+		if r.get("sampleid"):
+			# frappe.msgprint("in save"+self.sample_id)
+			sample_entry_doc=frappe.get_doc("Sample Entry Register",r.get("sampleid"))
+			sample_entry_doc.priority = priority
+			sample_entry_doc.standards = standards
+			sample_entry_doc.test_group = test_group
+			sample_entry_doc.save()
+			frappe.msgprint("Sample Enry Register: "+sample_entry_doc.name+" is updated");
 
 

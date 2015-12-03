@@ -63,6 +63,7 @@ sample_register.JobCard = Class.extend({
 		this.page = wrapper.page;
 		this.page.set_primary_action(__("Create Job Card"),
 			function() { me.refresh(); }, "icon-refresh")
+		this.page.add_menu_item(__("Set Priority"), function() {me.set_sample_data();	}, true);
 
 		this.department = this.page.add_field({fieldtype:"Link", label:"Sample Entry Register",
 			fieldname:"sample_entry_register", options:"Sample Entry Register"});
@@ -87,6 +88,67 @@ sample_register.JobCard = Class.extend({
 				"id": dataContext.id,
 				"checked": dataContext.checked ? 'checked="checked"' : ""
 			})
+	},
+	set_sample_data: function(){
+		// msgprint("in set sample data");
+		//sample data entry start
+		var me = this;
+		var selectedData = [],
+		selectedIndexes;
+		selectedIndexes = grid.getSelectedRows();
+		jQuery.each(selectedIndexes, function (index, value) {
+		  selectedData.push(grid.getData()[value]);
+		});
+		 // frappe prompt box code
+		 	var d = frappe.prompt([
+	    {label:__("Priority"), fieldtype:"Select",options: ["1-Emergency","2-Urgent", "3-Normal"],fieldname:"priority",'reqd': 1},
+	    {fieldtype: "Column Break"},
+	    {label:__("Standards"), fieldtype:"Link",options: "Standard",fieldname:"standards", 'reqd': 1},
+	    {fieldtype: "Column Break"},
+	    {label:__("Test Group"), fieldtype:"Link",options: "Test Group",fieldname:"test_group",'reqd': 1},
+	    //{'fieldname': 'select_test', 'fieldtype': 'HTML',options: "Select Test Group<br>", 'label': 'Select Test', 'reqd': 0},
+	    {fieldtype: "Section Break"},
+	   // {'fieldname': 'comment', 'fieldtype': 'Text', 'label': 'Selected Test', 'reqd': 1},
+	    {'fieldname': 'test', 'fieldtype': 'HTML',options: "", 'label': 'test', 'reqd': 0},
+	  //  {'fieldtype': 'Button',	'label': __('Add')}, 
+	],
+	function(values){
+	    var c = d.get_values();
+		var me = this;
+	   //submision of prompt box
+        var test_list = [];
+
+        //var test_list_1 = [];
+		$(".frappe-control input:checkbox:checked").each ( function() {
+			test_list.push($(this).val());
+		 	//alert ( $(this).val() );
+		});
+
+	   //getting check test
+       //msgprint(c.test_group)
+       //msgprint(selectedData)
+        //create job card against each sample
+	     frappe.call({
+				method: "sample_register.sample_register.page.jobboard.jobboard.set_sample_data",
+				 args: {
+				 	"priority": c.priority,
+				 	"standards": c.standards,
+				 	"test_group": c.test_group,
+				 	"selectedData":selectedData
+				 },	
+				callback: function(r) {
+  				  location.reload();				}
+			});
+
+	},
+	'Select Test',
+	'Submit'
+	);
+     
+
+
+
+		//sample data entry end
 	},
 	refresh: function(){
 		//this.check_mandatory_fields()
@@ -296,9 +358,9 @@ sample_register.JobCard = Class.extend({
 		        sampleid: data1.get_sample_data[i][1],
 		        customer: data1.get_sample_data[i][2],
 		        type: data1.get_sample_data[i][3],
-		        priority: "",
-		        standard: "",
-		        test_group: ""
+		        priority: data1.get_sample_data[i][4],
+		        standard: data1.get_sample_data[i][5],
+		        test_group: data1.get_sample_data[i][6]
 		      };
 		    }
 		    grid = new Slick.Grid("#myGrid", data, columns, options);
