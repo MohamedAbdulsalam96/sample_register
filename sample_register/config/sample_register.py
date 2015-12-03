@@ -12,6 +12,11 @@ def get_data():
 					"name": "Sample Entry Register",
 					"description": _("All samples related information."),
 				},
+				{
+					"type": "doctype",
+					"name": "Job Card Creation",
+					"description": _("All Job Card related information."),
+				},
 			]
 		},
 		{
@@ -64,6 +69,19 @@ def get_data():
 					"name": "Test",
 					"description":_("Test Master"),
 				},
+			]
+		},
+		{
+			"label": _("Tools"),
+			"icon": "icon-wrench",
+			"items": [
+				{
+					"type": "page",
+					"name": "jobboard",
+					"icon": "icon-sitemap",
+					"label": _("Job Card Creation"),
+				},
+
 			]
 		},
 

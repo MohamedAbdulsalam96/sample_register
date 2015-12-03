@@ -1,0 +1,26 @@
+{
+ "content": null, 
+ "creation": "2015-11-27 18:35:06.135544", 
+ "docstatus": 0, 
+ "doctype": "Page", 
+ "icon": "icon-bar-chart", 
+ "idx": 0, 
+ "modified": "2015-11-27 18:35:06.135544", 
+ "modified_by": "Administrator", 
+ "module": "Sample Register", 
+ "name": "jobcard-creation", 
+ "owner": "Administrator", 
+ "page_name": "jobcard-creation", 
+ "roles": [
+  {
+   "role": "Analytics"
+  }, 
+  {
+   "role": "All"
+  }
+ ], 
+ "script": null, 
+ "standard": "Yes", 
+ "style": null, 
+ "title": "icon-bar-chart"
+}
