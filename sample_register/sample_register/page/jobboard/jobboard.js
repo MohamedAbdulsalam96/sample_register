@@ -17,7 +17,7 @@ frappe.require("assets/frappe/js/lib/slickgrid/plugins/slick.cellselectionmodel.
 frappe.require("assets/frappe/js/lib/slickgrid/plugins/slick.rowselectionmodel.js");
 frappe.require("assets/frappe/js/lib/slickgrid/plugins/slick.cellselectionmodel.js");
 
-var cur_page = null;
+
 frappe.pages['jobboard'].on_page_load = function(wrapper) {
 	var page = frappe.ui.make_app_page({
 		parent: wrapper,
@@ -63,12 +63,50 @@ sample_register.JobCard = Class.extend({
 		this.page = wrapper.page;
 		this.page.set_primary_action(__("Create Job Card"),
 			function() { me.refresh(); }, "icon-refresh")
-		this.page.add_menu_item(__("Set Priority"), function() {me.set_sample_data();	}, true);
+		this.page.add_menu_item(__("Set Priority"), function() {me.set_priority_data();	}, true);
+		this.page.add_menu_item(__("Set Standard"), function() {me.set_standards_data();	}, true);
+		this.page.add_menu_item(__("Set Priority & Standard"), function() {me.set_sample_data();	}, true);
+		this.page.add_menu_item(__("Refresh"), function() {me.refresh(); }, true);
 
-		this.department = this.page.add_field({fieldtype:"Link", label:"Sample Entry Register",
+
+		this.sample_entry_register = this.page.add_field({fieldtype:"Link", label:"Sample Entry Register",
 			fieldname:"sample_entry_register", options:"Sample Entry Register"});
+		this.with_job_card = this.page.add_field({fieldtype:"Check", label:"With Job Card",
+			fieldname:"with_job_card"});
+		this.with_job_card.$input.on("change", function() {
+			with_job=$(this).prop("checked")
+			msgprint(with_job);
+			var data = [];
+			grid.setData(data);
+			grid.render();   wokring
+
+			//data with and without job
+
+			 frappe.call({
+				method: "sample_register.sample_register.page.jobboard.jobboard.get_sample_data",
+				type: "GET",
+				args: {
+					args:{
+
+					}
+				},
+				callback: function(r){
+					if(r.message){
+						me.data = r.message;
+						me.make_grid(r.message,columns,options)
+						//me.waiting.toggle(false);
+
+					}
+				}
+			});
+			//data with and without job end
+
+		});
 	},
-    create_job: function(){
+//job function
+
+//job function end
+     create_job: function(){
     	frappe.msgprint("Creating job in JobCard")
      },
 
@@ -90,7 +128,6 @@ sample_register.JobCard = Class.extend({
 			})
 	},
 	set_sample_data: function(){
-		// msgprint("in set sample data");
 		//sample data entry start
 		var me = this;
 		var selectedData = [],
@@ -99,117 +136,157 @@ sample_register.JobCard = Class.extend({
 		jQuery.each(selectedIndexes, function (index, value) {
 		  selectedData.push(grid.getData()[value]);
 		});
-		 // frappe prompt box code
-		 	var d = frappe.prompt([
+	 	var d = frappe.prompt([
 	    {label:__("Priority"), fieldtype:"Select",options: ["1-Emergency","2-Urgent", "3-Normal"],fieldname:"priority",'reqd': 1},
 	    {fieldtype: "Column Break"},
 	    {label:__("Standards"), fieldtype:"Link",options: "Standard",fieldname:"standards", 'reqd': 1},
-	    {fieldtype: "Column Break"},
-	    {label:__("Test Group"), fieldtype:"Link",options: "Test Group",fieldname:"test_group",'reqd': 1},
-	    //{'fieldname': 'select_test', 'fieldtype': 'HTML',options: "Select Test Group<br>", 'label': 'Select Test', 'reqd': 0},
 	    {fieldtype: "Section Break"},
-	   // {'fieldname': 'comment', 'fieldtype': 'Text', 'label': 'Selected Test', 'reqd': 1},
 	    {'fieldname': 'test', 'fieldtype': 'HTML',options: "", 'label': 'test', 'reqd': 0},
-	  //  {'fieldtype': 'Button',	'label': __('Add')}, 
-	],
-	function(values){
-	    var c = d.get_values();
-		var me = this;
-	   //submision of prompt box
-        var test_list = [];
+		],
+		function(values){
+		    var c = d.get_values();
+			var me = this;
+		     frappe.call({
+					method: "sample_register.sample_register.page.jobboard.jobboard.set_sample_data",
+					 args: {
+					 	"priority": c.priority,
+					 	"standards": c.standards,
+					 	"selectedData":selectedData
+					 },	
+					callback: function(r) {
+	  				  location.reload();				}
+				});
 
-        //var test_list_1 = [];
-		$(".frappe-control input:checkbox:checked").each ( function() {
-			test_list.push($(this).val());
-		 	//alert ( $(this).val() );
-		});
-
-	   //getting check test
-       //msgprint(c.test_group)
-       //msgprint(selectedData)
-        //create job card against each sample
-	     frappe.call({
-				method: "sample_register.sample_register.page.jobboard.jobboard.set_sample_data",
-				 args: {
-				 	"priority": c.priority,
-				 	"standards": c.standards,
-				 	"test_group": c.test_group,
-				 	"selectedData":selectedData
-				 },	
-				callback: function(r) {
-  				  location.reload();				}
-			});
-
-	},
-	'Select Test',
-	'Submit'
-	);
-     
-
-
-
+		},
+		'Select Test',
+		'Submit'
+		);
 		//sample data entry end
 	},
+	//set priority
+	set_priority_data: function(){
+		var me = this;
+		var selectedData = [],
+		selectedIndexes;
+		selectedIndexes = grid.getSelectedRows();
+		jQuery.each(selectedIndexes, function (index, value) {
+		  selectedData.push(grid.getData()[value]);
+		});
+		var d = frappe.prompt([
+		{label:__("Priority"), fieldtype:"Select",options: ["1-Emergency","2-Urgent", "3-Normal"],fieldname:"priority",'reqd': 1},			],
+		function(values){
+		    var c = d.get_values();
+			var me = this;
+		     frappe.call({
+					method: "sample_register.sample_register.page.jobboard.jobboard.set_priority_data",
+					 args: {
+					 	"priority": c.priority,
+					 	"selectedData":selectedData
+					 },	
+					callback: function(r) {
+	  				  location.reload();				}
+				});
+
+		},
+		'Select Test',
+		'Submit'
+		);
+	},
+	//set priority end
+
+	//set standards
+	set_standards_data: function(){
+		var me = this;
+		var selectedData = [],
+		selectedIndexes;
+		selectedIndexes = grid.getSelectedRows();
+		jQuery.each(selectedIndexes, function (index, value) {
+		  selectedData.push(grid.getData()[value]);
+		});
+		var d = frappe.prompt([
+	    {label:__("Standards"), fieldtype:"Link",options: "Standard",fieldname:"standards", 'reqd': 1},
+			],
+		function(values){
+		    var c = d.get_values();
+			var me = this;
+		     frappe.call({
+					method: "sample_register.sample_register.page.jobboard.jobboard.set_standards_data",
+					 args: {
+					 	"standards": c.standards,
+					 	"selectedData":selectedData
+					 },	
+					callback: function(r) {
+	  				  location.reload();				}
+				});
+
+		},
+		'Select Test',
+		'Submit'
+		);
+	},
+	//set standards end
 	refresh: function(){
 		//this.check_mandatory_fields()
 		var me = this;
+		// msgprint(me.with_job_card);
 		//this.waiting.toggle(true);
 		//msgprint(this.page.fields_dict.sample_entry_register.get_parsed_value());
 		//msgprint(grid);
 		//test selection
-//t3 start
-			var selectedData = [],
-			    selectedIndexes;
 
-			selectedIndexes = grid.getSelectedRows();
-			jQuery.each(selectedIndexes, function (index, value) {
-			  selectedData.push(grid.getData()[value]);
-			});
+		var selectedData = [],
+		    selectedIndexes;
+
+		selectedIndexes = grid.getSelectedRows();
+		jQuery.each(selectedIndexes, function (index, value) {
+		  selectedData.push(grid.getData()[value]);
+		});
 			//msgprint(selectedData);
 			//msgprint("selected samples are:");
 			// for(r in selectedData){
 			 	//msgprint(selectedData[0]["sampleid"])   //print selected sample id
 			// }
 			//msgprint(selectedData[0]["sampleid"]);  //selected data contains row data of currently selected checkbox
-//t3 end
            // var rows = grid.getData();
             //msgprint(rows[0]["sampleid"]);
            // msgprint(rows[1]["sampleid"]);
             //msgprint(rows[2]["sampleid"]);
             //msgprint(rows);
 
-        //for (r in rows) {
-         //       msgprint(rows[r]["sampleid"]); //print all sample id
-         //   }
+	        //for (r in rows) {
+	         //       msgprint(rows[r]["sampleid"]); //print all sample id
+	         //   }
         
 		    
 		 // frappe prompt box code
-		 	var d = frappe.prompt([
-	    {label:__("Test Group"), fieldtype:"Link",
-						options: "Test Group",
-						fieldname:"test_group"},
-	    {fieldtype: "Column Break"},
-	    {'fieldname': 'select_test', 'fieldtype': 'HTML',options: "Select Test Group<br>", 'label': 'Select Test', 'reqd': 0},
-	    {fieldtype: "Section Break"},
-	   // {'fieldname': 'comment', 'fieldtype': 'Text', 'label': 'Selected Test', 'reqd': 1},
-	    {'fieldname': 'test', 'fieldtype': 'HTML',options: "", 'label': 'test', 'reqd': 0},
-	  //  {'fieldtype': 'Button',	'label': __('Add')}, 
-	],
-	function(values){
-	    var c = d.get_values();
-		var me = this;
-	   //submision of prompt box
-        var test_list = [];
-        //test_list.push("test_1");
-        //test_list.push("test_2");
-        //test_list.push("test_3");
-        //msgprint(test_list);
+		 var d = new frappe.prompt([
+		    {label:__("Test Group"), fieldtype:"Link",
+							options: "Test Group",
+							fieldname:"test_group"},
+		    {fieldtype: "Column Break"},
+		    {'fieldname': 'select_test', 'fieldtype': 'HTML',options: "Select Test Group<br>", 'label': 'Select Test', 'reqd': 0},
+		    {fieldtype: "Section Break"},
+		   // {'fieldname': 'comment', 'fieldtype': 'Text', 'label': 'Selected Test', 'reqd': 1},
+		    {'fieldname': 'test', 'fieldtype': 'HTML', 'label': 'test', 'reqd': 0},
+		    {fieldtype: "Section Break"},
+		  //  {'fieldtype': 'Button',	'label': __('Add')}, 
+			],
+			function(values){
+			    var c = d.get_values();
+				var me = this;
+			   //submision of prompt box
+		        var test_list = [];
+		        //test_list.push("test_1");
+		        //test_list.push("test_2");
+		        //test_list.push("test_3");
+		        //msgprint(test_list);
 
-        //var test_list_1 = [];
-		$(".frappe-control input:checkbox:checked").each ( function() {
-			test_list.push($(this).val());
+		        //var test_list_1 = [];
+				$(".frappe-control input:checkbox:checked").each ( function() {
+					test_list.push($(this).val());
 		 	//alert ( $(this).val() );
-		});
+				});
+
 
 	   //getting check test
        //msgprint(c.test_group)
@@ -261,84 +338,94 @@ sample_register.JobCard = Class.extend({
 				// $.each(r.message, function(idx, val){
 				// 	 $("<input type='checkbox' name='"+val[0]+"' value='Bike'>"+val[0]+"<br>").appendTo(d.fields_dict.test.wrapper);
 				// });
+
 				//for loop to apend data
+					// d.fields_dict.test.wrapper=" "
+					// $('<div id="id1"></div>').appendTo(d.fields_dict.test.wrapper);
+					// $( "#id1" ).replaceWith('<div id="id1"></div>');
+					 //$( "#id1" ).empty();
+					//$("#id1").text("d");
+					// $(".frappe-control input:checkbox:checked").each ( function() {
+					// test_list.push($(this).val());
+				 // 	//alert ( $(this).val() );
+					// 	});
+                    //remove allready checked checkbox for test
+					$('.frappe-control input:checkbox').removeAttr('checked');
+					 html = '<div id="id1">'
 				    for (var i = 0; i<r.message.get_test_data.length; i++) {
-				    	$("<input type='checkbox' class='select' id='_select' name='"+r.message.get_test_data[i][0]+"' value='"+r.message.get_test_data[i][0]+"'>"+r.message.get_test_data[i][0]+"<br>").appendTo(d.fields_dict.test.wrapper);
+				    	  html += "<input type='checkbox' class='select' id='_select' name='"+r.message.get_test_data[i][0]+"' value='"+r.message.get_test_data[i][0]+"'>"+r.message.get_test_data[i][0]+"<br>"
+				    	// $("<input type='checkbox' class='select' id='_select' name='"+r.message.get_test_data[i][0]+"' value='"+r.message.get_test_data[i][0]+"'>"+r.message.get_test_data[i][0]+"<br>").appendTo( "#id1" );
+				    	// $("<input type='checkbox' class='select' id='_select' name='"+r.message.get_test_data[i][0]+"' value='"+r.message.get_test_data[i][0]+"'>"+r.message.get_test_data[i][0]+"<br>").appendTo(d.fields_dict.test.wrapper);
 				    }
+				    html += '</div>'	
 				 //end of for loop to apend data
+                  	var wrapper = d.fields_dict.test.$wrapper;
+                  	wrapper.empty();
+					wrapper.html(html);
+					// html.appendTo
+				  // $("#id1").html(html);
 
 				 //apend selected sample
-				$("<p>Selected sample to perform Test: </p>").appendTo(d.fields_dict.select_test.wrapper);
-			    for(r in selectedData){
-			       $("<p>"+selectedData[r]["sampleid"]+"</p>").appendTo(d.fields_dict.select_test.wrapper);
+				 selected_sample_html="<p>Selected sample to perform Test: </p>"
+				  for(r in selectedData){
+			       selected_sample_html+="<p>"+selectedData[r]["sampleid"]+"</p>"
 			    }
+
+				var wrapper_sample = d.fields_dict.select_test.$wrapper;
+				wrapper_sample.html(selected_sample_html);
+				// $('<div id="id2"></div>').appendTo(d.fields_dict.select_test.wrapper);
+				// $( "#id2" ).replaceWith('<div id="id2"><p>Selected sample to perform Test: </p></div>');
+			 //    for(r in selectedData){
+			 //       $("<p>"+selectedData[r]["sampleid"]+"</p>").appendTo("#id2");
+			 //    }
 				 //end of apend seleted sample
 
 				}
 			}
 		});
 //end of get test data
-
-		//d.set_value("comment", "test related to test group "+test_group); //setting comment
-		//d.set_value("test", "test related to test group "+test_group);
-
-		//msgprint("selected test group: "+test_group)
-
 		return false;
 	});
-//disply selected sample id
-		d.get_input("test_group").on("change", function() {
 
-//Working script, will fetch checked value
-  // $(".frappe-control input[type=checkbox]:checked").each ( function() {
-  //    alert ( $(this).val() );
-  // });
-	});
-
-//end of display seleted sample id
 		 // end of frappe prompt box code
 		//test selection
-
 	},
 
 	prepare_data: function() {
-		// add Opening, Closing, Totals rows
-		// if filtered by account and / or voucher
 		var me = this;
 	//slick start
-	        function requiredFieldValidator(value) {
-                if (value == null || value == undefined || !value.length) {
-                    return {valid: false, msg: "This is a required field"};
-                } else {
-                    return {valid: true, msg: null};
-                }
+        function requiredFieldValidator(value) {
+            if (value == null || value == undefined || !value.length) {
+                return {valid: false, msg: "This is a required field"};
+            } else {
+                return {valid: true, msg: null};
             }
-	var columns = [];
-  var options = {
-    enableCellNavigation: true,
-    enableColumnReorder: false
-  };
+        }
+		var columns = [];
+		  var options = {
+		    enableCellNavigation: true,
+		    enableColumnReorder: false,
+		  };
 
 		var grid;
   		var data=[];
-		 frappe.call({
-			method: "sample_register.sample_register.page.jobboard.jobboard.get_sample_data",
-			type: "GET",
-			args: {
-				args:{
+			 frappe.call({
+				method: "sample_register.sample_register.page.jobboard.jobboard.get_sample_data_with_job",
+				type: "GET",
+				args: {
+					args:{
 
+					}
+				},
+				callback: function(r){
+					if(r.message){
+						me.data = r.message;
+						me.make_grid(r.message,columns,options)
+						//me.waiting.toggle(false);
+
+					}
 				}
-			},
-			callback: function(r){
-				if(r.message){
-					me.data = r.message;
-					me.make_grid(r.message,columns,options)
-					//me.waiting.toggle(false);
-
-				}
-			}
-		});
-
+			});
  //this.wrapper.find('[type="checkbox"]').attr(data-id, '3');
 //$(".plot-check").hide() 
   //slick end
@@ -347,8 +434,10 @@ sample_register.JobCard = Class.extend({
 
 		//this.data = [total_tickets, days_to_close, hours_to_close, hours_to_respond];
 	},
+
 	//function split to make new grid from frappe.call
 	make_grid:function(data1,columns,options){
+
 			$(function () {
 		    var data = [];
 

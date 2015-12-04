@@ -53,7 +53,7 @@ frappe.views.JobCard = frappe.views.GridReport.extend({
 
 	filters: [
 
-		//{fieldtype:"Link", label: __("Sample Entry Register"),options:"Sample Entry Register"}
+		{fieldtype:"Link", label: __("Sample Entry Register"),options:"Sample Entry Register"}
 	],
 
 	setup_columns: function() {
