@@ -66,7 +66,7 @@ sample_register.JobCard = Class.extend({
 		this.page.add_menu_item(__("Set Priority"), function() {me.set_priority_data();	}, true);
 		this.page.add_menu_item(__("Set Standard"), function() {me.set_standards_data();	}, true);
 		this.page.add_menu_item(__("Set Priority & Standard"), function() {me.set_sample_data();	}, true);
-		this.page.add_menu_item(__("Refresh"), function() {me.refresh(); }, true);
+		this.page.add_menu_item(__("Refresh"), function() { location.reload(); }, true);
 
 
 		// this.sample_entry_register = this.page.add_field({fieldtype:"Link", label:"Sample Entry Register",
@@ -130,11 +130,17 @@ sample_register.JobCard = Class.extend({
 	set_sample_data: function(){
 		//sample data entry start
 		var me = this;
+		// var selectedData = [],
+		// selectedIndexes;
+		// selectedIndexes = grid.getSelectedRows();
+		// jQuery.each(selectedIndexes, function (index, value) {
+		//   selectedData.push(grid.getData()[value]);
+		// });
 		var selectedData = [],
 		selectedIndexes;
 		selectedIndexes = grid.getSelectedRows();
 		jQuery.each(selectedIndexes, function (index, value) {
-		  selectedData.push(grid.getData()[value]);
+		selectedData.push(grid.getDataItem(value));
 		});
 	 	var d = frappe.prompt([
 	    {label:__("Priority"), fieldtype:"Select",options: ["1-Emergency","2-Urgent", "3-Normal"],fieldname:"priority",'reqd': 1},
@@ -170,7 +176,7 @@ sample_register.JobCard = Class.extend({
 		selectedIndexes;
 		selectedIndexes = grid.getSelectedRows();
 		jQuery.each(selectedIndexes, function (index, value) {
-		  selectedData.push(grid.getData()[value]);
+		selectedData.push(grid.getDataItem(value));
 		});
 		var d = frappe.prompt([
 		{label:__("Priority"), fieldtype:"Select",options: ["1-Emergency","2-Urgent", "3-Normal"],fieldname:"priority",'reqd': 1},			],
@@ -201,7 +207,7 @@ sample_register.JobCard = Class.extend({
 		selectedIndexes;
 		selectedIndexes = grid.getSelectedRows();
 		jQuery.each(selectedIndexes, function (index, value) {
-		  selectedData.push(grid.getData()[value]);
+		selectedData.push(grid.getDataItem(value));
 		});
 		var d = frappe.prompt([
 	    {label:__("Standards"), fieldtype:"Link",options: "Standard",fieldname:"standards", 'reqd': 1},
@@ -235,11 +241,10 @@ sample_register.JobCard = Class.extend({
 		//test selection
 
 		var selectedData = [],
-		    selectedIndexes;
-
+		selectedIndexes;
 		selectedIndexes = grid.getSelectedRows();
 		jQuery.each(selectedIndexes, function (index, value) {
-		  selectedData.push(grid.getData()[value]);
+		selectedData.push(grid.getDataItem(value));
 		});
 			//msgprint(selectedData);
 			//msgprint("selected samples are:");
@@ -390,12 +395,15 @@ sample_register.JobCard = Class.extend({
 					// html.appendTo
 				  // $("#id1").html(html);
 
+				 selected_sample_html= "<p>Select Test to Create Job Card</p>"
 				 //apend selected sample
-				 selected_sample_html="<p>Selected sample to perform Test: </p>"
-				  for(r in selectedData){
-			       selected_sample_html+="<p>"+selectedData[r]["sampleid"]+"</p>"
-			    }
+				 // selected_sample_html='<div class="testSelect" style="max-height: 200px;overflow: auto;overflow-x: hidden;min-height:150px">'
+				 // selected_sample_html+="<p>Selected sample to perform Test: </p>"
+				 //  for(r in selectedData){
+			  //      selected_sample_html+="<p>"+selectedData[r]["sampleid"]+"</p>"
+			  //   }
 
+			  //   selected_sample_html += '</div>'	
 				var wrapper_sample = d.fields_dict.select_test.$wrapper;
 				wrapper_sample.html(selected_sample_html);
 				// $('<div id="id2"></div>').appendTo(d.fields_dict.select_test.wrapper);
@@ -430,13 +438,18 @@ sample_register.JobCard = Class.extend({
 		  var options = {
 		    enableCellNavigation: true,
 		    enableColumnReorder: false,
+		    showHeaderRow: true,
+		    headerRowHeight: 30,
+		    explicitInitialization: true, //shoud be true
 		    multiColumnSort: true,
-		  };
 
+		  };
+		 
+		var columnFilters = {};
 		var grid;
   		var data=[];
 			 frappe.call({
-				method: "sample_register.sample_register.page.jobboard.jobboard.get_sample_data_with_job",
+				method: "sample_register.sample_register.page.jobboard.jobboard.get_sample_data",
 				type: "GET",
 				args: {
 					args:{
@@ -469,6 +482,7 @@ sample_register.JobCard = Class.extend({
 
 		    for (var i = 0; i<data1.get_sample_data.length; i++) {
 		      data[i] = {
+		      	id: ""+(i+1)+" ",
 		      	checked:true,
 		        sampleid: data1.get_sample_data[i][1],
 		        customer: data1.get_sample_data[i][2],
@@ -485,6 +499,7 @@ sample_register.JobCard = Class.extend({
    				 });
     			columns.push(checkboxSelector.getColumnDefinition());
 			      columns.push(
+	{id: "id", name: "Sr.No", field: "id", minWidth:5},
     {id: "sample_id", name: "Sample Id", field: "sampleid", minWidth:120},
     {id: "customer", name: "Customer", field: "customer",minWidth:200},
     {id: "type", name: "Type", field: "type",minWidth:120},
@@ -493,12 +508,94 @@ sample_register.JobCard = Class.extend({
     // {id: "test_group", name: "Test Group", field: "test_group",minWidth:120}
 			       );
 
-			grid = new Slick.Grid("#myGrid", data, columns, options);	
+			// grid = new Slick.Grid("#myGrid", data, columns, options);	
+			var columnFilters = {};
+	        dataView = new Slick.Data.DataView();
+   			grid = new Slick.Grid("#myGrid", dataView, columns, options);
+
+//Start filter in slick grid
+   			function filter(item) {
+        // Regex pattern to validate numbers
+        var patRegex_no = /^[$]?[-+]?[0-9.,]*[$%]?$/; // a number negative/positive with decimals with/without $, %
+
+        for (var columnId in columnFilters) {
+            if (columnId !== undefined && columnFilters[columnId] !== "") {
+                var c = grid.getColumns()[grid.getColumnIndex(columnId)];
+                var filterVal = columnFilters[columnId].toLowerCase();
+                var filterChar1 = filterVal.substring(0, 1); // grab the 1st Char of the filter field, so we could detect if it's a condition or not
+
+                if(item[c.field] == null)
+                    return false;
+
+                // First let see if the user supplied a condition (<, <=, >, >=, !=, <>, =, ==)
+                // Substring on the 1st Char is enough to find out if it's a condition or not
+                // if a condition is supplied, we might have to transform the values (row values & filter value) before comparing
+                // for a String (we'll do a regular indexOf), for a number (parse to float then compare), for a date (create a Date Object then compare)
+                if( filterChar1 == '<' || filterChar1 == '>' || filterChar1 == '!' || filterChar1 == '=') {
+                    // We found a Condition filter, find the white space index position of the condition substring (should be index 1 or 2)
+                    var idxFilterSpace = filterVal.indexOf(" ");
+
+                    if( idxFilterSpace > 0 ) {
+                        // Split the condition & value of the full filter String
+                        var condition = filterVal.substring(0, idxFilterSpace);
+                        filterNoCondVal = columnFilters[columnId].substring(idxFilterSpace+1);
+
+                        // Which type are the row values? We'll convert to proper format before applying the condition
+                        // Then apply the condition comparison: String (we'll do a regular indexOf), number (parse to float then compare)
+                        if( patRegex_no.test(item[c.field]) ) {                             
+                            if( testCondition(condition, parseFloat(item[c.field]), parseFloat(filterNoCondVal)) == false ) 
+                                return false;
+                        // whatever is remain will be tested as a regular String format     
+                        }else {                             
+                            if ( testCondition(condition, item[c.field].toLowerCase(), filterNoCondVal.toLowerCase()) == false )
+                                return false;
+                        }
+                    } 
+                }else{
+                    if (item[c.field].toLowerCase().indexOf(columnFilters[columnId].toLowerCase()) == -1)
+                        return false;
+                }
+            }
+        }
+        return true;
+    }
+//end of filter
+    dataView.onRowCountChanged.subscribe(function (e, args) {
+      grid.updateRowCount();
+      grid.render();
+    });
+    dataView.onRowsChanged.subscribe(function (e, args) {
+      grid.invalidateRows(args.rows);
+      grid.render();
+    });
+    $(grid.getHeaderRow()).delegate(":input", "change keyup", function (e) {
+      var columnId = $(this).data("columnId");
+      if (columnId != null) {
+        columnFilters[columnId] = $.trim($(this).val());
+        dataView.refresh();
+      }
+    });
+    grid.onHeaderRowCellRendered.subscribe(function(e, args) {
+        $(args.node).empty();
+        $("<input type='text'>")
+           .data("columnId", args.column.id)
+           .val(columnFilters[args.column.id])
+           .appendTo(args.node);
+    });
+
 		    grid.setSelectionModel(new Slick.RowSelectionModel({selectActiveRow: false}));
 		    grid.registerPlugin(checkboxSelector);
+		    grid.init();
 
-	        var columnpicker = new Slick.Controls.ColumnPicker(columns, grid, options);
+		    dataView.beginUpdate();
 
+		    dataView.setItems(data);
+
+		    dataView.setFilter(filter);
+
+		    dataView.endUpdate();
+
+		    var columnpicker = new Slick.Controls.ColumnPicker(columns, grid, options);
 
 		  })
 

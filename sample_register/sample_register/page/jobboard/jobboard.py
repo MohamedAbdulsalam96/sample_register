@@ -70,7 +70,7 @@ def create_job_card_1(test_group,selectedData,test_list_unicode):
 	# print type(selectedData)
 	# frappe.msgprint("Job Card "+bank.name+" created successfuly for : "+test_group);
 	#frappe.msgprint(type(selectedData))
-	# print a
+	# print selectedData
 	# frappe.msgprint(selectedData)
 	selectedData_json = json.loads(selectedData)
 	for r in selectedData_json:
