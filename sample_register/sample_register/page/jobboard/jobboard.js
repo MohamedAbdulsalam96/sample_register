@@ -31,7 +31,7 @@ frappe.pages['jobboard'].on_page_load = function(wrapper) {
 	$("<table width='100%>\
   <tr>\
     <td valign='top' width='50%'>\
-      <div id='myGrid' style='width:600px;height:500px;''></div>\
+      <div id='myGrid' style='width:100%;height:500px;''></div>\
     </td>\
   </tr>\
 </table>").appendTo($(wrapper).find('.layout-main-section'));
@@ -69,39 +69,39 @@ sample_register.JobCard = Class.extend({
 		this.page.add_menu_item(__("Refresh"), function() {me.refresh(); }, true);
 
 
-		this.sample_entry_register = this.page.add_field({fieldtype:"Link", label:"Sample Entry Register",
-			fieldname:"sample_entry_register", options:"Sample Entry Register"});
-		this.with_job_card = this.page.add_field({fieldtype:"Check", label:"With Job Card",
-			fieldname:"with_job_card"});
-		this.with_job_card.$input.on("change", function() {
-			with_job=$(this).prop("checked")
-			msgprint(with_job);
-			var data = [];
-			grid.setData(data);
-			grid.render();   wokring
+		// this.sample_entry_register = this.page.add_field({fieldtype:"Link", label:"Sample Entry Register",
+		// fieldname:"sample_entry_register", options:"Sample Entry Register"});
+		// this.with_job_card = this.page.add_field({fieldtype:"Check", label:"With Job Card",
+		// 	fieldname:"with_job_card"});
+		// this.with_job_card.$input.on("change", function() {
+		// 	with_job=$(this).prop("checked")
+		// 	msgprint(with_job);
+		// 	var data = [];
+		// 	grid.setData(data);
+		// 	grid.render();   wokring
 
-			//data with and without job
+		// 	//data with and without job
 
-			 frappe.call({
-				method: "sample_register.sample_register.page.jobboard.jobboard.get_sample_data",
-				type: "GET",
-				args: {
-					args:{
+		// 	 frappe.call({
+		// 		method: "sample_register.sample_register.page.jobboard.jobboard.get_sample_data",
+		// 		type: "GET",
+		// 		args: {
+		// 			args:{
 
-					}
-				},
-				callback: function(r){
-					if(r.message){
-						me.data = r.message;
-						me.make_grid(r.message,columns,options)
-						//me.waiting.toggle(false);
+		// 			}
+		// 		},
+		// 		callback: function(r){
+		// 			if(r.message){
+		// 				me.data = r.message;
+		// 				me.make_grid(r.message,columns,options)
+		// 				//me.waiting.toggle(false);
 
-					}
-				}
-			});
-			//data with and without job end
+		// 			}
+		// 		}
+		// 	});
+		// 	//data with and without job end
 
-		});
+		// });
 	},
 //job function
 
@@ -351,13 +351,38 @@ sample_register.JobCard = Class.extend({
 					// 	});
                     //remove allready checked checkbox for test
 					$('.frappe-control input:checkbox').removeAttr('checked');
-					 html = '<div id="id1">'
-				    for (var i = 0; i<r.message.get_test_data.length; i++) {
-				    	  html += "<input type='checkbox' class='select' id='_select' name='"+r.message.get_test_data[i][0]+"' value='"+r.message.get_test_data[i][0]+"'>"+r.message.get_test_data[i][0]+"<br>"
-				    	// $("<input type='checkbox' class='select' id='_select' name='"+r.message.get_test_data[i][0]+"' value='"+r.message.get_test_data[i][0]+"'>"+r.message.get_test_data[i][0]+"<br>").appendTo( "#id1" );
-				    	// $("<input type='checkbox' class='select' id='_select' name='"+r.message.get_test_data[i][0]+"' value='"+r.message.get_test_data[i][0]+"'>"+r.message.get_test_data[i][0]+"<br>").appendTo(d.fields_dict.test.wrapper);
+					 // html = '<div id="id1">'
+				  //   for (var i = 0; i<r.message.get_test_data.length; i++) {
+				  //   	  html += "<input type='checkbox' class='select' id='_select' name='"+r.message.get_test_data[i][0]+"' value='"+r.message.get_test_data[i][0]+"'>"+r.message.get_test_data[i][0]+"<br>"
+				  //   	// $("<input type='checkbox' class='select' id='_select' name='"+r.message.get_test_data[i][0]+"' value='"+r.message.get_test_data[i][0]+"'>"+r.message.get_test_data[i][0]+"<br>").appendTo( "#id1" );
+				  //   	// $("<input type='checkbox' class='select' id='_select' name='"+r.message.get_test_data[i][0]+"' value='"+r.message.get_test_data[i][0]+"'>"+r.message.get_test_data[i][0]+"<br>").appendTo(d.fields_dict.test.wrapper);
+				  //   }
+				  //   html += '</div>'	
+				    html=""
+				    html += '<div class="testCont"  style="max-height: 200px;overflow: auto;overflow-x: hidden;min-height:150px">'
+				    for (var i = 0; i<r.message.get_test_data.length; i=i+2) {
+				    	// html += "<input type='checkbox' class='select' id='_select' name='"+r.message.get_test_data[i][0]+"' value='"+r.message.get_test_data[i][0]+"'>"+r.message.get_test_data[i][0]+"<br>"
+				    	html += "<div class='row'>  <div class='col-sm-6'>"
+				    	html += "<input type='checkbox' class='select' id='_select' name='"+r.message.get_test_data[i][0]+"' value='"+r.message.get_test_data[i][0]+"'>"+r.message.get_test_data[i][0]+ "</div>"
+						html +=	 "<div class='col-sm-6'>"
+						if(r.message.get_test_data[(i + 1)]){
+							j=i+1;
+				    		html +=	 "<input type='checkbox' class='select' id='_select' name='"+r.message.get_test_data[j][0]+"' value='"+r.message.get_test_data[j][0]+"'>"+r.message.get_test_data[j][0]+ "</div> </div>"
+				    	}
 				    }
-				    html += '</div>'	
+
+				   //  for (var i = 0; i<r.message.get_test_data.length; i++) {
+							// 	  <div class="row">\
+							// 	    <div class="col-sm-6">\
+				   //  	  html += "<input type='checkbox' class='select' id='_select' name='"+r.message.get_test_data[i][0]+"' value='"+r.message.get_test_data[i][0]+"'>"+r.message.get_test_data[i][0]+"<br>"
+							// 	    </div>\
+							// 	    <div class="col-sm-6">\
+				   //  	  html += "<input type='checkbox' class='select' id='_select' name='"+r.message.get_test_data[i][0]+"' value='"+r.message.get_test_data[i][0]+"'>"+r.message.get_test_data[i][0]+"<br>"
+							// 	    </div>\
+							// 	  </div>\
+							// </div>'
+				   //  }
+				   html += '</div>'	
 				 //end of for loop to apend data
                   	var wrapper = d.fields_dict.test.$wrapper;
                   	wrapper.empty();
@@ -405,6 +430,7 @@ sample_register.JobCard = Class.extend({
 		  var options = {
 		    enableCellNavigation: true,
 		    enableColumnReorder: false,
+		    multiColumnSort: true,
 		  };
 
 		var grid;
@@ -459,12 +485,12 @@ sample_register.JobCard = Class.extend({
    				 });
     			columns.push(checkboxSelector.getColumnDefinition());
 			      columns.push(
-    {id: "sample_id", name: "Sample Id", field: "sampleid"},
-    {id: "customer", name: "Customer", field: "customer"},
-    {id: "type", name: "Type", field: "type"},
-    {id: "priority", name: "Priority", field: "priority"},
-    {id: "standard", name: "Standard", field: "standard"},
-    {id: "test_group", name: "Test Group", field: "test_group"}
+    {id: "sample_id", name: "Sample Id", field: "sampleid", minWidth:120},
+    {id: "customer", name: "Customer", field: "customer",minWidth:200},
+    {id: "type", name: "Type", field: "type",minWidth:120},
+    {id: "priority", name: "Priority", field: "priority",minWidth:120},
+    {id: "standard", name: "Standard", field: "standard",minWidth:120}
+    // {id: "test_group", name: "Test Group", field: "test_group",minWidth:120}
 			       );
 
 			grid = new Slick.Grid("#myGrid", data, columns, options);	
