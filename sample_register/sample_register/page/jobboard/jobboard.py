@@ -51,22 +51,16 @@ def get_test_data(test_group):
 	}
 
 @frappe.whitelist()
-def create_job_card(test_group):
+def update_job_card(test_group):
 	frappe.msgprint("Job Card created successfuly for : "+test_group);
 
 @frappe.whitelist()
-def create_job_card_1(test_group,selectedData,test_list_unicode):
+def create_job_card(test_group,selectedData,test_list_unicode):
 	print test_list_unicode
 	test_list=json.loads(test_list_unicode)
 	# for test in test_list:
 	# 	frappe.msgprint("test is: "+ test)
 	# frappe.msgprint(test_list[0])
-
-	# bank=frappe.new_doc("Job Card Creation")
-	# bank.sample_id = "SER0005"
-	# bank.customer = "c"
-	# bank.type = "Mineral Oil"
-	# bank.save()
 	# print type(selectedData)
 	# frappe.msgprint("Job Card "+bank.name+" created successfuly for : "+test_group);
 	#frappe.msgprint(type(selectedData))
@@ -89,7 +83,6 @@ def create_job_card_1(test_group,selectedData,test_list_unicode):
 			doc_job_card_creation.append("test_details",test_req)
 		doc_job_card_creation.save()
 		frappe.msgprint("Job Card "+doc_job_card_creation.name+" is created successfuly for sample : "+r.get("sampleid"));
-		# frappe.msgprint(r.get("sampleid")+r.get("type")+"customer "+r.get("customer"))
 
 @frappe.whitelist()
 def set_sample_data(priority,standards,selectedData):
