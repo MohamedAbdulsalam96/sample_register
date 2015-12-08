@@ -16,7 +16,7 @@ frappe.require("assets/frappe/js/lib/slickgrid/plugins/slick.cellexternalcopyman
 frappe.require("assets/frappe/js/lib/slickgrid/plugins/slick.cellselectionmodel.js");
 frappe.require("assets/frappe/js/lib/slickgrid/plugins/slick.rowselectionmodel.js");
 frappe.require("assets/frappe/js/lib/slickgrid/plugins/slick.cellselectionmodel.js");
-
+	
 frappe.pages['jobboard'].on_page_load = function(wrapper) {
 	var page = frappe.ui.make_app_page({
 		parent: wrapper,
@@ -251,11 +251,11 @@ sample_register.JobCard = Class.extend({
 				    for (var i = 0; i<r.message.get_test_data.length; i=i+2) {
 				    	// html += "<input type='checkbox' class='select' id='_select' name='"+r.message.get_test_data[i][0]+"' value='"+r.message.get_test_data[i][0]+"'>"+r.message.get_test_data[i][0]+"<br>"
 				    	html += "<div class='row'>  <div class='col-sm-6'>"
-				    	html += "<input type='checkbox' class='select' id='_select' name='"+r.message.get_test_data[i][0]+"' value='"+r.message.get_test_data[i][0]+"'>"+r.message.get_test_data[i][0]+ "</div>"
+				    	html += "<label style='font-weight: normal;'><input type='checkbox' class='select' id='_select' name='"+r.message.get_test_data[i][0]+"' value='"+r.message.get_test_data[i][0]+"'> "+r.message.get_test_data[i][0]+ "</label></div>"
 						html +=	 "<div class='col-sm-6'>"
 						if(r.message.get_test_data[(i + 1)]){
 							j=i+1;
-				    		html +=	 "<input type='checkbox' class='select' id='_select' name='"+r.message.get_test_data[j][0]+"' value='"+r.message.get_test_data[j][0]+"'>"+r.message.get_test_data[j][0]+ "</div> </div>"
+				    		html +=	 "<label style='font-weight: normal;'><input type='checkbox' class='select' id='_select' name='"+r.message.get_test_data[j][0]+"' value='"+r.message.get_test_data[j][0]+"'> "+r.message.get_test_data[j][0]+ "</label></div> </div>"
 				    	}
 				    }
 
@@ -356,8 +356,14 @@ sample_register.JobCard = Class.extend({
     			columns.push(checkboxSelector.getColumnDefinition());
 			      columns.push(
 				{id: "id", name: "Sr.No", field: "id", minWidth:5},
-			    {id: "sample_id", name: "Sample Id", field: "sampleid", minWidth:120},
-			    {id: "customer", name: "Customer", field: "customer",minWidth:200},
+			    {id: "sample_id", name: "Sample Id", field: "sampleid", minWidth:120,
+				    formatter: linkFormatter = function ( row, cell, value, columnDef, dataContext ) {
+	           			 return '<a href="desk#Form/Sample Entry Register/' + dataContext['sampleid'] + '">' + value + '</a>';
+	      			  }},
+			    {id: "customer", name: "Customer", field: "customer",minWidth:200,
+					  formatter: linkFormatter = function ( row, cell, value, columnDef, dataContext ) {
+		           			 return '<a href="desk#Form/Customer/' + dataContext['customer'] + '">' + value + '</a>';
+		      			  }},
 			    {id: "type", name: "Type", field: "type",minWidth:120},
 			    {id: "priority", name: "Priority", field: "priority",minWidth:120},
 			    {id: "standard", name: "Standard", field: "standard",minWidth:120}

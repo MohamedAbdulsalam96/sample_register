@@ -49,7 +49,9 @@ def create_job_card(test_group,selectedData,test_list_unicode):
 			}
 			doc_job_card_creation.append("test_details",test_req)
 		doc_job_card_creation.save()
-		frappe.msgprint("Job Card "+doc_job_card_creation.name+" is created successfuly for sample : "+r.get("sampleid"));
+		sample_link="<a href='desk#Form/Sample Entry Register/"+r.get("sampleid")+"'>"+r.get("sampleid")+" </a>"
+		job_link="<a href='desk#Form/Job Card Creation/"+doc_job_card_creation.name+"'>"+doc_job_card_creation.name+" </a>"
+		frappe.msgprint("Job Card "+job_link+" is created successfuly for sample : "+sample_link);
 
 @frappe.whitelist()
 def set_sample_data(priority,standards,selectedData):
