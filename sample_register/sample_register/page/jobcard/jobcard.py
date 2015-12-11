@@ -6,13 +6,13 @@ import json
 @frappe.whitelist()
 def get_sample_data():
 	return {
-	"get_sample_data": frappe.db.sql("""select false, name, customer, type, priority, standards, test_group from `tabSample Entry Register` where job_card_status="Not Available" order by name""", as_list=1)
+	"get_sample_data": frappe.db.sql("""select false, name, customer, type, priority, standards, test_group from `tabSample Entry Register` where job_card_status="" order by name""", as_list=1)
 	}
 
 @frappe.whitelist()
 def get_sample_data_with_job():
 	return {
-	"get_sample_data": frappe.db.sql("""select false, name, customer, type, priority, standards, test_group from `tabSample Entry Register` where job_card_status!="" order by name""", as_list=1)
+	"get_sample_data": frappe.db.sql("""select false, name, customer, type, priority, standards, job_card, job_card_status, test_group, CASE job_card_status WHEN 'Not Available' THEN 1 WHEN 'Created' THEN 2 WHEN 'Submitted' THEN 3 ELSE 5 END as id from `tabSample Entry Register` order by id, name desc""", as_list=1,debug=1)
 	}
 
 @frappe.whitelist()
@@ -52,6 +52,16 @@ def create_job_card(test_group,selectedData,test_list_unicode):
 		sample_link="<a href='desk#Form/Sample Entry Register/"+r.get("sampleid")+"'>"+r.get("sampleid")+" </a>"
 		job_link="<a href='desk#Form/Job Card Creation/"+doc_job_card_creation.name+"'>"+doc_job_card_creation.name+" </a>"
 		frappe.msgprint("Job Card "+job_link+" is created successfuly for sample : "+sample_link);
+
+@frappe.whitelist()
+def submit_job_card(selectedData):
+	selectedData_json = json.loads(selectedData)
+	if (len(selectedData_json)==0):
+		frappe.msgprint("Please Select Sample ID whose Job Card need to submit")
+	for r in selectedData_json:
+		if(r.get("job_card")):
+			doc_job_card_creation=frappe.get_doc("Job Card Creation",r.get("job_card"))
+			doc_job_card_creation.submit()
 
 @frappe.whitelist()
 def set_sample_data(priority,standards,selectedData):

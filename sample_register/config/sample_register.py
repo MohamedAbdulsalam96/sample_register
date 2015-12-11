@@ -17,6 +17,11 @@ def get_data():
 					"name": "Job Card Creation",
 					"description": _("All Job Card related information."),
 				},
+				{
+					"type": "doctype",
+					"name": "Test Book",
+					"description": _("All Test Book related information."),
+				},
 			]
 		},
 		{
@@ -76,12 +81,17 @@ def get_data():
 			"icon": "icon-wrench",
 			"items": [
 				{
+					"type": "doctype",
+					"name": "Sample Entry Creation Tool",
+					"description": _("Create/Update Sample Entry"),
+				},
+				{
 					"type": "page",
 					"name": "jobboard",
 					"icon": "icon-sitemap",
 					"label": _("Job Card Creation"),
+					"description": _("Create/Submit Job Card and Set Priority, Standard Details"),
 				},
-
 			]
 		},
 

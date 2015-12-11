@@ -11,7 +11,7 @@ cur_frm.add_fetch('order_id','order_expiry_date','order_expiry_date');
 cur_frm.add_fetch('functional_location','functional_location_code','functional_location_code')
 cur_frm.add_fetch('equipment','equipment_code','equipment_code');
 cur_frm.add_fetch('equipment','equipment_make','equipment_make');
-cur_frm.add_fetch('equipment','equipment_code','serial_number');
+cur_frm.add_fetch('equipment','serial_number','serial_number');
 cur_frm.add_fetch('equipment','model_no','model_no');
 cur_frm.add_fetch('customer','customer_name','customer_name');
 
