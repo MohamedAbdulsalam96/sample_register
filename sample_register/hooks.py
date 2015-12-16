@@ -71,7 +71,8 @@ fixtures = ['Custom Field', 'Property Setter']
 doc_events = {
 	"Job Card Creation": {
 		"after_insert": "sample_register.sample_register.doctype.sample_entry_register.sample_entry_register.status_updator",
-		"on_submit": "sample_register.sample_register.doctype.sample_entry_register.sample_entry_register.status_updator"
+		"on_submit": "sample_register.sample_register.doctype.sample_entry_register.sample_entry_register.status_updator",
+		"before_cancel": "sample_register.sample_register.doctype.sample_entry_register.sample_entry_register.status_updator"
 	}
 }
 

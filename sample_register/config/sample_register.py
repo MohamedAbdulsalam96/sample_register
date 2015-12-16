@@ -90,7 +90,14 @@ def get_data():
 					"name": "jobboard",
 					"icon": "icon-sitemap",
 					"label": _("Job Card Creation"),
-					"description": _("Create/Submit Job Card and Set Priority, Standard Details"),
+					"description": _("Create Job Card and Set Priority, Standard Details"),
+				},
+				{
+					"type": "page",
+					"name": "jobcard",
+					"icon": "icon-sitemap",
+					"label": _("Job Card Submission"),
+					"description": _("Submit Job Card and Set Priority"),
 				},
 			]
 		},

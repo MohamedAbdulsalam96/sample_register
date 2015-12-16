@@ -20,7 +20,7 @@ frappe.require("assets/frappe/js/lib/slickgrid/plugins/slick.cellselectionmodel.
 frappe.pages['jobcard'].on_page_load = function(wrapper) {
 	var page = frappe.ui.make_app_page({
 		parent: wrapper,
-		title: 'Job Card Creation',
+		title: 'Job Card Submission',
 		single_column: true
 	});
 	var options = {
@@ -60,12 +60,12 @@ sample_register.JobCard = Class.extend({
     make_filters: function(wrapper){
 		var me = this;
 		this.page = wrapper.page;
-		this.page.set_primary_action(__("Create Job Card"),
-			function() { me.refresh(); }, "icon-refresh")
-		this.page.add_menu_item(__("Set Priority"), function() {me.set_priority_data();	}, true);
-		this.page.add_menu_item(__("Set Standard"), function() {me.set_standards_data();	}, true);
-		this.page.add_menu_item(__("Set Priority & Standard"), function() {me.set_sample_data();	}, true);
-		this.page.add_menu_item(__("Submit Job Card"), function() {me.submit_job_card();	}, true);
+		this.page.set_primary_action(__("Submit Job Card"),
+			function() { me.submit_job_card(); }, "icon-refresh")
+		// this.page.add_menu_item(__("Set Priority"), function() {me.set_priority_data();	}, true);
+		// this.page.add_menu_item(__("Set Standard"), function() {me.set_standards_data();	}, true);
+		// this.page.add_menu_item(__("Set Priority & Standard"), function() {me.set_sample_data();	}, true);
+		// this.page.add_menu_item(__("Submit Job Card"), function() {me.submit_job_card();	}, true);
 		this.page.add_menu_item(__("Refresh"), function() { location.reload(); }, true);
 	},
 
@@ -233,20 +233,23 @@ sample_register.JobCard = Class.extend({
 					test_list.push($(this).val());
 				});
 
+          if(c.test_group){
         //create job card against each sample
-	     frappe.call({
-				method: "sample_register.sample_register.page.jobboard.jobboard.create_job_card",
-				 args: {
-				 	"test_group": c.test_group,
-				 	"selectedData":selectedData,
-				 	"test_list_unicode":test_list
-				 },	
-				callback: function(r) {
-				if (cur_frm) {
-							cur_frm.reload_doc();
-						}
-				}
-			});
+		     frappe.call({
+					method: "sample_register.sample_register.page.jobboard.jobboard.create_job_card",
+					 args: {
+					 	"test_group": c.test_group,
+					 	"selectedData":selectedData,
+					 	"test_list_unicode":test_list
+					 },	
+					callback: function(r) {
+					if (cur_frm) {
+								cur_frm.reload_doc();
+							}
+					}
+				});
+		 }
+		 else { show_alert("Please select Test Group")}	
 
 	},
 	'Select Test',
@@ -388,7 +391,7 @@ sample_register.JobCard = Class.extend({
 					  formatter: linkFormatter = function ( row, cell, value, columnDef, dataContext ) {
 		           			 return '<a href="desk#Form/Customer/' + dataContext['customer'] + '">' + value + '</a>';
 		      			  }},
-			    {id: "type", name: "Type", field: "type",minWidth:120},
+			    {id: "type", name: "Sample Type", field: "type",minWidth:120},
 			    {id: "priority", name: "Priority", field: "priority",minWidth:120},
 			    {id: "standard", name: "Standard", field: "standard",minWidth:120},
 			    {id: "job_card", name: "Job Card", field: "job_card",minWidth:120},

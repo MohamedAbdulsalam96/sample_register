@@ -80,6 +80,10 @@ frappe.ui.form.on("Sample Entry Creation Tool", {
 		cur_frm.set_value("to_date", frm.doc.date_of_receipt);
 		cur_frm.set_value("filter_based_on_date_of_receipt", 1);
 		
+	},
+	to_date: function(frm){
+		cur_frm.set_value("filter_based_on_date_of_receipt", 1);
+		
 	}
 });
 

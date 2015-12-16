@@ -14,6 +14,10 @@ class SampleEntryCreationTool(Document):
 	def get_details(self):
 		if (self.filter_based_on_date_of_receipt and (not self.from_date or not self.to_date)):
 			frappe.throw("Please select From Date and To Date")
+		if not self.order:
+			frappe.throw("Please select Order")
+		if not self.customer:
+			frappe.throw("Please select Customer")
 
 		condition = ""
 
@@ -25,16 +29,12 @@ class SampleEntryCreationTool(Document):
 			condition +="and job_card_status='Not Available'"
 
 		dl = frappe.db.sql("""select name,customer,date_of_receipt,job_card,functional_location,functional_location_code,
-			equipment,equipment_make,serial_number,equipment_code from `tabSample Entry Register` where order_id='%s' %s"""%(self.order, condition),as_dict=1, debug=1)
+			equipment,equipment_make,serial_number,equipment_code,
+			conservation_protection_system, sample_taken_from, oil_temperature, winding_temperature,
+			remarks from `tabSample Entry Register` where order_id='%s' %s"""%(self.order, condition),as_dict=1, debug=1)
 
 		self.set('sample_entry_creation_tool_details', [])
-		# for d in dl:
-		# 	sample_details={
-		# 		"doctype": "Sample Entry Creation Tool Details",
-		# 		"sample_id": d.name,
-		# 		"customer": d.customer
-		# 	}
-		# 	self.append("sample_entry_creation_tool_details",sample_details)
+
 		for d in dl:
 			nl = self.append('sample_entry_creation_tool_details', {})
 			nl.sample_id = d.name
@@ -47,10 +47,24 @@ class SampleEntryCreationTool(Document):
 			nl.serial_number =d.serial_number
 			nl.equipment_code =d.equipment_code
 			nl.date_of_receipt = d.date_of_receipt
+			nl.conservation_protection_system = d.conservation_protection_system
+			nl.sample_taken_from = d.sample_taken_from
+			nl.oil_temperature = d.oil_temperature
+			nl.winding_temperature = d.winding_temperature
+			nl.remarks = d.remarks
 
 	def create_sample_entry(self):
-		if not self.date_of_receipt:
-			frappe.throw("Please select Date of Receipt")
+		if not self.date_of_collection:
+			frappe.throw("Please select Date of Collection")
+
+		# sample_count_allowed=frappe.db.sql("""select total_samples from `tabOrder Register` where name=%s""",(self.order),as_list=1)
+		# sample_count=frappe.db.sql("""select count(name) from `tabSample Entry Register` where order_id=%s""",(self.order),as_list=1)
+		# s_create = sample_count[0][0]+self.number_of_sample
+		# if s_create >= sample_count_allowed[0][0]:
+		# 	frappe.msgprint("limit exceed")
+		# if (sample_count_allowed[0][0] <= int(sample_count[0][0])):
+		# 	frappe.msgprint(sample_count[0][0]+self.number_of_sample)
+		# 	frappe.throw("Please increase Total Samples in Work Order "+ self.order+"<br>Currently sample collected in system: "+str(sample_count[0][0])) 
 
 		for i in range(self.number_of_sample):
 			doc_sample_entry=frappe.new_doc("Sample Entry Register")
@@ -59,93 +73,37 @@ class SampleEntryCreationTool(Document):
 			doc_sample_entry.date_of_receipt = self.date_of_receipt
 			doc_sample_entry.technical_contact = self.technical_contact
 			doc_sample_entry.type = self.type
-			doc_sample_entry.conservation_protection_system = self.conservation_protection_system
+			doc_sample_entry.date_of_collection = self.date_of_collection
+			doc_sample_entry.weather_condition_during_sampling = self.weather_condition
+			doc_sample_entry.drawn_by = self.drawn_by			
 			doc_sample_entry.save()
 			sample_link="<a href='desk#Form/Sample Entry Register/"+doc_sample_entry.name+"'>"+doc_sample_entry.name+" </a>"
 			frappe.msgprint(sample_link+"created")
 
 	def update_sample_entry(self):
 		sample_fl = []
-		sample_equipment =[]
-		sample_date_of_receipt = []
 		for d in self.get('sample_entry_creation_tool_details'):
-			if d.functional_location:
-				# frappe.db.set_value("Sample Entry Register", d.sample_id, "functional_location:", d.functional_location)
-				frappe.db.sql("""update `tabSample Entry Register` set functional_location = %s, modified = %s, functional_location_code= %s
-				 	where name=%s and docstatus!=1""", (d.functional_location, now_datetime(), d.functional_location_code, d.sample_id))
-				sample_fl.append(d.sample_id)
-			if d.equipment:
-				# frappe.db.set_value("Sample Entry Register", d.sample_id, "functional_location:", d.functional_location)
-				frappe.db.sql("""update `tabSample Entry Register` set equipment = %s, equipment_make =%s,
-					serial_number = %s, equipment_code = %s, modified = %s
-				 	where name=%s and docstatus!=1""", (d.equipment, d.equipment_make , d.serial_number, d.equipment_code, now_datetime(), d.sample_id))
-				sample_equipment.append(d.sample_id)
-			if d.date_of_receipt:
-				# frappe.db.set_value("Sample Entry Register", d.sample_id, "functional_location:", d.functional_location)
-				frappe.db.sql("""update `tabSample Entry Register` set date_of_receipt = %s, modified = %s
-				 	where name=%s and docstatus!=1""", (d.date_of_receipt, now_datetime(), d.sample_id))
-				sample_date_of_receipt.append(d.sample_id)
+				sample_entry_doc=frappe.get_doc("Sample Entry Register", d.sample_id)
+				if sample_entry_doc.docstatus == 0: 
+					sample_entry_doc.functional_location = d.functional_location
+					sample_entry_doc.functional_location_code = d.functional_location_code
+					sample_entry_doc.equipment = d.equipment
+					sample_entry_doc.equipment_make = d.equipment_make
+					sample_entry_doc.serial_number = d.serial_number
+					sample_entry_doc.equipment_code = d.equipment_code
+					sample_entry_doc.date_of_receipt = d.date_of_receipt
+					sample_entry_doc.conservation_protection_system = d.conservation_protection_system
+					sample_entry_doc.sample_taken_from = d.sample_taken_from
+					sample_entry_doc.oil_temperature = d.oil_temperature
+					sample_entry_doc.winding_temperature = d.winding_temperature
+					sample_entry_doc.remarks = d.remarks
+					sample_entry_doc.save()
+		frappe.msgprint("Sample Entry updated")
 
-		if sample_fl:
-			msgprint("Functional Focation updated in: {0}".format(", ".join(sample_fl)))
-		if sample_equipment:
-			msgprint("Equipment updated in: {0}".format(", ".join(sample_equipment)))
-		if sample_date_of_receipt:
-			msgprint("Date of Receipt updated.")
-		else:
-			msgprint(_("Functional Location not mentioned"))
+		# if d.functional_location:
+		# 	frappe.db.sql("""update `tabSample Entry Register` set functional_location = %s, modified = %s, functional_location_code= %s
+		# 	 	where name=%s and docstatus!=1""", (d.functional_location, now_datetime(), d.functional_location_code, d.sample_id))
+		# 	sample_fl.append(d.sample_id)
 
-
-
-		# for d in self.get('sample_entry_creation_tool_details'):
-		# 	if d.functional_location:
-		# 		if d.functional_location and getdate(d.clearance_date) < getdate(d.cheque_date):
-		# 			frappe.throw(_("Clearance date cannot be before check date in row {0}").format(d.idx))
-
-		# 		frappe.db.set_value("Journal Voucher", d.voucher_id, "clearance_date", d.clearance_date)
-		# 		frappe.db.sql("""update `tabJournal Voucher` set clearance_date = %s, modified = %s
-		# 			where name=%s""", (d.clearance_date, nowdate(), d.voucher_id))
-		# 		vouchers.append(d.voucher_id)
-
-		# if vouchers:
-		# 	msgprint("Clearance Date updated in: {0}".format(", ".join(vouchers)))
-		# else:
-		# 	msgprint(_("Clearance Date not mentioned"))
-
-		# if not (self.clearance_date):
-		# 	msgprint("Clearance Date is Mandatory"
-		# 	return
-
-		# condition = ""
-
-
-		# dl = frappe.db.sql("""select t1.name, t1.cheque_no, t1.cheque_date, t2.debit,
-		# 		t2.credit, t1.posting_date, t2.against_account, t1.clearance_date
-		# 	from
-		# 		`tabJournal Voucher` t1, `tabJournal Voucher Detail` t2
-		# 	where
-		# 		t2.parent = t1.name and t2.account = %s
-		# 		and t1.clearance_date= %s and t1.docstatus=1
-		# 		and ifnull(t1.is_opening, 'No') = 'No' %s order by t1.posting_date, t1.cheque_no""" %
-		# 		('%s', '%s', condition), (self.bank_account, self.clearance_date), as_dict=1)
-
-		# self.set('entries', [])
-		# self.total_amount = 0.0
-		# self.total_reconciled_credit = 0.0
-		# self.total_reconciled_debit = 0.0
-
-		# for d in dl:
-		# 	nl = self.append('entries', {})
-		# 	nl.posting_date = d.posting_date
-		# 	nl.voucher_id = d.name
-		# 	nl.cheque_number = d.cheque_no
-		# 	nl.cheque_date = d.cheque_date
-		# 	nl.debit = d.debit
-		# 	nl.credit = d.credit
-		# 	nl.against_account = d.against_account
-		# 	nl.clearance_date = d.clearance_date
-		# 	self.total_amount += flt(d.debit) - flt(d.credit)
-
-  #                       if d.clearance_date: 
-  #                       	self.total_reconciled_debit += flt(d.debit)
-  #                       	self.total_reconciled_credit += flt(d.credit)
+		# if sample_fl:
+		# 	msgprint("Functional Focation updated in: {0}".format(", ".join(sample_fl)))

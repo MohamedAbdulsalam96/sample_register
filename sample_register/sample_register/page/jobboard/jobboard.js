@@ -364,7 +364,7 @@ sample_register.JobCard = Class.extend({
 					  formatter: linkFormatter = function ( row, cell, value, columnDef, dataContext ) {
 		           			 return '<a href="desk#Form/Customer/' + dataContext['customer'] + '">' + value + '</a>';
 		      			  }},
-			    {id: "type", name: "Type", field: "type",minWidth:120},
+			    {id: "type", name: "Sample Type", field: "type",minWidth:120},
 			    {id: "priority", name: "Priority", field: "priority",minWidth:120},
 			    {id: "standard", name: "Standard", field: "standard",minWidth:120}
     			// {id: "test_group", name: "Test Group", field: "test_group",minWidth:120}
