@@ -22,6 +22,11 @@ def get_data():
 					"name": "Test Book",
 					"description": _("All Test Book related information."),
 				},
+				{
+					"type": "doctype",
+					"name": "Test Certificate",
+					"description": _("All Test Certificate related information."),
+				},
 			]
 		},
 		{
