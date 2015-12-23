@@ -12,6 +12,21 @@ def get_data():
 					"name": "Sample Entry Register",
 					"description": _("All samples related information."),
 				},
+				{
+					"type": "doctype",
+					"name": "Job Card Creation",
+					"description": _("All Job Card related information."),
+				},
+				{
+					"type": "doctype",
+					"name": "Test Book",
+					"description": _("All Test Book related information."),
+				},
+				{
+					"type": "doctype",
+					"name": "Test Certificate",
+					"description": _("All Test Certificate related information."),
+				},
 			]
 		},
 		{
@@ -63,6 +78,31 @@ def get_data():
 					"type": "doctype",
 					"name": "Test",
 					"description":_("Test Master"),
+				},
+			]
+		},
+		{
+			"label": _("Tools"),
+			"icon": "icon-wrench",
+			"items": [
+				{
+					"type": "doctype",
+					"name": "Sample Entry Creation Tool",
+					"description": _("Create/Update Sample Entry"),
+				},
+				{
+					"type": "page",
+					"name": "jobboard",
+					"icon": "icon-sitemap",
+					"label": _("Job Card Creation"),
+					"description": _("Create Job Card and Set Priority, Standard Details"),
+				},
+				{
+					"type": "page",
+					"name": "jobcard",
+					"icon": "icon-sitemap",
+					"label": _("Job Card Submission"),
+					"description": _("Submit Job Card and Set Priority"),
 				},
 			]
 		},

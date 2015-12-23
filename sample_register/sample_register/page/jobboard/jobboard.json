@@ -1,0 +1,26 @@
+{
+ "content": null, 
+ "creation": "2015-12-01 11:50:30.650540", 
+ "docstatus": 0, 
+ "doctype": "Page", 
+ "icon": "icon-bar-chart", 
+ "idx": 0, 
+ "modified": "2015-12-01 11:50:30.650540", 
+ "modified_by": "Administrator", 
+ "module": "Sample Register", 
+ "name": "jobboard", 
+ "owner": "Administrator", 
+ "page_name": "jobboard", 
+ "roles": [
+  {
+   "role": "Analytics"
+  }, 
+  {
+   "role": "All"
+  }
+ ], 
+ "script": null, 
+ "standard": "Yes", 
+ "style": null, 
+ "title": "Job Dashboard"
+}
