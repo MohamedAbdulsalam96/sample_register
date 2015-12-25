@@ -20,7 +20,7 @@ cur_frm.add_fetch('sample_id','sample_condition','condition_of_sample');
 cur_frm.add_fetch('sample_id','drawn_by','collected_by');
 cur_frm.add_fetch('sample_id','serial_number','serial_number');
 cur_frm.add_fetch('sample_id','equipment','equipment');
-cur_frm.add_fetch('sample_id','equipment','equipment');
+cur_frm.add_fetch('sample_id','model_no','model_no');
 cur_frm.add_fetch('equipment','serial_number','serial_number');
 cur_frm.add_fetch('sample_id','equipment_make','manufactured_by');
 cur_frm.add_fetch('sample_id','technical_contact','technical_contact');

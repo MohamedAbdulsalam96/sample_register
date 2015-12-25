@@ -82,6 +82,18 @@ class SampleEntryCreationTool(Document):
 
 	def update_sample_entry(self):
 		sample_fl = []
+		container_detail = []
+
+		#check duplicate combination for code designation, equipment and sample drawn
+		code_designation_combination_check = []
+
+		for d in self.get("sample_entry_creation_tool_details"):
+			if d.functional_location and d.equipment and d.sample_taken_from:
+				if (d.functional_location+d.equipment+d.sample_taken_from) in code_designation_combination_check:
+					frappe.msgprint("Duplicate Code Designation Combination <br> '%s' is not allowed at row '%s'"%((d.functional_location+"-"+d.equipment+ "-"+d.sample_taken_from),d.idx),raise_exception=1)
+				else:
+					code_designation_combination_check.append(d.functional_location+d.equipment+d.sample_taken_from)
+
 		for d in self.get('sample_entry_creation_tool_details'):
 				sample_entry_doc=frappe.get_doc("Sample Entry Register", d.sample_id)
 				if sample_entry_doc.docstatus == 0: 
@@ -97,6 +109,28 @@ class SampleEntryCreationTool(Document):
 					sample_entry_doc.oil_temperature = d.oil_temperature
 					sample_entry_doc.winding_temperature = d.winding_temperature
 					sample_entry_doc.remarks = d.remarks
+					if d.container_type_i and d.container_id_i:
+						del sample_entry_doc.container_details[:]
+						container_detail = {
+								"doctype": "Container Details",
+								"container_type": d.container_type_i,
+								"container_id":d.container_id_i
+								}
+						sample_entry_doc.append("container_details", container_detail)
+						if d.container_type_ii and d.container_id_ii:
+							container_detail = {
+									"doctype": "Container Details",
+									"container_type": d.container_type_ii,
+									"container_id":d.container_id_ii
+									}
+							sample_entry_doc.append("container_details", container_detail)
+						if d.container_type_iii and d.container_id_iii:
+							container_detail = {
+									"doctype": "Container Details",
+									"container_type": d.container_type_iii,
+									"container_id":d.container_id_iii
+									}
+							sample_entry_doc.append("container_details", container_detail)
 					sample_entry_doc.save()
 		frappe.msgprint("Sample Entry updated")
 
