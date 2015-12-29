@@ -50,7 +50,7 @@ app_version = "0.0.1"
 
 # notification_config = "sample_register.notifications.get_notification_config"
 
-fixtures = ['Custom Field', 'Property Setter']
+fixtures = ['Custom Field', 'Property Setter',"Print Format"]
 
 # Permissions
 # -----------
