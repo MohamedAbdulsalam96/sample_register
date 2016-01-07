@@ -54,6 +54,9 @@ class SampleEntryCreationTool(Document):
 			nl.remarks = d.remarks
 
 	def create_sample_entry(self):
+		if not self.number_of_sample:
+			frappe.throw("Please enter number of sample")
+
 		if not self.date_of_collection:
 			frappe.throw("Please select Date of Collection")
 
@@ -79,6 +82,13 @@ class SampleEntryCreationTool(Document):
 			doc_sample_entry.save()
 			sample_link="<a href='desk#Form/Sample Entry Register/"+doc_sample_entry.name+"'>"+doc_sample_entry.name+" </a>"
 			frappe.msgprint(sample_link+"created")
+
+		self.number_of_sample =0
+		self.weather_condition = ""
+		self.date_of_collection =""
+		self.technical_contact = ""
+		self.type =""
+		self.drawn_by =""
 
 	def update_sample_entry(self):
 		sample_fl = []

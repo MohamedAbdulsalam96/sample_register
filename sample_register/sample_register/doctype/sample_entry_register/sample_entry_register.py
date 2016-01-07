@@ -26,7 +26,12 @@ class SampleEntryRegister(Document):
 		sample_count_allowed=frappe.db.sql("""select total_samples from `tabOrder Register` where name=%s""",(self.order_id),as_list=1)
 		sample_count=frappe.db.sql("""select count(name) from `tabSample Entry Register` where order_id=%s""",(self.order_id),as_list=1)
 		if sample_count >= sample_count_allowed:
-			frappe.throw("Please increase Total Samples in Work Order "+ self.order_id+"<br>Currently sample collected in system: "+str(sample_count[0][0])) 
+			frappe.throw("Please increase Total Samples Ordered in Work Order "+ self.order_id+"<br>Currently sample collected in system: "+str(sample_count[0][0])) 
+
+		if self.order_id:
+			work_order_doc=frappe.get_doc("Order Register",self.order_id)
+			work_order_doc.quantity_received=sample_count[0][0]
+			work_order_doc.save()
  # frappe.db.sql("""select name from `tabTest Name` where test_group='%s' order by name"""%(test_group), as_list=1)
 
 
