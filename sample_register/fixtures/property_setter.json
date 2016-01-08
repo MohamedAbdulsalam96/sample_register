@@ -817,5 +817,18 @@
   "property": "default_print_format", 
   "property_type": "Data", 
   "value": "certificate"
+ }, 
+ {
+  "default_value": null, 
+  "doc_type": "Delivery Note Item", 
+  "docstatus": 0, 
+  "doctype": "Property Setter", 
+  "doctype_or_field": "DocType", 
+  "field_name": null, 
+  "modified": "2015-12-31 12:06:44.220102", 
+  "name": "Delivery Note Item-read_only_onload", 
+  "property": "read_only_onload", 
+  "property_type": "Check", 
+  "value": null
  }
 ]

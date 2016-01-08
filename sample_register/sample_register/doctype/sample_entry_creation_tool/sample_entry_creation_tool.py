@@ -28,7 +28,7 @@ class SampleEntryCreationTool(Document):
 		else:
 			condition +="and job_card_status='Not Available'"
 
-		dl = frappe.db.sql("""select name,customer,date_of_receipt,job_card,functional_location,functional_location_code,
+		dl = frappe.db.sql("""select name,customer,date_of_receipt, date_of_collection,job_card,functional_location,functional_location_code,
 			equipment,equipment_make,serial_number,equipment_code,
 			conservation_protection_system, sample_taken_from, oil_temperature, winding_temperature,
 			remarks from `tabSample Entry Register` where order_id='%s' %s"""%(self.order, condition),as_dict=1, debug=1)
@@ -47,6 +47,7 @@ class SampleEntryCreationTool(Document):
 			nl.serial_number =d.serial_number
 			nl.equipment_code =d.equipment_code
 			nl.date_of_receipt = d.date_of_receipt
+			nl.date_of_collection = d.date_of_collection
 			nl.conservation_protection_system = d.conservation_protection_system
 			nl.sample_taken_from = d.sample_taken_from
 			nl.oil_temperature = d.oil_temperature
@@ -114,6 +115,7 @@ class SampleEntryCreationTool(Document):
 					sample_entry_doc.serial_number = d.serial_number
 					sample_entry_doc.equipment_code = d.equipment_code
 					sample_entry_doc.date_of_receipt = d.date_of_receipt
+					sample_entry_doc.date_of_collection = d.date_of_collection
 					sample_entry_doc.conservation_protection_system = d.conservation_protection_system
 					sample_entry_doc.sample_taken_from = d.sample_taken_from
 					sample_entry_doc.oil_temperature = d.oil_temperature
@@ -143,6 +145,18 @@ class SampleEntryCreationTool(Document):
 							sample_entry_doc.append("container_details", container_detail)
 					sample_entry_doc.save()
 		frappe.msgprint("Sample Entry updated")
+
+	def set_date_of_receipt(self):
+		samples = []
+		if not self.date_of_receipt:
+			msgprint(_("Please select Date of Receipt."))
+
+		if self.date_of_receipt:
+			for d in self.get('sample_entry_creation_tool_details'):
+				if not d.date_of_receipt:
+					d.date_of_receipt = self.date_of_receipt
+
+			msgprint(_("Date of Receipt set into table, please click on Update Sample Entry button to update Sample"))
 
 		# if d.functional_location:
 		# 	frappe.db.sql("""update `tabSample Entry Register` set functional_location = %s, modified = %s, functional_location_code= %s
