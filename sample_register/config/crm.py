@@ -7,11 +7,7 @@ def get_data():
 			"label": _("Documents"),
 			"icon": "icon-star",
 			"items": [
-				{
-					"type": "doctype",
-					"name": "Contract",
-					"description": _("All Contract related information."),
-				},
+
 			]
 		},
 	]

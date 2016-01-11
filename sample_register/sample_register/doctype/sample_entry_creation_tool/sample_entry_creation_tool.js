@@ -42,12 +42,15 @@ frappe.ui.form.on("Sample Entry Creation Tool", {
 		frm.disable_save();
 	},
 	
-	// update_clearance_date: function(frm) {
-	// 	return frappe.call({
-	// 		method: "update_details",
-	// 		doc: frm.doc
-	// 	});
-	// },
+	set_date_of_receipt: function(frm) {
+		return frappe.call({
+			method: "set_date_of_receipt",
+			doc: frm.doc,
+			callback: function(r, rt){
+				frm.refresh()
+			}
+		});
+	},
 	create_sample_entry: function(frm){
 		return frappe.call({
 			method: "create_sample_entry",
@@ -75,6 +78,7 @@ frappe.ui.form.on("Sample Entry Creation Tool", {
 			}
 		});
 	},
+
 	date_of_receipt: function(frm){
 		cur_frm.set_value("from_date", frm.doc.date_of_receipt);
 		cur_frm.set_value("to_date", frm.doc.date_of_receipt);
