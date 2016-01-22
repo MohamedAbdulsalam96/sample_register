@@ -16,5 +16,23 @@
   "name": "Salary Slip-Client", 
   "script": "cur_frm.add_fetch(\"employee\",\"permanent_account_no\", \"permanent_account_no\");\ncur_frm.add_fetch(\"employee\",\"provident_fund_account_no\",\"provident_fund_account_no\");", 
   "script_type": "Client"
+ }, 
+ {
+  "docstatus": 0, 
+  "doctype": "Custom Script", 
+  "dt": "Supplier Quotation", 
+  "modified": "2016-01-19 19:12:05.492972", 
+  "name": "Supplier Quotation-Client", 
+  "script": "frappe.ui.form.on(\"Supplier Quotation\", \"onload\", \n\tfunction(frm){\n                if(frm.doc.items && frm.doc.items[0].prevdoc_docname){\n\t\t    if(frm.doc.items[0].prevdoc_docname){\n\t\t\tfrm.set_value(\"material_request\", frm.doc.items[0].prevdoc_docname);\n\t\t  }\n               }\n\t});", 
+  "script_type": "Client"
+ }, 
+ {
+  "docstatus": 0, 
+  "doctype": "Custom Script", 
+  "dt": "Material Request", 
+  "modified": "2016-01-21 19:20:17.196871", 
+  "name": "Material Request-Client", 
+  "script": "frappe.ui.form.on(\"Material Request\", \"refresh\", \n\tfunction(frm){\n                if(frm.doc.workflow_state == \"Rejected\"){\n                      var dialog = new frappe.ui.Dialog({\n\t\t             title: \"Reason\",\n\t\t             fields: [\n\t\t\t    {\"fieldtype\": \"Text\", \"label\": __(\"Reason for rejection\"), \n                            \"fieldname\": \"reason\", \"reqd\": 1 },\n                            {\"fieldtype\": \"Button\", \"label\": __(\"Update\"), \"fieldname\": \"update\"},\n                          ]\n                      });\n                      dialog.fields_dict.update.$input.click(function() {\n                      \n\t\t         args = dialog.get_values();\n                         frm.doc.reason_for_rejection = args.reason\n                         frm.save();\n                         dialog.hide();\n                      })\n                      frm.doc.workflow_state = \"Draft\"\n                      frm.save();\n                   dialog.show();\n                 }\n             })", 
+  "script_type": "Client"
  }
 ]
