@@ -75,7 +75,7 @@ doc_events = {
 		"before_cancel": "sample_register.sample_register.doctype.sample_entry_register.sample_entry_register.status_updator"
 	},
 	"Stock Entry":{
-		"on_update": "sample_register.sample_register.doctype.fixed_asset_serial_number.fixed_asset_serial_number.make_new_asset"
+		"on_submit": "sample_register.sample_register.doctype.fixed_asset_serial_number.fixed_asset_serial_number.make_new_asset"
 	},
 }
 

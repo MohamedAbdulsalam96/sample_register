@@ -26,3 +26,4 @@ def make_new_asset(doc, method):
 					asset_doc.fixed_asset_serial_number = item.fixed_asset_serial_number
 					asset_doc.save(ignore_permissions=True)
 
+
