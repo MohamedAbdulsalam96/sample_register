@@ -942,11 +942,11 @@
   "doctype": "Property Setter", 
   "doctype_or_field": "DocField", 
   "field_name": "naming_series", 
-  "modified": "2016-01-21 12:32:58.302922", 
+  "modified": "2016-01-22 16:29:52.897133", 
   "name": "Material Request-naming_series-default", 
   "property": "default", 
   "property_type": "Text", 
-  "value": "TF-RFQ.-.YY..MM.-.#####"
+  "value": "TF-MRQ.-.YY..MM.-.#####"
  }, 
  {
   "default_value": null, 
@@ -955,11 +955,11 @@
   "doctype": "Property Setter", 
   "doctype_or_field": "DocField", 
   "field_name": "naming_series", 
-  "modified": "2016-01-21 12:32:58.417456", 
+  "modified": "2016-01-22 16:29:52.925639", 
   "name": "Material Request-naming_series-options", 
   "property": "options", 
   "property_type": "Text", 
-  "value": "TF-RFQ.-.YY..MM.-.#####"
+  "value": "TF-MRQ.-.YY..MM.-.#####"
  }, 
  {
   "default_value": null, 
@@ -992,12 +992,38 @@
   "doc_type": "Material Request", 
   "docstatus": 0, 
   "doctype": "Property Setter", 
+  "doctype_or_field": "DocType", 
+  "field_name": null, 
+  "modified": "2016-01-22 16:32:53.812139", 
+  "name": "Material Request-read_only_onload", 
+  "property": "read_only_onload", 
+  "property_type": "Check", 
+  "value": null
+ }, 
+ {
+  "default_value": null, 
+  "doc_type": "Material Request", 
+  "docstatus": 0, 
+  "doctype": "Property Setter", 
   "doctype_or_field": "DocField", 
   "field_name": "reason_for_rejection", 
-  "modified": "2016-01-21 18:33:13.511301", 
+  "modified": "2016-01-22 16:32:53.978047", 
   "name": "Material Request-reason_for_rejection-previous_field", 
   "property": "previous_field", 
   "property_type": "Data", 
   "value": "per_ordered"
+ }, 
+ {
+  "default_value": null, 
+  "doc_type": "Material Request", 
+  "docstatus": 0, 
+  "doctype": "Property Setter", 
+  "doctype_or_field": "DocType", 
+  "field_name": null, 
+  "modified": "2016-01-22 16:32:54.332228", 
+  "name": "Material Request-_idx", 
+  "property": "_idx", 
+  "property_type": "Text", 
+  "value": "[\"type_section\", \"title\", \"material_request_type\", \"column_break_2\", \"amended_from\", \"company\", \"items_section\", \"items\", \"more_info\", \"requested_by\", \"transaction_date\", \"column_break2\", \"naming_series\", \"status\", \"per_ordered\", \"reason_for_rejection\", \"printing_details\", \"letter_head\", \"select_print_heading\", \"terms_section_break\", \"tc_name\", \"terms\", \"workflow_state\"]"
  }
 ]

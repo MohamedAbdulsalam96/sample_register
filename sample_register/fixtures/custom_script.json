@@ -30,9 +30,18 @@
   "docstatus": 0, 
   "doctype": "Custom Script", 
   "dt": "Material Request", 
-  "modified": "2016-01-21 19:20:17.196871", 
+  "modified": "2016-01-23 15:39:33.082640", 
   "name": "Material Request-Client", 
-  "script": "frappe.ui.form.on(\"Material Request\", \"refresh\", \n\tfunction(frm){\n                if(frm.doc.workflow_state == \"Rejected\"){\n                      var dialog = new frappe.ui.Dialog({\n\t\t             title: \"Reason\",\n\t\t             fields: [\n\t\t\t    {\"fieldtype\": \"Text\", \"label\": __(\"Reason for rejection\"), \n                            \"fieldname\": \"reason\", \"reqd\": 1 },\n                            {\"fieldtype\": \"Button\", \"label\": __(\"Update\"), \"fieldname\": \"update\"},\n                          ]\n                      });\n                      dialog.fields_dict.update.$input.click(function() {\n                      \n\t\t         args = dialog.get_values();\n                         frm.doc.reason_for_rejection = args.reason\n                         frm.save();\n                         dialog.hide();\n                      })\n                      frm.doc.workflow_state = \"Draft\"\n                      frm.save();\n                   dialog.show();\n                 }\n             })", 
+  "script": "frappe.ui.form.on(\"Material Request\", \"refresh\", \n\tfunction(frm){\n                if(frm.doc.workflow_state == \"Rejected\"){\n                      var dialog = new frappe.ui.Dialog({\n\t\t             title: \"Reason\",\n\t\t             fields: [\n\t\t\t    {\"fieldtype\": \"Text\", \"label\": __(\"Reason for rejection\"), \n                            \"fieldname\": \"reason\", \"reqd\": 1 },\n                            {\"fieldtype\": \"Button\", \"label\": __(\"Update\"), \"fieldname\": \"update\"},\n                          ]\n                      });\n                      dialog.fields_dict.update.$input.click(function() {\n                      \n\t\t         args = dialog.get_values();\n                         frm.doc.reason_for_rejection = args.reason\n                         frm.comments.insert_comment(\"Material Request Approval\", args.reason)\n                         frm.save();\n                         frm.comments.refresh\n                         dialog.hide();\n                    \n                      })\n                      frm.doc.workflow_state = \"Draft\"\n                      frm.save();\n                   dialog.show();\n                 }\n                 \n             })", 
+  "script_type": "Client"
+ }, 
+ {
+  "docstatus": 0, 
+  "doctype": "Custom Script", 
+  "dt": "Leave Application", 
+  "modified": "2016-01-22 19:12:37.633872", 
+  "name": "Leave Application-Client", 
+  "script": "frappe.ui.form.on(\"Leave Application\", {\n\tonload: function(frm) {\n\t\tfrm.set_query(\"leave_approver_two\", function() {\n\t\t\treturn {\n\t\t\tquery:\"erpnext.hr.doctype.leave_application.leave_application.get_approvers\",\n\t\t\tfilters: {\n\t\t\t\t   employee: frm.doc.employee\n\t\t\t      }\n\t\t\t};\n\t\t});\n\t},\n\tleave_approver_two: function(frm) {\n           frm.set_value(\"leave_approver_two_name\",frappe.user.full_name(frm.doc.leave_approver_two));\n        }\n})\n", 
   "script_type": "Client"
  }
 ]
