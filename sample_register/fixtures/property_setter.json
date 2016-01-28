@@ -833,32 +833,6 @@
  }, 
  {
   "default_value": null, 
-  "doc_type": "Employee", 
-  "docstatus": 0, 
-  "doctype": "Property Setter", 
-  "doctype_or_field": "DocType", 
-  "field_name": null, 
-  "modified": "2016-01-12 15:29:06.627793", 
-  "name": "Employee-_idx", 
-  "property": "_idx", 
-  "property_type": "Text", 
-  "value": "[\"basic_information\", \"column_break0\", \"employee\", \"naming_series\", \"salutation\", \"employee_name\", \"image\", \"image_view\", \"column_break1\", \"user_id\", \"employee_number\", \"date_of_joining\", \"date_of_birth\", \"gender\", \"company\", \"employment_details\", \"col_break_21\", \"status\", \"employment_type\", \"holiday_list\", \"col_break_22\", \"scheduled_confirmation_date\", \"final_confirmation_date\", \"contract_end_date\", \"date_of_retirement\", \"job_profile\", \"column_break2\", \"branch\", \"department\", \"designation\", \"company_email\", \"notice_number_of_days\", \"salary_information\", \"salary_mode\", \"bank_name\", \"bank_ac_no\", \"organization_profile\", \"reports_to\", \"leave_approvers\", \"contact_details\", \"column_break3\", \"cell_number\", \"personal_email\", \"unsubscribed\", \"emergency_contact_details\", \"person_to_be_contacted\", \"relation\", \"emergency_phone_number\", \"column_break4\", \"permanent_accommodation_type\", \"permanent_address\", \"current_accommodation_type\", \"current_address\", \"sb53\", \"bio\", \"personal_details\", \"column_break5\", \"permanent_account_no\", \"provident_fund_account_no\", \"esic_no\", \"passport_number\", \"date_of_issue\", \"valid_upto\", \"place_of_issue\", \"column_break6\", \"marital_status\", \"blood_group\", \"family_background\", \"health_details\", \"educational_qualification\", \"education\", \"previous_work_experience\", \"external_work_history\", \"history_in_company\", \"internal_work_history\", \"exit\", \"column_break7\", \"resignation_letter_date\", \"relieving_date\", \"reason_for_leaving\", \"leave_encashed\", \"encashment_date\", \"exit_interview_details\", \"held_on\", \"reason_for_resignation\", \"new_workplace\", \"feedback\"]"
- }, 
- {
-  "default_value": null, 
-  "doc_type": "Employee", 
-  "docstatus": 0, 
-  "doctype": "Property Setter", 
-  "doctype_or_field": "DocType", 
-  "field_name": null, 
-  "modified": "2016-01-12 15:29:25.323361", 
-  "name": "Employee-read_only_onload", 
-  "property": "read_only_onload", 
-  "property_type": "Check", 
-  "value": null
- }, 
- {
-  "default_value": null, 
   "doc_type": "Salary Slip", 
   "docstatus": 0, 
   "doctype": "Property Setter", 
@@ -1025,5 +999,57 @@
   "property": "_idx", 
   "property_type": "Text", 
   "value": "[\"type_section\", \"title\", \"material_request_type\", \"column_break_2\", \"amended_from\", \"company\", \"items_section\", \"items\", \"more_info\", \"requested_by\", \"transaction_date\", \"column_break2\", \"naming_series\", \"status\", \"per_ordered\", \"reason_for_rejection\", \"printing_details\", \"letter_head\", \"select_print_heading\", \"terms_section_break\", \"tc_name\", \"terms\", \"workflow_state\"]"
+ }, 
+ {
+  "default_value": null, 
+  "doc_type": "Employee", 
+  "docstatus": 0, 
+  "doctype": "Property Setter", 
+  "doctype_or_field": "DocType", 
+  "field_name": null, 
+  "modified": "2016-01-28 13:13:54.815233", 
+  "name": "Employee-read_only_onload", 
+  "property": "read_only_onload", 
+  "property_type": "Check", 
+  "value": null
+ }, 
+ {
+  "default_value": null, 
+  "doc_type": "Employee", 
+  "docstatus": 0, 
+  "doctype": "Property Setter", 
+  "doctype_or_field": "DocField", 
+  "field_name": "trufil_id", 
+  "modified": "2016-01-28 13:13:57.942880", 
+  "name": "Employee-trufil_id-previous_field", 
+  "property": "previous_field", 
+  "property_type": "Data", 
+  "value": "employee_name"
+ }, 
+ {
+  "default_value": null, 
+  "doc_type": "Employee", 
+  "docstatus": 0, 
+  "doctype": "Property Setter", 
+  "doctype_or_field": "DocField", 
+  "field_name": "function", 
+  "modified": "2016-01-28 13:14:01.650813", 
+  "name": "Employee-function-previous_field", 
+  "property": "previous_field", 
+  "property_type": "Data", 
+  "value": "trufil_id"
+ }, 
+ {
+  "default_value": null, 
+  "doc_type": "Employee", 
+  "docstatus": 0, 
+  "doctype": "Property Setter", 
+  "doctype_or_field": "DocType", 
+  "field_name": null, 
+  "modified": "2016-01-28 13:14:08.354571", 
+  "name": "Employee-_idx", 
+  "property": "_idx", 
+  "property_type": "Text", 
+  "value": "[\"basic_information\", \"column_break0\", \"employee\", \"naming_series\", \"trufil_id\", \"salutation\", \"employee_name\", \"image\", \"image_view\", \"column_break1\", \"function\", \"user_id\", \"employee_number\", \"date_of_joining\", \"date_of_birth\", \"gender\", \"company\", \"employment_details\", \"col_break_21\", \"status\", \"employment_type\", \"holiday_list\", \"col_break_22\", \"scheduled_confirmation_date\", \"final_confirmation_date\", \"contract_end_date\", \"date_of_retirement\", \"job_profile\", \"column_break2\", \"branch\", \"department\", \"designation\", \"company_email\", \"notice_number_of_days\", \"salary_information\", \"salary_mode\", \"bank_name\", \"bank_ac_no\", \"organization_profile\", \"reports_to\", \"leave_approvers\", \"contact_details\", \"column_break3\", \"cell_number\", \"personal_email\", \"unsubscribed\", \"emergency_contact_details\", \"person_to_be_contacted\", \"relation\", \"emergency_phone_number\", \"column_break4\", \"permanent_accommodation_type\", \"permanent_address\", \"current_accommodation_type\", \"current_address\", \"sb53\", \"bio\", \"personal_details\", \"column_break5\", \"permanent_account_no\", \"provident_fund_account_no\", \"esic_no\", \"passport_number\", \"date_of_issue\", \"valid_upto\", \"place_of_issue\", \"column_break6\", \"marital_status\", \"blood_group\", \"family_background\", \"health_details\", \"educational_qualification\", \"education\", \"previous_work_experience\", \"external_work_history\", \"history_in_company\", \"internal_work_history\", \"exit\", \"column_break7\", \"resignation_letter_date\", \"relieving_date\", \"reason_for_leaving\", \"leave_encashed\", \"encashment_date\", \"exit_interview_details\", \"held_on\", \"reason_for_resignation\", \"new_workplace\", \"feedback\"]"
  }
 ]

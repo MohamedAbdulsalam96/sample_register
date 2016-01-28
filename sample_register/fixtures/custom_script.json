@@ -3,9 +3,9 @@
   "docstatus": 0, 
   "doctype": "Custom Script", 
   "dt": "Employee", 
-  "modified": "2016-01-12 15:41:39.984632", 
+  "modified": "2016-01-28 13:19:29.205816", 
   "name": "Employee-Client", 
-  "script": "frappe.ui.form.on(\"Employee\", \"validate\", function(frm,doctype,name) {\n    if(frm.doc.permanent_account_no.length<10){\n    \tmsgprint(\"PAN number should be at least 10 characters\");\n            validated = false;\n\t}\n    if(frm.doc.provident_fund_account_no && frm.doc.provident_fund_account_no.length<30){\n    \tmsgprint(\"Provident Fund Account should be for at least 30 characters\");\n            validated = false;\n\t}\n    if(frm.doc.esic_no && frm.doc.esic_no.length<30){\n    \tmsgprint(\"ESIC No should be at least 30 characters.\");\n            validated = false;\n\t}\n});", 
+  "script": "frappe.ui.form.on(\"Employee\", \"validate\", function(frm,doctype,name) {\n\n    if(frm.doc.permanent_account_no && frm.doc.permanent_account_no.length<10){\n    \tmsgprint(\"PAN number should be at least 10 characters\");\n            validated = false;\n\t}\n    if(frm.doc.provident_fund_account_no && frm.doc.provident_fund_account_no.length<30){\n    \tmsgprint(\"Provident Fund Account should be for at least 30 characters\");\n            validated = false;\n\t}\n    if(frm.doc.esic_no && frm.doc.esic_no.length<30){\n    \tmsgprint(\"ESIC No should be at least 30 characters.\");\n            validated = false;\n\t}\n});", 
   "script_type": "Client"
  }, 
  {
