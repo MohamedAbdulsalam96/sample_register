@@ -40,20 +40,35 @@ def new_fixed_asset(doc, method):
 					asset_doc.save(ignore_permissions=True)
 
 @frappe.whitelist()
-def notify_user(doc_name, comment_doc):
+def material_reject_mail(doc_name, owner):
 	frappe.reload_doctype("Comment")
-	comment_data = frappe.db.sql("""select comment_by_fullname, comment from `tabComment` where comment_docname = %s""",comment_doc, as_dict=1)
+	comment_data = frappe.db.sql("""select comment_by_fullname, comment from `tabComment` where comment_docname = %s""",doc_name, as_dict=1)
 	subject = "Material Request Detils"
 	message = """<p>Hello ,</p><p>Material Request No : %s </p><p>Details given below :</p>"""%(doc_name)
 	for i in range(len(comment_data)):		
 		message_row = """<p> %s : %s, </p>"""%(comment_data[i]['comment_by_fullname'], comment_data[i]['comment'])
 		message = message + message_row   
-	# print message
-	# user_list = frappe.db.sql("""select parent from `tabUserRole` where role = '{0}'""".format('Purchase Manager'), as_dict=1)
-	# print user_list		
-	frappe.sendmail(recipients=frappe.session.user, subject=subject, message =message)
+	frappe.sendmail(recipients=owner, subject=subject, message =message)
 	
 	return frappe.session.user
 
+@frappe.whitelist()
+def material_request_mail(doc_name, owner):
 
-	
+	subject = "Material Request"
+	message = """<p>Hello ,</p><p>Material Request  : %s </p>
+	<p>owner : %s </p>
+	<p>Send for Approval By : %s </p>"""%(doc_name, owner, frappe.session.user)
+
+	purchase_manager = frappe.db.sql("""select t1.email from `tabUser` t1 join `tabUserRole` t2  on t2.parent = t1.name and t2.role = 'Purchase Manager';""", as_list=1)
+	for manager in purchase_manager:
+		print manager[0]
+		frappe.sendmail(recipients=manager[0], subject=subject, message =message)	
+
+
+@frappe.whitelist()
+def trufil_id(doc, method):
+	if not doc.trufil_id:	
+		doc.trufil_id = make_autoname('.####')
+	else:
+		doc.trufil_id = doc.trufil_id

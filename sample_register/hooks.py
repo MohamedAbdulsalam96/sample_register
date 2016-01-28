@@ -80,6 +80,9 @@ doc_events = {
 	"Purchase Receipt":{
 		"on_submit": "sample_register.sample_register.doctype.fixed_asset_serial_number.fixed_asset_serial_number.new_fixed_asset"
 	},
+	"Employee":{
+		"validate": "sample_register.sample_register.doctype.fixed_asset_serial_number.fixed_asset_serial_number.trufil_id"
+	},
 }
 
 # doc_events = {
