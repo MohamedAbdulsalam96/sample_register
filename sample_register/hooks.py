@@ -7,7 +7,7 @@ app_publisher = "indictrans"
 app_description = "Detail Information of collected samples."
 app_icon = "fa-book"
 app_color = "grey"
-app_email = "tejal.s@indictranstech.com"
+app_email = "sambhaji.k@indictranstech.com"
 app_version = "0.0.1"
 
 # Includes in <head>
@@ -48,7 +48,7 @@ app_version = "0.0.1"
 # ------------------
 # See frappe.core.notifications.get_notification_config
 
-# notification_config = "sample_register.notifications.get_notification_config"
+notification_config = "sample_register.sample_register.notifications.get_notification_config"
 
 fixtures = ['Custom Field', 'Property Setter', "Custom Script","Print Format"]
 
