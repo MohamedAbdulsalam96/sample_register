@@ -48,7 +48,7 @@ app_version = "0.0.1"
 # ------------------
 # See frappe.core.notifications.get_notification_config
 
-# notification_config = "sample_register.notifications.get_notification_config"
+notification_config = "sample_register.sample_register.notifications.get_notification_config"
 
 fixtures = ['Custom Field', 'Property Setter', "Custom Script","Print Format"]
 
@@ -125,4 +125,3 @@ doc_events = {
 # override_whitelisted_methods = {
 # 	"frappe.desk.doctype.event.event.get_events": "sample_register.event.get_events"
 # }
-
