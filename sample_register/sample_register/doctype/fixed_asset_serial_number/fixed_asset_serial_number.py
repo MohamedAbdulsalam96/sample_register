@@ -40,6 +40,14 @@ def new_fixed_asset(doc, method):
 					asset_doc.fixed_asset_serial_number = item.fixed_asset_serial_number
 					asset_doc.save(ignore_permissions=True)
 
+		for d in doc.get('items'):		 #Enter inspection date for all items that require inspection
+			if frappe.db.get_value("Item", d.item_code, "inspection_required") and not d.qa_no:
+				frappe.throw(_("Quality Inspection required for Item {0}").format(d.item_code))
+			elif d.qa_no:
+				quality_inspection = frappe.get_doc("Quality Inspection", d.qa_no)
+				if quality_inspection.docstatus != 1:
+					frappe.throw(_("Quality Inspection not Submitted"))
+
 # @frappe.whitelist()
 # def material_reject_mail(doc_name, owner):
 # 	frappe.reload_doctype("Comment")
