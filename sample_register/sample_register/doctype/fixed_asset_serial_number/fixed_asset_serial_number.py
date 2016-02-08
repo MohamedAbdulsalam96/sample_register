@@ -7,6 +7,7 @@ import frappe
 from frappe.model.document import Document
 from frappe.model.naming import make_autoname
 from datetime import datetime, timedelta
+from frappe import throw, _
 
 class FixedAssetSerialNumber(Document):
 	def autoname(self):

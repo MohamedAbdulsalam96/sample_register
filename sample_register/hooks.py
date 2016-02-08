@@ -78,11 +78,14 @@ doc_events = {
 		"on_submit": "sample_register.sample_register.doctype.fixed_asset_serial_number.fixed_asset_serial_number.make_new_asset"
 	},
 	"Purchase Receipt":{
-		"on_submit": "sample_register.sample_register.doctype.fixed_asset_serial_number.fixed_asset_serial_number.new_fixed_asset"
+		"on_submit": ["sample_register.sample_register.doctype.fixed_asset_serial_number.fixed_asset_serial_number.new_fixed_asset","sample_register.custom_py_methods.notify_quality_insp"]
 	},
 	"Employee":{
 		"validate": "sample_register.sample_register.doctype.fixed_asset_serial_number.fixed_asset_serial_number.trufil_id"
 	},
+	"Quality Inspection":{
+		"on_submit": "sample_register.custom_py_methods.send_verified_mail",
+	}
 }
 
 # doc_events = {
