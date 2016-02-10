@@ -23,8 +23,6 @@ frappe.ui.form.on("Quality Inspection", "validate", function(frm) {
 			dialog.fields_dict.update.$input.click(function() {
 				args = dialog.get_values();
 				if(!args) return;
-				console.log(args.inspected_by)
-				console.log(args.verified)
 				cur_frm.set_value("inspected_by",args.inspected_by)
 				cur_frm.set_value("verified",args.verified)
 				cur_frm.save();
@@ -63,3 +61,8 @@ cur_frm.cscript.custom_onload = function(doc, cdt, cdn) {
 		cur_frm.refresh_fields();
 	}
 }
+
+frappe.ui.form.on("Leave Application", "leave_approver_two",
+	function(frm) {
+		frm.set_value("leave_approver_two_name", frappe.user.full_name(frm.doc.leave_approver_two));
+})

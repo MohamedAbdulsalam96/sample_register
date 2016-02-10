@@ -87,3 +87,13 @@ def trufil_id(doc, method):
 		doc.trufil_id = make_autoname('.####')
 	else:
 		doc.trufil_id = doc.trufil_id
+
+@frappe.whitelist()
+def create_todo(item_code, reference_name, owner):
+	todo = frappe.new_doc("ToDo")
+	todo.description = item_code
+	todo.reference_type = "Fixed Asset Serial Number"
+	todo.reference_name = reference_name
+	todo.owner = owner
+	todo.save(ignore_permissions=True)
+
