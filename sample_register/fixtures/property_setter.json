@@ -1246,5 +1246,31 @@
   "property": "read_only_onload", 
   "property_type": "Check", 
   "value": null
+ }, 
+ {
+  "default_value": null, 
+  "doc_type": "Fixed Asset Serial Number", 
+  "docstatus": 0, 
+  "doctype": "Property Setter", 
+  "doctype_or_field": "DocType", 
+  "field_name": null, 
+  "modified": "2016-02-09 16:25:41.996741", 
+  "name": "Fixed Asset Serial Number-_idx", 
+  "property": "_idx", 
+  "property_type": "Text", 
+  "value": "[\"fixed_asset_serial_number\", \"is_calibration_required\", \"col_brk_1\", \"item_code\", \"calibration_detail\", \"calibration_assigned_to\", \"calibration_status\", \"col_brk_2\", \"next_calibration_date\"]"
+ }, 
+ {
+  "default_value": null, 
+  "doc_type": "Fixed Asset Serial Number", 
+  "docstatus": 0, 
+  "doctype": "Property Setter", 
+  "doctype_or_field": "DocType", 
+  "field_name": null, 
+  "modified": "2016-02-09 16:33:51.750885", 
+  "name": "Fixed Asset Serial Number-read_only_onload", 
+  "property": "read_only_onload", 
+  "property_type": "Check", 
+  "value": null
  }
 ]
