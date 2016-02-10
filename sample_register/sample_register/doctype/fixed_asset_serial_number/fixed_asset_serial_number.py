@@ -12,13 +12,12 @@ from frappe import throw, _
 class FixedAssetSerialNumber(Document):
 	def autoname(self):
 		if self.fixed_asset_serial_number:	
-			self.name = make_autoname(self.fixed_asset_serial_number+'.###')
-		else:
-			self.name = make_autoname('Asset'+'.###')
+			self.name = make_autoname('TF-'+'.###')
 
 @frappe.whitelist()
 def make_new_asset(doc, method):
 	if doc.purpose == "Material Receipt":
+		fixed_asset = [] 
 		for i, ele in enumerate (doc.items):
 			item  = frappe.get_doc("Item", ele.item_code)
 			if item.fixed_asset_serial_number and item.is_asset_item:
@@ -27,6 +26,9 @@ def make_new_asset(doc, method):
 					asset_doc.item_code = item.item_code
 					asset_doc.fixed_asset_serial_number = item.fixed_asset_serial_number
 					asset_doc.save(ignore_permissions=True)
+					fixed_asset.append(asset_doc.name)
+				frappe.msgprint(_("Fixed Asset Serial Number Created"))
+				for i in fixed_asset: frappe.msgprint(_(i))
 
 @frappe.whitelist()
 def new_fixed_asset(doc, method):
@@ -34,11 +36,15 @@ def new_fixed_asset(doc, method):
 		for i, ele in enumerate (doc.items):
 			item  = frappe.get_doc("Item", ele.item_code)
 			if item.fixed_asset_serial_number and item.is_asset_item:
+				fixed_asset = [] 
 				for qty in range(int(ele.qty)):
 					asset_doc = frappe.new_doc("Fixed Asset Serial Number")
 					asset_doc.item_code = item.item_code
 					asset_doc.fixed_asset_serial_number = item.fixed_asset_serial_number
 					asset_doc.save(ignore_permissions=True)
+					fixed_asset.append(asset_doc.name)
+				frappe.msgprint(_("Fixed Asset Serial Number Created"))
+				for i in fixed_asset: frappe.msgprint(_(i))
 
 		for d in doc.get('items'):		 #Enter inspection date for all items that require inspection
 			if frappe.db.get_value("Item", d.item_code, "inspection_required") and not d.qa_no:
@@ -81,3 +87,13 @@ def trufil_id(doc, method):
 		doc.trufil_id = make_autoname('.####')
 	else:
 		doc.trufil_id = doc.trufil_id
+
+@frappe.whitelist()
+def create_todo(item_code, reference_name, owner):
+	todo = frappe.new_doc("ToDo")
+	todo.description = item_code
+	todo.reference_type = "Fixed Asset Serial Number"
+	todo.reference_name = reference_name
+	todo.owner = owner
+	todo.save(ignore_permissions=True)
+
