@@ -66,3 +66,10 @@ frappe.ui.form.on("Leave Application", "leave_approver_two",
 	function(frm) {
 		frm.set_value("leave_approver_two_name", frappe.user.full_name(frm.doc.leave_approver_two));
 })
+
+frappe.ui.form.on("Opportunity", "refresh",
+	function(frm) {
+		if(frm.doc.estimated_closer_date) {
+			cur_frm.set_df_property("estimated_closer_date", "read_only", 1);
+		}
+	})
