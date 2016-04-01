@@ -84,7 +84,8 @@ doc_events = {
 		"validate": "sample_register.sample_register.doctype.fixed_asset_serial_number.fixed_asset_serial_number.trufil_id"
 	},
 	"Quality Inspection":{
-		"on_submit": "sample_register.custom_py_methods.send_verified_mail",
+		"on_submit": "sample_register.custom_py_methods.send_verified_mail"
+		# "onload":"sample_register.sample_register.doctype.fixed_asset_serial_number.fixed_asset_serial_number.schedular_event"
 	}
 }
 
@@ -99,10 +100,11 @@ doc_events = {
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
-# 	"all": [
-# 		"sample_register.tasks.all"
-# 	],
+scheduler_events = {
+	"daily": [
+		"sample_register.sample_register.doctype.fixed_asset_serial_number.fixed_asset_serial_number.change_calibration_status"
+	]
+}
 # 	"daily": [
 # 		"sample_register.tasks.daily"
 # 	],

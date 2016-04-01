@@ -6,7 +6,8 @@ frappe.ui.form.on("Fixed Asset Serial Number", {
 				args: {
 					item_code: cur_frm.doc.item_code,
 					reference_name: cur_frm.doc.name,
-					owner : cur_frm.doc.calibration_assigned_to
+					owner : cur_frm.doc.calibration_assigned_to,
+					date: cur_frm.doc.next_calibration_date
 				}
 			})
 		}
