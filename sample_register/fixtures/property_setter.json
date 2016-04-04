@@ -1410,7 +1410,7 @@
   "doctype": "Property Setter", 
   "doctype_or_field": "DocType", 
   "field_name": null, 
-  "modified": "2016-04-02 19:36:18.461325", 
+  "modified": "2016-04-04 11:05:28.934751", 
   "name": "Opportunity-read_only_onload", 
   "property": "read_only_onload", 
   "property_type": "Check", 
