@@ -86,7 +86,10 @@ doc_events = {
 	"Quality Inspection":{
 		"on_submit": "sample_register.custom_py_methods.send_verified_mail"
 		# "onload":"sample_register.sample_register.doctype.fixed_asset_serial_number.fixed_asset_serial_number.schedular_event"
-	}
+	},
+	"Opportunity": {
+		"on_update": "sample_register.custom_py_methods.activity_log"
+	},
 }
 
 # doc_events = {

@@ -43,3 +43,48 @@ def absent_days(employee, month, fiscal_year):
 		select att_date from `tabAttendance` where employee = %s and status = "Absent" and att_date between %s and %s
 		""", (employee, m.month_start_date, m.month_end_date), as_list=1)
 	return len(absent)
+
+@frappe.whitelist()
+def add_oppo_comment(docname, reason=None, stage=None, probability=None):
+	doc = frappe.get_doc("Opportunity", docname)
+	reason_comm = ""
+	stage_comm = ""
+	probability_comm = ""
+
+	if reason:
+		doc.old_reason = reason
+		reason_comm = """<b>Reason for Change:</b> """ + reason
+		
+	if stage:
+		doc.old_stage = stage
+		stage_comm = """<b>Opportunity Stage Print:</b> """ + stage
+
+	if probability:
+		doc.old_probability = probability
+		probability_comm = """<b>Probability:</b> """ + probability + "%"
+
+	if reason_comm or stage_comm or probability_comm:
+		comment = """<p>{0}</p> <p>{1}</p> <p>{2}</p>""".format(reason_comm, stage_comm, probability_comm)
+		doc.add_comment(comment)
+
+@frappe.whitelist()
+def activity_log(doc, method):
+	reason_comm = ""
+	stage_comm = ""
+	probability_comm = ""
+
+	if (doc.to_discuss != doc.old_reason) or (doc.to_discuss and not doc.old_reason):
+		doc.old_reason = doc.to_discuss
+		reason_comm = """<b>Reason for Change:</b> """ + doc.to_discuss
+		
+	if (doc.opportunity_stage != doc.old_stage) or (doc.opportunity_stage and not doc.old_stage):
+		doc.old_stage = doc.opportunity_stage
+		stage_comm = """<b>Opportunity Stage:</b> """ + doc.opportunity_stage
+
+	if (doc.probability != doc.old_probability) or (doc.probability and not doc.old_probability):
+		doc.old_probability = doc.probability
+		probability_comm = """<b>Probability:</b> """ + doc.probability + "%"
+
+	if reason_comm or stage_comm or probability_comm:
+		comment = """<p>{0}</p> <p>{1}</p> <p>{2}</p>""".format(reason_comm, stage_comm, probability_comm)
+		doc.add_comment(comment)
