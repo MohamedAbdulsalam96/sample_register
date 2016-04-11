@@ -104,6 +104,12 @@ def get_data():
 					"label": _("Job Card Submission"),
 					"description": _("Submit Job Card and Set Priority"),
 				},
+				{
+					"type": "doctype",
+					"name": "Standard Operating Procedure",
+					"label": _("Standard Operating Procedure"),
+					"description": _("create Standard Operating Procedure")
+				},
 			]
 		},
 
