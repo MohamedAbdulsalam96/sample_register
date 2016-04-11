@@ -182,7 +182,7 @@
    "unique": 0
   }, 
   {
-   "allow_on_submit": 0, 
+   "allow_on_submit": 1, 
    "bold": 0, 
    "collapsible": 0, 
    "fieldname": "standards", 
@@ -289,7 +289,7 @@
  "issingle": 0, 
  "istable": 0, 
  "max_attachments": 0, 
- "modified": "2015-12-16 11:40:36.712155", 
+ "modified": "2016-04-11 11:18:32.302292", 
  "modified_by": "Administrator", 
  "module": "Sample Register", 
  "name": "Job Card Creation", 
