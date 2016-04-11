@@ -66,3 +66,28 @@ frappe.ui.form.on("Leave Application", "leave_approver_two",
 	function(frm) {
 		frm.set_value("leave_approver_two_name", frappe.user.full_name(frm.doc.leave_approver_two));
 })
+
+frappe.ui.form.on("Opportunity", {
+	refresh: function(frm) {
+		if(frm.doc.estimated_closer_date) {
+			cur_frm.set_df_property("estimated_closer_date", "read_only", 1);
+		}
+	},
+
+	validate: function(frm) {
+		if(frm.doc.__islocal && ((frm.doc.estimated_closer_date && frm.doc.to_discuss) || frm.doc.opportunity_stage || frm.doc.probability)) {
+			frappe.call({
+				method: "sample_register.custom_py_methods.add_oppo_comment",
+				args: {
+					"docname": frm.doc.name,
+					"reason": frm.doc.to_discuss,
+					"stage": frm.doc.opportunity_stage,
+					"probability": frm.doc.probability
+				},
+			});
+		}
+		if(frm.doc.contact_date && !frm.doc.to_discuss) {
+			frappe.msgprint("Enter Reason for change in Follow up Date")
+		}
+	}
+})

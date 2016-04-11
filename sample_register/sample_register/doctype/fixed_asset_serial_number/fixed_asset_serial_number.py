@@ -89,11 +89,17 @@ def trufil_id(doc, method):
 		doc.trufil_id = doc.trufil_id
 
 @frappe.whitelist()
-def create_todo(item_code, reference_name, owner):
+def create_todo(item_code, reference_name, owner, date):
 	todo = frappe.new_doc("ToDo")
 	todo.description = item_code
 	todo.reference_type = "Fixed Asset Serial Number"
 	todo.reference_name = reference_name
 	todo.owner = owner
+	todo.date = date
 	todo.save(ignore_permissions=True)
 
+def change_calibration_status():
+	from frappe.utils import nowdate
+	due_calibration = frappe.db.sql(""" select name, next_calibration_date from `tabFixed Asset Serial Number` where next_calibration_date <%s """,nowdate(),as_dict=1)
+	for doc in due_calibration:
+		frappe.db.set_value("Fixed Asset Serial Number", doc.name, "calibration_status", "Due for calibration")
