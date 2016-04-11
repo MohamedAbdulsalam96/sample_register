@@ -75,19 +75,32 @@ frappe.ui.form.on("Opportunity", {
 	},
 
 	validate: function(frm) {
-		if(frm.doc.__islocal && ((frm.doc.estimated_closer_date && frm.doc.to_discuss) || frm.doc.opportunity_stage || frm.doc.probability)) {
-			frappe.call({
-				method: "sample_register.custom_py_methods.add_oppo_comment",
-				args: {
-					"docname": frm.doc.name,
-					"reason": frm.doc.to_discuss,
-					"stage": frm.doc.opportunity_stage,
-					"probability": frm.doc.probability
-				},
-			});
-		}
-		if(frm.doc.contact_date && !frm.doc.to_discuss) {
-			frappe.msgprint("Enter Reason for change in Follow up Date")
+		cur_frm.set_df_property("reason_for_changes", "reqd", frm.doc.contact_date);
+	},
+
+	contact_date: function(frm) {
+		if(frm.doc.contact_date != frm.doc.old_date && !frm.doc.__islocal) {
+			frm.doc.reason_for_changes = " "
+			cur_frm.set_df_property("reason_for_changes", "reqd", 1);
+			refresh_field("reason_for_changes")
 		}
 	}
+
+})
+
+frappe.ui.form.on("Sales Order", {
+	validate: function(frm) {
+		var qty = 0
+		var items = frm.doc.items
+		for(i=0;i<items.length; i++){
+			qty += items[i].qty
+		}
+		frm.doc.total_qty = qty
+	}
+
+	/*on_submit: function(frm) {
+		if(frm.attachments.get_attachments().length == 0) {
+			frappe.throw("Attach file");
+		}
+	}*/
 })

@@ -44,47 +44,46 @@ def absent_days(employee, month, fiscal_year):
 		""", (employee, m.month_start_date, m.month_end_date), as_list=1)
 	return len(absent)
 
-@frappe.whitelist()
-def add_oppo_comment(docname, reason=None, stage=None, probability=None):
-	doc = frappe.get_doc("Opportunity", docname)
-	reason_comm = ""
-	stage_comm = ""
-	probability_comm = ""
-
-	if reason:
-		doc.old_reason = reason
-		reason_comm = """<b>Reason for Change:</b> """ + reason
-		
-	if stage:
-		doc.old_stage = stage
-		stage_comm = """<b>Opportunity Stage Print:</b> """ + stage
-
-	if probability:
-		doc.old_probability = probability
-		probability_comm = """<b>Probability:</b> """ + probability + "%"
-
-	if reason_comm or stage_comm or probability_comm:
-		comment = """<p>{0}</p> <p>{1}</p> <p>{2}</p>""".format(reason_comm, stage_comm, probability_comm)
-		doc.add_comment(comment)
 
 @frappe.whitelist()
 def activity_log(doc, method):
-	reason_comm = ""
 	stage_comm = ""
 	probability_comm = ""
+	reason_comm = []
 
-	if (doc.to_discuss != doc.old_reason) or (doc.to_discuss and not doc.old_reason):
-		doc.old_reason = doc.to_discuss
-		reason_comm = """<b>Reason for Change:</b> """ + doc.to_discuss
+	if (doc.contact_date != doc.old_date) or (doc.contact_date and not doc.old_date):
+		doc.old_reason = doc.reason_for_changes
+		doc.old_date = doc.contact_date
+		if doc.contact_date:
+			reason_comm.extend(("<b>Reason for Change:</b>", doc.reason_for_changes, "<br />"))
+			reason_comm.extend(("Follow up contact date: ", doc.contact_date, "<br />"))
 		
+		if doc.follow_up_action:
+			reason_comm.extend(("Next action : ", doc.follow_up_action, "<br />"))
+		
+		if doc.contact_by:
+			reason_comm.extend(("Next Contact By: ", doc.contact_by, "<br />"))
+	
 	if (doc.opportunity_stage != doc.old_stage) or (doc.opportunity_stage and not doc.old_stage):
 		doc.old_stage = doc.opportunity_stage
 		stage_comm = """<b>Opportunity Stage:</b> """ + doc.opportunity_stage
+		
 
 	if (doc.probability != doc.old_probability) or (doc.probability and not doc.old_probability):
 		doc.old_probability = doc.probability
 		probability_comm = """<b>Probability:</b> """ + doc.probability + "%"
 
 	if reason_comm or stage_comm or probability_comm:
-		comment = """<p>{0}</p> <p>{1}</p> <p>{2}</p>""".format(reason_comm, stage_comm, probability_comm)
-		doc.add_comment(comment)
+		comment = """<p>{0}</p> <p>{1}</p> <p>{2}</p>""".format(" ".join(reason_comm), stage_comm, probability_comm)
+		doc.add_comment("Reason", comment)
+
+@frappe.whitelist()
+def so_require(doc, method):
+	if doc.customer and not doc.sales_order:
+		frappe.throw("Sales Order reference require");
+
+@frappe.whitelist()
+def check_attachment(doc, method):
+	file_name = frappe.db.sql("""select file_name from `tabFile` where attached_to_name = '%s'"""%(doc.name), as_list=1)
+	if not file_name:
+		frappe.throw("Please Attach File")

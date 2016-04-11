@@ -89,7 +89,14 @@ doc_events = {
 	},
 	"Opportunity": {
 		"on_update": "sample_register.custom_py_methods.activity_log"
+		# "validate": "sample_register.custom_py_methods.add_oppo_comment"
 	},
+	"Order Register": {
+	    "on_submit": "sample_register.custom_py_methods.so_require"
+	},
+	"Sales Order": {
+		"on_submit": "sample_register.custom_py_methods.check_attachment"
+	}
 }
 
 # doc_events = {
