@@ -6,3 +6,11 @@ cur_frm.fields_dict['sample_id'].get_query = function(doc) {
 			}
 	}
 }
+
+/*frappe.ui.form.on("Job Card Creation", {
+	on_submit : function(frm){
+		if(frm.doc.status == "Closed") {
+		
+		}
+	}
+})*/

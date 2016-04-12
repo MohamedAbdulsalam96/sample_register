@@ -87,3 +87,18 @@ def check_attachment(doc, method):
 	file_name = frappe.db.sql("""select file_name from `tabFile` where attached_to_name = '%s'"""%(doc.name), as_list=1)
 	if not file_name:
 		frappe.throw("Please Attach File")
+
+@frappe.whitelist()
+def quot_workflow(doc, method):
+	user = str(frappe.session['user'])
+	user_role =  frappe.get_roles(user)
+	
+	for row in doc.items:
+		if row.discount_percentage and row.discount_percentage >= 20 and not "Sales Manager" in user_role:
+			frappe.throw("Send this Quote to Sales Manager for Approval")
+	if not "Sales Manager" in user_role and doc.discount_amount and (doc.discount_amount >= doc.total*20/100):
+		frappe.throw("Send this Quote to Sales Manager for Approval")
+	elif "Sales Manager" in user_role or "Sales User" in user_role:
+		pass
+	else:
+		frappe.throw("Sales User or Sales Manager allow to submit")
