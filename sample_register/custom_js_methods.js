@@ -97,10 +97,12 @@ frappe.ui.form.on("Sales Order", {
 		}
 		frm.doc.total_qty = qty
 	}
-
-	/*on_submit: function(frm) {
-		if(frm.attachments.get_attachments().length == 0) {
-			frappe.throw("Attach file");
-		}
-	}*/
 })
+
+cur_frm.cscript.item_name = function(doc, cdt, cdn){
+	var d = locals[cdt][cdn];
+	if(!d.description) {
+		frappe.model.set_value(cdt, cdn, "description", d.item_name);
+		refresh_field(d.description)
+	}
+}
