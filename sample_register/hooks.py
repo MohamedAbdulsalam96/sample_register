@@ -96,6 +96,9 @@ doc_events = {
 	},
 	"Sales Order": {
 		"on_submit": "sample_register.custom_py_methods.check_attachment"
+	},
+	"Quotation": {
+		"on_submit": "sample_register.custom_py_methods.quot_workflow"
 	}
 }
 

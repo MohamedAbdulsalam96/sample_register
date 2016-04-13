@@ -11,12 +11,10 @@ from frappe.model.mapper import get_mapped_doc
 class JobCardCreation(Document):
 	def validate(self):
 		self.check_sample_status_if_sample_id_changed()
-		print "helloooooooooooooooooooooooooooooooooooooooooooooo"
 
 	def before_insert(self):
 		self.check_sample_status()
 
-	def on_submit(self):
 		sample_entry_doc=frappe.get_doc("Sample Entry Register",self.sample_id)
 		if(not sample_entry_doc.date_of_collection) or (not sample_entry_doc.date_of_receipt):
 			frappe.throw("Collection Date or Receipt Date not Present in "+self.sample_id)
@@ -53,5 +51,12 @@ class JobCardCreation(Document):
 				if(sample_entry_doc.job_card_status == "Submitted"):
 					frappe.throw("Job Card "+sample_entry_doc.job_card +" is allready Submitted for "+self.sample_id)
 	
-	def on_update(self):
-		print"**********************IN on_update**********************"
+	def on_update_after_submit(self):
+		if self.status and self.status == "Closed" and self.docstatus == 1:
+			status = True
+			for row in self.test_details:
+				if row.status != "Closed":
+					status = False
+			if status == False:
+				frappe.msgprint("All Test's are not Closed yet")
+				self.status = " "
