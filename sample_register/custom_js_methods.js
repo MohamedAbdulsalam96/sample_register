@@ -96,13 +96,41 @@ frappe.ui.form.on("Sales Order", {
 			qty += items[i].qty
 		}
 		frm.doc.total_qty = qty
+		if(frm.doc.po_no && !frm.doc.po_date) {
+			frappe.msgprint("Please add PO Date")
+		}
+	},
+
+	refresh: function(frm) {
+		if(frm.doc.docstatus==1) {
+			if(frm.doc.status != 'Stopped' && frm.doc.status != 'Closed') {
+				cur_frm.add_custom_button(__('Order Register'), function() {
+					frappe.model.open_mapped_doc({
+						method: "sample_register.custom_py_methods.make_order_register",
+						frm: cur_frm
+					})
+				})
+			}
+		}
 	}
-})
+});
 
 cur_frm.cscript.item_name = function(doc, cdt, cdn){
 	var d = locals[cdt][cdn];
 	if(!d.description) {
 		frappe.model.set_value(cdt, cdn, "description", d.item_name);
 		refresh_field(d.description)
+	}
+}
+
+cur_frm.cscript.custom_onload = function(doc, cdt, cdn) {
+	if(doc.doctype=="Opportunity" || doc.doctype=="Quotation" || doc.doctype=="Sales Order" || doc.doctype=="Delivery Note" || doc.doctype=="Sales Invoice"){
+		cur_frm.fields_dict.items.grid.get_field("item_code").get_query = function(doc) {
+			return {
+				filters: [
+					['Item','is_service_item','=',1]
+				]
+			}	
+		}
 	}
 }

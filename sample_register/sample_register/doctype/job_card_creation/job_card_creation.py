@@ -15,6 +15,7 @@ class JobCardCreation(Document):
 	def before_insert(self):
 		self.check_sample_status()
 
+	def before_submit(self):
 		sample_entry_doc=frappe.get_doc("Sample Entry Register",self.sample_id)
 		if(not sample_entry_doc.date_of_collection) or (not sample_entry_doc.date_of_receipt):
 			frappe.throw("Collection Date or Receipt Date not Present in "+self.sample_id)
@@ -33,6 +34,7 @@ class JobCardCreation(Document):
 			test_book_link="<a href='desk#Form/Test Book/"+doc_test_book.name+"'>"+doc_test_book.name+" </a>"
 			job_link="<a href='desk#Form/Job Card Creation/"+doc_test_book.job_card+"'>"+doc_test_book.job_card+" </a>"
 			frappe.msgprint("For Job Card "+job_link+", Test Book "+test_book_link+ " created for Test "+ r.test)
+			r.test_book = doc_test_book.name
 		
 	def check_sample_status(self):
 		if self.sample_id and (self.docstatus==0):
