@@ -22,4 +22,13 @@ class TestBook(Document):
 								and 
 									test = %s
 							""", (self.job_card, self.test_group, self.test))
+		
+		job_card = frappe.get_doc("Job Card Creation", self.job_card)
+		status = True
+		for test in job_card.test_details:
+			if test.status != "Closed":
+				status = False
+		if status == True:
+			frappe.db.set_value("Job Card Creation", self.job_card, "status", "Closed")
+
 

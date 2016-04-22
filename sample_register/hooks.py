@@ -88,11 +88,11 @@ doc_events = {
 		# "onload":"sample_register.sample_register.doctype.fixed_asset_serial_number.fixed_asset_serial_number.schedular_event"
 	},
 	"Opportunity": {
-		"on_update": "sample_register.custom_py_methods.activity_log"
-		# "validate": "sample_register.custom_py_methods.add_oppo_comment"
+		"on_update": "sample_register.custom_py_methods.activity_log",
+		"validate": "sample_register.custom_py_methods.calculate_tot_amount"
 	},
 	"Order Register": {
-	    "on_submit": "sample_register.custom_py_methods.so_require"
+	    "on_submit": ["sample_register.custom_py_methods.so_require", "erpnext.crm.doctype.order_register.order_register.check_total_samples"]
 	},
 	"Sales Order": {
 		"on_submit": "sample_register.custom_py_methods.check_attachment"

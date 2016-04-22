@@ -5,6 +5,7 @@
 from __future__ import unicode_literals
 import frappe
 from frappe.model.document import Document
+from frappe.model.mapper import get_mapped_doc
 
 class SampleEntryRegister(Document):
 	def validate(self):
@@ -60,4 +61,21 @@ def status_updator(self, method):
 		sample_entry_doc.save()
 		# bill_list = frappe.db.sql("""select name from `tabPurchase Invoice` where bill_no=%s and docstatus =1 and is_recurring='0'""",
 			# self.bill_no)
+
+@frappe.whitelist()
+def create_job_card(source_name, target_doc=None):
+	def set_missing_values(source, target):
+		target.sample_id = source.name
+		target.customer = source.customer
+		target.type = source.type
+
+	doclist = get_mapped_doc("Sample Entry Register", source_name, {
+			"Sample Entry Register": {
+				"doctype": "Job Card Creation",
+				"validation": {
+					"docstatus": ["=", 1]
+				}
+			}
+		}, target_doc, set_missing_values, ignore_permissions=False)
+	return doclist
 

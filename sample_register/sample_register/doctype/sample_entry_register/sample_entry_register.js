@@ -83,3 +83,34 @@ cur_frm.cscript.container_id = function(doc,cdt,cdn){
 		msgprint(__("Please specify") + ": " +
 						"customer" + __("Without Customer details No samples can be entered."));
 }
+
+cur_frm.cscript.refresh = function(doc, cdt, cdn) {
+	if(doc.docstatus == 1) {
+		cur_frm.add_custom_button(__("Create Job Card"),
+			function() {
+				frappe.model.open_mapped_doc({
+						method: "sample_register.sample_register.doctype.sample_entry_register.sample_entry_register.create_job_card",
+						frm: cur_frm
+				})
+			})
+		}
+	}
+
+frappe.ui.form.on("Sample Entry Register", {
+	refresh: function(frm) {
+		if(frm.doc.docstatus===0) {
+			cur_frm.add_custom_button(__("From Order Register"),
+			function() {
+				frappe.model.map_current_doc({
+					method: "erpnext.crm.doctype.order_register.order_register.create_sample_entry",
+					source_doctype: "Order Register",
+					get_query_filters: {
+						docstatus: 1,
+						customer: cur_frm.doc.customer || undefined,
+						company: cur_frm.doc.company
+					}
+				})
+			}, "icon-download", "btn-default")
+		}
+	}
+})
