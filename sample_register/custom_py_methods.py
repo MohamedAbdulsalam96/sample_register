@@ -1,5 +1,5 @@
 import frappe
-from frappe.utils import rounded,money_in_words
+from frappe.utils import flt,rounded,money_in_words
 from frappe.model.mapper import get_mapped_doc
 from frappe import throw, _
 from erpnext.hr.doctype.process_payroll.process_payroll import get_month_details
@@ -102,3 +102,36 @@ def quot_workflow(doc, method):
 		pass
 	else:
 		frappe.throw("Sales User or Sales Manager allow to submit")
+
+@frappe.whitelist()
+def calculate_tot_amount(doc, method):
+	if doc.with_items:
+		user = str(frappe.session['user'])
+		user_role =  frappe.get_roles(user)
+		tot_amount = 0
+		for row in doc.items:
+			if row.qty:
+				price_list_rate = frappe.db.get_value("Item Price",{"item_code": row.item_code, "price_list": "Standard Selling"}, "price_list_rate")
+				tot_amount += price_list_rate * row.qty
+		doc.total_amount = tot_amount
+		if (doc.total_amount and doc.estimated_price) and (flt(doc.total_amount) > flt(doc.estimated_price)) and not "Sales Manager" in user_role :
+			frappe.throw("Total Amount must be less than Estimated Price")
+		return tot_amount
+
+@frappe.whitelist()
+def make_order_register(source_name, target_doc=None):
+	def set_missing_values(source, target):
+		target.customer = source.customer
+		target.sales_order = source.name
+		target.po_no = source.po_no
+		target.po_date = source.po_date
+
+	doclist = get_mapped_doc("Sales Order", source_name, {
+			"Sales Order": {
+				"doctype": "Order Register",
+				"validation": {
+					"docstatus": ["=", 1]
+				}
+			}
+		}, target_doc, set_missing_values, ignore_permissions=False)
+	return doclist
