@@ -6,9 +6,15 @@ from __future__ import unicode_literals
 import frappe
 from frappe.model.document import Document
 from frappe.model.mapper import get_mapped_doc
+from frappe.utils import flt, getdate, nowdate,now_datetime
+from frappe.model.naming import make_autoname
 
 
 class JobCardCreation(Document):
+	def autoname(self):
+		year = int(now_datetime().strftime("%Y"))
+		self.name = make_autoname("TF-JC-"+str(year)+"-"+'.#####')
+
 	def validate(self):
 		self.check_sample_status_if_sample_id_changed()
 

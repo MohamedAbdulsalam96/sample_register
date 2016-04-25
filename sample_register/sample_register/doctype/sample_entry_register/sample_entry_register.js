@@ -5,7 +5,8 @@
 // Fetch order date ,order name and order expiry date on selection of order id on 'Sample Register Entry' form
 cur_frm.add_fetch('order_id','order_date','order_date');
 cur_frm.add_fetch('order_id','po_no','order_reference_number');
-cur_frm.add_fetch('order_id','order_expiry_date','order_expiry_date');
+cur_frm.add_fetch('order_id','customer','customer');
+/*cur_frm.add_fetch('order_id','order_expiry_date','order_expiry_date');*/
 
 //fetch equipment code ,make,serial_number,model_no and functional code after selecting equipment, functional location and customer
 cur_frm.add_fetch('functional_location','functional_location_code','functional_location_code')
@@ -47,7 +48,7 @@ cur_frm.fields_dict['equipment'].get_query = function(doc) {
 }
 
 // Return query for getting order aginst specified customer
-cur_frm.fields_dict['order_id'].get_query = function(doc) {
+/*cur_frm.fields_dict['order_id'].get_query = function(doc) {
 	return {
 		filters: {
 			
@@ -55,8 +56,12 @@ cur_frm.fields_dict['order_id'].get_query = function(doc) {
 			"order_status" : ["in", ["In-Progress", "Open"]]
 		}
 	}
-}
+}*/
 
+cur_frm.cscript.technical_address = function(doc,cdt,cdn){
+
+	erpnext.utils.get_address_display(this.frm, "technical_address","address_details");
+}
 
 
 
@@ -95,6 +100,15 @@ cur_frm.cscript.refresh = function(doc, cdt, cdn) {
 			})
 		}
 	}
+cur_frm.fields_dict['technical_address'].get_query = function(doc) {
+	return {
+		filters: {
+			
+			"address_type": 'Technical',
+			"customer": doc.customer
+		}
+	}
+}
 
 frappe.ui.form.on("Sample Entry Register", {
 	refresh: function(frm) {
@@ -111,6 +125,12 @@ frappe.ui.form.on("Sample Entry Register", {
 					}
 				})
 			}, "icon-download", "btn-default")
+		}
+	},
+
+	before_submit: function(frm) {
+		if(!frm.doc.date_of_collection || !frm.doc.date_of_receipt) {
+			frappe.throw("Please enter Date Of Collection & Date of Receipt")
 		}
 	}
 })
