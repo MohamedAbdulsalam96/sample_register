@@ -92,8 +92,11 @@ frappe.ui.form.on("Sales Order", {
 	validate: function(frm) {
 		var qty = 0
 		var items = frm.doc.items
-		for(i=0;i<items.length; i++){
-			qty += items[i].qty
+		if(items){
+			for(i=0;i<items.length; i++){
+				if(qty < items[i].qty)
+					{qty = items[i].qty}
+			}
 		}
 		frm.doc.total_qty = qty
 		if(frm.doc.po_no && !frm.doc.po_date) {
