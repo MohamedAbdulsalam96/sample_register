@@ -78,9 +78,10 @@ def activity_log(doc, method):
 		doc.add_comment("Reason", comment)
 
 @frappe.whitelist()
-def so_require(doc, method):
-	if doc.customer and not doc.sales_order:
-		frappe.throw("Sales Order reference require");
+def sales_order_ref(doc, method):
+	assign_to = frappe.db.sql("""select owner from `tabToDo` where reference_name = '%s' """%(doc.name))
+	if not doc.sales_order and not assign_to:
+		frappe.throw("Sales Order reference require or Addign to");
 
 @frappe.whitelist()
 def check_attachment(doc, method):
