@@ -27,6 +27,12 @@ def get_data():
 					"name": "Test Certificate",
 					"description": _("All Test Certificate related information."),
 				},
+				{
+					"label": _("Work Order"),
+					"type": "doctype",
+					"name": "Order Register",
+					"description": _("Customer orders list."),
+				},
 			]
 		},
 		{

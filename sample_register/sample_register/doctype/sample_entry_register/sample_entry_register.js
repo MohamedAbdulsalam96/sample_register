@@ -57,6 +57,10 @@ cur_frm.fields_dict['order_id'].get_query = function(doc) {
 	}
 }
 
+cur_frm.cscript.technical_address = function(doc,cdt,cdn){
+
+	erpnext.utils.get_address_display(this.frm, "technical_address","address_details");
+}
 
 
 
@@ -95,6 +99,15 @@ cur_frm.cscript.refresh = function(doc, cdt, cdn) {
 			})
 		}
 	}
+cur_frm.fields_dict['technical_address'].get_query = function(doc) {
+	return {
+		filters: {
+			
+			"address_type": 'Technical',
+			"customer": doc.customer
+		}
+	}
+}
 
 frappe.ui.form.on("Sample Entry Register", {
 	refresh: function(frm) {
@@ -111,6 +124,12 @@ frappe.ui.form.on("Sample Entry Register", {
 					}
 				})
 			}, "icon-download", "btn-default")
+		}
+	},
+
+	before_submit: function(frm) {
+		if(!frm.doc.date_of_collection || !frm.doc.date_of_receipt) {
+			frappe.throw("Please enter Date Of Collection & Date of Receipt")
 		}
 	}
 })
