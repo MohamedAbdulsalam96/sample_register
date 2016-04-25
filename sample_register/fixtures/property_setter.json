@@ -1851,12 +1851,12 @@
   "docstatus": 0, 
   "doctype": "Property Setter", 
   "doctype_or_field": "DocField", 
-  "field_name": "drawn_by", 
-  "modified": "2016-04-25 12:25:57.641635", 
-  "name": "Sample Entry Register-drawn_by-options", 
-  "property": "options", 
-  "property_type": "Text", 
-  "value": "Employee"
+  "field_name": "order_id", 
+  "modified": "2016-04-25 13:31:50.382453", 
+  "name": "Sample Entry Register-order_id-depends_on", 
+  "property": "depends_on", 
+  "property_type": "Data", 
+  "value": ""
  }, 
  {
   "default_value": null, 
@@ -1865,10 +1865,36 @@
   "doctype": "Property Setter", 
   "doctype_or_field": "DocType", 
   "field_name": null, 
-  "modified": "2016-04-25 12:29:13.798957", 
+  "modified": "2016-04-25 15:18:49.265865", 
   "name": "Sample Entry Register-read_only_onload", 
   "property": "read_only_onload", 
   "property_type": "Check", 
   "value": null
+ }, 
+ {
+  "default_value": null, 
+  "doc_type": "Sample Entry Register", 
+  "docstatus": 0, 
+  "doctype": "Property Setter", 
+  "doctype_or_field": "DocField", 
+  "field_name": "drawn_by", 
+  "modified": "2016-04-25 15:18:49.390067", 
+  "name": "Sample Entry Register-drawn_by-fieldtype", 
+  "property": "fieldtype", 
+  "property_type": "Select", 
+  "value": "Select"
+ }, 
+ {
+  "default_value": null, 
+  "doc_type": "Sample Entry Register", 
+  "docstatus": 0, 
+  "doctype": "Property Setter", 
+  "doctype_or_field": "DocField", 
+  "field_name": "drawn_by", 
+  "modified": "2016-04-25 15:18:49.993051", 
+  "name": "Sample Entry Register-drawn_by-options", 
+  "property": "options", 
+  "property_type": "Text", 
+  "value": "\nTrufil\nSelf"
  }
 ]
