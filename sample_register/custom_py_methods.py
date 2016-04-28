@@ -79,9 +79,14 @@ def activity_log(doc, method):
 
 @frappe.whitelist()
 def sales_order_ref(doc, method):
+	user = str(frappe.session['user'])
+	user_role =  frappe.get_roles(user)
 	assign_to = frappe.db.sql("""select owner from `tabToDo` where reference_name = '%s' """%(doc.name))
-	if not doc.sales_order and not assign_to:
-		frappe.throw("Sales Order reference require or Addign to");
+	if (not doc.sales_order) and (not assign_to or not doc.approved_status == "Approved" or not "Sales Manager" in user_role):
+		frappe.throw("Assign and Approvement require");
+	else:
+		pass
+		
 
 @frappe.whitelist()
 def check_attachment(doc, method):

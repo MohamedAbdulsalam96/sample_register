@@ -27,6 +27,16 @@ cur_frm.fields_dict['technical_contact'].get_query = function(doc) {
 	}
 }
 
+// Return query for getting tech address
+cur_frm.set_query("technical_address", function() {
+		return {
+			filters: {
+				'technical_address': 1,
+				'customer': cur_frm.doc.customer
+			}
+		}
+	});
+
 // Return query for getting functional location related to specified customer
 cur_frm.fields_dict['functional_location'].get_query = function(doc) {
 	return {
@@ -100,7 +110,7 @@ cur_frm.cscript.refresh = function(doc, cdt, cdn) {
 			})
 		}
 	}
-cur_frm.fields_dict['technical_address'].get_query = function(doc) {
+/*cur_frm.fields_dict['technical_address'].get_query = function(doc) {
 	return {
 		filters: {
 			
@@ -108,7 +118,7 @@ cur_frm.fields_dict['technical_address'].get_query = function(doc) {
 			"customer": doc.customer
 		}
 	}
-}
+}*/
 
 frappe.ui.form.on("Sample Entry Register", {
 	refresh: function(frm) {
