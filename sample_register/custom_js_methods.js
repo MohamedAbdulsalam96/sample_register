@@ -90,15 +90,14 @@ frappe.ui.form.on("Opportunity", {
 
 frappe.ui.form.on("Sales Order", {
 	validate: function(frm) {
-		var qty = 0
-		var items = frm.doc.items
-		if(items){
-			for(i=0;i<items.length; i++){
-				if(qty < items[i].qty)
-					{qty = items[i].qty}
-			}
+		if(frm.doc.total_qty) {
+			order_value = 0
+			$.each(frm.doc.items, function(i, d) {
+				order_value += d.rate
+				d.qty = frm.doc.total_qty
+			})
+			frm.doc.order_value = order_value * frm.doc.total_qty
 		}
-		frm.doc.total_qty = qty
 		if(frm.doc.po_no && !frm.doc.po_date) {
 			frappe.msgprint("Please add PO Date")
 		}
