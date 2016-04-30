@@ -69,11 +69,33 @@ def status_updator(self, method):
 			# self.bill_no)
 
 @frappe.whitelist()
-def create_job_card(source_name, target_doc=None):
+def create_job_card(source_name, target_doc=None):	
 	def set_missing_values(source, target):
 		target.sample_id = source.name
 		target.customer = source.customer
 		target.type = source.type
+
+		order_register = frappe.db.get_value("Sample Entry Register", source_name, "order_id")
+		if order_register:
+			so = frappe.db.get_value("Order Register", order_register, "sales_order")
+			if so:
+				items = frappe.db.sql(	"""	select 
+								soi.item_code 
+							from 
+								`tabSales Order Item` soi, 
+								`tabSales Order` so 
+							where 
+								soi.parent = so.name
+							and 
+								so.name = '%s' 
+
+						"""%(so),as_list = 1)
+				if items:
+					target.set("test_details", [])
+					for item in items:
+						so_item = target.append("test_details", {})
+						so_item.item_code = item[0]
+		
 
 	doclist = get_mapped_doc("Sample Entry Register", source_name, {
 			"Sample Entry Register": {
