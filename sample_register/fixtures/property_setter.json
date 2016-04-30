@@ -1,5 +1,9 @@
 [
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Sales Order", 
   "docstatus": 0, 
@@ -13,6 +17,10 @@
   "value": "\nWalk-In\nContract\nTender\nMaintenance"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Sales Order", 
   "docstatus": 0, 
@@ -26,6 +34,10 @@
   "value": ""
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Contact", 
   "docstatus": 0, 
@@ -39,6 +51,10 @@
   "value": "1"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Order Register", 
   "docstatus": 0, 
@@ -52,6 +68,10 @@
   "value": "1"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Order Register", 
   "docstatus": 0, 
@@ -65,6 +85,10 @@
   "value": "1"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Sample Entry Register", 
   "docstatus": 0, 
@@ -78,6 +102,10 @@
   "value": "Sample Receipt"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Equipment", 
   "docstatus": 0, 
@@ -91,6 +119,10 @@
   "value": "0"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Sample Entry Register", 
   "docstatus": 0, 
@@ -104,6 +136,10 @@
   "value": "Code Designation & Equipment "
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Sample Entry Register", 
   "docstatus": 0, 
@@ -117,6 +153,10 @@
   "value": " Sample Condition at Site"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Sample Entry Register", 
   "docstatus": 0, 
@@ -130,6 +170,10 @@
   "value": " Sample Collection"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Quality Inspection", 
   "docstatus": 0, 
@@ -143,6 +187,10 @@
   "value": "[\"naming_series\", \"report_date\", \"column_break_4\", \"inspection_type\", \"purchase_receipt_no\", \"delivery_note_no\", \"section_break_7\", \"item_code\", \"item_serial_no\", \"batch_no\", \"sample_size\", \"column_break1\", \"item_name\", \"description\", \"section_break_14\", \"inspected_by\", \"inspecter_name\", \"verified\", \"verified_by_name\", \"verified_by\", \"column_break_17\", \"remarks\", \"amended_from\", \"specification_details\", \"get_specification_details\", \"readings\"]"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Employee", 
   "docstatus": 0, 
@@ -156,6 +204,10 @@
   "value": "employee_name"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Salary Slip", 
   "docstatus": 0, 
@@ -169,6 +221,10 @@
   "value": "employee"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Salary Slip", 
   "docstatus": 0, 
@@ -182,6 +238,10 @@
   "value": "cost_center"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Salary Slip", 
   "docstatus": 0, 
@@ -195,6 +255,10 @@
   "value": "location"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Communication", 
   "docstatus": 0, 
@@ -208,6 +272,10 @@
   "value": "COMM-"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Communication", 
   "docstatus": 0, 
@@ -221,6 +289,10 @@
   "value": "COMM-"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Customer", 
   "docstatus": 0, 
@@ -234,6 +306,10 @@
   "value": "CUST-"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Customer", 
   "docstatus": 0, 
@@ -247,6 +323,10 @@
   "value": "Customer Legal Name"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Communication", 
   "docstatus": 0, 
@@ -260,6 +340,10 @@
   "value": null
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Communication", 
   "docstatus": 0, 
@@ -273,6 +357,10 @@
   "value": "[\"naming_series\", \"communication_medium\", \"recipients\", \"cc\", \"phone_no\", \"column_break_5\", \"status\", \"sent_or_received\", \"delivery_status\", \"section_break_10\", \"subject\", \"section_break_8\", \"content_full\", \"content\", \"additional_info\", \"sender\", \"sender_full_name\", \"communication_date\", \"column_break_14\", \"reference_doctype\", \"reference_name\", \"in_reply_to\", \"email_account\", \"user\", \"unread_notification_sent\", \"_user_tags\"]"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Test Certificate", 
   "docstatus": 0, 
@@ -286,6 +374,10 @@
   "value": "certificate"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Delivery Note Item", 
   "docstatus": 0, 
@@ -299,6 +391,10 @@
   "value": null
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Sales Order", 
   "docstatus": 0, 
@@ -312,6 +408,10 @@
   "value": "TF-SO-"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Sales Order", 
   "docstatus": 0, 
@@ -325,6 +425,10 @@
   "value": "TF-SO-"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Material Request", 
   "docstatus": 0, 
@@ -338,6 +442,10 @@
   "value": "TF-MRQ.-.YY..MM.-.#####"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Material Request", 
   "docstatus": 0, 
@@ -351,6 +459,10 @@
   "value": "TF-MRQ.-.YY..MM.-.#####"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Material Request", 
   "docstatus": 0, 
@@ -364,6 +476,10 @@
   "value": null
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Material Request", 
   "docstatus": 0, 
@@ -377,6 +493,10 @@
   "value": "[\"type_section\", \"title\", \"material_request_type\", \"column_break_2\", \"amended_from\", \"company\", \"items_section\", \"items\", \"more_info\", \"requested_by\", \"transaction_date\", \"column_break2\", \"naming_series\", \"status\", \"per_ordered\", \"reason_for_rejection\", \"printing_details\", \"letter_head\", \"select_print_heading\", \"terms_section_break\", \"tc_name\", \"terms\", \"workflow_state\"]"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Employee", 
   "docstatus": 0, 
@@ -390,6 +510,10 @@
   "value": "[\"basic_information\", \"column_break0\", \"employee\", \"naming_series\", \"salutation\", \"employee_name\", \"trufil_id\", \"image\", \"image_view\", \"column_break1\", \"function\", \"user_id\", \"employee_number\", \"date_of_joining\", \"date_of_birth\", \"gender\", \"company\", \"employment_details\", \"col_break_21\", \"status\", \"employment_type\", \"holiday_list\", \"location\", \"col_break_22\", \"grade\", \"scheduled_confirmation_date\", \"final_confirmation_date\", \"contract_end_date\", \"date_of_retirement\", \"job_profile\", \"column_break2\", \"branch\", \"department\", \"designation\", \"company_email\", \"notice_number_of_days\", \"salary_information\", \"salary_mode\", \"bank_name\", \"bank_ac_no\", \"bank_ifscode\", \"cost_center\", \"organization_profile\", \"reports_to\", \"leave_approvers\", \"contact_details\", \"column_break3\", \"cell_number\", \"personal_email\", \"unsubscribed\", \"emergency_contact_details\", \"person_to_be_contacted\", \"relation\", \"emergency_phone_number\", \"column_break4\", \"permanent_accommodation_type\", \"permanent_address\", \"current_accommodation_type\", \"current_address\", \"sb53\", \"bio\", \"personal_details\", \"column_break5\", \"permanent_account_no\", \"provident_fund_account_no\", \"esic_no\", \"passport_number\", \"date_of_issue\", \"valid_upto\", \"place_of_issue\", \"column_break6\", \"marital_status\", \"blood_group\", \"family_background\", \"health_details\", \"educational_qualification\", \"education\", \"previous_work_experience\", \"external_work_history\", \"history_in_company\", \"internal_work_history\", \"exit\", \"column_break7\", \"resignation_letter_date\", \"relieving_date\", \"reason_for_leaving\", \"leave_encashed\", \"encashment_date\", \"exit_interview_details\", \"held_on\", \"reason_for_resignation\", \"new_workplace\", \"feedback\"]"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Employee", 
   "docstatus": 0, 
@@ -403,6 +527,10 @@
   "value": null
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Employee", 
   "docstatus": 0, 
@@ -416,6 +544,10 @@
   "value": "trufil_id"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Salary Slip", 
   "docstatus": 0, 
@@ -429,6 +561,10 @@
   "value": null
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Salary Slip", 
   "docstatus": 0, 
@@ -442,6 +578,10 @@
   "value": "esic_no"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Salary Slip", 
   "docstatus": 0, 
@@ -455,6 +595,10 @@
   "value": "location"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Salary Slip", 
   "docstatus": 0, 
@@ -468,6 +612,10 @@
   "value": "esic_no"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Salary Slip", 
   "docstatus": 0, 
@@ -481,6 +629,10 @@
   "value": "[\"column_break0\", \"employee\", \"employee_name\", \"department\", \"designation\", \"branch\", \"letter_head\", \"company\", \"column_break1\", \"month\", \"fiscal_year\", \"total_days_in_month\", \"leave_without_pay\", \"absent_days\", \"payment_days\", \"bank_name\", \"bank_account_no\", \"email_check\", \"amended_from\", \"earning_deduction\", \"earning\", \"html_21\", \"earnings\", \"deduction\", \"html_24\", \"deductions\", \"totals\", \"column_break_25\", \"column_break_26\", \"arrear_amount\", \"leave_encashment_amount\", \"gross_pay\", \"total_deduction\", \"net_pay\", \"rounded_total\", \"total_in_words\", \"more_details\", \"trufil_id\", \"grade\", \"location\", \"permanent_account_no\", \"cb3\", \"bank_ifscode\", \"cost_center\", \"esic_no\", \"provident_fund_account_no\", \"column_break\", \"date_of_birth\", \"date_of_joining\"]"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Quality Inspection", 
   "docstatus": 0, 
@@ -494,6 +646,10 @@
   "value": null
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Fixed Asset Serial Number", 
   "docstatus": 0, 
@@ -507,6 +663,10 @@
   "value": "[\"fixed_asset_serial_number\", \"is_calibration_required\", \"col_brk_1\", \"item_code\", \"calibration_detail\", \"calibration_assigned_to\", \"calibration_status\", \"col_brk_2\", \"next_calibration_date\"]"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Fixed Asset Serial Number", 
   "docstatus": 0, 
@@ -520,6 +680,10 @@
   "value": null
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Quotation", 
   "docstatus": 0, 
@@ -533,6 +697,10 @@
   "value": "0"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Quotation", 
   "docstatus": 0, 
@@ -546,6 +714,10 @@
   "value": "1"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Quotation", 
   "docstatus": 0, 
@@ -559,6 +731,10 @@
   "value": "0"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Quotation", 
   "docstatus": 0, 
@@ -572,6 +748,10 @@
   "value": "0"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Sales Order", 
   "docstatus": 0, 
@@ -585,6 +765,10 @@
   "value": "0"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Sales Order", 
   "docstatus": 0, 
@@ -598,6 +782,10 @@
   "value": "1"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Sales Order", 
   "docstatus": 0, 
@@ -611,6 +799,10 @@
   "value": "0"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Sales Order", 
   "docstatus": 0, 
@@ -624,6 +816,10 @@
   "value": "0"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Sales Invoice", 
   "docstatus": 0, 
@@ -637,6 +833,10 @@
   "value": "0"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Sales Invoice", 
   "docstatus": 0, 
@@ -650,6 +850,10 @@
   "value": "1"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Sales Invoice", 
   "docstatus": 0, 
@@ -663,6 +867,10 @@
   "value": "0"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Sales Invoice", 
   "docstatus": 0, 
@@ -676,6 +884,10 @@
   "value": "0"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Delivery Note", 
   "docstatus": 0, 
@@ -689,6 +901,10 @@
   "value": "0"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Delivery Note", 
   "docstatus": 0, 
@@ -702,6 +918,10 @@
   "value": "1"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Delivery Note", 
   "docstatus": 0, 
@@ -715,6 +935,10 @@
   "value": "0"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Delivery Note", 
   "docstatus": 0, 
@@ -728,6 +952,10 @@
   "value": "0"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Item", 
   "docstatus": 0, 
@@ -741,6 +969,10 @@
   "value": "0"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Item", 
   "docstatus": 0, 
@@ -754,6 +986,10 @@
   "value": "1"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Item", 
   "docstatus": 0, 
@@ -767,6 +1003,10 @@
   "value": "0"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Item", 
   "docstatus": 0, 
@@ -780,6 +1020,10 @@
   "value": "1"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Employee", 
   "docstatus": 0, 
@@ -793,6 +1037,10 @@
   "value": "0"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Employee", 
   "docstatus": 0, 
@@ -806,6 +1054,10 @@
   "value": "1"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Employee", 
   "docstatus": 0, 
@@ -819,6 +1071,10 @@
   "value": "0"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Employee", 
   "docstatus": 0, 
@@ -832,6 +1088,10 @@
   "value": "1"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Supplier", 
   "docstatus": 0, 
@@ -845,6 +1105,10 @@
   "value": "0"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Supplier", 
   "docstatus": 0, 
@@ -858,6 +1122,10 @@
   "value": "1"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Opportunity", 
   "docstatus": 0, 
@@ -871,6 +1139,10 @@
   "value": "\nNew Business\nAdditional Business\nContract Renewal\nSales\nMaintenance"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Opportunity", 
   "docstatus": 0, 
@@ -884,6 +1156,10 @@
   "value": "Follow up Contact Date"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Quotation", 
   "docstatus": 0, 
@@ -897,6 +1173,10 @@
   "value": "\n \nSales\nMaintenance\nShopping Cart"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Sales Order", 
   "docstatus": 0, 
@@ -910,6 +1190,10 @@
   "value": "1"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Opportunity", 
   "docstatus": 0, 
@@ -923,6 +1207,10 @@
   "value": ""
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Quotation", 
   "docstatus": 0, 
@@ -936,6 +1224,10 @@
   "value": "[\"customer_section\", \"column_break0\", \"title\", \"naming_series\", \"quotation_to\", \"customer\", \"lead\", \"customer_name\", \"quotation_code\", \"address_display\", \"contact_display\", \"contact_mobile\", \"contact_email\", \"column_break1\", \"amended_from\", \"company\", \"transaction_date\", \"order_type\", \"quotation_for\", \"currency_and_price_list\", \"currency\", \"conversion_rate\", \"column_break2\", \"selling_price_list\", \"price_list_currency\", \"plc_conversion_rate\", \"ignore_pricing_rule\", \"items_section\", \"items\", \"sec_break23\", \"base_total\", \"base_net_total\", \"column_break_28\", \"total\", \"net_total\", \"taxes_section\", \"taxes_and_charges\", \"column_break_34\", \"shipping_rule\", \"section_break_36\", \"taxes\", \"other_charges_calculation\", \"section_break_39\", \"base_total_taxes_and_charges\", \"column_break_42\", \"total_taxes_and_charges\", \"section_break_44\", \"apply_discount_on\", \"column_break_46\", \"discount_amount\", \"base_discount_amount\", \"totals\", \"base_grand_total\", \"base_rounded_total\", \"base_in_words\", \"column_break3\", \"grand_total\", \"rounded_total\", \"in_words\", \"terms_section_break\", \"tc_name\", \"terms\", \"contact_section\", \"territory\", \"customer_group\", \"shipping_address_name\", \"shipping_address\", \"col_break98\", \"customer_address\", \"contact_person\", \"print_settings\", \"letter_head\", \"select_print_heading\", \"more_info\", \"campaign\", \"source\", \"order_lost_reason\", \"prepared_by\", \"approved_by\", \"column_break4\", \"status\", \"fiscal_year\", \"enq_det\", \"prepared_time\", \"approved_time\"]"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Equipment List", 
   "docstatus": 0, 
@@ -949,6 +1241,10 @@
   "value": "1"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Equipment List", 
   "docstatus": 0, 
@@ -962,6 +1258,10 @@
   "value": "1"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Equipment List", 
   "docstatus": 0, 
@@ -975,6 +1275,10 @@
   "value": null
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Equipment List", 
   "docstatus": 0, 
@@ -988,6 +1292,10 @@
   "value": ""
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Chemical List", 
   "docstatus": 0, 
@@ -1001,6 +1309,10 @@
   "value": null
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Chemical List", 
   "docstatus": 0, 
@@ -1014,6 +1326,10 @@
   "value": "1"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Chemical List", 
   "docstatus": 0, 
@@ -1027,6 +1343,10 @@
   "value": ""
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Chemical List", 
   "docstatus": 0, 
@@ -1040,6 +1360,10 @@
   "value": "1"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Standard Operating Procedure", 
   "docstatus": 0, 
@@ -1053,6 +1377,10 @@
   "value": null
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Standard Operating Procedure", 
   "docstatus": 0, 
@@ -1066,6 +1394,10 @@
   "value": "[\"sop_code\", \"standard_methods\", \"quality_check\", \"uncertainty\", \"col_br\", \"sop_name\", \"intermediate_check\", \"description\", \"equipment_details\", \"equipment_list\", \"chemical_details\", \"chemical_list\"]"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Item", 
   "docstatus": 0, 
@@ -1079,6 +1411,10 @@
   "value": "[\"name_and_description_section\", \"naming_series\", \"item_code\", \"variant_of\", \"item_name\", \"item_group\", \"stock_uom\", \"sop_number\", \"std_test_methods\", \"column_break0\", \"is_stock_item\", \"disabled\", \"image\", \"image_view\", \"section_break_11\", \"brand\", \"barcode\", \"description\", \"inventory\", \"default_warehouse\", \"end_of_life\", \"has_batch_no\", \"has_serial_no\", \"serial_no_series\", \"is_asset_item\", \"fixed_asset_serial_number\", \"column_break1\", \"tolerance\", \"valuation_method\", \"warranty_period\", \"net_weight\", \"weight_uom\", \"reorder_section\", \"re_order_level\", \"re_order_qty\", \"apply_warehouse_wise_reorder_level\", \"section_break_31\", \"reorder_levels\", \"variants_section\", \"has_variants\", \"attributes\", \"purchase_details\", \"is_purchase_item\", \"min_order_qty\", \"lead_time_days\", \"buying_cost_center\", \"expense_account\", \"unit_of_measure_conversion\", \"uoms\", \"last_purchase_rate\", \"supplier_details\", \"default_supplier\", \"delivered_by_supplier\", \"manufacturer\", \"manufacturer_part_no\", \"column_break2\", \"supplier_items\", \"sales_details\", \"is_sales_item\", \"is_service_item\", \"publish_in_hub\", \"synced_with_hub\", \"income_account\", \"selling_cost_center\", \"column_break3\", \"customer_items\", \"max_discount\", \"item_tax_section_break\", \"taxes\", \"inspection_criteria\", \"inspection_required\", \"quality_parameters\", \"manufacturing\", \"is_pro_applicable\", \"is_sub_contracted_item\", \"column_break_74\", \"default_bom\", \"customer_code\", \"website_section\", \"show_in_website\", \"page_name\", \"weightage\", \"slideshow\", \"website_image\", \"thumbnail\", \"cb72\", \"website_warehouse\", \"website_item_groups\", \"sb72\", \"copy_from_item_group\", \"website_specifications\", \"web_long_description\", \"parent_website_route\"]"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Job Card Creation", 
   "docstatus": 0, 
@@ -1092,6 +1428,10 @@
   "value": "1"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Job Card Creation", 
   "docstatus": 0, 
@@ -1105,6 +1445,10 @@
   "value": "0"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Item", 
   "docstatus": 0, 
@@ -1118,6 +1462,10 @@
   "value": null
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Test Book", 
   "docstatus": 0, 
@@ -1131,6 +1479,10 @@
   "value": "[\"test_details\", \"sample_id\", \"standards\", \"type\", \"cb01\", \"job_card\", \"test\", \"test_group\", \"sample_entry_details\", \"customer\", \"status\", \"column_break_3\", \"customer_name\", \"priority\", \"amended_from\"]"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Job Card Creation Test Details", 
   "docstatus": 0, 
@@ -1144,6 +1496,10 @@
   "value": "[\"test_group\", \"status\", \"column_break_1\", \"test\"]"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Job Card Creation", 
   "docstatus": 0, 
@@ -1157,6 +1513,10 @@
   "value": "[\"sample_entry_details\", \"sample_id\", \"customer\", \"type\", \"column_break_3\", \"customer_name\", \"priority\", \"standards\", \"job_card_id\", \"status\", \"test\", \"amended_from\", \"test_details\", \"sec_break\", \"creation_date\", \"closed_by\", \"approved_by\", \"approval_remarks\", \"acknowledged_by\", \"col_break\", \"creation_remarks\", \"closed_date\", \"approved_date\", \"acknowledged_date\", \"acknowledged_remarks\"]"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Test Book", 
   "docstatus": 0, 
@@ -1170,6 +1530,10 @@
   "value": null
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Job Card Creation", 
   "docstatus": 0, 
@@ -1183,6 +1547,10 @@
   "value": null
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Sales Order Item", 
   "docstatus": 0, 
@@ -1196,6 +1564,10 @@
   "value": "0"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Sales Order Item", 
   "docstatus": 0, 
@@ -1209,6 +1581,10 @@
   "value": "[\"item_name\", \"customer_item_code\", \"col_break1\", \"item_code\", \"section_break_5\", \"description\", \"column_break_7\", \"image\", \"image_view\", \"quantity_and_rate\", \"qty\", \"price_list_rate\", \"discount_percentage\", \"col_break2\", \"stock_uom\", \"base_price_list_rate\", \"section_break_simple1\", \"rate\", \"amount\", \"col_break3\", \"base_rate\", \"base_amount\", \"pricing_rule\", \"section_break_24\", \"net_rate\", \"net_amount\", \"column_break_27\", \"base_net_rate\", \"base_net_amount\", \"drop_ship_section\", \"delivered_by_supplier\", \"supplier\", \"warehouse_and_reference\", \"warehouse\", \"target_warehouse\", \"prevdoc_docname\", \"brand\", \"item_group\", \"page_break\", \"col_break4\", \"projected_qty\", \"actual_qty\", \"ordered_qty\", \"delivered_qty\", \"returned_qty\", \"billed_amt\", \"planned_qty\", \"produced_qty\", \"item_tax_rate\", \"transaction_date\"]"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Sales Order Item", 
   "docstatus": 0, 
@@ -1222,6 +1598,10 @@
   "value": null
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Quotation", 
   "docstatus": 0, 
@@ -1235,6 +1615,10 @@
   "value": null
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Opportunity", 
   "docstatus": 0, 
@@ -1248,6 +1632,10 @@
   "value": "eval:doc.customer"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Job Card Creation Test Details", 
   "docstatus": 0, 
@@ -1261,6 +1649,10 @@
   "value": null
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Customer", 
   "docstatus": 0, 
@@ -1274,6 +1666,10 @@
   "value": "0"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Customer", 
   "docstatus": 0, 
@@ -1287,6 +1683,10 @@
   "value": "1"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Opportunity", 
   "docstatus": 0, 
@@ -1300,6 +1700,10 @@
   "value": null
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Opportunity", 
   "docstatus": 0, 
@@ -1313,6 +1717,10 @@
   "value": "[\"from_section\", \"naming_series\", \"enquiry_from\", \"owner\", \"customer\", \"lead\", \"customer_name\", \"estimated_price\", \"column_break0\", \"title\", \"enquiry_type\", \"status\", \"opportunity_description\", \"order_lost_reason\", \"with_items\", \"items_section\", \"items\", \"total_amount\", \"contact_info\", \"customer_address\", \"address_display\", \"territory\", \"customer_group\", \"column_break3\", \"contact_person\", \"contact_display\", \"contact_email\", \"contact_mobile\", \"fax\", \"more_info\", \"source\", \"campaign\", \"reference_of_previous\", \"tracking_reference_no\", \"column_break1\", \"company\", \"transaction_date\", \"fiscal_year\", \"next_contact\", \"contact_by\", \"contact_date\", \"old_date\", \"follow_up_action\", \"column_break2\", \"to_discuss\", \"reason_for_changes\", \"old_reason\", \"amended_from\", \"extra_info\", \"estimated_sale_value\", \"opportunity_stage\", \"old_stage\", \"actual_closer_date\", \"key_competitors\", \"partner_details\", \"col_break\", \"estimated_closer_date\", \"probability\", \"old_probability\", \"additional_information\", \"requirement_details\", \"partner_commission\"]"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Sales Order", 
   "docstatus": 0, 
@@ -1326,6 +1734,10 @@
   "value": "Today"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Functional Location", 
   "docstatus": 0, 
@@ -1339,6 +1751,10 @@
   "value": "[\"functional_location_details\", \"customer\", \"customer_code\", \"location\", \"functional_location_code\", \"column_break_3\", \"plant\", \"substation\", \"location_type\"]"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Container Details", 
   "docstatus": 0, 
@@ -1352,6 +1768,10 @@
   "value": "[\"container_details\", \"container_type\", \"customer_container_id\", \"column_break_3\", \"container_id\"]"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Container Details", 
   "docstatus": 0, 
@@ -1365,6 +1785,10 @@
   "value": null
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Address", 
   "docstatus": 0, 
@@ -1378,6 +1802,10 @@
   "value": "Billing\nAdministrative\nShipping\nTechnical\nOffice\nPersonal\nPlant\nPostal\nShop\nSubsidiary\nWarehouse\nOther"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Equipment", 
   "docstatus": 0, 
@@ -1391,6 +1819,10 @@
   "value": null
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Equipment", 
   "docstatus": 0, 
@@ -1404,6 +1836,10 @@
   "value": "serial_number,model_no"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Functional Location", 
   "docstatus": 0, 
@@ -1417,6 +1853,10 @@
   "value": null
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Sample Entry Register", 
   "docstatus": 0, 
@@ -1430,6 +1870,10 @@
   "value": ""
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Sample Entry Register", 
   "docstatus": 0, 
@@ -1443,6 +1887,10 @@
   "value": "Select"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Sample Entry Register", 
   "docstatus": 0, 
@@ -1456,6 +1904,10 @@
   "value": "\nTrufil\nSelf"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Contact", 
   "docstatus": 0, 
@@ -1469,6 +1921,10 @@
   "value": "email_id"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Contact", 
   "docstatus": 0, 
@@ -1482,6 +1938,10 @@
   "value": "unsubscribed"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Contact", 
   "docstatus": 0, 
@@ -1495,6 +1955,10 @@
   "value": "cb"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Contact", 
   "docstatus": 0, 
@@ -1508,6 +1972,10 @@
   "value": "telephone"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Contact", 
   "docstatus": 0, 
@@ -1521,6 +1989,10 @@
   "value": "date_of_birth"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Contact", 
   "docstatus": 0, 
@@ -1534,6 +2006,10 @@
   "value": "customer_name"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Contact", 
   "docstatus": 0, 
@@ -1547,6 +2023,10 @@
   "value": "last_name"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Contact", 
   "docstatus": 0, 
@@ -1560,6 +2040,10 @@
   "value": "user_input"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Contact", 
   "docstatus": 0, 
@@ -1573,6 +2057,10 @@
   "value": "contact_code"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Contact", 
   "docstatus": 0, 
@@ -1586,6 +2074,10 @@
   "value": "admin_contact"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Contact", 
   "docstatus": 0, 
@@ -1599,6 +2091,10 @@
   "value": "billing_contact"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Supplier Quotation", 
   "docstatus": 0, 
@@ -1612,6 +2108,10 @@
   "value": "transaction_date"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Item", 
   "docstatus": 0, 
@@ -1625,6 +2125,10 @@
   "value": "is_asset_item"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Material Request", 
   "docstatus": 0, 
@@ -1638,6 +2142,10 @@
   "value": "per_ordered"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Leave Application", 
   "docstatus": 0, 
@@ -1651,6 +2159,10 @@
   "value": "leave_approver_name"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Leave Application", 
   "docstatus": 0, 
@@ -1664,6 +2176,10 @@
   "value": "leave_approver_two"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Employee", 
   "docstatus": 0, 
@@ -1677,6 +2193,10 @@
   "value": "holiday_list"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Employee", 
   "docstatus": 0, 
@@ -1690,6 +2210,10 @@
   "value": "grade"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Employee", 
   "docstatus": 0, 
@@ -1703,6 +2227,10 @@
   "value": "esic_no"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Employee", 
   "docstatus": 0, 
@@ -1716,6 +2244,10 @@
   "value": "bank_ac_no"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Salary Slip", 
   "docstatus": 0, 
@@ -1729,6 +2261,10 @@
   "value": "totals"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Salary Slip", 
   "docstatus": 0, 
@@ -1742,6 +2278,10 @@
   "value": "grade"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Salary Slip", 
   "docstatus": 0, 
@@ -1755,6 +2295,10 @@
   "value": "rounded_total"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Sample Entry Register", 
   "docstatus": 0, 
@@ -1768,6 +2312,10 @@
   "value": "[\"sample_entry_details\", \"customer\", \"customer_name\", \"order_id\", \"order_date\", \"order_reference_number\", \"column_break_3\", \"technical_contact\", \"technical_address\", \"address_details\", \"date_of_collection\", \"technical_contact_details\", \"order_expiry_date\", \"section_break_7\", \"functional_location\", \"functional_location_code\", \"column_break_9\", \"equipment\", \"equipment_make\", \"section_break_11\", \"column_break_13\", \"serial_number\", \"equipment_code\", \"model_no\", \"address\", \"col_break\", \"section_break_15\", \"type\", \"conservation_protection_system\", \"sample_taken_from\", \"oil_temperature\", \"winding_temperature\", \"drawn_by\", \"column_break_34\", \"html_28\", \"container_details\", \"weather_condition_during_sampling\", \"remarks\", \"amended_from\", \"sb6\", \"sample_condition\", \"cb6\", \"date_of_receipt\", \"job_card_details\", \"priority\", \"standards\", \"test_group\", \"more\", \"job_card\", \"job_card_status\", \"cb5\", \"fiscal_year\"]"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Address", 
   "docstatus": 0, 
@@ -1781,6 +2329,10 @@
   "value": null
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Address", 
   "docstatus": 0, 
@@ -1794,6 +2346,10 @@
   "value": "state"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Address", 
   "docstatus": 0, 
@@ -1807,6 +2363,10 @@
   "value": "column_break0"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Address", 
   "docstatus": 0, 
@@ -1820,6 +2380,10 @@
   "value": "user_input"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Address", 
   "docstatus": 0, 
@@ -1833,6 +2397,10 @@
   "value": "fax"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Address", 
   "docstatus": 0, 
@@ -1846,6 +2414,10 @@
   "value": "customer_name"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Address", 
   "docstatus": 0, 
@@ -1859,6 +2431,10 @@
   "value": "[\"address_details\", \"address_title\", \"address_type\", \"admin_address\", \"billing_address\", \"technical_address\", \"address_line1\", \"address_line2\", \"city\", \"state\", \"district\", \"country\", \"pincode\", \"column_break0\", \"user_input\", \"neighbourhood\", \"email_id\", \"phone\", \"fax\", \"address_code\", \"is_primary_address\", \"is_shipping_address\", \"linked_with\", \"customer\", \"customer_name\", \"customer_code\", \"supplier\", \"supplier_name\", \"sales_partner\", \"column_break_22\", \"lead\", \"lead_name\"]"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Order Register", 
   "docstatus": 0, 
@@ -1872,6 +2448,10 @@
   "value": "Address & Conatct"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Order Register", 
   "docstatus": 0, 
@@ -1885,6 +2465,10 @@
   "value": "[\"order_details\", \"customer\", \"order_date\", \"order_description\", \"column_break_3\", \"customer_name\", \"customer_code\", \"po_date\", \"po_no\", \"sales_order\", \"approved_status\", \"wo_ref_no\", \"wo_ref_date\", \"amended_from\", \"contact_details\", \"contract\", \"sb5\", \"administrative_contact\", \"administrative_contact_details\", \"admin_address\", \"admin_address_details\", \"column_break_10\", \"billing_contact\", \"billing_contact_details\", \"billing_address\", \"billing_address_details\", \"section_break_16\", \"cl_2\", \"contract_details\", \"contract_start_date\", \"contract_value\", \"contact_value_as_on_today\", \"cl_1\", \"contract_expiry_date\", \"contract_quantity\", \"contact_quantity_as_on_today\", \"billing_details\", \"order_value\", \"total_samples\", \"order_closing_date\", \"cb10\", \"invoice_value\", \"quantity_received\", \"more_details\", \"fiscal_year\", \"column_break_18\", \"order_price_book_code\", \"order_status\"]"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Code Designation", 
   "docstatus": 0, 
@@ -1898,6 +2482,10 @@
   "value": ""
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Code Designation", 
   "docstatus": 0, 
@@ -1911,6 +2499,10 @@
   "value": "1"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Sample Entry Register", 
   "docstatus": 0, 
@@ -1924,6 +2516,10 @@
   "value": null
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Sample Entry Register", 
   "docstatus": 0, 
@@ -1937,6 +2533,10 @@
   "value": "Code Designation"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Test Certificate", 
   "docstatus": 0, 
@@ -1950,6 +2550,10 @@
   "value": null
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Test Certificate", 
   "docstatus": 0, 
@@ -1963,6 +2567,10 @@
   "value": "Code Designation"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Sample Entry Creation Tool Details", 
   "docstatus": 0, 
@@ -1976,6 +2584,10 @@
   "value": null
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Sample Entry Creation Tool Details", 
   "docstatus": 0, 
@@ -1989,6 +2601,10 @@
   "value": "Code Designation"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Sales Order", 
   "docstatus": 0, 
@@ -2002,6 +2618,10 @@
   "value": "[\"customer_section\", \"column_break0\", \"title\", \"naming_series\", \"customer\", \"customer_name\", \"address_display\", \"contact_display\", \"contact_mobile\", \"contact_email\", \"order_type\", \"so_status\", \"order_value\", \"order_end_date\", \"column_break1\", \"amended_from\", \"company\", \"transaction_date\", \"delivery_date\", \"po_no\", \"po_date\", \"actual_closer_date\", \"shipping_address_name\", \"shipping_address\", \"currency_and_price_list\", \"currency\", \"conversion_rate\", \"column_break2\", \"selling_price_list\", \"price_list_currency\", \"plc_conversion_rate\", \"ignore_pricing_rule\", \"items_section\", \"items\", \"section_break_31\", \"total_qty\", \"column_break_33a\", \"base_total\", \"base_net_total\", \"column_break_33\", \"total\", \"net_total\", \"taxes_section\", \"taxes_and_charges\", \"column_break_38\", \"shipping_rule\", \"section_break_40\", \"taxes\", \"other_charges_calculation\", \"section_break_43\", \"base_total_taxes_and_charges\", \"column_break_46\", \"total_taxes_and_charges\", \"section_break_48\", \"apply_discount_on\", \"column_break_50\", \"discount_amount\", \"base_discount_amount\", \"totals\", \"base_grand_total\", \"base_rounded_total\", \"base_in_words\", \"column_break3\", \"grand_total\", \"rounded_total\", \"in_words\", \"advance_paid\", \"packing_list\", \"packed_items\", \"terms_section_break\", \"tc_name\", \"terms\", \"contact_info\", \"col_break45\", \"territory\", \"customer_group\", \"col_break46\", \"customer_address\", \"contact_person\", \"more_info\", \"project_name\", \"fiscal_year\", \"column_break_77\", \"source\", \"campaign\", \"printing_details\", \"letter_head\", \"column_break4\", \"select_print_heading\", \"section_break_78\", \"status\", \"delivery_status\", \"per_delivered\", \"column_break_81\", \"per_billed\", \"billing_status\", \"actual_quantity\", \"actual_order_value\", \"sales_team_section_break\", \"sales_partner\", \"column_break7\", \"commission_rate\", \"total_commission\", \"section_break1\", \"sales_team\", \"recurring_order\", \"is_recurring\", \"recurring_type\", \"from_date\", \"to_date\", \"repeat_on_day_of_month\", \"end_date\", \"column_break83\", \"next_date\", \"recurring_id\", \"notification_email_address\", \"recurring_print_format\"]"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Sales Order", 
   "docstatus": 0, 
@@ -2015,6 +2635,10 @@
   "value": "1"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Sales Order", 
   "docstatus": 0, 
@@ -2028,6 +2652,10 @@
   "value": "1"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Sales Order", 
   "docstatus": 0, 
@@ -2041,6 +2669,10 @@
   "value": "1"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Customer", 
   "docstatus": 0, 
@@ -2054,6 +2686,10 @@
   "value": "customer_code,customer_name"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Code Designation", 
   "docstatus": 0, 
@@ -2067,6 +2703,10 @@
   "value": null
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Code Designation", 
   "docstatus": 0, 
@@ -2080,6 +2720,10 @@
   "value": "customer_code,customer_code_designation"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Customer", 
   "docstatus": 0, 
@@ -2093,6 +2737,10 @@
   "value": "[\"basic_info\", \"naming_series\", \"customer_name\", \"parent_name\", \"customer_type\", \"lead_name\", \"column_break0\", \"customer_group\", \"territory\", \"is_frozen\", \"statutory_details\", \"customer_year_of_incorporation\", \"pan_no\", \"vat_no\", \"col_br\", \"tax_id\", \"cst_no\", \"currency_and_price_list\", \"default_price_list\", \"column_break_14\", \"default_taxes_and_charges\", \"address_contacts\", \"address_html\", \"column_break1\", \"contact_html\", \"default_receivable_accounts\", \"accounts\", \"more_info\", \"customer_details\", \"column_break2\", \"default_currency\", \"credit_days_based_on\", \"credit_days\", \"credit_limit\", \"website\", \"sales_team_section_break\", \"default_sales_partner\", \"default_commission_rate\", \"sales_team_section\", \"sales_team\", \"communications\"]"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Customer", 
   "docstatus": 0, 
@@ -2106,6 +2754,10 @@
   "value": "customer_name"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Customer", 
   "docstatus": 0, 
@@ -2119,6 +2771,10 @@
   "value": "tax_id"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Customer", 
   "docstatus": 0, 
@@ -2132,6 +2788,10 @@
   "value": "customer_year_of_incorporation"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Customer", 
   "docstatus": 0, 
@@ -2145,6 +2805,10 @@
   "value": "pan_no"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Order Register", 
   "docstatus": 0, 
@@ -2158,6 +2822,10 @@
   "value": "Customer"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Sales Order", 
   "docstatus": 0, 
@@ -2171,6 +2839,10 @@
   "value": null
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Order Register", 
   "docstatus": 0, 
@@ -2184,6 +2856,10 @@
   "value": "0"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Order Register", 
   "docstatus": 0, 
@@ -2197,6 +2873,10 @@
   "value": null
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Order Register", 
   "docstatus": 0, 
@@ -2210,6 +2890,10 @@
   "value": "0"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Customer", 
   "docstatus": 0, 
@@ -2223,6 +2907,10 @@
   "value": "ASC"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Customer", 
   "docstatus": 0, 
@@ -2236,6 +2924,10 @@
   "value": null
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Contact", 
   "docstatus": 0, 
@@ -2249,6 +2941,10 @@
   "value": "ASC"
  }, 
  {
+  "_assign": null, 
+  "_comments": null, 
+  "_liked_by": null, 
+  "_user_tags": null, 
   "default_value": null, 
   "doc_type": "Contact", 
   "docstatus": 0, 
