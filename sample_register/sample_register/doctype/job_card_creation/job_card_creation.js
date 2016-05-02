@@ -23,5 +23,16 @@ frappe.ui.form.on("Job Card Creation", {
 				})
 			}, "icon-download", "btn-default")
 		}
+		cur_frm.set_query("item_code", "test_details", function(doc) {
+			var sales_order = doc.sales_order
+			if(doc.sales_order) {
+				return{
+					query: "sample_register.sample_register.doctype.job_card_creation.job_card_creation.so_item_code",
+					filters: {'parent':sales_order}
+				}
+			}
+		});
 	}
 })
+
+
