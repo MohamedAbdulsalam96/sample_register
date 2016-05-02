@@ -68,3 +68,9 @@ class JobCardCreation(Document):
 			if status == False:
 				frappe.msgprint("All Test's are not Closed yet")
 				self.status = " "
+
+@frappe.whitelist()
+def so_item_code(doctype, txt, searchfield, start, page_len, filters):
+	query = """select item_code from `tabSales Order Item` where parent = '%s'"""
+	items = frappe.db.sql(query%(filters.get("parent")), as_list=1)
+	return items
