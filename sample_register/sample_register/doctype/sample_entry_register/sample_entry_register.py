@@ -80,20 +80,26 @@ def create_job_card(source_name, target_doc=None):
 		if order_register:
 			so = frappe.db.get_value("Order Register", order_register, "sales_order")
 			if so:
-				items = frappe.db.sql(	"""	select 
-								soi.item_code as item_code,
-								soi.item_name as item_name 
-							from 
-								`tabSales Order Item` soi
-							where 
-								soi.parent = '%s' 
-						"""%(so),as_list = 1)
+				query = """	select 
+								soi.item_code, 
+								soi.item_name, 
+								ifnull(i.test_group, '') 
+							from  
+								`tabSales Order Item` soi,
+								`tabItem` i
+							where  
+								soi.parent = '%s'
+							and 
+								soi.item_code = i.item_code 
+						"""
+				items = frappe.db.sql(query%(so),as_list = 1)
 				if items:
 					target.set("test_details", [])
 					for item in items:
 						so_item = target.append("test_details", {})
 						so_item.item_code = item[0]
 						so_item.item_name = item[1]
+						so_item.test_group = item[2]
 		
 
 	doclist = get_mapped_doc("Sample Entry Register", source_name, {
