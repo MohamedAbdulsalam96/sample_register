@@ -16,6 +16,7 @@ class SampleEntryRegister(Document):
 
 	def validate(self):
 		self.validate_container_id()
+		self.check_total_sample_count()
 
 	def before_insert(self):
 		if self.order_id:
@@ -80,21 +81,19 @@ def create_job_card(source_name, target_doc=None):
 			so = frappe.db.get_value("Order Register", order_register, "sales_order")
 			if so:
 				items = frappe.db.sql(	"""	select 
-								soi.item_code 
+								soi.item_code as item_code,
+								soi.item_name as item_name 
 							from 
-								`tabSales Order Item` soi, 
-								`tabSales Order` so 
+								`tabSales Order Item` soi
 							where 
-								soi.parent = so.name
-							and 
-								so.name = '%s' 
-
+								soi.parent = '%s' 
 						"""%(so),as_list = 1)
 				if items:
 					target.set("test_details", [])
 					for item in items:
 						so_item = target.append("test_details", {})
 						so_item.item_code = item[0]
+						so_item.item_name = item[1]
 		
 
 	doclist = get_mapped_doc("Sample Entry Register", source_name, {
