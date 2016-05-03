@@ -75,7 +75,7 @@ def activity_log(doc, method):
 
 	if reason_comm or stage_comm or probability_comm:
 		comment = """<p>{0}</p> <p>{1}</p> <p>{2}</p>""".format(" ".join(reason_comm), stage_comm, probability_comm)
-		doc.add_comment("Reason", comment)
+		doc.add_comment("Comment", comment)
 
 @frappe.whitelist()
 def sales_order_ref(doc, method):

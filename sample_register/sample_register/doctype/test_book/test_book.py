@@ -18,10 +18,10 @@ class TestBook(Document):
 								where 
 									parent = %s 
 								and 
-									test_group = %s 
+									test_group = %s
 								and 
-									test = %s
-							""", (self.job_card, self.test_group, self.test))
+									item_code = %s
+							""", (self.job_card, self.test_group, self.item_code))
 		
 		job_card = frappe.get_doc("Job Card Creation", self.job_card)
 		status = True
