@@ -19,7 +19,7 @@ def get_sales_order():
 @frappe.whitelist()
 def get_sample_data():
 	return {
-	"get_sample_data": frappe.db.sql("""select false, name, customer, type, priority, standards, sales_order, test_group from `tabSample Entry Register` where job_card_status="Not Available" order by name""", as_list=1)
+	"get_sample_data": frappe.db.sql("""select false, name, customer, type, priority, standards, sales_order, test_group from `tabSample Entry Register` where job_card_status="Not Available" and docstatus = 1 order by name""", as_list=1)
 	}
 
 @frappe.whitelist()
