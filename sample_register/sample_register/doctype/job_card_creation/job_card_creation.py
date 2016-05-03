@@ -39,7 +39,7 @@ class JobCardCreation(Document):
 			doc_test_book.save()
 			test_book_link="<a href='desk#Form/Test Book/"+doc_test_book.name+"'>"+doc_test_book.name+" </a>"
 			job_link="<a href='desk#Form/Job Card Creation/"+doc_test_book.job_card+"'>"+doc_test_book.job_card+" </a>"
-			frappe.msgprint("For Job Card "+job_link+", Test Book "+test_book_link+ " created for Test "+ r.test)
+			frappe.msgprint("For Job Card "+job_link+", Test Book "+test_book_link+ " created")
 			r.test_book = doc_test_book.name
 		
 	def check_sample_status(self):
