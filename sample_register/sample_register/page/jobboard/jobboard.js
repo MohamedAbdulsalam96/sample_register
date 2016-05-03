@@ -42,7 +42,7 @@ frappe.pages['jobboard'].on_page_load = function(wrapper) {
 
 }
 
-sample_register.JobCard = Class.extend({
+sample_register.JobCard = frappe.views.GridReport.extend({
 	init: function(opts, wrapper,page) {
 		$.extend(this, opts);
 		this.make_filters(wrapper);
@@ -71,9 +71,11 @@ sample_register.JobCard = Class.extend({
     create_job: function(){
     	frappe.msgprint("Creating job in JobCard")
      },
-
 	filters: [],
-
+	setup_filters: function() {
+		var me = this;
+		this._super();
+	},
 	setup_columns: function() {
 		var std_columns = [];
 	},
@@ -189,33 +191,40 @@ sample_register.JobCard = Class.extend({
 		selectedIndexes = grid.getSelectedRows();
 		jQuery.each(selectedIndexes, function (index, value) {
 		selectedData.push(grid.getDataItem(value));
-		});        
-		    
+		});
+
 		 // frappe prompt box code to create job card
 		 var d = new frappe.prompt([
-		    {label:__("Test Group"), fieldtype:"Link", options: "Test Group", fieldname:"test_group"},
+		    {label:__("Sales Order"), fieldtype:"Link", options: "Sales Order", fieldname:"sales_order"},
 		    {fieldtype: "Column Break"},
-		    {'fieldname': 'select_test', 'fieldtype': 'HTML',options: "Select Test Group<br>", 'label': 'Select Test', 'reqd': 0},
+		    {'fieldname': 'select_test', 'fieldtype': 'HTML',options: "Select Sales Order<br>", 'label': 'Select Test', 'reqd': 0},
 		    {fieldtype: "Section Break"},
 		   // {'fieldname': 'comment', 'fieldtype': 'Text', 'label': 'Selected Test', 'reqd': 1},
 		    {'fieldname': 'test', 'fieldtype': 'HTML', 'label': 'test', 'reqd': 0},
 		    {fieldtype: "Section Break"},
 			],
+			//fatch items From Sales Order
+		
+
+            
+
 			//submision of prompt box
 			function(values){
 			    var c = d.get_values();
+
 				var me = this;
 		        var test_list = [];
 		        //get checked 'Test' records
+				
 				$(".frappe-control input:checkbox:checked").each ( function() {
 					test_list.push($(this).val());
 				});
 
+				console.log(test_list);
         //create job card against each sample
 	     frappe.call({
 				method: "sample_register.sample_register.page.jobboard.jobboard.create_job_card",
 				 args: {
-				 	"test_group": c.test_group,
 				 	"selectedData":selectedData,
 				 	"test_list_unicode":test_list
 				 },	
@@ -230,14 +239,15 @@ sample_register.JobCard = Class.extend({
 	'Select Test',
 	'Submit'
 	);
-		d.get_input("test_group").on("change", function() {
-		var test_group = d.get_value("test_group");
-//get test data in frappe prompt box
-		 frappe.call({
-			method: "sample_register.sample_register.page.jobboard.jobboard.get_test_data",
+		//fatch Items 02/05/2016
+		html = "<div>Item</div>"
+		
+		
+		frappe.call({
+			method: "sample_register.sample_register.page.jobboard.jobboard.get_items",
 			type: "GET",
 			args: {
-				"test_group": test_group
+				"sales_order": "SO-00004"
 			},
 			callback: function(r){
 				if(r.message){
@@ -248,14 +258,47 @@ sample_register.JobCard = Class.extend({
 
 				    html=""
 				    html += '<div class="testCont"  style="max-height: 200px;overflow: auto;overflow-x: hidden;min-height:150px">'
-				    for (var i = 0; i<r.message.get_test_data.length; i=i+2) {
+				    for (var i = 0; i<r.message.get_items.length; i=i+2) {
 				    	// html += "<input type='checkbox' class='select' id='_select' name='"+r.message.get_test_data[i][0]+"' value='"+r.message.get_test_data[i][0]+"'>"+r.message.get_test_data[i][0]+"<br>"
 				    	html += "<div class='row'>  <div class='col-sm-6'>"
-				    	html += "<label style='font-weight: normal;'><input type='checkbox' class='select' id='_select' name='"+r.message.get_test_data[i][0]+"' value='"+r.message.get_test_data[i][0]+"'> "+r.message.get_test_data[i][0]+ "</label></div>"
+				    	html += "<label style='font-weight: normal;'><input type='checkbox' class='select' id='_select' name='"+r.message.get_items[i][0]+"' value='"+r.message.get_items[i][0]+"'> "+r.message.get_items[i][0]+ "</label></div>"
 						html +=	 "<div class='col-sm-6'>"
-						if(r.message.get_test_data[(i + 1)]){
+						if(r.message.get_items[(i + 1)]){
 							j=i+1;
-				    		html +=	 "<label style='font-weight: normal;'><input type='checkbox' class='select' id='_select' name='"+r.message.get_test_data[j][0]+"' value='"+r.message.get_test_data[j][0]+"'> "+r.message.get_test_data[j][0]+ "</label></div> </div>"
+				    		html +=	 "<label style='font-weight: normal;'><input type='checkbox' class='select' id='_select' name='"+r.message.get_items[j][0]+"' value='"+r.message.get_items[j][0]+"'> "+r.message.get_items[j][0]+ "</label></div> </div>"
+				    	}
+				    }
+				    $(d.fields_dict.test.$wrapper).append(html)
+				}
+			}
+		});
+		//End Fatch items	
+
+		d.get_input("sales_order").on("change", function() {
+		console.log("in sales order change");
+		var sales_order = d.get_value("sales_order");
+//get test data in frappe prompt box
+		 frappe.call({
+			method: "sample_register.sample_register.page.jobboard.jobboard.get_items",
+			type: "GET",
+			args: {
+				"sales_order": sales_order
+			},
+			callback: function(r){
+				if(r.message){                    
+                    //remove existing checked checkbox
+					$('.frappe-control input:checkbox').removeAttr('checked');
+
+				    html=""
+				    html += '<div class="testCont"  style="max-height: 200px;overflow: auto;overflow-x: hidden;min-height:150px">'
+				    for (var i = 0; i<r.message.get_items.length; i=i+2) {
+				    	// html += "<input type='checkbox' class='select' id='_select' name='"+r.message.get_test_data[i][0]+"' value='"+r.message.get_test_data[i][0]+"'>"+r.message.get_test_data[i][0]+"<br>"
+				    	html += "<div class='row'>  <div class='col-sm-6'>"
+				    	html += "<label style='font-weight: normal;'><input type='checkbox' class='select' id='_select' name='"+r.message.get_items[i][0]+"' value='"+r.message.get_items[i][0]+"'> "+r.message.get_items[i][0]+ "</label></div>"
+						html +=	 "<div class='col-sm-6'>"
+						if(r.message.get_items[(i + 1)]){
+							j=i+1;
+				    		html +=	 "<label style='font-weight: normal;'><input type='checkbox' class='select' id='_select' name='"+r.message.get_items[j][0]+"' value='"+r.message.get_items[j][0]+"'> "+r.message.get_items[j][0]+ "</label></div> </div>"
 				    	}
 				    }
 
@@ -345,7 +388,7 @@ sample_register.JobCard = Class.extend({
 		        type: data1.get_sample_data[i][3],
 		        priority: data1.get_sample_data[i][4],
 		        standard: data1.get_sample_data[i][5],
-		        test_group: data1.get_sample_data[i][6]
+		        sales_order: data1.get_sample_data[i][6]
 		      };
 		    }
 		    grid = new Slick.Grid("#myGrid", data, columns, options);
@@ -366,7 +409,9 @@ sample_register.JobCard = Class.extend({
 		      			  }},
 			    {id: "type", name: "Sample Type", field: "type",minWidth:120},
 			    {id: "priority", name: "Priority", field: "priority",minWidth:120},
-			    {id: "standard", name: "Standard", field: "standard",minWidth:120}
+			    {id: "standard", name: "Standard", field: "standard",minWidth:120},
+			    {id: "sales_order", name: "Sales Order", field: "sales_order",minWidth:120}
+
     			// {id: "test_group", name: "Test Group", field: "test_group",minWidth:120}
 			       );
 

@@ -4,9 +4,22 @@ from frappe.utils import cstr,now,add_days
 import json
 
 @frappe.whitelist()
+def get_items(sales_order):
+	return {
+	"get_items": frappe.db.sql("""select item_name from `tabSales Order Item` where parent  = '{0}'""".format(sales_order), as_list=1)
+	}
+
+@frappe.whitelist()
+def get_sales_order():
+	return {
+	"get_sales_order": frappe.db.sql("""select name from `tabSales Order`""", as_list=1)
+	}
+
+
+@frappe.whitelist()
 def get_sample_data():
 	return {
-	"get_sample_data": frappe.db.sql("""select false, name, customer, type, priority, standards, test_group from `tabSample Entry Register` where job_card_status="Not Available" order by name""", as_list=1)
+	"get_sample_data": frappe.db.sql("""select false, name, customer, type, priority, standards, sales_order, test_group from `tabSample Entry Register` where job_card_status="Not Available" order by name""", as_list=1)
 	}
 
 @frappe.whitelist()
@@ -22,7 +35,7 @@ def get_test_data(test_group):
 	}
 
 @frappe.whitelist()
-def create_job_card(test_group,selectedData,test_list_unicode):
+def create_job_card(selectedData,test_list_unicode):
 	print test_list_unicode
 	test_list=json.loads(test_list_unicode)
 	# for test in test_list:
@@ -41,11 +54,10 @@ def create_job_card(test_group,selectedData,test_list_unicode):
 		doc_job_card_creation.type = r.get("type")
 		doc_job_card_creation.priority = r.get("priority")
 		doc_job_card_creation.standards = r.get("standard")
-		for test in test_list:
+		for item_code in test_list:
 			test_req={
 				"doctype": "Job Card Creation Test Details",
-				"test_group": test_group,
-				"test": test
+				"item_code": item_code
 			}
 			doc_job_card_creation.append("test_details",test_req)
 		doc_job_card_creation.save()
