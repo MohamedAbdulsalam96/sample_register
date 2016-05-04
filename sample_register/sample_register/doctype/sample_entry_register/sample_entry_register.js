@@ -57,17 +57,16 @@ cur_frm.fields_dict['equipment'].get_query = function(doc) {
 	}
 }
 
-// Return query for getting order aginst specified customer
-/*cur_frm.fields_dict['order_id'].get_query = function(doc) {
+cur_frm.fields_dict['technical_address'].get_query = function(doc) {
 	return {
 		filters: {
 			
-			"customer": doc.customer,
-			"order_status" : ["in", ["In-Progress", "Open"]]
+			"address_type": 'Technical',
+			"customer": doc.customer
 		}
 	}
-}*/
-
+}
+			
 cur_frm.cscript.technical_address = function(doc,cdt,cdn){
 
 	erpnext.utils.get_address_display(this.frm, "technical_address","address_details");
@@ -100,7 +99,7 @@ cur_frm.cscript.container_id = function(doc,cdt,cdn){
 }
 
 cur_frm.cscript.refresh = function(doc, cdt, cdn) {
-	if(doc.docstatus == 1) {
+	if(doc.docstatus == 1 && doc.job_card_status == "Not Available") {
 		cur_frm.add_custom_button(__("Create Job Card"),
 			function() {
 				frappe.model.open_mapped_doc({
@@ -110,15 +109,6 @@ cur_frm.cscript.refresh = function(doc, cdt, cdn) {
 			})
 		}
 	}
-/*cur_frm.fields_dict['technical_address'].get_query = function(doc) {
-	return {
-		filters: {
-			
-			"address_type": 'Technical',
-			"customer": doc.customer
-		}
-	}
-}*/
 
 frappe.ui.form.on("Sample Entry Register", {
 	refresh: function(frm) {
@@ -141,6 +131,20 @@ frappe.ui.form.on("Sample Entry Register", {
 	before_submit: function(frm) {
 		if(!frm.doc.date_of_collection || !frm.doc.date_of_receipt) {
 			frappe.throw("Please enter Date Of Collection & Date of Receipt")
+		}
+	},
+	// Return query for getting order aginst specified customer
+	customer: function(frm) {
+		if (frm.doc.customer) {
+			cur_frm.fields_dict['order_id'].get_query = function(doc) {
+				return {
+					filters: {
+						"customer": doc.customer,
+						"docstatus": 1,
+						"order_status" : ["in", ["In-Progress", "Open"]]
+					}
+				}
+			}
 		}
 	}
 })
