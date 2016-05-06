@@ -91,9 +91,6 @@ doc_events = {
 		"on_update": "sample_register.custom_py_methods.activity_log",
 		"validate": "sample_register.custom_py_methods.calculate_tot_amount"
 	},
-	"Order Register": {
-	    "on_submit": ["sample_register.custom_py_methods.sales_order_ref", "erpnext.crm.doctype.order_register.order_register.check_total_samples"]
-	},
 	"Sales Order": {
 		"on_submit": "sample_register.custom_py_methods.check_attachment"
 	},
