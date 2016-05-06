@@ -6,7 +6,7 @@ import json
 @frappe.whitelist()
 def get_items(sales_order):
 	return {
-	"get_items": frappe.db.sql("""select item_name from `tabSales Order Item` where parent  = '{0}'""".format(sales_order), as_list=1)
+	"get_items": frappe.db.sql("""select item_code from `tabSales Order Item` where parent  = '{0}'""".format(sales_order), as_list=1)
 	}
 
 @frappe.whitelist()

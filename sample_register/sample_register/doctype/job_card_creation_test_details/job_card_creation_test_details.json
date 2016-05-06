@@ -137,7 +137,7 @@
    "unique": 0
   }, 
   {
-   "allow_on_submit": 0, 
+   "allow_on_submit": 1, 
    "bold": 0, 
    "collapsible": 0, 
    "fieldname": "status", 
@@ -198,7 +198,7 @@
  "issingle": 0, 
  "istable": 1, 
  "max_attachments": 0, 
- "modified": "2016-05-02 12:50:46.780091", 
+ "modified": "2016-05-03 16:31:42.113506", 
  "modified_by": "Administrator", 
  "module": "Sample Register", 
  "name": "Job Card Creation Test Details", 
