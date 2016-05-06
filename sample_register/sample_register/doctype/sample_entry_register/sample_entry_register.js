@@ -14,6 +14,7 @@ cur_frm.add_fetch('equipment','equipment_code','equipment_code');
 cur_frm.add_fetch('equipment','equipment_make','equipment_make');
 cur_frm.add_fetch('equipment','serial_number','serial_number');
 cur_frm.add_fetch('equipment','model_no','model_no');
+cur_frm.add_fetch('equipment','equipment_address','equipment_address');
 cur_frm.add_fetch('customer','customer_name','customer_name');
 
 // Return query for getting technical contact name in link field

@@ -33,7 +33,7 @@ class SampleEntryRegister(Document):
 	def check_total_sample_count(self):
 		sample_count_allowed=frappe.db.sql("""select total_samples from `tabOrder Register` where name=%s""",(self.order_id),as_list=1)
 		sample_count=frappe.db.sql("""select count(name) from `tabSample Entry Register` where order_id=%s and docstatus = 1""",(self.order_id),as_list=1)
-		if sample_count >= sample_count_allowed:
+		if sample_count and (sample_count >= sample_count_allowed):
 			frappe.throw("Please increase Total Samples Ordered in Work Order "+ self.order_id+"<br>Currently sample collected in system: "+str(sample_count[0][0])) 
 
 		if self.order_id:
