@@ -21,7 +21,8 @@ frappe.ui.form.on("Job Card Creation", {
 					get_query_filters: {
 						docstatus: 1,
 						customer: cur_frm.doc.customer || undefined,
-						company: cur_frm.doc.company
+						company: cur_frm.doc.company,
+						job_card_status: "Not Available"
 					}
 				})
 			}, "icon-download", "btn-default")

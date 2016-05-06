@@ -9,19 +9,29 @@ from frappe.model.mapper import get_mapped_doc
 
 class TestBook(Document):
 	def on_submit(self):
+		if not self.status:
+			frappe.throw("Please Enter status")
 		if self.status and self.status == "Completed":
-			frappe.db.sql(	"""
+			cond = """select name from `tabJob Card Creation Test Details` where parent = '%s'"""%(self.job_card)
+			if self.test_group:
+				cond += """ and test_group = '%s'"""%(self.test_group)
+			if self.item_code:
+				cond += """ and item_code = '%s'"""%(self.item_code)
+			if self.item_name:
+				cond += """ and item_name = '%s'"""%(self.item_name)
+	
+			job_card_details = frappe.db.sql(cond, as_dict=1)
+			jc_name = job_card_details[0]['name']
+
+			update_query = """
 								update 
 									`tabJob Card Creation Test Details` 
 								set 
 									status = "Closed" 
 								where 
-									parent = %s 
-								and 
-									test_group = %s
-								and 
-									item_code = %s
-							""", (self.job_card, self.test_group, self.item_code))
+									name = %s
+							"""
+			frappe.db.sql(update_query, (jc_name ))
 		
 		job_card = frappe.get_doc("Job Card Creation", self.job_card)
 		status = True

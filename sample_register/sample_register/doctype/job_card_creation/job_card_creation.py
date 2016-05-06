@@ -36,6 +36,7 @@ class JobCardCreation(Document):
 			doc_test_book.standards = self.standards
 			doc_test_book.item_code = r.item_code
 			doc_test_book.test_group = r.test_group
+			doc_test_book.item_name = r.item_name
 			# doc_test_book.test = r.test
 			doc_test_book.save()
 			test_book_link="<a href='desk#Form/Test Book/"+doc_test_book.name+"'>"+doc_test_book.name+" </a>"
@@ -75,3 +76,21 @@ def so_item_code(doctype, txt, searchfield, start, page_len, filters):
 	query = """select item_code from `tabSales Order Item` where parent = '%s'"""
 	items = frappe.db.sql(query%(filters.get("parent")), as_list=1)
 	return items
+
+# @frappe.whitelist()
+# def so_item_code(doctype, txt, searchfield, start, page_len, filters):
+# 	pro_bundle_query = """ select pi.parent_item as parent_item, 
+# 							GROUP_CONCAT(pi.item_code SEPARATOR ',')as item 
+# 							from `tabPacked Item` pi where pi.parent = '%s'"""
+# 	item_query = """ select soi.item_code from `tabSales Order Item` soi 
+# 					where soi.parent = '%s'"""
+	
+# 	pro_bundle_item = frappe.db.sql(pro_bundle_query%(filters.get("parent")), as_dict=1,debug=1)
+# 	if pro_bundle_item:
+# 		item_query += """ and soi.item_code not in ('{}')""".format(pro_bundle_item[0]['parent_item'])
+# 	soi_items = frappe.db.sql(item_query%(filters.get("parent")), as_list=1,debug=1)
+# 	print"###############################"
+# 	print soi_items
+# 	print [pro_bundle_item[0]['item'].split(",")]
+
+# 	return soi_items + [pro_bundle_item[0]['item'].split(" ")]
