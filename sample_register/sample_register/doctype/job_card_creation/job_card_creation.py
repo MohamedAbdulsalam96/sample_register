@@ -73,24 +73,10 @@ class JobCardCreation(Document):
 
 @frappe.whitelist()
 def so_item_code(doctype, txt, searchfield, start, page_len, filters):
-	query = """select item_code from `tabSales Order Item` where parent = '%s'"""
-	items = frappe.db.sql(query%(filters.get("parent")), as_list=1)
-	return items
-
-# @frappe.whitelist()
-# def so_item_code(doctype, txt, searchfield, start, page_len, filters):
-# 	pro_bundle_query = """ select pi.parent_item as parent_item, 
-# 							GROUP_CONCAT(pi.item_code SEPARATOR ',')as item 
-# 							from `tabPacked Item` pi where pi.parent = '%s'"""
-# 	item_query = """ select soi.item_code from `tabSales Order Item` soi 
-# 					where soi.parent = '%s'"""
+	pi_item = frappe.db.sql("""select item_code from `tabPacked Item` where parent = '%s'"""%(filters.get("parent")))
+	soi_item_query = """select item_code from `tabSales Order Item` where parent='%s'"""%(filters.get("parent"))
+	if pi_item:
+		soi_item_query += """ and item_code not in (select parent_item from `tabPacked Item` where parent='%s')"""%filters.get("parent")
+	soi_item = frappe.db.sql(soi_item_query)
 	
-# 	pro_bundle_item = frappe.db.sql(pro_bundle_query%(filters.get("parent")), as_dict=1,debug=1)
-# 	if pro_bundle_item:
-# 		item_query += """ and soi.item_code not in ('{}')""".format(pro_bundle_item[0]['parent_item'])
-# 	soi_items = frappe.db.sql(item_query%(filters.get("parent")), as_list=1,debug=1)
-# 	print"###############################"
-# 	print soi_items
-# 	print [pro_bundle_item[0]['item'].split(",")]
-
-# 	return soi_items + [pro_bundle_item[0]['item'].split(" ")]
+	return pi_item+soi_item
