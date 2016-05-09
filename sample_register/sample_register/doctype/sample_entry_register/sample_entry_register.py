@@ -38,7 +38,7 @@ class SampleEntryRegister(Document):
 
 		if self.order_id:
 			work_order_doc=frappe.get_doc("Order Register",self.order_id)
-			work_order_doc.quantity_received=sample_count[0][0]
+			work_order_doc.quantity_received = sample_count[0][0] + 1
 			work_order_doc.save()
  # frappe.db.sql("""select name from `tabTest Name` where test_group='%s' order by name"""%(test_group), as_list=1)
 
