@@ -43,5 +43,14 @@
   "name": "Leave Application-Client", 
   "script": "frappe.ui.form.on(\"Leave Application\", {\n\tonload: function(frm) {\n\t\tfrm.set_query(\"leave_approver_two\", function() {\n\t\t\treturn {\n\t\t\tquery:\"erpnext.hr.doctype.leave_application.leave_application.get_approvers\",\n\t\t\tfilters: {\n\t\t\t\t   employee: frm.doc.employee\n\t\t\t      }\n\t\t\t};\n\t\t});\n\t},\n\tleave_approver_two: function(frm) {\n           frm.set_value(\"leave_approver_two_name\",frappe.user.full_name(frm.doc.leave_approver_two));\n        }\n})\n", 
   "script_type": "Client"
+ }, 
+ {
+  "docstatus": 0, 
+  "doctype": "Custom Script", 
+  "dt": "Order Register", 
+  "modified": "2016-05-05 15:46:20.373605", 
+  "name": "Order Register-Client", 
+  "script": "frappe.ui.form.on(\"Order Register\", \"validate\", function(frm,doctype,name) {\n    if(!frm.doc.order_date){\n       cur_frm.set_value(\"order_date\",frappe.datetime.now_datetime());\n    }\n});", 
+  "script_type": "Client"
  }
 ]
