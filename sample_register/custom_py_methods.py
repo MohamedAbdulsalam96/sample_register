@@ -88,15 +88,17 @@ def quot_workflow(doc, method):
 	user = str(frappe.session['user'])
 	user_role =  frappe.get_roles(user)
 	
+	price_list_amt = 0
 	for row in doc.items:
-		if row.discount_percentage and row.discount_percentage >= 20 and not "Sales Manager" in user_role:
-			frappe.throw("Send this Quote to Sales Manager for Approval")
+		price_list_amt += row.qty * row.base_price_list_rate
+	if (price_list_amt - doc.total) >= (price_list_amt)*20/100 and not "Sales Manager" in user_role:
+		frappe.throw("Send this Quote to Sales Manager for Approval")
 	if not "Sales Manager" in user_role and doc.discount_amount and (doc.discount_amount >= doc.total*20/100):
 		frappe.throw("Send this Quote to Sales Manager for Approval")
-	elif "Sales Manager" in user_role or "Sales User" in user_role:
-		pass
-	else:
-		frappe.throw("Sales User or Sales Manager allow to submit")
+	# elif "Sales Manager" in user_role or "Sales User" in user_role:
+	# 	pass
+	# else:
+	# 	frappe.throw("Sales User or Sales Manager allow to submit")
 
 @frappe.whitelist()
 def calculate_tot_amount(doc, method):
