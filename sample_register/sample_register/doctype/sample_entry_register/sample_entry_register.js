@@ -16,6 +16,7 @@ cur_frm.add_fetch('equipment','serial_number','serial_number');
 cur_frm.add_fetch('equipment','model_no','model_no');
 cur_frm.add_fetch('equipment','equipment_address','equipment_address');
 cur_frm.add_fetch('customer','customer_name','customer_name');
+cur_frm.add_fetch('customer','customer_code','customer_code');
 
 // Return query for getting technical contact name in link field
 cur_frm.fields_dict['technical_contact'].get_query = function(doc) {

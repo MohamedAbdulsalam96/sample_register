@@ -25,7 +25,7 @@ cur_frm.add_fetch('equipment','serial_number','serial_number');
 cur_frm.add_fetch('sample_id','equipment_make','manufactured_by');
 cur_frm.add_fetch('sample_id','technical_contact','technical_contact');
 cur_frm.add_fetch('sample_id','technical_contact_details','technical_contact_details');
-
+cur_frm.add_fetch('customer','customer_code','customer_code');
 
 
 
