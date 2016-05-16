@@ -96,6 +96,9 @@ doc_events = {
 	},
 	"Quotation": {
 		"on_submit": "sample_register.custom_py_methods.quot_workflow"
+	},
+	"Product Bundle": {
+		"on_trash": "sample_register.custom_py_methods.bundle_so_present"
 	}
 }
 

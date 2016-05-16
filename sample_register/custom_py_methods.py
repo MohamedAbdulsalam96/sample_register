@@ -132,3 +132,14 @@ def make_order_register(source_name, target_doc=None):
 			}
 		}, target_doc, set_missing_values, ignore_permissions=False)
 	return doclist
+
+@frappe.whitelist()
+def bundle_so_present(doc,method):
+	"""check sales order present for product bundle"""
+	query = """select parent from `tabSales Order Item` where item_code = '%s'"""%(doc.name)
+	so_of_bundle = frappe.db.sql(query,as_list=1)
+	if so_of_bundle:
+		so =  [i[0] for i in so_of_bundle]
+		so_msg = "Product Bundle Linked with Sales Order "
+		so_msg += ', '.join(so)
+		frappe.throw(so_msg)

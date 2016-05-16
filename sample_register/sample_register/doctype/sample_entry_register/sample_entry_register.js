@@ -30,14 +30,14 @@ cur_frm.fields_dict['technical_contact'].get_query = function(doc) {
 }
 
 // Return query for getting tech address
-cur_frm.set_query("technical_address", function() {
+cur_frm.fields_dict['technical_address'].get_query = function(doc) {
 		return {
 			filters: {
 				'technical_address': 1,
-				'customer': cur_frm.doc.customer
+				'customer': doc.customer
 			}
 		}
-	});
+	}
 
 // Return query for getting functional location related to specified customer
 cur_frm.fields_dict['functional_location'].get_query = function(doc) {
@@ -54,16 +54,6 @@ cur_frm.fields_dict['equipment'].get_query = function(doc) {
 	return {
 		filters: {
 			
-			"customer": doc.customer
-		}
-	}
-}
-
-cur_frm.fields_dict['technical_address'].get_query = function(doc) {
-	return {
-		filters: {
-			
-			"address_type": 'Technical',
 			"customer": doc.customer
 		}
 	}
