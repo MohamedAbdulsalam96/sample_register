@@ -141,5 +141,5 @@ def bundle_so_present(doc,method):
 	if so_of_bundle:
 		so =  [i[0] for i in so_of_bundle]
 		so_msg = "Product Bundle Linked with Sales Order "
-		# so_msg += ', '.join(so)
+		so_msg += ', '.join(so)
 		frappe.throw(so_msg)
