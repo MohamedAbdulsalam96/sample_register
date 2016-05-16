@@ -138,5 +138,15 @@ frappe.ui.form.on("Sample Entry Register", {
 				}
 			}
 		}
+		else {
+			cur_frm.fields_dict['order_id'].get_query = function(doc) {
+				return {
+					filters: {
+						"docstatus": 1,
+						"order_status" : ["in", ["In-Progress", "Open"]]
+					}
+				}
+			}
+		}
 	}
 })
