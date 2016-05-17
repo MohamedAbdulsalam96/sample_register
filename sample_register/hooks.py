@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 app_name = "sample_register"
-app_title = "Sample Register"
+app_title = "Back Office"
 app_publisher = "indictrans"
 app_description = "Detail Information of collected samples."
 app_icon = "fa-book"
