@@ -7,10 +7,12 @@ import frappe
 from frappe.model.document import Document
 
 class CodeDesignation(Document):
+	def before_insert(self):
+		self.set_functional_location_code()
+
 	def validate(self):
 		self.set_functional_location_code()
 		self.verify_functional_code()
-
 
 	# Generate functional location code with combination of plant which is optional + substation + location
 	def set_functional_location_code(self):
