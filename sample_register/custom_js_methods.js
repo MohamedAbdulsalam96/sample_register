@@ -101,8 +101,11 @@ frappe.ui.form.on("Sales Order", {
 		if(frm.doc.po_no && !frm.doc.po_date) {
 			frappe.msgprint("Please add PO Date")
 		}
-		if(!frm.doc.__islocal && frm.doc.actual_closer_date) {
+		if(frm.doc.__islocal) {
 			cur_frm.set_df_property("actual_closer_date", "read_only", 1);
+		}
+		else{
+			cur_frm.set_df_property("actual_closer_date", "read_only", 0);
 		}
 	},
 
@@ -115,8 +118,11 @@ frappe.ui.form.on("Sales Order", {
 				})
 			})
 		}
-		if(!frm.doc.__islocal && frm.doc.actual_closer_date) {
+		if(frm.doc.__islocal) {
 			cur_frm.set_df_property("actual_closer_date", "read_only", 1);
+		}
+		else{
+			cur_frm.set_df_property("actual_closer_date", "read_only", 0);
 		}
 	}
 });
