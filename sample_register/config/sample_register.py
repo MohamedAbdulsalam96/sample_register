@@ -118,5 +118,31 @@ def get_data():
 				},
 			]
 		},
+		{
+			"label": _("Test Result Book"),
+			"icon": "icon-star",
+			"items": [
+				{
+					"type": "doctype",
+					"name": "Water Content Test",
+					"description": _("Water Content Test"),
+				},
+				{
+					"type": "doctype",
+					"name": "Neutralisation Value Test",
+					"description": _(" Neutralisation Value Test"),
+				},
+				{
+					"type": "doctype",
+					"name": "Flash point by Penskey Martin",
+					"description": _(" Flash point by Penskey Martin"),
+				},
+				{
+					"type": "doctype",
+					"name": "Interfacial Tension Test",
+					"description": _("Interfacial Tension Test"),
+				},
+			]
+		},
 
 	]
