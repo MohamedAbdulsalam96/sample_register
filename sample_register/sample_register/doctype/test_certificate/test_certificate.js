@@ -9,6 +9,7 @@ cur_frm.cscript.address = function(doc,cdt,cdn){
 	erpnext.utils.get_address_display(this.frm, "address","admin_address_details");
 }
 
+cur_frm.add_fetch('work_order_no','customer_code','customer_code');
 cur_frm.add_fetch('sample_id','customer','customer');
 cur_frm.add_fetch('sample_id','functional_location','code_designation');
 cur_frm.add_fetch('sample_id','equipment','equipment');
@@ -17,7 +18,13 @@ cur_frm.add_fetch('sample_id','weather_condition_during_sampling','weather_condi
 cur_frm.add_fetch('sample_id','date_of_receipt','date_of_receipt');
 cur_frm.add_fetch('sample_id','date_of_collection','date_of_collection');
 cur_frm.add_fetch('sample_id','sample_condition','condition_of_sample');
-cur_frm.add_fetch('sample_id','drawn_by','collected_by');
+cur_frm.add_fetch('sample_id','drawn_by','drawn_by');
+cur_frm.add_fetch('sample_id','drawn_from','drawn_from');
+cur_frm.add_fetch('sample_id','placed_at','placed_at');
+cur_frm.add_fetch('sample_id','cust_sample_id','cust_sample_id');
+cur_frm.add_fetch('sample_id','designation','designation');
+
+cur_frm.add_fetch('sample_id','order_id','work_order_no');
 cur_frm.add_fetch('sample_id','serial_number','serial_number');
 cur_frm.add_fetch('sample_id','equipment','equipment');
 cur_frm.add_fetch('sample_id','model_no','model_no');
@@ -38,6 +45,32 @@ cur_frm.fields_dict['technical_contact'].get_query = function(doc) {
 		}
 	}
 }
+
+//filter SER based on work order
+cur_frm.fields_dict['sample_id'].get_query = function(doc) {
+	if(doc.work_order_no){
+
+			return {
+					filters: {
+						"order_id":doc.work_order_no
+					}
+				}
+
+	}
+}
+//filter SER based on work order
+cur_frm.fields_dict['sample_id'].get_query = function(doc) {
+	if(doc.customer){
+
+			return {
+					filters: {
+						"customer":doc.customer
+					}
+				}
+
+	}
+}
+
 //frappe call for retriveing technical contact details and setting all details to a field
 cur_frm.cscript.technical_contact = function(doc,cdt,cdn){
 	frappe.call({
