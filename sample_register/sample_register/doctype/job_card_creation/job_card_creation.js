@@ -1,5 +1,7 @@
 cur_frm.add_fetch('item_code', 'item_name', 'item_name');
 cur_frm.add_fetch('item_code', 'test_group', 'test_group');
+cur_frm.add_fetch('customer', 'customer_code', 'customer_name');
+
 
 cur_frm.fields_dict['sample_id'].get_query = function(doc) {
 	return {
