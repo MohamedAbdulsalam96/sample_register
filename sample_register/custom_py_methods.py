@@ -125,7 +125,7 @@ def make_order_register(source_name, target_doc=None):
 
 	doclist = get_mapped_doc("Sales Order", source_name, {
 			"Sales Order": {
-				"doctype": "Order Register",
+				"doctype": "Service Request",
 				"validation": {
 					"docstatus": ["=", 1]
 				}

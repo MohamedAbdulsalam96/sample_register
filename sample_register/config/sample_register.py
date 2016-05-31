@@ -28,10 +28,10 @@ def get_data():
 					"description": _("All Test Certificate related information."),
 				},
 				{
-					"label": _("Work Order"),
+					"label": _("Service Request"),
 					"type": "doctype",
-					"name": "Order Register",
-					"description": _("Customer orders list."),
+					"name": "Service Request",
+					"description": _("Customer Service Request list."),
 				},
 			]
 		},

@@ -105,11 +105,11 @@ cur_frm.cscript.refresh = function(doc, cdt, cdn) {
 frappe.ui.form.on("Sample Entry Register", {
 	refresh: function(frm) {
 		if(frm.doc.docstatus===0) {
-			cur_frm.add_custom_button(__("From Work Order"),
+			cur_frm.add_custom_button(__("From Service Request"),
 			function() {
 				frappe.model.map_current_doc({
-					method: "erpnext.crm.doctype.order_register.order_register.create_sample_entry",
-					source_doctype: "Order Register",
+					method: "sample_register.sample_register.doctype.service_request.service_request.create_sample_entry",
+					source_doctype: "Service Request",
 					get_query_filters: {
 						docstatus: 1,
 						customer: cur_frm.doc.customer || undefined,

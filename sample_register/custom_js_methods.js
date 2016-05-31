@@ -112,7 +112,7 @@ frappe.ui.form.on("Sales Order", {
 
 	refresh: function(frm) {
 		if(frm.doc.docstatus==1 && (frm.doc.total_qty > frm.doc.actual_quantity)) {
-			cur_frm.add_custom_button(__('Create Work Order'), function() {
+			cur_frm.add_custom_button(__('Create Service Request'), function() {
 				frappe.model.open_mapped_doc({
 					method: "sample_register.custom_py_methods.make_order_register",
 					frm: cur_frm

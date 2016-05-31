@@ -31,13 +31,13 @@ class SampleEntryRegister(Document):
 				container_id.append(d.container_id)
 
 	def check_total_sample_count(self):
-		sample_count_allowed=frappe.db.sql("""select total_samples from `tabOrder Register` where name=%s""",(self.order_id),as_list=1)
+		sample_count_allowed=frappe.db.sql("""select total_samples from `tabService Request` where name=%s""",(self.order_id),as_list=1)
 		sample_count=frappe.db.sql("""select count(name) from `tabSample Entry Register` where order_id=%s and docstatus = 1""",(self.order_id),as_list=1)
 		if sample_count and (sample_count >= sample_count_allowed):
-			frappe.throw("Please increase Total Samples Ordered in Work Order "+ self.order_id+"<br>Currently sample collected in system: "+str(sample_count[0][0])) 
+			frappe.throw("Please increase Total Samples Ordered in Service Request "+ self.order_id+"<br>Currently sample collected in system: "+str(sample_count[0][0])) 
 
 		if self.order_id:
-			work_order_doc=frappe.get_doc("Order Register",self.order_id)
+			work_order_doc=frappe.get_doc("Service Request",self.order_id)
 			work_order_doc.quantity_received = sample_count[0][0] + 1
 			work_order_doc.save()
  # frappe.db.sql("""select name from `tabTest Name` where test_group='%s' order by name"""%(test_group), as_list=1)
@@ -78,7 +78,7 @@ def create_job_card(source_name, target_doc=None):
 
 		# order_register = frappe.db.get_value("Sample Entry Register", source_name, "order_id")
 		# if order_register:
-		# 	so = frappe.db.get_value("Order Register", order_register, "sales_order")
+		# 	so = frappe.db.get_value("Service Request", order_register, "sales_order")
 		# 	if so:
 		# 		query = """	select 
 		# 						soi.item_code, 
