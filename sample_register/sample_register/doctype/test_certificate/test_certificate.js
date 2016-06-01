@@ -1,5 +1,5 @@
 // Fetch order date ,order name and order expiry date on selection of order id on 'Sample Register Entry' form
-cur_frm.add_fetch('work_order_no','order_date','work_order_date');
+cur_frm.add_fetch('work_order_no','wo_ref_date','work_order_date');
 cur_frm.add_fetch('work_order_no','customer','customer');
 cur_frm.add_fetch('work_order_no','admin_address','address');
 cur_frm.add_fetch('work_order_no','admin_address_details','admin_address_details');
@@ -46,6 +46,18 @@ cur_frm.fields_dict['technical_contact'].get_query = function(doc) {
 	}
 }
 
+// //filter SER based on work order
+// cur_frm.fields_dict['sample_id'].get_query = function(doc) {
+// 	if(doc.work_order_no){
+
+// 			return {
+// 					filters: {
+// 						"order_id":doc.work_order_no
+// 					}
+// 				}
+
+// 	}
+// }
 //filter SER based on work order
 cur_frm.fields_dict['sample_id'].get_query = function(doc) {
 	if(doc.work_order_no){
@@ -58,18 +70,7 @@ cur_frm.fields_dict['sample_id'].get_query = function(doc) {
 
 	}
 }
-//filter SER based on work order
-cur_frm.fields_dict['sample_id'].get_query = function(doc) {
-	if(doc.customer){
 
-			return {
-					filters: {
-						"customer":doc.customer
-					}
-				}
-
-	}
-}
 
 //frappe call for retriveing technical contact details and setting all details to a field
 cur_frm.cscript.technical_contact = function(doc,cdt,cdn){
