@@ -11,8 +11,7 @@ from frappe import throw, _
 
 class FixedAssetSerialNumber(Document):
 	def autoname(self):
-		if self.fixed_asset_serial_number:	
-			self.name = make_autoname('TF-'+'.###')
+		self.name = make_autoname("TF-.YY..MM.-.######")
 
 @frappe.whitelist()
 def make_new_asset(doc, method):
@@ -20,11 +19,11 @@ def make_new_asset(doc, method):
 		fixed_asset = [] 
 		for i, ele in enumerate (doc.items):
 			item  = frappe.get_doc("Item", ele.item_code)
-			if item.fixed_asset_serial_number and item.is_asset_item:
+			if item.is_asset_item:
 				for qty in range(int(ele.qty)):
 					asset_doc = frappe.new_doc("Fixed Asset Serial Number")
 					asset_doc.item_code = item.item_code
-					asset_doc.fixed_asset_serial_number = item.fixed_asset_serial_number
+					# asset_doc.fixed_asset_serial_number = item.fixed_asset_serial_number
 					asset_doc.save(ignore_permissions=True)
 					fixed_asset.append(asset_doc.name)
 				frappe.msgprint(_("Fixed Asset Serial Number Created"))
@@ -35,12 +34,12 @@ def new_fixed_asset(doc, method):
 	if doc.items:
 		for i, ele in enumerate (doc.items):
 			item  = frappe.get_doc("Item", ele.item_code)
-			if item.fixed_asset_serial_number and item.is_asset_item:
+			if item.is_asset_item:
 				fixed_asset = [] 
 				for qty in range(int(ele.qty)):
 					asset_doc = frappe.new_doc("Fixed Asset Serial Number")
 					asset_doc.item_code = item.item_code
-					asset_doc.fixed_asset_serial_number = item.fixed_asset_serial_number
+					# asset_doc.fixed_asset_serial_number = item.fixed_asset_serial_number
 					asset_doc.save(ignore_permissions=True)
 					fixed_asset.append(asset_doc.name)
 				frappe.msgprint(_("Fixed Asset Serial Number Created"))
