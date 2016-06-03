@@ -8,6 +8,6 @@ def get_data():
 			"color": "#1abc9c",
 			"icon": "icon-book",
 			"type": "module",
-			"label": _("Sample Register")
+			"label": _("Back Office")
 		}
 	}
