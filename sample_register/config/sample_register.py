@@ -142,6 +142,16 @@ def get_data():
 					"name": "Interfacial Tension Test",
 					"description": _("Interfacial Tension Test"),
 				},
+				{
+					"type": "doctype",
+					"name": "Furan Content",
+					"description": _("Furan Content Test"),
+				},
+				{
+					"type": "doctype",
+					"name": "Dissolved Gas Analysis",
+					"description": _("Dissolved Gas Analysis"),
+				},
 			]
 		},
 
