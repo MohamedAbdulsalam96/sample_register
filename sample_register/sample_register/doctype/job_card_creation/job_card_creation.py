@@ -27,22 +27,22 @@ class JobCardCreation(Document):
 			frappe.throw("Collection Date or Receipt Date not Present in "+self.sample_id)
 
 		for r in self.test_details:
-			doc_test_book=frappe.new_doc("Test Book")
+			doc_test_book=frappe.new_doc(r.test_type)
 			doc_test_book.job_card = self.name
 			doc_test_book.sample_id = self.sample_id
-			doc_test_book.customer = self.customer
+			# doc_test_book.customer = self.customer
 			doc_test_book.type = self.type
 			doc_test_book.priority = self.priority
 			doc_test_book.standards = self.standards
-			doc_test_book.item_code = r.item_code
-			doc_test_book.test_group = r.test_group
+			# doc_test_book.item_code = r.item_code
+			# doc_test_book.test_group = r.test_group
 			doc_test_book.item_name = r.item_name
 			# doc_test_book.test = r.test
 			doc_test_book.save()
 			test_book_link="<a href='desk#Form/Test Book/"+doc_test_book.name+"'>"+doc_test_book.name+" </a>"
 			job_link="<a href='desk#Form/Job Card Creation/"+doc_test_book.job_card+"'>"+doc_test_book.job_card+" </a>"
 			frappe.msgprint("For Job Card "+job_link+", Test Book "+test_book_link+ " created")
-			r.test_book = doc_test_book.name
+			# r.test_book = doc_test_book.name
 		
 	def check_sample_status(self):
 		if self.sample_id and (self.docstatus==0):

@@ -6,7 +6,8 @@ import json
 @frappe.whitelist()
 def get_items(sales_order):
 	return {
-	"get_items": frappe.db.sql("""select item_code from `tabSales Order Item` where parent  = '{0}'""".format(sales_order), as_list=1)
+	"get_items": frappe.db.sql("""select soi.item_code, i.test_type from `tabSales Order Item` soi, `tabItem` i
+				where soi.item_code=i.item_code and soi.parent = '{0}'""".format(sales_order), as_list=1)
 	}
 
 @frappe.whitelist()
@@ -19,13 +20,22 @@ def get_sales_order():
 @frappe.whitelist()
 def get_sample_data():
 	return {
-	"get_sample_data": frappe.db.sql("""select false, name, customer, type, priority, standards, sales_order, test_group from `tabSample Entry Register` where job_card_status="Not Available" and docstatus = 1 order by name""", as_list=1)
+	"get_sample_data": frappe.db.sql("""select false, name, customer, type, priority, standards, sales_order, test_group,
+		order_id,
+		case when 5!=6 then (select sales_order from `tabService Request` where name=order_id)
+		ELSE ""
+		END AS 'sales_order'
+	 from `tabSample Entry Register` where job_card_status="Not Available" and docstatus = 1 order by name""", as_list=1)
 	}
 
 @frappe.whitelist()
 def get_sample_data_with_job():
 	return {
-	"get_sample_data": frappe.db.sql("""select false, name, customer, type, priority, standards, test_group from `tabSample Entry Register` where job_card_status!="" order by name""", as_list=1)
+	"get_sample_data": frappe.db.sql("""select false, name, customer, type, priority, standards, test_group,order_id,
+		case when 5!=6 then (select sales_order from `tabService Request` where name=order_id)
+		ELSE ""
+		END AS 'sales_order'
+	 from `tabSample Entry Register` where job_card_status!="" order by name""", as_list=1)
 	}
 
 @frappe.whitelist()
@@ -47,17 +57,18 @@ def create_job_card(selectedData,test_list_unicode):
 	# print selectedData
 	# frappe.msgprint(selectedData)
 	selectedData_json = json.loads(selectedData)
+	print test_list
 	for r in selectedData_json:
 		doc_job_card_creation=frappe.new_doc("Job Card Creation")
 		doc_job_card_creation.sample_id = r.get("sampleid")
 		doc_job_card_creation.customer = r.get("customer")
-		doc_job_card_creation.type = r.get("type")
+		# doc_job_card_creation.type = r.get("type")
 		doc_job_card_creation.priority = r.get("priority")
 		doc_job_card_creation.standards = r.get("standard")
-		for item_code in test_list:
+		for test_type in test_list:
 			test_req={
 				"doctype": "Job Card Creation Test Details",
-				"item_code": item_code
+				"test_type": test_type,
 			}
 			doc_job_card_creation.append("test_details",test_req)
 		doc_job_card_creation.save()

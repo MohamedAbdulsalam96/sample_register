@@ -4,13 +4,13 @@ cur_frm.add_fetch('equipment','equipment_code','equipment_code');
 cur_frm.add_fetch('equipment','equipment_make','equipment_make');
 cur_frm.add_fetch('equipment','serial_number','serial_number');
 
-cur_frm.fields_dict['order'].get_query = function(doc) {
-	return {
-		filters: {			
-			"customer": doc.customer
-		}
-	}
-}
+// cur_frm.fields_dict['order'].get_query = function(doc) {
+// 	return {
+// 		filters: {			
+// 			"customer": doc.customer
+// 		}
+// 	}
+// }
 // Return query for getting technical contact name in link field
 cur_frm.fields_dict['technical_contact'].get_query = function(doc) {
 	return {

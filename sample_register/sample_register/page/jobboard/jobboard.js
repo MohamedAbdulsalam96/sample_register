@@ -217,7 +217,7 @@ sample_register.JobCard = frappe.views.GridReport.extend({
 		        //get checked 'Test' records
 				
 				$(".frappe-control input:checkbox:checked").each ( function() {
-					test_list.push($(this).val());
+					test_list.push($(this).attr("name"));
 				});
 
 				console.log(test_list);
@@ -294,11 +294,11 @@ sample_register.JobCard = frappe.views.GridReport.extend({
 				    for (var i = 0; i<r.message.get_items.length; i=i+2) {
 				    	// html += "<input type='checkbox' class='select' id='_select' name='"+r.message.get_test_data[i][0]+"' value='"+r.message.get_test_data[i][0]+"'>"+r.message.get_test_data[i][0]+"<br>"
 				    	html += "<div class='row'>  <div class='col-sm-6'>"
-				    	html += "<label style='font-weight: normal;'><input type='checkbox' class='select' id='_select' name='"+r.message.get_items[i][0]+"' value='"+r.message.get_items[i][0]+"'> "+r.message.get_items[i][0]+ "</label></div>"
+				    	html += "<label style='font-weight: normal;'><input type='checkbox' class='select' id='_select' name='"+r.message.get_items[i][0]+"' value='"+r.message.get_items[i][1]+"'> "+r.message.get_items[i][1]+ "</label></div>"
 						html +=	 "<div class='col-sm-6'>"
 						if(r.message.get_items[(i + 1)]){
 							j=i+1;
-				    		html +=	 "<label style='font-weight: normal;'><input type='checkbox' class='select' id='_select' name='"+r.message.get_items[j][0]+"' value='"+r.message.get_items[j][0]+"'> "+r.message.get_items[j][0]+ "</label></div> </div>"
+				    		html +=	 "<label style='font-weight: normal;'><input type='checkbox' class='select' id='_select' name='"+r.message.get_items[j][0]+"' value='"+r.message.get_items[j][1]+"'> "+r.message.get_items[j][0]+ "</label></div> </div>"
 				    	}
 				    }
 
@@ -388,7 +388,7 @@ sample_register.JobCard = frappe.views.GridReport.extend({
 		        type: data1.get_sample_data[i][3],
 		        priority: data1.get_sample_data[i][4],
 		        standard: data1.get_sample_data[i][5],
-		        sales_order: data1.get_sample_data[i][6]
+		        sales_order: data1.get_sample_data[i][9]
 		      };
 		    }
 		    grid = new Slick.Grid("#myGrid", data, columns, options);
@@ -410,7 +410,10 @@ sample_register.JobCard = frappe.views.GridReport.extend({
 			    {id: "type", name: "Sample Type", field: "type",minWidth:120},
 			    {id: "priority", name: "Priority", field: "priority",minWidth:120},
 			    {id: "standard", name: "Standard", field: "standard",minWidth:120},
-			    {id: "sales_order", name: "Sales Order", field: "sales_order",minWidth:120}
+			    {id: "sales_order", name: "Sales Order", field: "sales_order",minWidth:120,
+						formatter: linkFormatter = function ( row, cell, value, columnDef, dataContext ) {
+					           			 return '<a href="desk#Form/Sales Order/' + dataContext['sales_order'] + '">' + value + '</a>';
+					      			  }}
 
     			// {id: "test_group", name: "Test Group", field: "test_group",minWidth:120}
 			       );
