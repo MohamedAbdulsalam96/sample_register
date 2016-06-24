@@ -31,7 +31,7 @@ class SampleEntryCreationTool(Document):
 		dl = frappe.db.sql("""select name,customer,date_of_receipt, date_of_collection,job_card,functional_location,functional_location_code,
 			equipment,equipment_make,serial_number,equipment_code,
 			conservation_protection_system, sample_taken_from, oil_temperature, winding_temperature,
-			remarks from `tabSample Entry Register` where order_id='%s' %s"""%(self.order, condition),as_dict=1, debug=1)
+			remarks from `tabSample Entry Register` where docstatus = 0 and order_id='%s' %s"""%(self.order, condition),as_dict=1, debug=1)
 
 		self.set('sample_entry_creation_tool_details', [])
 
@@ -145,6 +145,13 @@ class SampleEntryCreationTool(Document):
 							sample_entry_doc.append("container_details", container_detail)
 					sample_entry_doc.save()
 		frappe.msgprint("Sample Entry updated")
+
+	def submit_sample_entry(self):
+		for d in self.get('sample_entry_creation_tool_details'):
+				sample_entry_doc=frappe.get_doc("Sample Entry Register", d.sample_id)
+				if sample_entry_doc.docstatus == 0 and sample_entry_doc.date_of_receipt: 
+					sample_entry_doc.submit()
+		frappe.msgprint("Sample Entry submitted.")
 
 	def set_date_of_receipt(self):
 		samples = []

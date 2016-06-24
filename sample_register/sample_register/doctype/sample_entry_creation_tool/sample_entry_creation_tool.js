@@ -69,6 +69,15 @@ frappe.ui.form.on("Sample Entry Creation Tool", {
 			}
 		})
 	},
+	submit_sample_entry: function(frm){
+		return frappe.call({
+			method: "submit_sample_entry",
+			doc: frm.doc,
+			callback: function(r, rt){
+				frm.refresh()
+			}
+		})
+	},
 	get_relevant_entries: function(frm) {
 		return frappe.call({
 			method: "get_details",
