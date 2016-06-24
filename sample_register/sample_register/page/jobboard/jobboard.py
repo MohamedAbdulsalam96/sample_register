@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 import frappe
 from frappe.utils import cstr,now,add_days
 import json
+import datetime
 
 @frappe.whitelist()
 def get_items(sales_order):
@@ -62,13 +63,17 @@ def create_job_card(selectedData,test_list_unicode):
 		doc_job_card_creation=frappe.new_doc("Job Card Creation")
 		doc_job_card_creation.sample_id = r.get("sampleid")
 		doc_job_card_creation.customer = r.get("customer")
-		# doc_job_card_creation.type = r.get("type")
+		doc_job_card_creation.type = r.get("type")
 		doc_job_card_creation.priority = r.get("priority")
 		doc_job_card_creation.standards = r.get("standard")
+		doc_job_card_creation.creation_date = datetime.datetime.today()
 		for test_type in test_list:
 			test_req={
 				"doctype": "Job Card Creation Test Details",
-				"test_type": test_type,
+				"item_code":test_type,
+				"item_name":frappe.db.get_value("Item", test_type, "item_name"),
+				"test_type": frappe.db.get_value("Item", test_type, "test_type"),
+				"test_group": frappe.db.get_value("Item", test_type, "test_group"),
 			}
 			doc_job_card_creation.append("test_details",test_req)
 		doc_job_card_creation.save()
