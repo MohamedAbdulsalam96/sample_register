@@ -30,16 +30,17 @@ class TRBSession(Document):
 		# 	conservation_protection_system, sample_taken_from, oil_temperature, winding_temperature,
 		# 	remarks from `tabSample Entry Register` where order_id='%s' %s"""%(self.order, condition),as_dict=1, debug=1)
 
-		test_type = ["Water Content Test","Furan Content"]
-		dl_furan_list = []
+		test_type = ["Water Content Test","Furan Content","Dissolved Gas Analysis"]
+		dl_list = []
 		for i in test_type:
-			print "aaaaaaaaaaaaaa",i
+			# print "aaaaaaaaaaaaaa",i
 			dl = frappe.db.sql("""select name,job_card,final_result,result_status,sample_id, '{0}' as test_type 
 						from `tab{0}` where sample_id in 
 						(select name from `tabSample Entry Register` where order_id='{1}')""".format(i,self.order),as_dict=1, debug=1)
-			dl_list.append(dl_furan)
+			if dl:
+				dl_list.append(dl)
 
-		print "dl_furan_list",dl_furan_list	
+		print "dl_list",dl_list	
 
 		self.set('trb_session_details', [])
 
@@ -68,7 +69,7 @@ class TRBSession(Document):
 
 	def update_sample_entry(self):
 		for d in self.get('trb_session_details'):
-			entry_doc = frappe.get_doc("Water Content Test", d.test_name)
+			entry_doc = frappe.get_doc(d.test_type, d.test_name)
 			if entry_doc.docstatus == 0:
 				entry_doc.result_status = d.result_status
 				entry_doc.save()
