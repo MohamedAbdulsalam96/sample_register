@@ -30,21 +30,20 @@ class TRBSession(Document):
 		# 	conservation_protection_system, sample_taken_from, oil_temperature, winding_temperature,
 		# 	remarks from `tabSample Entry Register` where order_id='%s' %s"""%(self.order, condition),as_dict=1, debug=1)
 
+		test_type = ["Water Content Test","Furan Content"]
+		dl_furan_list = []
+		for i in test_type:
+			print "aaaaaaaaaaaaaa",i
+			dl = frappe.db.sql("""select name,job_card,final_result,result_status,sample_id, '{0}' as test_type 
+						from `tab{0}` where sample_id in 
+						(select name from `tabSample Entry Register` where order_id='{1}')""".format(i,self.order),as_dict=1, debug=1)
+			dl_list.append(dl_furan)
 
-		# dl = frappe.db.sql("""select name,customer,date_of_receipt, date_of_collection,job_card,functional_location,functional_location_code,
-		# 	equipment,equipment_make,serial_number,equipment_code,
-		# 	conservation_protection_system, sample_taken_from, oil_temperature, winding_temperature,
-		# 	remarks from `tabSample Entry Register` where order_id='%s'"""%(self.order),as_dict=1, debug=1)
-
-		# dl = frappe.db.sql("""select name,job_card,final_result,sample_id, "Water Content Test" as test_type from `tabWater Content Test` where sample_id= '%s'"""%("TF-SE-2016-00001"),as_dict=1, debug=1)
-
-		dl = frappe.db.sql("""select name,job_card,final_result,result_status,sample_id, "Water Content Test" as test_type 
-					from `tabWater Content Test` where sample_id in 
-					(select name from `tabSample Entry Register` where order_id='%s')"""%(self.order),as_dict=1, debug=1)
+		print "dl_furan_list",dl_furan_list	
 
 		self.set('trb_session_details', [])
 
-		for d in dl:
+		for d in [d[0] for d in dl_list]:
 			nl = self.append('trb_session_details', {})
 			nl.sample_id = d.sample_id
 			nl.job_card = d.job_card
@@ -77,7 +76,7 @@ class TRBSession(Document):
 
 	def start_session(self):
 		for d in self.get('trb_session_details'):
-			entry_doc = frappe.get_doc("Water Content Test", d.test_name)
+			entry_doc = frappe.get_doc(d.test_type, d.test_name)
 			if entry_doc.docstatus == 0:
 				entry_doc.start_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 				entry_doc.lab_equipment_details = []
