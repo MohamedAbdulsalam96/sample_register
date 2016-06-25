@@ -52,12 +52,6 @@ sample_register.JobCard = frappe.views.GridReport.extend({
 			this.page.main.find(".page").css({"padding-top": "0px"});
 	},
 	make_fun: function(){
-		console.log("in funnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
-		console.log("in funnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
-		console.log("in funnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
-		console.log("in funnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
-		console.log("in funnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
-
             this.page.set_title(__("Dashboard") + " - " + __("Job Card Creation"));
 
      },
@@ -100,7 +94,7 @@ sample_register.JobCard = frappe.views.GridReport.extend({
 		this.page = wrapper.page;
 		this.page.set_primary_action(__("Create Job Card"),
 			function() { me.refresh(); }, "icon-refresh")
-		this.page.add_menu_item(__("Set Priority"), function() {me.set_priority_data();	}, true);
+		this.page.add_menu_item(__("Set Priority"), function() {me.set_priority_data();}, true);
 		this.page.add_menu_item(__("Set Standard"), function() {me.set_standards_data();	}, true);
 		this.page.add_menu_item(__("Set Priority & Standard"), function() {me.set_sample_data();	}, true);
 		this.page.add_menu_item(__("Refresh"), function() { location.reload(); }, true);
@@ -143,7 +137,7 @@ sample_register.JobCard = frappe.views.GridReport.extend({
 		],
 		function(values){
 		    var c = d.get_values();
-			var me = this;
+			var me2 = me;
 		     frappe.call({
 					method: "sample_register.sample_register.page.jobboard.jobboard.set_sample_data",
 					 args: {
@@ -152,7 +146,8 @@ sample_register.JobCard = frappe.views.GridReport.extend({
 					 	"selectedData":selectedData
 					 },	
 					callback: function(r) {
-	  				  location.reload();				}
+		  				  me2.prepare_data();				
+		  				}
 				});
 
 		},
@@ -170,23 +165,28 @@ sample_register.JobCard = frappe.views.GridReport.extend({
 		selectedData.push(grid.getDataItem(value));
 		});
 		var d = frappe.prompt([
-		{label:__("Priority"), fieldtype:"Select",options: ["1-Emergency","2-Urgent", "3-Normal"],fieldname:"priority",'reqd': 1},			],
-		function(values){
-		    var c = d.get_values();
-			var me = this;
-		     frappe.call({
-					method: "sample_register.sample_register.page.jobboard.jobboard.set_priority_data",
-					 args: {
-					 	"priority": c.priority,
-					 	"selectedData":selectedData
-					 },	
-					callback: function(r) {
-	  				  location.reload();				}
-				});
+			{label:__("Priority"), fieldtype:"Select",
+				options: ["1-Emergency","2-Urgent", "3-Normal"],
+				fieldname:"priority",'reqd': 1},			
+			],
+			function(values){
+			    var c = d.get_values();
+				
+			     frappe.call({
+						method: "sample_register.sample_register.page.jobboard.jobboard.set_priority_data",
+						 args: {
+						 	"priority": c.priority,
+						 	"selectedData":selectedData
+						 },	
+						 async:false,
+						callback: function(r) {
+							me.prepare_data();		
+		  				}
+					});
 
-		},
-		'Select Test',
-		'Submit'
+			},
+			'Select Priority',
+			'Submit'
 		);
 	},
 	//set standards
@@ -203,7 +203,6 @@ sample_register.JobCard = frappe.views.GridReport.extend({
 			],
 		function(values){
 		    var c = d.get_values();
-			var me = this;
 		     frappe.call({
 					method: "sample_register.sample_register.page.jobboard.jobboard.set_standards_data",
 					 args: {
@@ -211,7 +210,7 @@ sample_register.JobCard = frappe.views.GridReport.extend({
 					 	"selectedData":selectedData
 					 },	
 					callback: function(r) {
-	  				  location.reload();				}
+	  				  me.prepare_data();				}
 				});
 
 		},
@@ -219,6 +218,7 @@ sample_register.JobCard = frappe.views.GridReport.extend({
 		'Submit'
 		);
 	},
+
 	//set standards end
 
 	//get sample data and make grid report
