@@ -19,14 +19,16 @@ def get_sales_order():
 
 
 @frappe.whitelist()
-def get_sample_data():
+def get_sample_data(sales_order):
+	print "in sample get get_sample_data"
+	print sales_order
 	return {
 	"get_sample_data": frappe.db.sql("""select false, name, customer, type, priority, standards, sales_order, test_group,
 		order_id,
 		case when 5!=6 then (select sales_order from `tabService Request` where name=order_id)
 		ELSE ""
 		END AS 'sales_order'
-	 from `tabSample Entry Register` where job_card_status="Not Available" and docstatus = 1 order by name""", as_list=1)
+	 from `tabSample Entry Register` where job_card_status="Not Available" and docstatus = 1 group by name having sales_order = '{0}' order by name""".format(sales_order), as_list=1)
 	}
 
 @frappe.whitelist()

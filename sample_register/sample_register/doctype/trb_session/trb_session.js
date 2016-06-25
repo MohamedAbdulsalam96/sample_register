@@ -12,7 +12,7 @@ cur_frm.fields_dict.lab_equipment_details.grid.get_field("item_code").get_query 
 frappe.ui.form.on("TRB Session", {
 
 	refresh: function(frm) {
-
+		frm.disable_save();
 	},
 	get_relevant_entries: function(frm) {
 		return frappe.call({

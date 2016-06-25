@@ -28,13 +28,12 @@ frappe.pages['jobboard'].on_page_load = function(wrapper) {
 		parent: page
 	};
 	// created custom div, after making slickgrid, slickgrid will be append on custom div myGrid
-	$("<table width='100%>\
-  <tr>\
-    <td valign='top' width='50%'>\
-      <div id='myGrid' style='width:100%;height:500px;''></div>\
-    </td>\
-  </tr>\
-</table>").appendTo($(wrapper).find('.layout-main-section'));
+	$("<br><div class='row'><div class='party-area col-xs-4' style='margin-left:10px;'> </div><div class='party-area col-xs-8'> </div><br><br></div>\
+  <div class='row'>\
+	  	<div class='party-area col-xs-12'>\
+			<div id='myGrid' style='width:100%;height:500px;''></div>\
+		</div>\
+	</div>").appendTo($(wrapper).find('.layout-main-section'));
 	setTimeout(function(){
 		new new sample_register.JobCard(options, wrapper, page);	
 	}, 1)
@@ -44,18 +43,57 @@ frappe.pages['jobboard'].on_page_load = function(wrapper) {
 
 sample_register.JobCard = frappe.views.GridReport.extend({
 	init: function(opts, wrapper,page) {
+		var so_number = ""
 		$.extend(this, opts);
 		this.make_filters(wrapper);
-		this.prepare_data();
+		// this.prepare_data();
+		this.make_fun();
+		this.make_party();
 			this.page.main.find(".page").css({"padding-top": "0px"});
 	},
 	make_fun: function(){
+		console.log("in funnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
+		console.log("in funnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
+		console.log("in funnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
+		console.log("in funnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
+		console.log("in funnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
+
             this.page.set_title(__("Dashboard") + " - " + __("Job Card Creation"));
 
      },
+    make_party: function() {
+    			console.log("in make party");
+
+		var me = this;
+		    			console.log(me.page.wrapper.find(".party-area"));
+
+		this.party_field = frappe.ui.form.make_control({
+			df: {
+				"fieldtype": "Link",
+				"options": "Sales Order",
+				"label": "Sales Order",
+				"fieldname": "pos_party",
+				"Link": "Sales Order",
+				"placeholder": "Sales Order",
+			},
+			parent: me.page.wrapper.find(".party-area"),
+			only_input: true,
+		});
+		console.log("in make party")
+		console.log(this.party_field)
+		this.party_field.make_input();
+		this.party_field.$input.on("change", function() {
+					me.so_number = this.value;
+					console.log(me.so_number);
+					me.prepare_data();
+		});
+	},
     make: function(){
         this._super();
         this.make_fun();
+        		console.log("in make make");
+
+        this.make_party();
     },
     make_filters: function(wrapper){
 		var me = this;
@@ -195,19 +233,9 @@ sample_register.JobCard = frappe.views.GridReport.extend({
 
 		 // frappe prompt box code to create job card
 		 var d = new frappe.prompt([
-		    {label:__("Sales Order"), fieldtype:"Link", options: "Sales Order", fieldname:"sales_order"},
-		    {fieldtype: "Column Break"},
-		    {'fieldname': 'select_test', 'fieldtype': 'HTML',options: "Select Sales Order<br>", 'label': 'Select Test', 'reqd': 0},
-		    {fieldtype: "Section Break"},
-		   // {'fieldname': 'comment', 'fieldtype': 'Text', 'label': 'Selected Test', 'reqd': 1},
 		    {'fieldname': 'test', 'fieldtype': 'HTML', 'label': 'test', 'reqd': 0},
-		    {fieldtype: "Section Break"},
 			],
 			//fatch items From Sales Order
-		
-
-            
-
 			//submision of prompt box
 			function(values){
 			    var c = d.get_values();
@@ -235,54 +263,19 @@ sample_register.JobCard = frappe.views.GridReport.extend({
 				}
 			});
 
+
 	},
-	'Select Test',
+	'Select Test to Create Job Card',
 	'Submit'
 	);
-		//fatch Items 02/05/2016
-		html = "<div>Item</div>"
-		
-		
-		frappe.call({
+	
+	//set sales order items in popup
+	frappe.call({
 			method: "sample_register.sample_register.page.jobboard.jobboard.get_items",
 			type: "GET",
+			async:false,
 			args: {
-				"sales_order": "SO-00004"
-			},
-			callback: function(r){
-				if(r.message){
-					me.test_data = r.message;
-                    
-                    //remove existing checked checkbox
-					$('.frappe-control input:checkbox').removeAttr('checked');
-
-				    html=""
-				    html += '<div class="testCont"  style="max-height: 200px;overflow: auto;overflow-x: hidden;min-height:150px">'
-				    for (var i = 0; i<r.message.get_items.length; i=i+2) {
-				    	// html += "<input type='checkbox' class='select' id='_select' name='"+r.message.get_test_data[i][0]+"' value='"+r.message.get_test_data[i][0]+"'>"+r.message.get_test_data[i][0]+"<br>"
-				    	html += "<div class='row'>  <div class='col-sm-6'>"
-				    	html += "<label style='font-weight: normal;'><input type='checkbox' class='select' id='_select' name='"+r.message.get_items[i][0]+"' value='"+r.message.get_items[i][0]+"'> "+r.message.get_items[i][0]+ "</label></div>"
-						html +=	 "<div class='col-sm-6'>"
-						if(r.message.get_items[(i + 1)]){
-							j=i+1;
-				    		html +=	 "<label style='font-weight: normal;'><input type='checkbox' class='select' id='_select' name='"+r.message.get_items[j][0]+"' value='"+r.message.get_items[j][0]+"'> "+r.message.get_items[j][0]+ "</label></div> </div>"
-				    	}
-				    }
-				    $(d.fields_dict.test.$wrapper).append(html)
-				}
-			}
-		});
-		//End Fatch items	
-
-		d.get_input("sales_order").on("change", function() {
-		console.log("in sales order change");
-		var sales_order = d.get_value("sales_order");
-//get test data in frappe prompt box
-		 frappe.call({
-			method: "sample_register.sample_register.page.jobboard.jobboard.get_items",
-			type: "GET",
-			args: {
-				"sales_order": sales_order
+				"sales_order": me.so_number
 			},
 			callback: function(r){
 				if(r.message){                    
@@ -308,7 +301,7 @@ sample_register.JobCard = frappe.views.GridReport.extend({
 					wrapper.html(html);
 
 
-				 selected_sample_html= "<p>Select Test to Create Job Card</p>"
+				 // selected_sample_html= "<p>Select Test to Create Job Card</p>"
 				 //apend selected sample with sample id
 				 // selected_sample_html='<div class="testSelect" style="max-height: 200px;overflow: auto;overflow-x: hidden;min-height:150px">'
 				 // selected_sample_html+="<p>Selected sample to perform Test: </p>"
@@ -317,22 +310,77 @@ sample_register.JobCard = frappe.views.GridReport.extend({
 			  //   }
 
 			  //   selected_sample_html += '</div>'	
-				var wrapper_sample = d.fields_dict.select_test.$wrapper;
-				wrapper_sample.html(selected_sample_html);
+				// var wrapper_sample = d.fields_dict.select_test.$wrapper;
+				// wrapper_sample.html(selected_sample_html);
 				 //end of apend seleted sample
 
 				}
 			}
-		});
-//end of get test data
-		return false;
 	});
+
+// 		//fatch Items 02/05/2016
+// 		html = "<div>Item</div>"
+		
+// 		d.get_input("sales_order").on("change", function() {
+// 		console.log("in sales order change");
+// 		var sales_order = d.get_value("sales_order");
+// //get test data in frappe prompt box
+// 		 frappe.call({
+// 			method: "sample_register.sample_register.page.jobboard.jobboard.get_items",
+// 			type: "GET",
+// 			args: {
+// 				"sales_order": me.so_number
+// 			},
+// 			callback: function(r){
+// 				if(r.message){                    
+//                     //remove existing checked checkbox
+// 					$('.frappe-control input:checkbox').removeAttr('checked');
+
+// 				    html=""
+// 				    html += '<div class="testCont"  style="max-height: 200px;overflow: auto;overflow-x: hidden;min-height:150px">'
+// 				    for (var i = 0; i<r.message.get_items.length; i=i+2) {
+// 				    	// html += "<input type='checkbox' class='select' id='_select' name='"+r.message.get_test_data[i][0]+"' value='"+r.message.get_test_data[i][0]+"'>"+r.message.get_test_data[i][0]+"<br>"
+// 				    	html += "<div class='row'>  <div class='col-sm-6'>"
+// 				    	html += "<label style='font-weight: normal;'><input type='checkbox' class='select' id='_select' name='"+r.message.get_items[i][0]+"' value='"+r.message.get_items[i][1]+"'> "+r.message.get_items[i][1]+ "</label></div>"
+// 						html +=	 "<div class='col-sm-6'>"
+// 						if(r.message.get_items[(i + 1)]){
+// 							j=i+1;
+// 				    		html +=	 "<label style='font-weight: normal;'><input type='checkbox' class='select' id='_select' name='"+r.message.get_items[j][0]+"' value='"+r.message.get_items[j][1]+"'> "+r.message.get_items[j][0]+ "</label></div> </div>"
+// 				    	}
+// 				    }
+
+// 				   	html += '</div>'	
+//                   	var wrapper = d.fields_dict.test.$wrapper;
+//                   	wrapper.empty();
+// 					wrapper.html(html);
+
+
+// 				 selected_sample_html= "<p>Select Test to Create Job Card</p>"
+// 				 //apend selected sample with sample id
+// 				 // selected_sample_html='<div class="testSelect" style="max-height: 200px;overflow: auto;overflow-x: hidden;min-height:150px">'
+// 				 // selected_sample_html+="<p>Selected sample to perform Test: </p>"
+// 				 //  for(r in selectedData){
+// 			  //      selected_sample_html+="<p>"+selectedData[r]["sampleid"]+"</p>"
+// 			  //   }
+
+// 			  //   selected_sample_html += '</div>'	
+// 				var wrapper_sample = d.fields_dict.select_test.$wrapper;
+// 				wrapper_sample.html(selected_sample_html);
+// 				 //end of apend seleted sample
+
+// 				}
+// 			}
+// 		});
+// //end of get test data
+// 		return false;
+// 	});
 
 // end of frappe prompt box code
 	},
 
 	prepare_data: function() {
 		var me = this;
+		console.log("in pdata",me.so_number);
 	//slick start
         function requiredFieldValidator(value) {
             if (value == null || value == undefined || !value.length) {
@@ -358,9 +406,7 @@ sample_register.JobCard = frappe.views.GridReport.extend({
 				method: "sample_register.sample_register.page.jobboard.jobboard.get_sample_data",
 				type: "GET",
 				args: {
-					args:{
-
-					}
+					"sales_order": me.so_number
 				},
 				callback: function(r){
 					if(r.message){
@@ -502,7 +548,7 @@ sample_register.JobCard = frappe.views.GridReport.extend({
 		    dataView.setItems(data);
 		    dataView.setFilter(filter);
 		    dataView.endUpdate();
-		    var columnpicker = new Slick.Controls.ColumnPicker(columns, grid, options);
+		    // var columnpicker = new Slick.Controls.ColumnPicker(columns, grid, options);
 
 		  })
 

@@ -15,9 +15,6 @@ class TRBSession(Document):
 		# 	frappe.throw("Please select Order")
 		# if not self.customer:
 		# 	frappe.throw("Please select Customer")
-
-		condition = ""
-
 		# if self.filter_based_on_date_of_receipt and self.from_date and self.to_date:
 		# 	condition = "and date_of_receipt>='"+self.from_date+"' and date_of_receipt<='"+self.to_date+"'"
 		# if self.show_job_card_created_entries:
@@ -33,7 +30,6 @@ class TRBSession(Document):
 		test_type = ["Water Content Test","Furan Content","Dissolved Gas Analysis"]
 		dl_list = []
 		for i in test_type:
-			# print "aaaaaaaaaaaaaa",i
 			dl = frappe.db.sql("""select name,job_card,final_result,result_status,sample_id, '{0}' as test_type 
 						from `tab{0}` where sample_id in 
 						(select name from `tabSample Entry Register` where order_id='{1}')""".format(i,self.order),as_dict=1, debug=1)
@@ -45,27 +41,23 @@ class TRBSession(Document):
 		self.set('trb_session_details', [])
 
 		for d in [d[0] for d in dl_list]:
-			nl = self.append('trb_session_details', {})
-			nl.sample_id = d.sample_id
-			nl.job_card = d.job_card
-			nl.test_name = d.name
-			nl.reported_ir = d.final_result
-			nl.test_type = d.test_type
-			nl.result_status = d.result_status
-			# nl.customer = d.customer
-			# nl.functional_location=d.functional_location
-			# nl.functional_location_code = d.functional_location_code
-			# nl.equipment = d.equipment
-			# nl.equipment_make = d.equipment_make
-			# nl.serial_number =d.serial_number
-			# nl.equipment_code =d.equipment_code
-			# nl.date_of_receipt = d.date_of_receipt
-			# nl.date_of_collection = d.date_of_collection
-			# nl.conservation_protection_system = d.conservation_protection_system
-			# nl.sample_taken_from = d.sample_taken_from
-			# nl.oil_temperature = d.oil_temperature
-			# nl.winding_temperature = d.winding_temperature
-			# nl.remarks = d.remarks
+			if self.test_type:
+				if d.test_type == self.test_type:
+					nl = self.append('trb_session_details', {})
+					nl.sample_id = d.sample_id
+					nl.job_card = d.job_card
+					nl.test_name = d.name
+					nl.reported_ir = d.final_result
+					nl.test_type = d.test_type
+					nl.result_status = d.result_status
+			else:
+				nl = self.append('trb_session_details', {})
+				nl.sample_id = d.sample_id
+				nl.job_card = d.job_card
+				nl.test_name = d.name
+				nl.reported_ir = d.final_result
+				nl.test_type = d.test_type
+				nl.result_status = d.result_status
 
 	def update_sample_entry(self):
 		for d in self.get('trb_session_details'):
