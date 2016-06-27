@@ -2,6 +2,15 @@
  {
   "docstatus": 0, 
   "doctype": "Custom Script", 
+  "dt": "Quotation", 
+  "modified": "2016-06-24 12:09:35.831189", 
+  "name": "Quotation-Client", 
+  "script": "cur_frm.add_fetch(\"customer\",\"customer_code\",\"customer_legal_name\");\n", 
+  "script_type": "Client"
+ }, 
+ {
+  "docstatus": 0, 
+  "doctype": "Custom Script", 
   "dt": "Employee", 
   "modified": "2016-01-28 13:19:29.205816", 
   "name": "Employee-Client", 
@@ -51,6 +60,15 @@
   "modified": "2016-05-05 15:46:20.373605", 
   "name": "Order Register-Client", 
   "script": "frappe.ui.form.on(\"Order Register\", \"validate\", function(frm,doctype,name) {\n    if(!frm.doc.order_date){\n       cur_frm.set_value(\"order_date\",frappe.datetime.now_datetime());\n    }\n});", 
+  "script_type": "Client"
+ }, 
+ {
+  "docstatus": 0, 
+  "doctype": "Custom Script", 
+  "dt": "Sales Order", 
+  "modified": "2016-06-27 15:01:11.847054", 
+  "name": "Sales Order-Client", 
+  "script": "frappe.ui.form.on(\"Sales Order\", \"validate\", function(frm,cdt,cdn) {\n\ttotal_qty=0;\n\tfor(i=0;i<frm.doc.items.length;i++){\n\t\ttotal_qty+=frm.doc.items[i].qty\n\t};\n\tcur_frm.set_value(\"contract_quantities\", total_qty)\n});", 
   "script_type": "Client"
  }
 ]
