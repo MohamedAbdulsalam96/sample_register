@@ -35,6 +35,18 @@ cur_frm.add_fetch('sample_id','technical_contact_details','technical_contact_det
 cur_frm.add_fetch('customer','customer_code','customer_code');
 
 
+cur_frm.cscript.refresh = function(doc, cdt, cdn) {
+	if(doc.docstatus == 0) {
+		cur_frm.add_custom_button(__("Get Test Result"),
+			function() {
+				frappe.model.open_mapped_doc({
+						method: "sample_register.sample_register.doctype.sample_entry_register.sample_entry_register.create_job_card",
+						frm: cur_frm
+				})
+			})
+		}
+}
+
 
 cur_frm.fields_dict['technical_contact'].get_query = function(doc) {
 	return {

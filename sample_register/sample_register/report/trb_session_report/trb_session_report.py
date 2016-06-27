@@ -13,11 +13,20 @@ def execute(filters=None):
 	return columns, data
 
 def get_data(filters):
-	if 1==1:
-		result = frappe.db.sql("""select sample_id,result_status,start_time, end_time,name, "Water Content Test" as test_type, standard
-			from `tabWater Content Test`
-			""",as_list=1,debug=1)
-	return result
+	test_type = ["Water Content Test","Furan Content","Dissolved Gas Analysis"]
+	result = []
+	for i in test_type:
+		dl = frappe.db.sql("""select sample_id,result_status,start_time, end_time,name, "Water Content Test" as test_type, standard
+			from `tab{0}`""".format(i),as_list=1,debug=1)
+		if dl:
+			result.append(dl)
+
+	#list operatios
+	abc = []
+	k = [item for sublist in result for item in sublist]
+	for d in [d for d in k]:
+		print "dddddddddd",d
+	return k
 	
 	# 	# result.append([])
 	# 	# result.append(["Total Item",str(total_item[0][0])])
@@ -43,7 +52,7 @@ def get_total_item():
 	return "11"
 
 def  get_colums():
-	columns = ["Sample ID:Link/Sample Entry Register:120"]+["Status::165"]+ ["Start Date/Time::130"] +["End Date/Time::130"]\
+	columns = ["Sample ID:Link/Sample Entry Register:120"]+["Status::165"]+ ["Start Date/Time:Date:130"] +["End Date/Time:Date:130"]\
 		+["TRB ID:Link/Water Content Test:130"]+ ["Test Type::130"] + ["Standard::130"]
 	return columns
 
