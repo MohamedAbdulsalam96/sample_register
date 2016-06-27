@@ -3580,7 +3580,7 @@
   "doctype": "Property Setter", 
   "doctype_or_field": "DocType", 
   "field_name": null, 
-  "modified": "2016-06-27 15:01:44.176454", 
+  "modified": "2016-06-27 15:10:24.168090", 
   "name": "Sales Order-read_only_onload", 
   "property": "read_only_onload", 
   "property_type": "Check", 
