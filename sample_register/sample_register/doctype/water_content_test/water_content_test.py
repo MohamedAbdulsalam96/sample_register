@@ -5,6 +5,8 @@
 from __future__ import unicode_literals
 import frappe
 from frappe.model.document import Document
+import datetime
 
 class WaterContentTest(Document):
-	pass
+	def before_submit(self):
+		self.end_time = datetime.datetime.now()
