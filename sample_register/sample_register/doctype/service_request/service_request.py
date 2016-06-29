@@ -17,7 +17,7 @@ class ServiceRequest(Document):
 			if getdate(self.order_date) < getdate(contract_doc.contract_start_date):
 				frappe.throw("Service Request Date < Contract Start Date")
 
-		if self.wo_ref_date and self.sales_order:
+		if self.sr_ref_date and self.sales_order:
 			so_date_unicode = frappe.db.get_value("Sales Order", self.sales_order, "order_end_date")
 			if so_date_unicode:
 				so_date = datetime.strptime(str(so_date_unicode), '%Y-%m-%d')
