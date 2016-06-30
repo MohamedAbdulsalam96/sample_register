@@ -31,7 +31,7 @@ frappe.pages['jobboard'].on_page_load = function(wrapper) {
 	$("<br><div class='row'><div class='party-area col-xs-4' style='margin-left:10px;'> </div><div class='party-area col-xs-8'> </div><br><br></div>\
   <div class='row'>\
 	  	<div class='party-area col-xs-12'>\
-			<div id='myGrid' style='width:100%;height:500px;''></div>\
+			<div id='myGrid1' style='width:100%;height:500px;''></div>\
 		</div>\
 	</div>").appendTo($(wrapper).find('.layout-main-section'));
 	setTimeout(function(){
@@ -64,11 +64,11 @@ sample_register.JobCard = frappe.views.GridReport.extend({
 		this.party_field = frappe.ui.form.make_control({
 			df: {
 				"fieldtype": "Link",
-				"options": "Sales Order",
-				"label": "Sales Order",
+				"options": "Service Request",
+				"label": "Service Request",
 				"fieldname": "pos_party",
-				"Link": "Sales Order",
-				"placeholder": "Sales Order",
+				"Link": "Service Request",
+				"placeholder": "Service Request",
 			},
 			parent: me.page.wrapper.find(".party-area"),
 			only_input: true,
@@ -257,9 +257,7 @@ sample_register.JobCard = frappe.views.GridReport.extend({
 				 	"test_list_unicode":test_list
 				 },	
 				callback: function(r) {
-				if (cur_frm) {
-							cur_frm.reload_doc();
-						}
+
 				}
 			});
 
@@ -437,7 +435,7 @@ sample_register.JobCard = frappe.views.GridReport.extend({
 		        sales_order: data1.get_sample_data[i][9]
 		      };
 		    }
-		    grid = new Slick.Grid("#myGrid", data, columns, options);
+		    grid = new Slick.Grid("#myGrid1", data, columns, options);
 		    
 		        var checkboxSelector = new Slick.CheckboxSelectColumn({
       			cssClass: "slick-cell-checkboxsel"
@@ -468,7 +466,7 @@ sample_register.JobCard = frappe.views.GridReport.extend({
 			var columnFilters = {};
 	        dataView = new Slick.Data.DataView();
 	        //call to create grid report
-   			grid = new Slick.Grid("#myGrid", dataView, columns, options);
+   			grid = new Slick.Grid("#myGrid1", dataView, columns, options);
 
 //Start filter in slick grid
    			function filter(item) {

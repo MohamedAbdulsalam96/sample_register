@@ -91,6 +91,8 @@ class SampleEntryCreationTool(Document):
 		self.type =""
 		self.drawn_by =""
 
+		self.get_details()
+
 	def update_sample_entry(self):
 		sample_fl = []
 		container_detail = []
@@ -126,21 +128,25 @@ class SampleEntryCreationTool(Document):
 						container_detail = {
 								"doctype": "Container Details",
 								"container_type": d.container_type_i,
-								"container_id":d.container_id_i
+								"container_id":d.container_id_i,
+								"customer_container_id":d.customer_container_id
 								}
 						sample_entry_doc.append("container_details", container_detail)
 						if d.container_type_ii and d.container_id_ii:
 							container_detail = {
 									"doctype": "Container Details",
 									"container_type": d.container_type_ii,
-									"container_id":d.container_id_ii
+									"container_id":d.container_id_ii,
+									"customer_container_id":d.customer_container_id_ii
+
 									}
 							sample_entry_doc.append("container_details", container_detail)
 						if d.container_type_iii and d.container_id_iii:
 							container_detail = {
 									"doctype": "Container Details",
 									"container_type": d.container_type_iii,
-									"container_id":d.container_id_iii
+									"container_id":d.container_id_iii,
+									"customer_container_id":d.customer_container_id_iii
 									}
 							sample_entry_doc.append("container_details", container_detail)
 					sample_entry_doc.save()

@@ -10,9 +10,15 @@ def get_sample_data():
 	}
 
 @frappe.whitelist()
-def get_sample_data_with_job():
+def get_sample_data_with_job(service_request):
 	return {
-	"get_sample_data": frappe.db.sql("""select false, name, customer, type, priority, standards, job_card, job_card_status, test_group, CASE job_card_status WHEN 'Not Available' THEN 1 WHEN 'Created' THEN 2 WHEN 'Submitted' THEN 3 ELSE 5 END as id from `tabSample Entry Register` where job_card_status!='Not Available' order by id,priority, name desc""", as_list=1,debug=1)
+	"get_sample_data": frappe.db.sql("""select false, name, customer, type, 
+			priority, standards, job_card, job_card_status, test_group, 
+				CASE job_card_status WHEN 'Not Available' THEN 1 WHEN 'Created' THEN 2 WHEN 'Submitted' THEN 3 ELSE 5 END as id
+			 from `tabSample Entry Register` 
+			 where job_card_status not in ('Not Available', 'Submitted')
+			 and order_id = '{0}'
+			 order by id,priority, name desc""".format(service_request), as_list=1,debug=1)
 	}
 
 @frappe.whitelist()

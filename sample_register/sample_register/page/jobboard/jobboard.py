@@ -6,9 +6,12 @@ import datetime
 
 @frappe.whitelist()
 def get_items(sales_order):
+	print "\n\nser_____",sales_order
+	dl = frappe.db.sql("""select sales_order from `tabService Request` where name='{0}'""".format(sales_order),as_list=1)
+	so = dl[0][0]
 	return {
 	"get_items": frappe.db.sql("""select soi.item_code, i.test_type from `tabSales Order Item` soi, `tabItem` i
-				where soi.item_code=i.item_code and soi.parent = '{0}'""".format(sales_order), as_list=1)
+				where soi.item_code=i.item_code and soi.parent = '{0}'""".format(so), as_list=1)
 	}
 
 @frappe.whitelist()
@@ -28,7 +31,7 @@ def get_sample_data(sales_order):
 		case when 5!=6 then (select sales_order from `tabService Request` where name=order_id)
 		ELSE ""
 		END AS 'sales_order'
-	 from `tabSample Entry Register` where job_card_status="Not Available" and docstatus = 1 group by name having sales_order = '{0}' order by name""".format(sales_order), as_list=1)
+	 from `tabSample Entry Register` where job_card_status="Not Available" and docstatus = 1 and order_id = '{0}' order by name""".format(sales_order), as_list=1)
 	}
 
 @frappe.whitelist()

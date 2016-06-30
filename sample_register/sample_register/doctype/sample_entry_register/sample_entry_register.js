@@ -54,7 +54,8 @@ cur_frm.fields_dict['equipment'].get_query = function(doc) {
 	return {
 		filters: {
 			
-			"customer": doc.customer
+			"customer": doc.customer,
+			"code_designation": doc.functional_location
 		}
 	}
 }

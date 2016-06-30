@@ -27,14 +27,13 @@ frappe.pages['jobcard'].on_page_load = function(wrapper) {
 		doctype: "Sample Entry Register",
 		parent: page
 	};
+	$("<br><div class='row'><div class='party-area col-xs-4' style='margin-left:10px;'> </div><div class='party-area col-xs-8'> </div><br><br></div>\
+  <div class='row'>\
+	  	<div class='party-area col-xs-12'>\
+			<div id='myGrid' style='width:100%;height:500px;''></div>\
+		</div>\
+	</div>").appendTo($(wrapper).find('.layout-main-section'));
 	// created custom div, after making slickgrid, slickgrid will be append on custom div myGrid
-	$("<table width='100%>\
-  <tr>\
-    <td valign='top' width='50%'>\
-      <div id='myGrid' style='width:100%;height:500px;''></div>\
-    </td>\
-  </tr>\
-</table>").appendTo($(wrapper).find('.layout-main-section'));
 	setTimeout(function(){
 		new new sample_register.JobCard(options, wrapper, page);	
 	}, 1)
@@ -46,8 +45,10 @@ sample_register.JobCard = Class.extend({
 	init: function(opts, wrapper,page) {
 		$.extend(this, opts);
 		this.make_filters(wrapper);
-		this.prepare_data();
-			this.page.main.find(".page").css({"padding-top": "0px"});
+		this.make_party();
+		// this.prepare_data();
+
+		this.page.main.find(".page").css({"padding-top": "0px"});
 	},
 	make_fun: function(){
             this.page.set_title(__("Dashboard") + " - " + __("Job Card Creation"));
@@ -57,6 +58,33 @@ sample_register.JobCard = Class.extend({
         this._super();
         this.make_fun();
     },
+    make_party: function() {
+    			console.log("in make party");
+
+		var me = this;
+		console.log(me.page.wrapper.find(".party-area"));
+
+		this.party_field = frappe.ui.form.make_control({
+			df: {
+				"fieldtype": "Link",
+				"options": "Service Request",
+				"label": "Service Request",
+				"fieldname": "pos_party",
+				"Link": "Service Request",
+				"placeholder": "Service Request",
+			},
+			parent: me.page.wrapper.find(".party-area"),
+			only_input: true,
+		});
+		console.log("in make party")
+		console.log(this.party_field)
+		this.party_field.make_input();
+		this.party_field.$input.on("change", function() {
+					me.so_number = this.value;
+					console.log(me.so_number);
+					me.prepare_data();
+		});
+	},
     make_filters: function(wrapper){
 		var me = this;
 		this.page = wrapper.page;
@@ -340,15 +368,14 @@ sample_register.JobCard = Class.extend({
 				method: "sample_register.sample_register.page.jobcard.jobcard.get_sample_data_with_job",
 				type: "GET",
 				args: {
-					args:{
-
-					}
+					"service_request": me.so_number
 				},
 				callback: function(r){
 					if(r.message){
 						me.data = r.message;
 						me.make_grid(r.message,columns,options)
 						//me.waiting.toggle(false);
+						console.log("in prepare_data callback")
 
 					}
 				}
@@ -357,6 +384,7 @@ sample_register.JobCard = Class.extend({
 
 	//function split to make new grid from frappe.call
 	make_grid:function(data1,columns,options){
+		console.log(data1)
 
 			$(function () {
 		    var data = [];
@@ -484,7 +512,7 @@ sample_register.JobCard = Class.extend({
 		    dataView.setItems(data);
 		    dataView.setFilter(filter);
 		    dataView.endUpdate();
-		    var columnpicker = new Slick.Controls.ColumnPicker(columns, grid, options);
+		    // var columnpicker = new Slick.Controls.ColumnPicker(columns, grid, options);
 
 		  })
 
