@@ -9,6 +9,16 @@ cur_frm.fields_dict.lab_equipment_details.grid.get_field("item_code").get_query 
                }
 		}
 }
+cur_frm.fields_dict.lab_equipment_details.grid.get_field("fixed_asset_serial_number").get_query = function(doc,cdt,cdn) {
+	var d  = locals[cdt][cdn];
+	if(d.item_code){
+		return {
+			filters: {
+                       "item_code": d.item_code
+               }
+		}
+	}
+}
 frappe.ui.form.on("TRB Session", {
 
 	refresh: function(frm) {
