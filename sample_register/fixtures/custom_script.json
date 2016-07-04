@@ -3,9 +3,9 @@
   "docstatus": 0, 
   "doctype": "Custom Script", 
   "dt": "Quotation", 
-  "modified": "2016-06-24 12:09:35.831189", 
+  "modified": "2016-06-29 16:45:28.534888", 
   "name": "Quotation-Client", 
-  "script": "cur_frm.add_fetch(\"customer\",\"customer_code\",\"customer_legal_name\");\n", 
+  "script": "cur_frm.add_fetch(\"customer\",\"customer_code\",\"customer_legal_name\");\ncur_frm.add_fetch(\"customer\",\"vendor_code\",\"vendor_code\");\n", 
   "script_type": "Client"
  }, 
  {
@@ -66,9 +66,18 @@
   "docstatus": 0, 
   "doctype": "Custom Script", 
   "dt": "Sales Order", 
-  "modified": "2016-06-27 15:01:11.847054", 
+  "modified": "2016-07-04 13:09:48.483897", 
   "name": "Sales Order-Client", 
-  "script": "frappe.ui.form.on(\"Sales Order\", \"validate\", function(frm,cdt,cdn) {\n\ttotal_qty=0;\n\tfor(i=0;i<frm.doc.items.length;i++){\n\t\ttotal_qty+=frm.doc.items[i].qty\n\t};\n\tcur_frm.set_value(\"contract_quantities\", total_qty)\n});", 
+  "script": "cur_frm.add_fetch(\"customer\",\"customer_code\",\"customer_legal_name\");\nfrappe.ui.form.on(\"Sales Order\", \"validate\", function(frm,cdt,cdn) {\n\ttotal_qty=0;\n\tfor(i=0;i<frm.doc.items.length;i++){\n\t\ttotal_qty+=frm.doc.items[i].qty\n\t};\n\tcur_frm.set_value(\"contract_quantities\", total_qty)\n});", 
+  "script_type": "Client"
+ }, 
+ {
+  "docstatus": 0, 
+  "doctype": "Custom Script", 
+  "dt": "Sales Invoice", 
+  "modified": "2016-07-04 13:10:02.365800", 
+  "name": "Sales Invoice-Client", 
+  "script": "cur_frm.add_fetch(\"customer\",\"customer_code\",\"customer_legal_name\");", 
   "script_type": "Client"
  }
 ]
