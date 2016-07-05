@@ -111,7 +111,7 @@ def calculate_tot_amount(doc, method):
 				price_list_rate = frappe.db.get_value("Item Price",{"item_code": row.item_code, "price_list": "Standard Selling"}, "price_list_rate")
 				tot_amount += price_list_rate * row.qty
 		doc.total_amount = tot_amount
-		if (doc.total_amount and doc.estimated_price) and (flt(doc.total_amount) > flt(doc.estimated_price)) and not "Sales Manager" in user_role :
+		if (doc.total_amount and doc.estimated_sale_value) and (flt(doc.total_amount) > flt(doc.estimated_sale_value)) and not "Sales Manager" in user_role :
 			frappe.throw("Total Amount must be less than Estimated Price")
 		return tot_amount
 
