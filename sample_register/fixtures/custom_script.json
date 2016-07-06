@@ -79,5 +79,14 @@
   "name": "Sales Invoice-Client", 
   "script": "cur_frm.add_fetch(\"customer\",\"customer_code\",\"customer_legal_name\");", 
   "script_type": "Client"
+ }, 
+ {
+  "docstatus": 0, 
+  "doctype": "Custom Script", 
+  "dt": "Opportunity", 
+  "modified": "2016-07-06 16:09:39.821527", 
+  "name": "Opportunity-Client", 
+  "script": "cur_frm.add_fetch(\"customer\",\"customer_code\",\"customer_legal_name\");\nfrappe.ui.form.on(\"Opportunity\", \"validate\", function(frm,cdt,cdn) {\n\tvar eov = (frm.doc.estimated_sale_value*frm.doc.probability)/100;\n\tif(frm.doc.probability>100 || frm.doc.probability<0){\n\t\tmsgprint(\"Probability should be 0 to 100\");\n\t\tvalidated = false;\n\t\tcur_frm.set_value(\"estimated_opportunity_value\",0);\n\t}\n\telse{\n\t\tcur_frm.set_value(\"estimated_opportunity_value\",eov);\n\t}\n});\nfrappe.ui.form.on(\"Opportunity\", \"refresh\", function(frm,cdt,cdn) {\n \tif(frm.doc.customer){\n\t \tif(cur_frm.doc.title == cur_frm.doc.customer){\n\t \t\tvar title = frm.doc.customer+\"-\"+frm.doc.name;\n\t \t\tcur_frm.set_value(\"opportunity_code\",title)\n\t \t\tcur_frm.save()\n\t \t}\n\t\t\n\t}\n\telse if(frm.doc.lead){\n\t\tif(cur_frm.doc.title == cur_frm.doc.lead){\n\t\t\tvar title = frm.doc.lead+\"-\"+frm.doc.name;\n\t \t\tcur_frm.set_value(\"opportunity_code\",title)\n\t \t\tcur_frm.save()\n \t\t}\n\n\t}\n});\nfrappe.ui.form.on(\"Opportunity\", \"probability\", function(frm,cdt,cdn) {\n\tvar eov = (frm.doc.estimated_sale_value*frm.doc.probability)/100;\n\tif(frm.doc.probability>100 || frm.doc.probability<0){\n\t\tmsgprint(\"Probability should be 0 to 100\");\n\t}\n\telse{\n\t\tcur_frm.set_value(\"estimated_opportunity_value\",eov);\n\t}\n});", 
+  "script_type": "Client"
  }
 ]
