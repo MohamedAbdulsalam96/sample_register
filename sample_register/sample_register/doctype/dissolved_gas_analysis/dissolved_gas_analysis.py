@@ -7,4 +7,6 @@ import frappe
 from frappe.model.document import Document
 
 class DissolvedGasAnalysis(Document):
-	pass
+	def validate(self):
+		# frappe.msgprint("hi")
+		print "hi"

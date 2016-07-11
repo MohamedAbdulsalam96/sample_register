@@ -20,6 +20,10 @@ class TestCertificate(Document):
 		print "\n\nhugrogen",dl_dga[0]["oxygen"],"\n\n"
 		print "dga_test_result",dga_test_result
 		print "dga_test_result ox",dga_test_result["oxygen"]
+		self.total_gas_contents = dga_test_result["total_gas_contents"]
+		self.total_dissolved_combustible_gases = dga_test_result["tdcg"]
+		self.tdcg_per_tgc = dga_test_result["tdcg_per_tgc"]
+
 		self.hydrogen = dga_test_result["hydrogen"]
 		self.oxygen = dga_test_result["oxygen"]
 		self.nitrogen = dga_test_result["nitrogen"]
@@ -32,3 +36,4 @@ class TestCertificate(Document):
 		self.propane = dga_test_result["propane"]
 		self.propylene = dga_test_result["propylene"]
 		self.save()
+		frappe.msgprint("Test Results updated")
