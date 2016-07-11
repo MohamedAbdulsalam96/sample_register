@@ -225,7 +225,7 @@ sample_register.JobCard = Class.extend({
 				"selectedData":selectedData
 			},	
 			callback: function(r) {
-			  // location.reload();			
+			  me.prepare_data();		
 			}
 		});
 	},

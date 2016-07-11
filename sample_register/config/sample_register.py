@@ -104,16 +104,16 @@ def get_data():
 					"description": _("Create Job Card and Set Priority, Standard Details"),
 				},
 				{
-					"type": "doctype",
-					"name": "TRB Session",
-					"description": _("Create/Update TRB"),
-				},
-				{
 					"type": "page",
 					"name": "jobcard",
 					"icon": "icon-sitemap",
 					"label": _("Job Card Submission"),
 					"description": _("Submit Job Card and Set Priority"),
+				},
+				{
+					"type": "doctype",
+					"name": "TRB Session",
+					"description": _("Create/Update TRB"),
 				},
 				{
 					"type": "report",
