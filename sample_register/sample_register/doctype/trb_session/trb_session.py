@@ -46,7 +46,7 @@ class TRBSession(Document):
 		self.set('trb_session_details', [])
 
 		list_of_lists=dl_list
-		print "dl_list",dl_list
+		# print "dl_list",dl_list
 		flattened = []
 		for sublist in list_of_lists:
 		    for val in sublist:
@@ -72,6 +72,8 @@ class TRBSession(Document):
 				nl.reported_ir = d.final_result
 				nl.test_type = d.test_type
 				nl.result_status = d.result_status
+				nl.priority = d.priority
+
 
 	def get_details_from_child_table(self):
 		get_items = []

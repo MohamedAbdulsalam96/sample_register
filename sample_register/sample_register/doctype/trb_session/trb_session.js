@@ -71,8 +71,6 @@ frappe.ui.form.on("TRB Session", {
 
 		frappe.call({
 			method: "get_details_from_child_table",
-			type: "GET",
-			async:false,
 			doc: frm.doc,
 			callback: function(r){
 				if(r.message.get_items){   
@@ -81,7 +79,7 @@ frappe.ui.form.on("TRB Session", {
 					$('.frappe-control input:checkbox').removeAttr('checked');
 
 				    html=""
-				    html += '<div class="testCont"  style="max-height: 350px;overflow: auto;overflow-x: hidden;min-height:150px">'
+				    html += "<div class='testCont'  style='max-height: 350px;overflow: auto;overflow-x: hidden;min-height:150px'>"
 				    for (var i = 0; i<r.message.get_items.length; i=i+1) {
 				    	html += "<label style='font-weight: normal;'><input type='checkbox' class='select' id='_select' name='"
 				    	+r.message.get_items[i][0]
