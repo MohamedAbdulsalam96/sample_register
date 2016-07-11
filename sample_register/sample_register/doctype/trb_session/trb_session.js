@@ -76,19 +76,20 @@ frappe.ui.form.on("TRB Session", {
 			doc: frm.doc,
 			callback: function(r){
 				if(r.message.get_items){   
-				// console.log(r.message.get_items) 
+
+				console.log("get itemsssss",r.message.get_items) 
 					$('.frappe-control input:checkbox').removeAttr('checked');
 
 				    html=""
 				    html += '<div class="testCont"  style="max-height: 350px;overflow: auto;overflow-x: hidden;min-height:150px">'
 				    for (var i = 0; i<r.message.get_items.length; i=i+1) {
 				    	html += "<label style='font-weight: normal;'><input type='checkbox' class='select' id='_select' name='"
-				    	+r.message.get_items[i]["test_name"]
-				    	+"' value='"+r.message.get_items[i]["test_name"]+"'> "
-				    	+ r.message.get_items[i]["sample_id"] +" ("
-				    	+ r.message.get_items[i]["test_type"] +")"
-						r.message.get_items[i]["priority"] ? html += " ("
-						+ r.message.get_items[i]["priority"] +")":""
+				    	+r.message.get_items[i][0]
+				    	+"' value='"+r.message.get_items[i][0]+"'> "
+				    	+ r.message.get_items[i][1] +" ("
+				    	+ r.message.get_items[i][2] +")"
+						r.message.get_items[i][3] ? html += " ("
+						+ r.message.get_items[i][3] +")":""
 				    	html += "</label><br>"
 				    }
 				   	html += '</div>'	

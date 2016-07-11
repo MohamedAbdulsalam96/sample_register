@@ -74,8 +74,17 @@ class TRBSession(Document):
 				nl.result_status = d.result_status
 
 	def get_details_from_child_table(self):
+		get_items = []
+		X2 = []
+		for d in self.get('trb_session_details'):
+			print d.test_name
+			print d.sample_id
+			print d.test_type
+			X1=[d.test_name,d.sample_id,d.test_type, d.priority]
+			get_items.append(X1)
+
 		return {
-		"get_items": self.get('trb_session_details')
+		"get_items": get_items
 		}
 
 
