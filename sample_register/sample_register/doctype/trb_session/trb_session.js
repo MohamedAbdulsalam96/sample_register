@@ -33,6 +33,15 @@ frappe.ui.form.on("TRB Session", {
 			}
 		});
 	},
+	get_batch_entries: function(frm) {
+		return frappe.call({
+			method: "get_batch_entries",
+			doc: frm.doc,
+			callback: function(r, rt) {
+				frm.refresh()
+			}
+		});
+	},
 	update_sample_entry: function(frm){
 		return frappe.call({
 			method: "update_sample_entry",
