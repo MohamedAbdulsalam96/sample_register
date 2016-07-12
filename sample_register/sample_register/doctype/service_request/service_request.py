@@ -21,7 +21,7 @@ class ServiceRequest(Document):
 			so_date_unicode = frappe.db.get_value("Sales Order", self.sales_order, "order_end_date")
 			if so_date_unicode:
 				so_date = datetime.strptime(str(so_date_unicode), '%Y-%m-%d')
-				if so_date < datetime.strptime(str(self.wo_ref_date), '%Y-%m-%d') and so_date:
+				if so_date < datetime.strptime(str(self.sr_ref_date), '%Y-%m-%d') and so_date:
 					frappe.throw("Service Request Ref Date should be less than Sales Order End Date")
 
 	def check_contract_value(self):
