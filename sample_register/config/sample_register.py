@@ -113,7 +113,14 @@ def get_data():
 				{
 					"type": "doctype",
 					"name": "TRB Session",
-					"description": _("Create/Update TRB"),
+					"label": _("TRB Session - Create Batch"),
+					"description": _("Create TRB Session Batch"),
+				},
+				{
+					"type": "doctype",
+					"name": "TRB Session Batch",
+					"label": _("TRB Session - Update Batch"),
+					"description": _("Update TRB Session Batch"),
 				},
 				{
 					"type": "report",
