@@ -125,6 +125,9 @@ frappe.ui.form.on("Sample Entry Register", {
 		if(!frm.doc.date_of_collection || !frm.doc.date_of_receipt) {
 			frappe.throw("Please enter Date Of Collection & Date of Receipt")
 		}
+		if(!frm.doc.functional_location || !frm.doc.sample_taken_from || !frm.doc.equipment) {
+			frappe.throw("Code Designation, Equipment and Sample Take From are mandatory before submission.")
+		}
 	},
 	// Return query for getting order aginst specified customer
 	customer: function(frm) {

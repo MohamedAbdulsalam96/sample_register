@@ -8,5 +8,8 @@ from frappe.model.document import Document
 import datetime
 
 class WaterContentTest(Document):
+	def on_submit(self):
+		self.end_time = datetime.datetime.now()
+		
 	def before_submit(self):
 		self.end_time = datetime.datetime.now()
