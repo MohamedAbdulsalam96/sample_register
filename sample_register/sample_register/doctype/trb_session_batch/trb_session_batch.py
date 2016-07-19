@@ -113,7 +113,6 @@ class TRBSessionBatch(Document):
 		"get_items": get_items
 		}
 
-
 	def update_sample_entry(self):
 		for d in self.get('trb_session_details'):
 			entry_doc = frappe.get_doc(d.test_type, d.test_name)
@@ -122,28 +121,12 @@ class TRBSessionBatch(Document):
 				entry_doc.save()
 		frappe.msgprint("TRB Status updated")
 
-	def start_session(self,test_list):
-		trb_batch = frappe.new_doc("TRB Batch")
-		trb_batch.owner = frappe.session.user
-		trb_batch.test_type = self.test_type
-		trb_batch.save()
-		trb_batch_name = trb_batch.name
-		print "\n\ntrb batch",trb_batch.name
-		print "\n\ntrb_batch_name",trb_batch_name
+	def close_batch(self,test_list):
 		for d in self.get('trb_session_details'):
 			if d.test_name in test_list:
 				entry_doc = frappe.get_doc(d.test_type, d.test_name)
 				if entry_doc.docstatus == 0:
-					entry_doc.start_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-					entry_doc.trb_batch = trb_batch.name
-					entry_doc.lab_equipment_details = []
-					for de in self.get("lab_equipment_details"):
-						test_req={
-							"doctype": "Lab Equipment Details",
-							"item_code": de.item_code,
-							"fixed_asset_serial_number": de.fixed_asset_serial_number
-						}
-						entry_doc.append("lab_equipment_details",test_req)
-			# 		entry_doc.result_status = d.result_status
+					entry_doc.start_time = ""
+					entry_doc.trb_batch = ""
 					entry_doc.save()
-		frappe.msgprint("TRB Session created and Lab Equipment Details updated and assigned \nBatch: "+trb_batch_name)
+		frappe.msgprint("selected sample removed from TRB Batch")

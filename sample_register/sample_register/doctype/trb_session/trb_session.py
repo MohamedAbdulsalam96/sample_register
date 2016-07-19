@@ -35,7 +35,7 @@ class TRBSession(Document):
 			# 			from `tab{0}` where sample_id in 
 			# 			(select name from `tabSample Entry Register` where order_id='{1}')""".format(i,self.order),as_dict=1, debug=1)
 			dl = frappe.db.sql("""select name,job_card,final_result,result_status,sample_id, '{0}' as test_type, priority 
-						from `tab{0}` where docstatus = 0 and trb_batch is null order by priority""".format(i),as_dict=1, debug=1)
+						from `tab{0}` where docstatus = 0 and (trb_batch is null or trb_batch = '') order by priority""".format(i),as_dict=1, debug=1)
 		
 			#get TRB with Test Type filter
 			if dl:

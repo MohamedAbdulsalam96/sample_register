@@ -19,13 +19,7 @@ frappe.ui.form.on("TRB Session Batch", {
 		});
 	},
 	get_batch_entries: function(frm) {
-		return frappe.call({
-			method: "get_batch_entries",
-			doc: frm.doc,
-			callback: function(r, rt) {
-				frm.refresh()
-			}
-		});
+		get_batch_entries_function(frm)
 	},
 	update_sample_entry: function(frm){
 		return frappe.call({
@@ -36,7 +30,8 @@ frappe.ui.form.on("TRB Session Batch", {
 			}
 		})
 	},
-	start_session: function(frm) {
+	close_batch: function(frm) {
+		var me = this;
 		var d = new frappe.prompt([
 		    {'fieldname': 'test', 'fieldtype': 'HTML', 'label': 'test', 'reqd': 0},
 			],
@@ -49,13 +44,13 @@ frappe.ui.form.on("TRB Session Batch", {
 				});
 			console.log("test_list",test_list);
 		    frappe.call({
-					method: "start_session",
+					method: "close_batch",
 					doc: frm.doc,
 					 args: {
 					 	"test_list":test_list,
 					 },	
 					callback: function(r) {
-
+						get_batch_entries_function(frm)
 					}
 			});
 		},
@@ -93,6 +88,18 @@ frappe.ui.form.on("TRB Session Batch", {
 		});
 	},
 });
+
+get_batch_entries_function = function(frm){
+			return frappe.call({
+			method: "get_batch_entries",
+			doc: frm.doc,
+			callback: function(r, rt) {
+				frm.refresh()
+			}
+		});
+}
+
+
 
 sample_register.sample_register.TRBSession = frappe.ui.form.Controller.extend({
 	onload: function() {
