@@ -6,6 +6,8 @@ frappe.ui.form.on("TRB Session Batch", {
 
 	refresh: function(frm) {
 		frm.disable_save();
+		frappe.meta.get_docfield("Lab Equipment Details","item_code", cur_frm.doc.name).read_only = 1;
+		frappe.meta.get_docfield("Lab Equipment Details","fixed_asset_serial_number", cur_frm.doc.name).read_only = 1;
 	},
 	get_relevant_entries: function(frm) {
 		return frappe.call({

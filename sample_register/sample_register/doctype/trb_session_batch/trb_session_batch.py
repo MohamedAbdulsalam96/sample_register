@@ -8,24 +8,6 @@ from frappe.model.document import Document
 
 class TRBSessionBatch(Document):
 	def get_details(self):
-		# if (self.filter_based_on_date_of_receipt and (not self.from_date or not self.to_date)):
-		# 	frappe.throw("Please select From Date and To Date")
-		# if not self.order:
-		# 	frappe.throw("Please select Order")
-		# if not self.customer:
-		# 	frappe.throw("Please select Customer")
-		# if self.filter_based_on_date_of_receipt and self.from_date and self.to_date:
-		# 	condition = "and date_of_receipt>='"+self.from_date+"' and date_of_receipt<='"+self.to_date+"'"
-		# if self.show_job_card_created_entries:
-		# 	condition +="and job_card_status!='Not Available'"
-		# else:
-		# 	condition +="and job_card_status='Not Available'"
-
-		# dl = frappe.db.sql("""select name,customer,date_of_receipt, date_of_collection,job_card,functional_location,functional_location_code,
-		# 	equipment,equipment_make,serial_number,equipment_code,
-		# 	conservation_protection_system, sample_taken_from, oil_temperature, winding_temperature,
-		# 	remarks from `tabSample Entry Register` where order_id='%s' %s"""%(self.order, condition),as_dict=1, debug=1)
-
 		test_type = ["Water Content Test","Furan Content","Dissolved Gas Analysis"]
 		dl_list = []
 		for i in test_type:
@@ -53,25 +35,16 @@ class TRBSessionBatch(Document):
 
 		# for d in [d[0] for d in dl_list]:
 		for d in flattened:
-			if self.test_type:
-				if d.test_type == self.test_type:
-					nl = self.append('trb_session_details', {})
-					nl.sample_id = d.sample_id
-					nl.job_card = d.job_card
-					nl.test_name = d.name
-					nl.reported_ir = d.final_result
-					nl.test_type = d.test_type
-					nl.result_status = d.result_status
-					nl.priority = d.priority
-			else:
-				nl = self.append('trb_session_details', {})
-				nl.sample_id = d.sample_id
-				nl.job_card = d.job_card
-				nl.test_name = d.name
-				nl.reported_ir = d.final_result
-				nl.test_type = d.test_type
-				nl.result_status = d.result_status
-				nl.priority = d.priority
+			nl = self.append('trb_session_details', {})
+			nl.sample_id = d.sample_id
+			nl.job_card = d.job_card
+			nl.test_name = d.name
+			nl.reported_ir = d.final_result
+			nl.test_type = d.test_type
+			nl.result_status = d.result_status
+			nl.priority = d.priority
+
+
 
 
 	def get_batch_entries(self):
@@ -102,7 +75,29 @@ class TRBSessionBatch(Document):
 				nl.test_type = d.test_type
 				nl.result_status = d.result_status
 				nl.priority = d.priority
+		
+		for d in self.get('trb_session_details'):
+			print d.test_type
+			print d.test_name
+			dl = frappe.db.sql("""select start_time,tested_by 
+				from `tab{0}` where name = '{1}'""".format(d.test_type,d.test_name),as_dict=1, debug=1)
+			print dl[0]["start_time"]
+			self.start_time = dl[0]["start_time"]
+			self.tested_by = dl[0]["tested_by"]
 
+			dl = frappe.db.sql("""select item_code,fixed_asset_serial_number,item_name,calibration_status,next_calibration_date
+				   	from `tabLab Equipment Details` where parent = '{0}'""".format(d.test_name),as_dict=1, debug=1)
+			print "lab",dl
+		self.set('lab_equipment_details', [])
+
+		for d in dl:
+			print d
+			nl = self.append('lab_equipment_details', {})
+			print "item_code",nl.item_code
+			nl.item_code = d.item_code
+			nl.item_name = d.item_name
+			nl.fixed_asset_serial_number = d.fixed_asset_serial_number
+			nl.calibration_status = d.calibration_status	
 
 	def get_details_from_child_table(self):
 		get_items = []

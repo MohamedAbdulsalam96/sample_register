@@ -153,3 +153,4 @@ class TRBSession(Document):
 			# 		entry_doc.result_status = d.result_status
 					entry_doc.save()
 		frappe.msgprint("TRB Session created and Lab Equipment Details updated and assigned \nBatch: "+trb_batch_name)
+		frappe.msgprint("<a href='desk#Form/TRB Session Batch'>Click here to open TRB Session Batch</a>")
