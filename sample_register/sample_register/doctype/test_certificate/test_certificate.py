@@ -11,11 +11,9 @@ class TestCertificate(Document):
 		# dl2 = frappe.db.sql("""select avg(final_result) from `tabWater Content Test`
 		#  where sample_id = '{0}' and result_status = 'Accept'""".format(self.sample_id), as_list=1)
 		dl = frappe.db.get_value("Water Content Test",{"sample_id":self.sample_id, "result_status":"Accept"},"avg(final_result)")
-		self.water_content = dl;
-		# print "DLLLLLLLLLLLL",dl
+		self.water_content = dl*1
 		dl_dga = frappe.db.sql("""select * from `tabDissolved Gas Analysis`
 			where sample_id = '{0}' and result_status = 'Accept'""".format(self.sample_id), as_dict=1)
-		# print "DLLLLLLLLLLLL2",dl2
 		if dl_dga:
 			dga_test_result = dl_dga[0]
 			print "\n\nhugrogen",dl_dga[0]["oxygen"],"\n\n"
@@ -36,5 +34,36 @@ class TestCertificate(Document):
 			self.acetelene = dga_test_result["acetelene"]
 			self.propane = dga_test_result["propane"]
 			self.propylene = dga_test_result["propylene"]
-			self.save()
-		frappe.msgprint("Test Results updated")
+		
+		self.save()
+		frappe.msgprint("Test Certificate " +self.name+" is updated")
+		
+@frappe.whitelist()
+def create_test_certificate(sample_id,job_card):	
+	doc_sample_entry_register = frappe.get_doc("Sample Entry Register",sample_id)
+	doc_test_certificate = frappe.new_doc("Test Certificate")
+	doc_test_certificate.sample_id = sample_id
+	doc_test_certificate.customer = doc_sample_entry_register.customer
+	doc_test_certificate.code_designation = doc_sample_entry_register.functional_location
+	doc_test_certificate.equipment = doc_sample_entry_register.equipment
+	doc_test_certificate.type = doc_sample_entry_register.type
+	doc_test_certificate.weather_condition_during_sampling = doc_sample_entry_register.weather_condition_during_sampling
+	doc_test_certificate.date_of_receipt = doc_sample_entry_register.date_of_receipt
+	doc_test_certificate.date_of_collection = doc_sample_entry_register.date_of_collection
+	doc_test_certificate.condition_of_sample = doc_sample_entry_register.sample_condition
+	doc_test_certificate.drawn_by = doc_sample_entry_register.drawn_by
+	doc_test_certificate.drawn_from = doc_sample_entry_register.drawn_from
+	doc_test_certificate.placed_at = doc_sample_entry_register.placed_at
+	doc_test_certificate.cust_sample_id = doc_sample_entry_register.cust_sample_id
+	doc_test_certificate.designation = doc_sample_entry_register.designation
+	doc_test_certificate.work_order_no = doc_sample_entry_register.order_id
+	doc_test_certificate.serial_number = doc_sample_entry_register.serial_number
+	doc_test_certificate.model_no = doc_sample_entry_register.model_no
+	doc_test_certificate.equipment_make = doc_sample_entry_register.equipment_make
+	doc_test_certificate.customer_code = doc_sample_entry_register.customer
+	doc_test_certificate.technical_contact = doc_sample_entry_register.technical_contact
+	doc_test_certificate.technical_contact_details = doc_sample_entry_register.technical_contact_details
+	import datetime
+	doc_test_certificate.certificate_date = datetime.datetime.today()
+	doc_test_certificate.get_test_details()
+	doc_test_certificate.save()

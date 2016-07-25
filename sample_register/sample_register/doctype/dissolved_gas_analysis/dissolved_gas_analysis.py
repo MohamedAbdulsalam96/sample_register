@@ -56,4 +56,5 @@ class DissolvedGasAnalysis(Document):
 				status = False
 		if status == True:
 			frappe.db.set_value("Job Card Creation", self.job_card, "status", "Accept")
+			frappe.db.set_value("Sample Entry Register", self.sample_id, "job_card_trb_status", "Accept")
 

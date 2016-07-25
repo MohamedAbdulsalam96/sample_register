@@ -103,6 +103,7 @@ cur_frm.cscript.refresh = function(doc, cdt, cdn) {
 		}
 	}
 
+
 frappe.ui.form.on("Sample Entry Register", {
 	refresh: function(frm) {
 		if(frm.doc.docstatus===0) {
@@ -118,6 +119,18 @@ frappe.ui.form.on("Sample Entry Register", {
 					}
 				})
 			}, "icon-download", "btn-default")
+		}
+		if(frm.doc.docstatus == 1 && frm.doc.job_card_trb_status == "Accept") {
+		cur_frm.add_custom_button(__("Create Test Certificate"),
+			function() {
+				frappe.call({
+						method:"sample_register.sample_register.doctype.test_certificate.test_certificate.create_test_certificate",
+						args:{"sample_id": frm.doc.name, "job_card": frm.doc.job_card },
+						callback: function(r) {
+							
+						}
+					});
+			})
 		}
 	},
 
