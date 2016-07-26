@@ -19,8 +19,14 @@ cur_frm.fields_dict.lab_equipment_details.grid.get_field("fixed_asset_serial_num
 		}
 	}
 }
+cur_frm.cscript.trb_session_details_on_form_rendered = function(doc, cdt, cdn){   
+    cur_frm.get_field("trb_session_details").grid.docfields[7].hidden = true;
+	cur_frm.get_field("trb_session_details").grid.docfields[8].hidden = true;
+	cur_frm.get_field("trb_session_details").grid.docfields[10].hidden = true;
+	cur_frm.get_field("trb_session_details").grid.docfields[11].hidden = true;
+ 
+}
 frappe.ui.form.on("TRB Session", {
-
 	refresh: function(frm) {
 		frm.disable_save();
 	},
@@ -38,7 +44,9 @@ frappe.ui.form.on("TRB Session", {
 			method: "get_batch_entries",
 			doc: frm.doc,
 			callback: function(r, rt) {
+
 				frm.refresh()
+
 			}
 		});
 	},

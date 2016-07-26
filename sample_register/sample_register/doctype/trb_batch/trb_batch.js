@@ -3,6 +3,6 @@
 
 frappe.ui.form.on('TRB Batch', {
 	refresh: function(frm) {
-
+		
 	}
 });
