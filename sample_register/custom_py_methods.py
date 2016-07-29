@@ -71,7 +71,7 @@ def activity_log(doc, method):
 
 	if (doc.probability != doc.old_probability) or (doc.probability and not doc.old_probability):
 		doc.old_probability = doc.probability
-		probability_comm = """<b>Probability:</b> """ + str(doc.probability) + "%"
+		probability_comm = "<b>Probability:</b> " + str(doc.probability) + str("%")
 
 	if reason_comm or stage_comm or probability_comm:
 		comment = """<p>{0}</p> <p>{1}</p> <p>{2}</p>""".format(" ".join(reason_comm), stage_comm, probability_comm)
