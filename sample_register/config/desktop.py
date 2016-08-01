@@ -9,5 +9,11 @@ def get_data():
 			"icon": "icon-book",
 			"type": "module",
 			"label": _("Back Office")
+		},
+		"Lab Operation": {
+			"color": "#1abc9c",
+			"icon": "icon-book",
+			"type": "module",
+			"label": _("Lab Operation")
 		}
 	}

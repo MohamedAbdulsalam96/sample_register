@@ -120,7 +120,7 @@ frappe.ui.form.on("Sample Entry Register", {
 				})
 			}, "icon-download", "btn-default")
 		}
-		if(frm.doc.docstatus == 1 && frm.doc.job_card_trb_status == "Accept") {
+		if(frm.doc.docstatus == 1 && frm.doc.job_card_trb_status == "Accept" && frm.doc.test_certificate_status != "Created") {
 		cur_frm.add_custom_button(__("Create Test Certificate"),
 			function() {
 				frappe.call({

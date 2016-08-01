@@ -67,3 +67,4 @@ def create_test_certificate(sample_id,job_card):
 	doc_test_certificate.certificate_date = datetime.datetime.today()
 	doc_test_certificate.get_test_details()
 	doc_test_certificate.save()
+	frappe.db.set_value("Sample Entry Register", sample_id, "test_certificate_status", "Created")
