@@ -58,3 +58,13 @@ class WaterContentTest(Document):
 		
 	def before_submit(self):
 		self.end_time = datetime.datetime.now()
+
+	def validate(self):
+		if self.bottle_number:
+			dl_dga = frappe.db.sql("""select container_id from `tabContainer Details`\
+				where parent = '{0}'""".format(self.sample_id), as_list=1)
+			b =[e[0] for e in dl_dga]
+			if self.bottle_number in b:
+				pass
+			else:
+				frappe.msgprint("Please check bottle number {0} with container id entered in Sample Register Entry: {1}.".format(self.bottle_number,self.sample_id))

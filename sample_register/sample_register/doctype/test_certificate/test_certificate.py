@@ -11,7 +11,8 @@ class TestCertificate(Document):
 		# dl2 = frappe.db.sql("""select avg(final_result) from `tabWater Content Test`
 		#  where sample_id = '{0}' and result_status = 'Accept'""".format(self.sample_id), as_list=1)
 		dl = frappe.db.get_value("Water Content Test",{"sample_id":self.sample_id, "result_status":"Accept"},"avg(final_result)")
-		self.water_content = dl*1
+		if dl:
+			self.water_content = dl*1
 		dl_dga = frappe.db.sql("""select * from `tabDissolved Gas Analysis`
 			where sample_id = '{0}' and result_status = 'Accept'""".format(self.sample_id), as_dict=1)
 		if dl_dga:

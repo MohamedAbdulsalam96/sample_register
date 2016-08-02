@@ -58,3 +58,12 @@ class DissolvedGasAnalysis(Document):
 			frappe.db.set_value("Job Card Creation", self.job_card, "status", "Accept")
 			frappe.db.set_value("Sample Entry Register", self.sample_id, "job_card_trb_status", "Accept")
 
+	def validate(self):
+		dl_dga = frappe.db.sql("""select container_id from `tabContainer Details`\
+			where parent = '{0}'""".format(self.sample_id), as_list=1)
+		b =[e[0] for e in dl_dga]
+		if self.bottle_number:
+			if self.bottle_number in b:
+				pass
+			else:
+				frappe.msgprint("Please check bottle number {0} with container id entered in Sample Register Entry: {1}.".format(self.bottle_number,self.sample_id))

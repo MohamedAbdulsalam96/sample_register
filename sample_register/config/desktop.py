@@ -11,7 +11,7 @@ def get_data():
 			"label": _("Back Office")
 		},
 		"Lab Operation": {
-			"color": "#1abc9c",
+			"color": "#3498db",
 			"icon": "icon-book",
 			"type": "module",
 			"label": _("Lab Operation")

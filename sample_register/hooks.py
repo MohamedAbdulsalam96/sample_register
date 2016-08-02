@@ -8,7 +8,7 @@ app_description = "Detail Information of collected samples."
 app_icon = "fa-book"
 app_color = "grey"
 app_email = "sambhaji.k@indictranstech.com"
-app_version = "0.0.1"
+app_version = "3.5.1"
 
 # Includes in <head>
 # ------------------
@@ -116,7 +116,7 @@ doc_events = {
 scheduler_events = {
 	"daily": [
 		"sample_register.sample_register.doctype.fixed_asset_serial_number.fixed_asset_serial_number.change_calibration_status"
-	]
+	]	
 }
 # 	"daily": [
 # 		"sample_register.tasks.daily"
