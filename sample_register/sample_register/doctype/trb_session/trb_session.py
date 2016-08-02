@@ -182,8 +182,7 @@ class TRBSession(Document):
 			if d.test_name in test_list:
 				entry_doc = frappe.get_doc(d.test_type, d.test_name)
 				if entry_doc.docstatus == 0:
-					print "\n\nin entrrrrrrrrrrrrrr"
-					entry_doc.start_run_two = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+					entry_doc.start_time_run_2 = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 					entry_doc.save()
 		frappe.msgprint("TRB Session Run Two is started")
 		frappe.msgprint("<a href='desk#Form/TRB Session Batch'>Click here to open TRB Session Batch</a>")
