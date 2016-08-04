@@ -12,7 +12,7 @@ def get_data():
 		},
 		"Lab Operation": {
 			"color": "#3498db",
-			"icon": "icon-book",
+			"icon": "icon-list-alt ",
 			"type": "module",
 			"label": _("Lab Operation")
 		}
