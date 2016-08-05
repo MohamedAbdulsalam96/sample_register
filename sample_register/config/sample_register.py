@@ -85,6 +85,12 @@ def get_data():
 					"name": "Test",
 					"description":_("Test Master"),
 				},
+				{
+					"type": "doctype",
+					"name": "Standard Operating Procedure",
+					"label": _("Standard Operating Procedure"),
+					"description": _("create Standard Operating Procedure")
+				},
 			]
 		},
 		{
@@ -110,67 +116,6 @@ def get_data():
 					"label": _("Job Card Submission"),
 					"description": _("Submit Job Card and Set Priority"),
 				},
-				{
-					"type": "doctype",
-					"name": "TRB Session",
-					"label": _("TRB Session - Create Batch"),
-					"description": _("Create TRB Session Batch"),
-				},
-				{
-					"type": "doctype",
-					"name": "TRB Session Batch",
-					"label": _("TRB Session - Update Batch"),
-					"description": _("Update TRB Session Batch"),
-				},
-				{
-					"type": "report",
-					"name":"TRB Session Report",
-					"doctype": "Job Card Creation",
-					"is_query_report": True,
-				},
-				{
-					"type": "doctype",
-					"name": "Standard Operating Procedure",
-					"label": _("Standard Operating Procedure"),
-					"description": _("create Standard Operating Procedure")
-				},
 			]
 		},
-		{
-			"label": _("Test Result Book"),
-			"icon": "icon-star",
-			"items": [
-				{
-					"type": "doctype",
-					"name": "Water Content Test",
-					"description": _("Water Content Test"),
-				},
-				{
-					"type": "doctype",
-					"name": "Neutralisation Value Test",
-					"description": _(" Neutralisation Value Test"),
-				},
-				{
-					"type": "doctype",
-					"name": "Flash point by Penskey Martin",
-					"description": _(" Flash point by Penskey Martin"),
-				},
-				{
-					"type": "doctype",
-					"name": "Interfacial Tension Test",
-					"description": _("Interfacial Tension Test"),
-				},
-				{
-					"type": "doctype",
-					"name": "Furan Content",
-					"description": _("Furan Content Test"),
-				},
-				{
-					"type": "doctype",
-					"name": "Dissolved Gas Analysis",
-					"description": _("Dissolved Gas Analysis"),
-				},
-			]
-		},
-
 	]
