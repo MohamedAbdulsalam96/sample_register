@@ -34,7 +34,7 @@ class TRBSession(Document):
 			# dl = frappe.db.sql("""select name,job_card,final_result,result_status,sample_id, '{0}' as test_type 
 			# 			from `tab{0}` where sample_id in 
 			# 			(select name from `tabSample Entry Register` where order_id='{1}')""".format(i,self.order),as_dict=1, debug=1)
-			dl = frappe.db.sql("""select name,job_card,final_result,result_status,sample_id, '{0}' as test_type, priority 
+			dl = frappe.db.sql("""select name,job_card,final_result,result_status,sample_id, '{0}' as test_type, priority, standards 
 						from `tab{0}` where docstatus = 0 and (trb_batch is null or trb_batch = '') order by priority""".format(i),as_dict=1, debug=1)
 		
 			#get TRB with Test Type filter
@@ -64,6 +64,7 @@ class TRBSession(Document):
 					nl.test_type = d.test_type
 					nl.result_status = d.result_status
 					nl.priority = d.priority
+					nl.standards = d.standards
 			else:
 				nl = self.append('trb_session_details', {})
 				nl.sample_id = d.sample_id
@@ -73,6 +74,7 @@ class TRBSession(Document):
 				nl.test_type = d.test_type
 				nl.result_status = d.result_status
 				nl.priority = d.priority
+				nl.standards = d.standards
 
 	def get_entry_for_run_two(self):
 		test_type = ["Water Content Test","Furan Content","Dissolved Gas Analysis"]
@@ -113,6 +115,7 @@ class TRBSession(Document):
 					nl.test_type = d.test_type
 					nl.result_status = d.result_status
 					nl.priority = d.priority
+					nl.standards = d.standards
 			else:
 				nl = self.append('trb_session_details', {})
 				nl.sample_id = d.sample_id
@@ -122,6 +125,7 @@ class TRBSession(Document):
 				nl.test_type = d.test_type
 				nl.result_status = d.result_status
 				nl.priority = d.priority
+				nl.standards = d.standards
 
 	def get_batch_entries(self):
 		test_type = ["Water Content Test","Furan Content","Dissolved Gas Analysis"]
@@ -151,6 +155,7 @@ class TRBSession(Document):
 				nl.test_type = d.test_type
 				nl.result_status = d.result_status
 				nl.priority = d.priority
+				nl.standards = d.standards
 
 
 	def get_details_from_child_table(self):
@@ -160,7 +165,7 @@ class TRBSession(Document):
 			print d.test_name
 			print d.sample_id
 			print d.test_type
-			X1=[d.test_name,d.sample_id,d.test_type, d.priority]
+			X1=[d.test_name,d.sample_id,d.test_type, d.priority, d.standards]
 			get_items.append(X1)
 
 		return {

@@ -30,7 +30,7 @@ frappe.ui.form.on("TRB Session", {
 	refresh: function(frm) {
 		frm.disable_save();
 	},
-	get_relevant_entries: function(frm) {
+	test_type: function(frm) {
 		return frappe.call({
 			method: "get_details",
 			doc: frm.doc,
@@ -116,6 +116,8 @@ frappe.ui.form.on("TRB Session", {
 				    	+ r.message.get_items[i][2] +")"
 						r.message.get_items[i][3] ? html += " ("
 						+ r.message.get_items[i][3] +")":""
+						r.message.get_items[i][4] ? html += " ("
+						+ r.message.get_items[i][4] +")":""
 				    	html += "</label><br>"
 				    }
 				   	html += '</div>'	
