@@ -5,6 +5,17 @@ frappe.ui.form.on('Dissolved Gas Analysis', {
 	refresh: function(frm) {
 
 	},
+	onload: function(frm){
+		if(frm.doc.gase_analysis_run1.length <3){
+			var gases = ["O2","N2","CO2","H2","CO","CH4",
+						"C2H6","C2H4","C2H2","C3H8","C3H6"];
+			$.each(gases, function(i, d) {
+                var row = frappe.model.add_child(cur_frm.doc, "Dissolved Gas Analysis Gases Details", "gase_analysis_run1");
+                row.gas = d;
+            })
+            refresh_field("gase_analysis_run1");
+		}
+	},
 	validate: function(frm){
 		var total_con_gas=0;
 		var con_gas_length=0;
