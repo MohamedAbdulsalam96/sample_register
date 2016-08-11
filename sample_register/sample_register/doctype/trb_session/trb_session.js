@@ -27,6 +27,9 @@ cur_frm.cscript.trb_session_details_on_form_rendered = function(doc, cdt, cdn){
  
 }
 frappe.ui.form.on("TRB Session", {
+	onload: function(frm) {
+		cur_frm.set_value("test_type","Select")
+	},
 	refresh: function(frm) {
 		frm.disable_save();
 	},
@@ -71,6 +74,9 @@ frappe.ui.form.on("TRB Session", {
 		})
 	},
 	start_session: function(frm) {
+		if(frm.doc.lab_equipment_details.length < 1){
+			frappe.throw("Please select Lab Equipment");
+		}
 		var d = new frappe.prompt([
 		    {'fieldname': 'test', 'fieldtype': 'HTML', 'label': 'test', 'reqd': 0},
 			],

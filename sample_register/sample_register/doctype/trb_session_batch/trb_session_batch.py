@@ -130,3 +130,8 @@ class TRBSessionBatch(Document):
 					entry_doc.trb_batch = ""
 					entry_doc.save()
 		frappe.msgprint("selected sample removed from TRB Batch")
+
+	def get_last_batch(self):
+		last_batch = frappe.db.sql("""select name from `tabTRB Batch` order by creation desc limit 1""", debug=1)
+		batch = last_batch[0][0]
+		return batch
