@@ -8,7 +8,7 @@ from frappe.model.document import Document
 from frappe.model.mapper import get_mapped_doc
 from frappe.utils import flt, getdate, nowdate,now_datetime
 from frappe.model.naming import make_autoname
-
+from sample_register.sample_register.doctype.test_certificate.test_certificate import create_test_certificate
 
 class JobCardCreation(Document):
 	def autoname(self):
@@ -17,6 +17,10 @@ class JobCardCreation(Document):
 
 	def validate(self):
 		self.check_sample_status_if_sample_id_changed()
+
+	def before_update_after_submit(self):
+		if self.status == "Accept":
+			create_test_certificate(self.sample_id,self.name)
 
 	def before_insert(self):
 		self.check_sample_status()

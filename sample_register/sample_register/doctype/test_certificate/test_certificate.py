@@ -42,7 +42,12 @@ class TestCertificate(Document):
 @frappe.whitelist()
 def create_test_certificate(sample_id,job_card):	
 	doc_sample_entry_register = frappe.get_doc("Sample Entry Register",sample_id)
-	doc_test_certificate = frappe.new_doc("Test Certificate")
+	doc_job_card = frappe.get_doc("Job Card Creation",job_card)
+	if doc_sample_entry_register.test_certificate:
+		doc_test_certificate = frappe.get_doc("Test Certificate",doc_sample_entry_register.test_certificate)
+	else:
+		doc_test_certificate = frappe.new_doc("Test Certificate")
+
 	doc_test_certificate.sample_id = sample_id
 	doc_test_certificate.customer = doc_sample_entry_register.customer
 	doc_test_certificate.code_designation = doc_sample_entry_register.functional_location
@@ -67,7 +72,6 @@ def create_test_certificate(sample_id,job_card):
 	import datetime
 	doc_test_certificate.certificate_date = datetime.datetime.today()
 	doc_test_certificate.get_test_details()
-	doc_job_card = frappe.get_doc("Job Card Creation",job_card)
 	doc_test_certificate.observations_from_oil_screening_test = doc_job_card.observations_from_oil_screening_test
 	doc_test_certificate.observation_from_dissolved_gas_analysis = doc_job_card.observation_from_dissolved_gas_analysis
 	doc_test_certificate.next_test_due_on = doc_job_card.next_test_due_on
@@ -75,5 +79,8 @@ def create_test_certificate(sample_id,job_card):
 	doc_test_certificate.overall_recommendation = doc_job_card.overall_recommendation
 	doc_test_certificate.trufil_remarks = doc_job_card.trufil_remarks
 	doc_test_certificate.save()
+
+	frappe.db.set_value("Job Card Creation", job_card, "test_certificate",doc_test_certificate.name)
 	frappe.db.set_value("Sample Entry Register", sample_id, "test_certificate_status", "Created")
+	frappe.db.set_value("Sample Entry Register", sample_id, "test_certificate", doc_test_certificate.name)
 
