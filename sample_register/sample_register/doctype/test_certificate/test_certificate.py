@@ -78,6 +78,7 @@ def create_test_certificate(sample_id,job_card):
 	doc_test_certificate.observation_from_furan_analysis = doc_job_card.observation_from_furan_analysis
 	doc_test_certificate.overall_recommendation = doc_job_card.overall_recommendation
 	doc_test_certificate.trufil_remarks = doc_job_card.trufil_remarks
+	
 	doc_test_certificate.save()
 
 	frappe.db.set_value("Job Card Creation", job_card, "test_certificate",doc_test_certificate.name)

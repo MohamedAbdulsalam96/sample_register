@@ -48,5 +48,10 @@ frappe.ui.form.on('Water Content Test', {
 
 		}
 
-	}
+	},
+	before_submit: function(frm) {
+		if(!frm.doc.standard_operating_procedure || !frm.doc.bottle_number) {
+			frappe.throw("Please enter Bottle Number & Standard Operating Procedure")
+		}
+	},
 });

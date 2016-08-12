@@ -7,13 +7,22 @@ frappe.ui.form.on('Dissolved Gas Analysis', {
 	},
 	onload: function(frm){
 		if(frm.doc.gase_analysis_run1.length <3){
-			var gases = ["O2","N2","CO2","H2","CO","CH4",
-						"C2H6","C2H4","C2H2","C3H8","C3H6"];
-			$.each(gases, function(i, d) {
+			var gases = { "gases" :["O2","N2","CO2","H2","CO","CH4",
+						"C2H6","C2H4","C2H2","C3H8","C3H6"], 
+						"gas_name": ["Oxygen","Nitrogen","Carbon","Hydrogen"," Carbon Monoxide","Methane",
+						"Ethane","Ethylene","Acetelene","Propane","Propylene"]}
+
+			$.each(gases["gases"], function(i, d) {
                 var row = frappe.model.add_child(cur_frm.doc, "Dissolved Gas Analysis Gases Details", "gase_analysis_run1");
-                row.gas = d;
+                row.gas = gases["gases"][i];
+                row.gas_name = gases["gas_name"][i];
             })
             refresh_field("gase_analysis_run1");
+		}
+	},
+	before_submit: function(frm) {
+		if(!frm.doc.standard_operating_procedure || !frm.doc.bottle_number) {
+			frappe.throw("Please enter Bottle Number & Standard Operating Procedure")
 		}
 	},
 	validate: function(frm){

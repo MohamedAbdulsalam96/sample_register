@@ -22,6 +22,10 @@ class SampleEntryRegister(Document):
 		if self.order_id:
 			self.check_total_sample_count()
 
+	def before_submit(self):
+		if not self.container_details:
+			frappe.throw("Please select Container Details")
+
 	def validate_container_id(self):
 		container_id = []
 		for d in self.get("container_details"):
