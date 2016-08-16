@@ -1,17 +1,24 @@
-<table class="table table-bordered table-condensed" id="header-fixed" style="margin-bottom: 0px;">
-    <thead>
-      <tr>
-        <td align="center" width="13%"><b>Sample ID</b></td>
-        <td align="center" width="12%"><b>Test Type</b></td>
-        <td align="center" width="12%"><b>Test Name</b></td>
-        <td align="center" width="12%"><b>Job Card</b></td>
-        <td align="center" width="12%"><b>Priority</b></td>
+   
+<br>
+<table class="table table-bordered table-condensed">
+        <tr>
+        <th width="13%">
+             <p align="center" style="margin:2px"><b>Sample ID</b></p>
+        </th>
+        <th align="center" width="12%">
+             <p align="center" style="margin:2px"><b>Test Type</b></p> 
+        </th>
+        <th align="center" width="12%">
+            <p align="center" style="margin:2px"><b>Test Name</b></p> 
+        </th>
+        <th align="center" width="12%">
+            <p align="center" style="margin:2px"><b>Job Card</b></p> 
+        </th>
+        <th align="center" width="12%">
+            <p align="center" style="margin:2px"><b>Priority</b></p> 
+        </th>
 
       </tr>
-    </thead>
-</table>    
-<br>
-<table class="table table-bordered table-condensed" id="header-fixed">
     {% if (data.length) { %}
         {% for(var i=0, l=data.length; i < l; i++) { %}
                 <tr>
