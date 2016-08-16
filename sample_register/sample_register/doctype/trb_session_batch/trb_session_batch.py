@@ -75,6 +75,8 @@ class TRBSessionBatch(Document):
 				nl.test_type = d.test_type
 				nl.result_status = d.result_status
 				nl.priority = d.priority
+
+		print "\n\nflattened",flattened
 		
 		for d in self.get('trb_session_details'):
 			print d.test_type
@@ -98,6 +100,8 @@ class TRBSessionBatch(Document):
 			nl.item_name = d.item_name
 			nl.fixed_asset_serial_number = d.fixed_asset_serial_number
 			nl.calibration_status = d.calibration_status	
+
+		return flattened
 
 	def get_details_from_child_table(self):
 		get_items = []

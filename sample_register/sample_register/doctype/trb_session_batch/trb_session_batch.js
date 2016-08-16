@@ -18,15 +18,15 @@ frappe.ui.form.on("TRB Session Batch", {
 		frappe.meta.get_docfield("Lab Equipment Details","item_code", cur_frm.doc.name).read_only = 1;
 		frappe.meta.get_docfield("Lab Equipment Details","fixed_asset_serial_number", cur_frm.doc.name).read_only = 1;
 	},
-	get_relevant_entries: function(frm) {
-		return frappe.call({
-			method: "get_details",
-			doc: frm.doc,
-			callback: function(r, rt) {
-				frm.refresh()
-			}
-		});
-	},
+	// get_relevant_entries: function(frm) {
+	// 	return frappe.call({
+	// 		method: "get_details",
+	// 		doc: frm.doc,
+	// 		callback: function(r, rt) {
+	// 			frm.refresh()
+	// 		}
+	// 	});
+	// },
 	trb_batch: function(frm) {
 		get_batch_entries_function(frm)
 	},
@@ -106,7 +106,11 @@ get_batch_entries_function = function(frm){
 			method: "get_batch_entries",
 			doc: frm.doc,
 			callback: function(r, rt) {
-				frm.refresh()
+				console.log("\nf",r.message)
+				html = frappe.render_template("html_table",{"data":r.message})
+				console.log("\nhtml",html)
+				frm.refresh();
+				$(cur_frm.fields_dict.html_table.wrapper).html(html)
 			}
 		});
 }

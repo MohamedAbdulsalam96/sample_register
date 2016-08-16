@@ -1,0 +1,31 @@
+<table class="table table-bordered table-condensed" id="header-fixed" style="margin-bottom: 0px;">
+    <thead>
+      <tr>
+        <td align="center" width="13%"><b>Sample ID</b></td>
+        <td align="center" width="12%"><b>Test Type</b></td>
+        <td align="center" width="12%"><b>Test Name</b></td>
+        <td align="center" width="12%"><b>Job Card</b></td>
+        <td align="center" width="12%"><b>Priority</b></td>
+
+      </tr>
+    </thead>
+</table>    
+<br>
+<table class="table table-bordered table-condensed" id="header-fixed">
+    {% if (data.length) { %}
+        {% for(var i=0, l=data.length; i < l; i++) { %}
+                <tr>
+                    <td align="center" width="13%">{{ data[i].sample_id  }}</td>
+                    <td align="center" width="12.1%">{{ data[i].test_type }}</td>
+                    <td align="center" width="12.1%">
+                        <a href="desk#Form/{{ data[i].test_type }}/{{ data[i].name }}">
+                            {{ data[i].name }} </a>
+
+                        </td>
+                    <td align="center" width="12.1%">{{ data[i].job_card }}</td>
+                    <td align="center" width="12.1%">{{ data[i].priority }}</td>
+
+                </tr>
+        {% } %}
+    {% } %} 
+</table>
