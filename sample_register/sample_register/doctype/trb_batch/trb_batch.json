@@ -28,7 +28,7 @@
    "precision": "", 
    "print_hide": 0, 
    "print_hide_if_no_value": 0, 
-   "read_only": 0, 
+   "read_only": 1, 
    "report_hide": 0, 
    "reqd": 0, 
    "search_index": 0, 
@@ -174,7 +174,7 @@
  "issingle": 0, 
  "istable": 0, 
  "max_attachments": 0, 
- "modified": "2016-07-12 11:04:17.966022", 
+ "modified": "2016-08-16 19:00:04.033829", 
  "modified_by": "Administrator", 
  "module": "Sample Register", 
  "name": "TRB Batch", 
@@ -204,6 +204,7 @@
  ], 
  "read_only": 1, 
  "read_only_onload": 0, 
+ "search_fields": "owner,creation", 
  "sort_field": "modified", 
  "sort_order": "DESC"
 }
