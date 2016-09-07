@@ -8,14 +8,20 @@
         <th align="center" width="12%">
              <p align="center" style="margin:2px"><b>Test Type</b></p> 
         </th>
-        <th align="center" width="12%">
+        <th align="center" width="10%">
             <p align="center" style="margin:2px"><b>Test Name</b></p> 
         </th>
-        <th align="center" width="12%">
+        <th align="center" width="10%">
             <p align="center" style="margin:2px"><b>Job Card</b></p> 
         </th>
-        <th align="center" width="12%">
+        <th align="center" width="10%">
             <p align="center" style="margin:2px"><b>Priority</b></p> 
+        </th>
+        <th align="center" width="7%">
+            <p align="center" style="margin:2px"><b>Type</b></p> 
+        </th>
+        <th align="center" width="7%">
+            <p align="center" style="margin:2px"><b>Verify</b></p> 
         </th>
 
       </tr>
@@ -31,7 +37,12 @@
                         </td>
                     <td align="center" width="12.1%">{{ data[i].job_card }}</td>
                     <td align="center" width="12.1%">{{ data[i].priority }}</td>
-
+                    <td align="center" width="12.1%">{{ data[i].test_type_purpose }}</td>
+                    <td class="verify" align="center" width="12.1%">
+                    {% if (data[i].test_type_purpose != "Verify") { %}
+                        <button class="add-comment btn btn-default btn-sm" test-name="{{ data[i].name }}" test-type="{{ data[i].test_type  }}">Verify</button   >
+                    </td>
+                    {% } %} 
                 </tr>
         {% } %}
     {% } %} 

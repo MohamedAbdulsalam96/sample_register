@@ -10,11 +10,11 @@ class TestCertificate(Document):
 	def get_test_details(self):
 		# dl2 = frappe.db.sql("""select avg(final_result) from `tabWater Content Test`
 		#  where sample_id = '{0}' and result_status = 'Accept'""".format(self.sample_id), as_list=1)
-		dl = frappe.db.get_value("Water Content Test",{"sample_id":self.sample_id, "result_status":"Accept"},"avg(final_result)")
+		dl = frappe.db.get_value("Water Content Test",{"sample_id":self.sample_id, "result_status":"Accept", "test_type" : "Sample"},"avg(final_result)")
 		if dl:
 			self.water_content = dl*1
 		dl_dga = frappe.db.sql("""select * from `tabDissolved Gas Analysis`
-			where sample_id = '{0}' and result_status = 'Accept'""".format(self.sample_id), as_dict=1)
+			where sample_id = '{0}' and result_status = 'Accept' and test_type = 'Sample'""".format(self.sample_id), as_dict=1)
 		if dl_dga:
 			dga_test_result = dl_dga[0]
 			print "\n\nhugrogen",dl_dga[0]["oxygen"],"\n\n"

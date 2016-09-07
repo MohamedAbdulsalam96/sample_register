@@ -25,6 +25,12 @@ class JobCardCreation(Document):
 	def before_insert(self):
 		self.check_sample_status()
 
+	def view_result(self):
+
+		abc = frappe.render_template("sample_register/sample_register/doctype/job_card_creation/view_result.html",{"context":"aa","aa":"aaaa"}, is_path=True)
+		# abc = frappe.render_template("templates/includes/cart/view_result.html",{"context":"aa","aa":"aaaa"})
+		frappe.msgprint(abc)
+
 	def before_submit(self):
 		sample_entry_doc=frappe.get_doc("Sample Entry Register",self.sample_id)
 		if(not sample_entry_doc.date_of_collection) or (not sample_entry_doc.date_of_receipt):

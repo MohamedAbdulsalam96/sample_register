@@ -51,7 +51,7 @@ class TRBSessionBatch(Document):
 		test_type = ["Water Content Test","Furan Content","Dissolved Gas Analysis"]
 		dl_list = []
 		for i in test_type:
-			dl = frappe.db.sql("""select name,job_card,final_result,result_status,sample_id, '{0}' as test_type, priority 
+			dl = frappe.db.sql("""select name,job_card,final_result,result_status,sample_id, test_type as test_type_purpose, '{0}' as test_type, priority 
 						from `tab{0}` where docstatus = 0 and trb_batch = '{1}' order by priority""".format(i, self.trb_batch),as_dict=1, debug=1)
 		
 			if dl:
@@ -75,6 +75,7 @@ class TRBSessionBatch(Document):
 				nl.test_type = d.test_type
 				nl.result_status = d.result_status
 				nl.priority = d.priority
+				nl.test_type_purpose = d.test_type_purpose
 
 		print "\n\nflattened",flattened
 		
@@ -139,3 +140,14 @@ class TRBSessionBatch(Document):
 		last_batch = frappe.db.sql("""select name from `tabTRB Batch` order by creation desc limit 1""", debug=1)
 		batch = last_batch[0][0]
 		return batch
+
+	def create_verify_entry(self,test_name,test_type=None):
+		test_doc = frappe.get_doc(test_type, test_name)
+		new_test_doc = frappe.copy_doc(test_doc)
+		new_test_doc.test_type = "Verify"
+		new_test_doc.save()
+		frappe.msgprint("New "+ test_type + " "+new_test_doc.name+" is created")
+		# new_test_doc.posting_date = "2013-02-14"
+		# last_batch = frappe.db.sql("""select name from `tabTRB Batch` order by creation desc limit 1""", debug=1)
+		# batch = last_batch[0][0]
+		return "batch"

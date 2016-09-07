@@ -12,6 +12,7 @@ frappe.ui.form.on("TRB Session Batch", {
 				cur_frm.set_value("trb_batch",r.message)
 			}
 		});
+
 	},
 	refresh: function(frm) {
 		frm.disable_save();
@@ -111,11 +112,29 @@ get_batch_entries_function = function(frm){
 				console.log("\nhtml",html)
 				frm.refresh();
 				$(cur_frm.fields_dict.html_table.wrapper).html(html)
+
+				add_verify_entry($(cur_frm.fields_dict.html_table.wrapper))
+
+
 			}
 		});
+},
+add_verify_entry = function(wrapper){		
+	wrapper.find($('.add-comment').click(function() {
+		frappe.call({
+			method: "create_verify_entry",
+			doc: cur_frm.doc,
+			args: {
+				test_name: $(this).attr("test-name"),
+				test_type: $(this).attr("test-type"),
+			},
+			callback: function(r, rt) {
+				get_batch_entries_function(cur_frm)
+			}
+		});
+    }))
+		
 }
-
-
 
 sample_register.sample_register.TRBSession = frappe.ui.form.Controller.extend({
 	onload: function() {
