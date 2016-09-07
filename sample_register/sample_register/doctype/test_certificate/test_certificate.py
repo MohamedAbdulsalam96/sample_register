@@ -38,6 +38,7 @@ class TestCertificate(Document):
 		
 		self.save()
 		frappe.msgprint("Test Certificate " +self.name+" is updated")
+		return {"water_content":dl}
 		
 @frappe.whitelist()
 def create_test_certificate(sample_id,job_card):	

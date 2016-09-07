@@ -26,9 +26,16 @@ class JobCardCreation(Document):
 		self.check_sample_status()
 
 	def view_result(self):
-
-		abc = frappe.render_template("sample_register/sample_register/doctype/job_card_creation/view_result.html",{"context":"aa","aa":"aaaa"}, is_path=True)
 		# abc = frappe.render_template("templates/includes/cart/view_result.html",{"context":"aa","aa":"aaaa"})
+		water_content = frappe.db.get_value("Water Content Test",{"sample_id":self.sample_id, "result_status":"Accept", "test_type" : "Sample"},"avg(final_result)")
+		if water_content:
+			water_content = '%.2f'%water_content
+		dl_dga = frappe.db.sql("""select * from `tabDissolved Gas Analysis`
+					where sample_id = '{0}' and result_status = 'Accept' and test_type = 'Sample'""".format(self.sample_id), as_dict=1)
+		dga_test_result = {}
+		if dl_dga:
+			dga_test_result = dl_dga[0]
+		abc = frappe.render_template("sample_register/sample_register/doctype/job_card_creation/view_result.html",{"water_content":water_content,"dga_test_result":dga_test_result}, is_path=True)
 		frappe.msgprint(abc)
 
 	def before_submit(self):

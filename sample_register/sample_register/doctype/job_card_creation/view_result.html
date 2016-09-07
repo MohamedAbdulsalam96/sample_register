@@ -44,7 +44,8 @@
             <td>Dielectric Strength (BDV) at ##.# °C</td><td></td>
         </tr>
         <tr>
-            <td>Water Content</td><td></td>
+            <td>Water Content</td>
+            <td> {{ water_content or '' }} ppm</td>
         </tr>    
         <tr>
             <td>Neutralization Value</td><td></td>
@@ -72,64 +73,84 @@
 <table class="table table-bordered">
 	<tbody>
         <tr>
-            <td>Date of Test</td><td></td>
+            <td>Date of Test</td>
+            <td>{{ dga_test_result.start_date or '' }} </td>
         </tr>
         <tr>
-            <td>Purchase Order</td><td></td>
+            <td>Purchase Order</td>
+            <td></td>
         </tr>
         <tr>
-            <td>Service Request</td><td></td>
+            <td>Service Request</td>
+            <td></td>
         </tr>
         <tr>
-            <td>TRB ID</td><td></td>
+            <td>TRB ID</td>
+            <td>{{ dga_test_result.name or '' }}</td>
         </tr>
         <tr>
-            <td>Test Conducted By</td><td></td>
+            <td>Test Conducted By</td>
+            <td>{{ dga_test_result.tested_by or '' }}</td>
         </tr>
         <tr>
-            <td>Limiting Value Standard</td><td></td>
+            <td>Limiting Value Standard</td>
+            <td></td>
         </tr>
         <tr>
-            <td>Total Gas Content (TGC)</td><td></td>
+            <td>Total Gas Content (TGC)</td>
+            <td>{{ dga_test_result.total_gas_contents or '' }}</td>
         </tr>
         <tr>
-            <td>Total Dissolved Gas Content (TDCG)</td><td></td>
+            <td>Total Dissolved Gas Content (TDCG)</td>
+            <td>{{ dga_test_result.tdcg or '' }}</td>
         </tr>
         <tr>
-            <td>TDCG/TCD</td><td></td>
+            <td>TDCG/TCD</td>
+            <td>{{ dga_test_result.tdcg_per_tgc or '' }}</td>
         </tr>
         <tr>
-            <td>Oxygen</td><td></td>
+            <td>Oxygen</td>
+            <td>{{ "{0:.5f}".format(dga_test_result.oxygen) or '' }} ppm</td>
         </tr>
         <tr>
-            <td>Nitrogen</td><td></td>
+            <td>Nitrogen</td>
+            <td>{{ "{0:.5f}".format((dga_test_result.nitrogen)) or '' }} ppm</td>
         </tr>
         <tr>
-            <td>Carbon Dioxide</td><td></td>
+            <td>Carbon Dioxide</td>
+            <td>{{ "{0:.5f}".format(dga_test_result.carbon) or '' }} ppm</td>
         </tr>
         <tr>
-            <td>Hydrogen</td><td></td>
+            <td>Hydrogen</td>
+            <td>{{ "{0:.5f}".format(dga_test_result.hydrogen) or '' }} ppm</td>
         </tr>
         <tr>
-            <td>Carbon Monoxide</td><td></td>
+            <td>Carbon Monoxide</td>
+            <td></td>
         </tr>
         <tr>
-            <td>Methane</td><td></td>
+            <td>Methane</td>
+            <td>{{ "{0:.5f}".format(dga_test_result.methane) or '' }} ppm</td>
         </tr>    
         <tr>
-            <td>Ethane</td><td></td>
+            <td>Ethane</td>
+            <td>{{ "{0:.5f}".format(dga_test_result.ethane) or '' }} ppm</td>
         </tr>    
          <tr>
-            <td>Ethylene</td><td></td>
+            <td>Ethylene</td>
+            <td>{{ "{0:.5f}".format((dga_test_result.ethylene))  or '' }} ppm</td>
         </tr>    
          <tr>
-            <td>Acetylene</td><td></td>
+            <td>Acetylene</td>
+            <td>{{ "{0:.5f}".format(dga_test_result.acetelene) or '' }} ppm</td>
         </tr>    
          <tr>
-            <td>Propane</td><td></td>
+            <td>Propane</td>
+            <td>{{ "{0:.5f}".format(dga_test_result.propane) or '' }} ppm</td>
         </tr>    
          <tr>
-            <td>Propylene</td><td></td>
+            <td>Propylene</td>
+            <td>{{ "{0:.5f}".format(dga_test_result.propylene) or '' }} ppm</td>
         </tr>    
    
                                      
