@@ -35,6 +35,7 @@ class JobCardCreation(Document):
 		dga_test_result = {}
 		if dl_dga:
 			dga_test_result = dl_dga[0]
+		print "/n/n/ndga",dl_dga
 		abc = frappe.render_template("sample_register/sample_register/doctype/job_card_creation/view_result.html",{"water_content":water_content,"dga_test_result":dga_test_result}, is_path=True)
 		frappe.msgprint(abc)
 

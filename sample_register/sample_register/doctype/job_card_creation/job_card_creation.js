@@ -42,13 +42,13 @@ frappe.ui.form.on("Job Card Creation", {
 		});
 	},
 	view_result: function(frm) {
-		return frappe.call({
+		frappe.call({
 			method: "view_result",
 			doc: frm.doc,
 			callback: function(r, rt){
 				frm.refresh()
 			}
-		});
+		})
 	},
 })
 
