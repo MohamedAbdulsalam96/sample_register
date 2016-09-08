@@ -33,10 +33,13 @@ class JobCardCreation(Document):
 		dl_dga = frappe.db.sql("""select * from `tabDissolved Gas Analysis`
 					where sample_id = '{0}' and result_status = 'Accept' and test_type = 'Sample'""".format(self.sample_id), as_dict=1)
 		dga_test_result = {}
-		if dl_dga:
+		print "/n/ndl",dl_dga
+		if len(dl_dga)>0:
 			dga_test_result = dl_dga[0]
-		print "/n/n/ndga",dl_dga
-		abc = frappe.render_template("sample_register/sample_register/doctype/job_card_creation/view_result.html",{"water_content":water_content,"dga_test_result":dga_test_result}, is_path=True)
+			print "/n/n/ndga",dl_dga
+			abc = frappe.render_template("sample_register/sample_register/doctype/job_card_creation/view_result_with_dga.html",{"water_content":water_content,"dga_test_result":dga_test_result}, is_path=True)
+		else:
+			abc = frappe.render_template("sample_register/sample_register/doctype/job_card_creation/view_result.html",{"water_content":water_content,"dga_test_result":dga_test_result}, is_path=True)
 		frappe.msgprint(abc)
 
 	def before_submit(self):
