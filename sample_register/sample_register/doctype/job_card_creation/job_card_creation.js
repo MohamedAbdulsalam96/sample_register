@@ -50,6 +50,15 @@ frappe.ui.form.on("Job Card Creation", {
 			}
 		})
 	},
+	view_detail_result: function(frm) {
+		frappe.call({
+			method: "view_detail_result",
+			doc: frm.doc,
+			callback: function(r, rt){
+				frm.refresh()
+			}
+		})
+	},
 })
 
 

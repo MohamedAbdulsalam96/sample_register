@@ -1,68 +1,88 @@
-<p><b> Job Card View for Technical Manager Approval</b></p>
-
+<p><b> Job Card View for Technical Head Approval</b></p>
 <p><b> Oil Screening Tests</b></p>
 <table class="table table-bordered">
     <tbody>
         <tr>
             <td>Date of Test</td><td></td>
+            <td></td><td></td>
+
         </tr>
         <tr>
             <td>Purchase Order</td><td></td>
+            <td></td><td></td>
         </tr>
         <tr>
             <td>Service Request</td><td></td>
+            <td></td><td></td>
         </tr>
         <tr>
             <td>TRB ID</td><td></td>
+            <td></td><td></td>
         </tr>
         <tr>
             <td>Test Conducted By</td><td></td>
+            <td></td><td></td>
         </tr>
         <tr>
             <td>Limiting Value Standard</td><td></td>
+            <td></td><td></td>
         </tr>
         <tr>
             <td>Visual Appearance</td><td></td>
+            <td></td><td></td>
         </tr>
         <tr>
             <td>Density at ##.# °C</td><td></td>
+            <td></td><td></td>
         </tr>
         <tr>
             <td>Dielectric Dissipation Factor at 50 Hz</td><td></td>
+            <td></td><td></td>
         </tr>
         <tr>
             <td>Specific Resistivity at ##.# °C (RT)</td><td></td>
+            <td></td><td></td>
         </tr>
         <tr>
             <td>Specific Resistivity at ##.# °C</td><td></td>
+            <td></td><td></td>
         </tr>
         <tr>
             <td>Interfacial Tension at ##.# °C</td><td></td>
+            <td></td><td></td>
         </tr>
         <tr>
             <td>Dielectric Strength (BDV) at ##.# °C (RT)</td><td></td>
+            <td></td><td></td>
         </tr>
         <tr>
             <td>Dielectric Strength (BDV) at ##.# °C</td><td></td>
+            <td></td><td></td>
         </tr>
         <tr>
             <td>Water Content</td>
             <td> {{ water_content or "" }} ppm</td>
+            <td></td><td></td>
         </tr>    
         <tr>
             <td>Neutralization Value</td><td></td>
+            <td></td><td></td>
         </tr>    
          <tr>
             <td>Sediments and Precipitable Sludge</td><td>g</td>
+            <td></td><td></td>
         </tr>    
          <tr>
             <td>Flash Point</td><td>###.# °C</td>
+            <td></td><td></td>
         </tr>    
          <tr>
             <td>Kinematic Viscosity at ##.# °C</td><td>##.## cst </td>
+            <td></td><td></td>
         </tr>    
          <tr>
             <td>Pour Point</td><td>###.# °C</td>
+            <td></td><td></td>
         </tr>    
    
                                      
@@ -76,83 +96,172 @@
 	<tbody>
         <tr>
             <td>Date of Test</td>
-            <td></td>
+            <td>
+            {{ frappe.utils.get_datetime(dga_test_result.start_time).strftime('%d %b %Y') or "" }}
+            </td>
+            <td>    
+            {{ frappe.utils.get_datetime(dga_test_result_last1.start_time).strftime('%d %b %Y') or "" }}</td>
+            <td>{{ frappe.utils.get_datetime(dga_test_result_last2.start_time).strftime('%d %b %Y') or "" }}</td>
         </tr>
         <tr>
             <td>Purchase Order</td>
             <td></td>
+            <td></td><td></td>
         </tr>
         <tr>
             <td>Service Request</td>
             <td></td>
+            <td></td><td></td>
         </tr>
+        
         <tr>
             <td>TRB ID</td>
             <td>{{ dga_test_result.name or "" }}</td>
+            <td>{{ dga_test_result_last1.name or "" }}</td>
+            <td>{{ dga_test_result_last2.name or "" }}</td>
         </tr>
         <tr>
             <td>Test Conducted By</td>
             <td>{{ dga_test_result.tested_by or "" }}</td>
+            <td>{{ dga_test_result_last1.tested_by or "" }}</td>
+            <td>{{ dga_test_result_last2.tested_by or "" }}</td>
         </tr>
         <tr>
             <td>Limiting Value Standard</td>
             <td></td>
+            <td></td><td></td>
         </tr>
         <tr>
             <td>Total Gas Content (TGC)</td>
             <td>{{ dga_test_result.total_gas_contents or "" }}</td>
+            <td>{{ dga_test_result_last1.total_gas_contents or "" }}</td>
+            <td>{{ dga_test_result_last2.total_gas_contents or "" }}</td>
         </tr>
         <tr>
             <td>Total Dissolved Gas Content (TDCG)</td>
             <td>{{ dga_test_result.tdcg or "" }}</td>
+            <td>{{ dga_test_result_last1.tdcg or "" }}</td>
+            <td>{{ dga_test_result_last2.tdcg or "" }}</td>
         </tr>
         <tr>
             <td>TDCG/TCD</td>
             <td>{{ dga_test_result.tdcg_per_tgc or "" }}</td>
+            <td>{{ dga_test_result_last1.tdcg_per_tgc or "" }}</td>
+            <td>
+            {% if dga_test_result_last2 -%}
+            {{ dga_test_result_last2.tdcg_per_tgc or "" }}
+            {%- endif %}
+        </td>
         </tr>
         <tr>
             <td>Oxygen</td>
             <td>{{ "{0:.5f}".format(dga_test_result.oxygen) or "" }} ppm</td>
+            <td>{{ "{0:.5f}".format(dga_test_result_last1.oxygen) or "" }} ppm</td>
+            <td>
+            {% if dga_test_result_last2 -%}
+            {{ "{0:.5f}".format(dga_test_result_last2.oxygen) or "" }} ppm
+            {%- endif %}
+            </td>
         </tr>
         <tr>
             <td>Nitrogen</td>
             <td>{{ "{0:.5f}".format((dga_test_result.nitrogen)) or "" }} ppm</td>
+            <td>
+            {% if dga_test_result_last2 -%}
+            {{ "{0:.5f}".format((dga_test_result_last1.nitrogen)) or "" }} 
+            {%- endif %}ppm
+            </td>
+            <td>
+            {% if dga_test_result_last2 -%}
+            {{ "{0:.5f}".format((dga_test_result_last2.nitrogen)) or "" }}
+            {%- endif %}ppm
+            </td>            
         </tr>
         <tr>
             <td>Carbon Dioxide</td>
             <td>{{ "{0:.5f}".format(dga_test_result.carbon) or "" }} ppm</td>
+            <td>{{ "{0:.5f}".format(dga_test_result_last1.carbon) or "" }} ppm</td>            
+            <td>
+            {% if dga_test_result_last2 -%}
+            {{ "{0:.5f}".format(dga_test_result_last2.carbon) or "" }}
+            {%- endif %}ppm
+            </td>
         </tr>
         <tr>
             <td>Hydrogen</td>
             <td>{{ "{0:.5f}".format(dga_test_result.hydrogen) or "" }} ppm</td>
+            <td>{{ "{0:.5f}".format(dga_test_result_last1.hydrogen) or "" }} ppm</td>
+            <td>
+            {% if dga_test_result_last2 -%}
+            {{ "{0:.5f}".format(dga_test_result_last2.hydrogen) or "" }}
+            {%- endif %}ppm
+            </td>
         </tr>
         <tr>
             <td>Carbon Monoxide</td>
-            <td></td>
+            <td> ppm</td>
+            <td> ppm</td>
+            <td> ppm</td>
         </tr>
         <tr>
             <td>Methane</td>
             <td>{{ "{0:.5f}".format(dga_test_result.methane) or "" }} ppm</td>
+            <td>{{ "{0:.5f}".format(dga_test_result_last1.methane) or "" }} ppm</td>
+            <td>
+            {% if dga_test_result_last2 -%}
+            {{ "{0:.5f}".format(dga_test_result_last2.methane) or "" }}
+            {%- endif %}ppm
+            </td>
         </tr>    
         <tr>
             <td>Ethane</td>
             <td>{{ "{0:.5f}".format(dga_test_result.ethane) or "" }} ppm</td>
+            <td>{{ "{0:.5f}".format(dga_test_result_last1.ethane) or "" }} ppm</td>
+            <td>
+            {% if dga_test_result_last2 -%}
+            {{ "{0:.5f}".format(dga_test_result_last2.ethane) or "" }}
+            {%- endif %}ppm
+            </td>
         </tr>    
          <tr>
             <td>Ethylene</td>
             <td>{{ "{0:.5f}".format((dga_test_result.ethylene))  or "" }} ppm</td>
+            <td>{{ "{0:.5f}".format((dga_test_result_last1.ethylene))  or "" }} ppm</td>
+            <td>
+            {% if dga_test_result_last2 -%}
+           {{ "{0:.5f}".format((dga_test_result_last2.ethylene))  or "" }}
+            {%- endif %}ppm
+            </td>
         </tr>    
          <tr>
             <td>Acetylene</td>
             <td>{{ "{0:.5f}".format(dga_test_result.acetelene) or "" }} ppm</td>
+            <td>{{ "{0:.5f}".format(dga_test_result_last1.acetelene) or "" }} ppm</td>
+            <td>
+            {% if dga_test_result_last2 -%}
+            {{ "{0:.5f}".format(dga_test_result_last2.acetelene) or "" }}            
+            {%- endif %}ppm
+            </td>
         </tr>    
          <tr>
             <td>Propane</td>
             <td>{{ "{0:.5f}".format(dga_test_result.propane) or "" }} ppm</td>
+            <td>{{ "{0:.5f}".format(dga_test_result_last1.propane) or "" }} ppm</td>
+            <td>
+            {% if dga_test_result_last2 -%}
+            {{ "{0:.5f}".format(dga_test_result_last2.propane) or "" }}            
+            {%- endif %}ppm
+            </td>
         </tr>    
          <tr>
             <td>Propylene</td>
             <td>{{ "{0:.5f}".format(dga_test_result.propylene) or "" }} ppm</td>
+            <td>{{ "{0:.5f}".format(dga_test_result_last1.propylene) or "" }} ppm</td>
+            <td>
+            {% if dga_test_result_last2 -%}
+            {{ "{0:.5f}".format(dga_test_result_last2.propylene) or "" }}            
+            {%- endif %}ppm
+            </td>
         </tr>    
    
                                      
@@ -164,39 +273,52 @@
     <tbody>
         <tr>
             <td>Date of Test</td><td></td>
+            <td></td><td></td>
         </tr>
         <tr>
             <td>Purchase Order</td><td></td>
+            <td></td><td></td>
         </tr>
         <tr>
             <td>Service Request</td><td></td>
+            <td></td><td></td>
         </tr>
         <tr>
             <td>TRB ID</td><td></td>
+            <td></td><td></td>
         </tr>
         <tr>
             <td>Test Conducted By</td><td></td>
+            <td></td><td></td>
         </tr>
         <tr>
             <td>Limiting Value Standard</td><td></td>
+            <td></td><td></td>
         </tr>
         <tr>
             <td>Total Furan Content in Oil</td><td> %</td>
+            <td> %</td><td> %</td>
         </tr>
         <tr>
             <td>5-hydroxymethyle 2-furaldehyde</td><td>µg/ kg</td>
+            <td>µg/ kg</td><td>µg/ kg</td>
         </tr>
         <tr>
             <td>2-furfurol (Furfuryl Alcohal)</td><td> µg/ kg</td>
+            <td>µg/ kg</td><td>µg/ kg</td>
         </tr>
         <tr>
             <td>2-furaldehyde</td><td> µg/ kg</td>
+            <td>µg/ kg</td><td>µg/ kg</td>
         </tr>
         <tr>
             <td>2-acetyle furan</td><td> µg/ kg</td>
+            <td>µg/ kg</td><td>µg/ kg</td>
+
         </tr>
         <tr>
             <td>5-methyle 2-furaldehyde</td><td> µg/ kg</td>
+            <td>µg/ kg</td><td>µg/ kg</td>
         </tr>
                                 
     </tbody>

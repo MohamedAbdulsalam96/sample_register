@@ -33,11 +33,47 @@ class JobCardCreation(Document):
 		dl_dga = frappe.db.sql("""select * from `tabDissolved Gas Analysis`
 					where sample_id = '{0}' and result_status = 'Accept' and test_type = 'Sample'""".format(self.sample_id), as_dict=1)
 		dga_test_result = {}
-		print "/n/ndl",dl_dga
+		# print "/n/ndl",dl_dga
 		if len(dl_dga)>0:
 			dga_test_result = dl_dga[0]
 			print "/n/n/ndga",dl_dga
 			abc = frappe.render_template("sample_register/sample_register/doctype/job_card_creation/view_result_with_dga.html",{"water_content":water_content,"dga_test_result":dga_test_result}, is_path=True)
+		else:
+			abc = frappe.render_template("sample_register/sample_register/doctype/job_card_creation/view_result.html",{"water_content":water_content,"dga_test_result":dga_test_result}, is_path=True)
+		frappe.msgprint(abc)
+
+	def view_detail_result(self):
+		# abc = frappe.render_template("templates/includes/cart/view_result.html",{"context":"aa","aa":"aaaa"})
+
+		#Current Job Card Test
+		water_content = frappe.db.get_value("Water Content Test",{"sample_id":self.sample_id, "result_status":"Accept", "test_type" : "Sample"},"avg(final_result)")
+		if water_content:
+			water_content = '%.2f'%water_content
+
+		dl_dga = frappe.db.sql("""select * from `tabDissolved Gas Analysis`
+					where sample_id = '{0}' and result_status = 'Accept' and test_type = 'Sample'""".format(self.sample_id), as_dict=1)
+		dga_test_result = {}
+
+		#last Test Result
+		last1 = frappe.db.sql("""select name,sample_id,creation from `tabJob Card Creation` where functional_location='{0}' order by creation desc limit 1,2""".format(self.functional_location), as_dict=1)
+
+		dl_dga_last1 = frappe.db.sql("""select * from `tabDissolved Gas Analysis`
+			where sample_id = '{0}' and result_status = 'Accept' and test_type = 'Sample'""".format(last1[0]["sample_id"]), as_dict=1)
+
+		#last second
+		last2 = frappe.db.sql("""select name,sample_id,creation from `tabJob Card Creation` where functional_location='{0}' order by creation desc limit 2,3""".format(self.functional_location), as_dict=1)
+		# frappe.msgprint(last2[0]["sample_id"])
+		dl_dga_last2 = {}
+		if last2:
+			dl_dga_last2 = frappe.db.sql("""select * from `tabDissolved Gas Analysis`
+				where sample_id = '{0}' and result_status = 'Accept' and test_type = 'Sample'""".format(last2[0]["sample_id"]), as_dict=1)
+
+		if len(dl_dga)>0:
+			dga_test_result = dl_dga[0]
+			dga_test_result_last1 = dl_dga_last1[0] if (len(dl_dga_last1)>0) else   {}
+			dga_test_result_last2 = dl_dga_last2[0] if (len(dl_dga_last2)>0) else   {}
+			
+			abc = frappe.render_template("sample_register/sample_register/doctype/job_card_creation/view_detail_result_with_dga.html",{"water_content":water_content,"dga_test_result":dga_test_result,"dga_test_result_last1":dga_test_result_last1,"dga_test_result_last2":dga_test_result_last2}, is_path=True)
 		else:
 			abc = frappe.render_template("sample_register/sample_register/doctype/job_card_creation/view_result.html",{"water_content":water_content,"dga_test_result":dga_test_result}, is_path=True)
 		frappe.msgprint(abc)
