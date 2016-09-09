@@ -97,11 +97,11 @@
         <tr>
             <td>Date of Test</td>
             <td>
-            {{ frappe.utils.get_datetime(dga_test_result.start_time).strftime('%d %b %Y') or "" }}
+            {{ frappe.utils.get_datetime(dga_test_result.start_time).strftime("%d %b %Y") or "" }}
             </td>
             <td>    
-            {{ frappe.utils.get_datetime(dga_test_result_last1.start_time).strftime('%d %b %Y') or "" }}</td>
-            <td>{{ frappe.utils.get_datetime(dga_test_result_last2.start_time).strftime('%d %b %Y') or "" }}</td>
+            {{ frappe.utils.get_datetime(dga_test_result_last1.start_time).strftime("%d %b %Y") or "" }}</td>
+            <td>{{ frappe.utils.get_datetime(dga_test_result_last2.start_time).strftime("%d %b %Y") or "" }}</td>
         </tr>
         <tr>
             <td>Purchase Order</td>
