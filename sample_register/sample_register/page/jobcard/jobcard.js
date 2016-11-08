@@ -92,7 +92,7 @@ sample_register.JobCard = Class.extend({
 			function() { me.submit_job_card(); }, "icon-refresh")
 		// this.page.add_menu_item(__("Set Priority"), function() {me.set_priority_data();	}, true);
 		// this.page.add_menu_item(__("Set Standard"), function() {me.set_standards_data();	}, true);
-		// this.page.add_menu_item(__("Set Priority & Standard"), function() {me.set_sample_data();	}, true);
+		this.page.add_menu_item(__("Set Priority & Standard"), function() {me.set_sample_data();	}, true);
 		// this.page.add_menu_item(__("Submit Job Card"), function() {me.submit_job_card();	}, true);
 		this.page.add_menu_item(__("Refresh"), function() { location.reload(); }, true);
 	},
@@ -132,16 +132,17 @@ sample_register.JobCard = Class.extend({
 		],
 		function(values){
 		    var c = d.get_values();
-			var me = this;
+			var me2 = me;
 		     frappe.call({
-					method: "sample_register.sample_register.page.jobboard.jobboard.set_sample_data",
+					method: "sample_register.sample_register.page.jobcard.jobcard.set_priority_standard_in_jcc",
 					 args: {
 					 	"priority": c.priority,
 					 	"standards": c.standards,
 					 	"selectedData":selectedData
 					 },	
 					callback: function(r) {
-	  				  location.reload();				}
+		  				  me2.prepare_data();				
+		  				}
 				});
 
 		},

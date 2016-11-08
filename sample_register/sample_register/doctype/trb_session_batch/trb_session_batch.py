@@ -16,7 +16,7 @@ class TRBSessionBatch(Document):
 			# 			from `tab{0}` where sample_id in 
 			# 			(select name from `tabSample Entry Register` where order_id='{1}')""".format(i,self.order),as_dict=1, debug=1)
 			dl = frappe.db.sql("""select name,job_card,final_result,result_status,sample_id, '{0}' as test_type, priority 
-						from `tab{0}` where docstatus = 0 and trb_batch is null order by priority""".format(i),as_dict=1, debug=1)
+						from `tab{0}` where (docstatus in (0,1)) and trb_batch is null order by priority""".format(i),as_dict=1, debug=1)
 		
 			#get TRB with Test Type filter
 			if dl:
@@ -44,15 +44,12 @@ class TRBSessionBatch(Document):
 			nl.result_status = d.result_status
 			nl.priority = d.priority
 
-
-
-
 	def get_batch_entries(self):
 		test_type = ["Water Content Test","Furan Content","Dissolved Gas Analysis"]
 		dl_list = []
 		for i in test_type:
 			dl = frappe.db.sql("""select name,job_card,final_result,result_status,sample_id, test_type as test_type_purpose, '{0}' as test_type, priority 
-						from `tab{0}` where docstatus = 0 and trb_batch = '{1}' order by priority""".format(i, self.trb_batch),as_dict=1, debug=1)
+						from `tab{0}` where docstatus in (0,1) and trb_batch = '{1}' order by priority""".format(i, self.trb_batch),as_dict=1, debug=1)
 		
 			if dl:
 				dl_list.append(dl)

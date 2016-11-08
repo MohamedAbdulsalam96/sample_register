@@ -85,6 +85,25 @@ def set_sample_data(priority,standards,selectedData):
 			sample_entry_doc.save()
 
 @frappe.whitelist()
+def set_priority_standard_in_jcc(priority,standards,selectedData):
+	selectedData_json = json.loads(selectedData)
+	print "\nselected",selectedData_json
+	for r in selectedData_json:
+		if r.get("job_card"):
+			print "\n\njcc",r.get("job_card")
+			sample_entry_doc=frappe.get_doc("Job Card Creation",r.get("job_card"))
+			sample_entry_doc.priority = priority
+			sample_entry_doc.standards = standards
+			sample_entry_doc.save()
+
+	for r in selectedData_json:
+		if r.get("sampleid"):
+			sample_entry_doc=frappe.get_doc("Sample Entry Register",r.get("sampleid"))
+			sample_entry_doc.priority = priority
+			sample_entry_doc.standards = standards
+			sample_entry_doc.save()
+
+@frappe.whitelist()
 def set_priority_data(priority,selectedData):
 	selectedData_json = json.loads(selectedData)
 	for r in selectedData_json:
