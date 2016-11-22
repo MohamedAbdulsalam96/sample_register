@@ -3,7 +3,7 @@ from frappe.utils import flt,rounded,money_in_words
 from frappe.model.mapper import get_mapped_doc
 from frappe import throw, _
 from erpnext.hr.doctype.process_payroll.process_payroll import get_month_details
-
+import datetime
 
 @frappe.whitelist()
 def send_inspection_mail(item, inspector, name, verifier):
@@ -90,15 +90,20 @@ def add_actual_closure_date(doc, method):
 	if(doc.items):
 		if(doc.items[0].prevdoc_docname):
 			quote=frappe.get_doc("Quotation",doc.items[0].prevdoc_docname)
-			quote.add_comment("Comment", "Quotation is closed against Sales Order: {0}".format(doc.name))
-
+			quote_link="<a href='desk#Form/Sales Order/"+doc.name+"'>"+doc.name+" </a>"
+			quote.add_comment("Comment", "Quotation is closed against Sales Order: {0}".format(quote_link))
+			quote.closer_date = datetime.datetime.now()
+			quote.save()
+			
 @frappe.whitelist()
 def add_actual_closure_date_in_quote(doc, method):
 	if(doc.items):
 		if(doc.items[0].prevdoc_docname):
 			quote=frappe.get_doc("Opportunity",doc.items[0].prevdoc_docname)
-			quote.add_comment("Comment", "Opportunity is closed against Quotation: {0}".format(doc.name))
-
+			quote_link="<a href='desk#Form/Quotation/"+doc.name+"'>"+doc.name+" </a>"
+			quote.add_comment("Comment", "Opportunity is closed against Quotation: {0}".format(quote_link))
+			quote.closer_date = datetime.datetime.now()
+			quote.save()
 
 @frappe.whitelist()
 def quot_workflow(doc, method):
