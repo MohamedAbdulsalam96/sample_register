@@ -86,6 +86,21 @@ def check_attachment(doc, method):
 		frappe.throw("Please Attach File")
 
 @frappe.whitelist()
+def add_actual_closure_date(doc, method):
+	if(doc.items):
+		if(doc.items[0].prevdoc_docname):
+			quote=frappe.get_doc("Quotation",doc.items[0].prevdoc_docname)
+			quote.add_comment("Comment", "Quotation is closed against Sales Order: {0}".format(doc.name))
+
+@frappe.whitelist()
+def add_actual_closure_date_in_quote(doc, method):
+	if(doc.items):
+		if(doc.items[0].prevdoc_docname):
+			quote=frappe.get_doc("Opportunity",doc.items[0].prevdoc_docname)
+			quote.add_comment("Comment", "Opportunity is closed against Quotation: {0}".format(doc.name))
+
+
+@frappe.whitelist()
 def quot_workflow(doc, method):
 	user = str(frappe.session['user'])
 	user_role =  frappe.get_roles(user)

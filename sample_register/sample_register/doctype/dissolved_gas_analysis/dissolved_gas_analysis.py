@@ -26,7 +26,7 @@ class DissolvedGasAnalysis(Document):
 	def set_job_card_status(self):
 		if not self.result_status:
 			frappe.throw("Please Enter status")
-		if self.result_status and (self.result_status == "Accept" or self.result_status == "Reject"):
+		if self.result_status and (self.result_status == "Accept" or self.result_status == "Reject" or self.result_status == "Select"):
 			print "\n\nin validate"
 			cond = """select name from `tabJob Card Creation Test Details` where parent = '%s'"""%(self.job_card)
 			if self.test_group:
@@ -59,6 +59,7 @@ class DissolvedGasAnalysis(Document):
 			frappe.db.set_value("Sample Entry Register", self.sample_id, "job_card_trb_status", "Accept")
 
 	def validate(self):
+		self.set_job_card_status()
 		dl_dga = frappe.db.sql("""select container_id from `tabContainer Details`\
 			where parent = '{0}'""".format(self.sample_id), as_list=1)
 		b =[e[0] for e in dl_dga]

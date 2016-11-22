@@ -9,9 +9,13 @@ def get_items(sales_order):
 	print "\n\nser_____",sales_order
 	dl = frappe.db.sql("""select sales_order from `tabService Request` where name='{0}'""".format(sales_order),as_list=1)
 	so = dl[0][0]
+
 	return {
 	"get_items": frappe.db.sql("""select soi.item_code, i.test_type from `tabSales Order Item` soi, `tabItem` i
-				where soi.item_code=i.item_code and soi.parent = '{0}'""".format(so), as_list=1)
+				where soi.item_code=i.item_code and soi.parent = '{0}'
+				UNION ALL select pi.item_code,item.test_type from `tabPacked Item` pi, tabItem item where pi.item_code=item.item_code and 
+				pi.parent = '{0}'
+				""".format(so), as_list=1)
 	}
 
 @frappe.whitelist()

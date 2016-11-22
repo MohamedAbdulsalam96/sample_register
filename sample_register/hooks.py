@@ -92,10 +92,12 @@ doc_events = {
 		"validate": "sample_register.custom_py_methods.calculate_tot_amount"
 	},
 	"Sales Order": {
-		"on_submit": "sample_register.custom_py_methods.check_attachment"
+		"on_submit": "sample_register.custom_py_methods.check_attachment",
+		"after_insert": "sample_register.custom_py_methods.add_actual_closure_date"
 	},
 	"Quotation": {
-		"on_submit": "sample_register.custom_py_methods.quot_workflow"
+		"on_submit": "sample_register.custom_py_methods.quot_workflow",
+		"after_insert": "sample_register.custom_py_methods.add_actual_closure_date_in_quote"
 	},
 	"Product Bundle": {
 		"on_trash": "sample_register.custom_py_methods.bundle_so_present"

@@ -11,7 +11,7 @@ class WaterContentTest(Document):
 	def set_job_card_status(self):
 		if not self.result_status:
 			frappe.throw("Please Enter status")
-		if self.result_status and (self.result_status == "Accept" or self.result_status == "Reject"):
+		if self.result_status and (self.result_status == "Accept" or self.result_status == "Reject" or self.result_status == "Select"):
 			cond = """select name from `tabJob Card Creation Test Details` where parent = '%s'"""%(self.job_card)
 			if self.test_group:
 				cond += """ and test_group = '%s'"""%(self.test_group)
@@ -60,6 +60,7 @@ class WaterContentTest(Document):
 		self.end_time = datetime.datetime.now()
 
 	def validate(self):
+		self.set_job_card_status()
 		if self.bottle_number:
 			dl_dga = frappe.db.sql("""select container_id from `tabContainer Details`\
 				where parent = '{0}'""".format(self.sample_id), as_list=1)
