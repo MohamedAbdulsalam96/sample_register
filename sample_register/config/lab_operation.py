@@ -33,6 +33,11 @@ def get_data():
 			"items": [
 				{
 					"type": "doctype",
+					"name": "Density Test",
+					"description": _("Density Test"),
+				},
+				{
+					"type": "doctype",
 					"name": "Water Content Test",
 					"description": _("Water Content Test"),
 				},

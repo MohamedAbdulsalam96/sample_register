@@ -8,7 +8,6 @@ from frappe.model.document import Document
 
 class InterfacialTension(Document):
 	def validate(self):
-		frappe.msgprint("Test Saved")
 		self.calculate_interfacial_tension()
 
 	def calculate_interfacial_tension(self):
@@ -27,5 +26,3 @@ class InterfacialTension(Document):
 		interfacial_tension = (ir*factor)/float(1000)
 		self.interfacial_tension = interfacial_tension
 		print "\n\ninterfacial_tension", interfacial_tension
-		frappe.msgprint(factor)
-		frappe.msgprint("in cit")
