@@ -48,7 +48,7 @@ class TRBSessionBatch(Document):
 		test_type = ["Water Content Test","Furan Content","Dissolved Gas Analysis"]
 		dl_list = []
 		for i in test_type:
-			dl = frappe.db.sql("""select name,job_card,final_result,result_status,sample_id, test_type as test_type_purpose, '{0}' as test_type, priority 
+			dl = frappe.db.sql("""select name,job_card,final_result,result_status,sample_id, test_type as test_type_purpose, '{0}' as test_type, docstatus, priority 
 						from `tab{0}` where docstatus in (0,1) and trb_batch = '{1}' order by priority""".format(i, self.trb_batch),as_dict=1, debug=1)
 		
 			if dl:

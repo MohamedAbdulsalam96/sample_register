@@ -39,7 +39,7 @@
                     <td align="center" width="12.1%">{{ data[i].priority }}</td>
                     <td align="center" width="12.1%">{{ data[i].test_type_purpose }}</td>
                     <td class="verify" align="center" width="12.1%">
-                    {% if (data[i].test_type_purpose != "Verify") { %}
+                    {% if (data[i].test_type_purpose != "Verify" && data[i].docstatus != 0) { %}
                         <button class="add-comment btn btn-default btn-sm" test-name="{{ data[i].name }}" test-type="{{ data[i].test_type  }}">Verify</button   >
                     </td>
                     {% } %} 
