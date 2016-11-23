@@ -13,9 +13,10 @@ cur_frm.fields_dict.lab_equipment_details.grid.get_field("fixed_asset_serial_num
 	var d  = locals[cdt][cdn];
 	if(d.item_code){
 		return {
-			filters: {
-                       "item_code": d.item_code
-               }
+			filters: [
+                       ['Fixed Asset Serial Number','item_code','=',d.item_code],
+                       ['Fixed Asset Serial Number','calibration_status','!=','Due for calibration']
+               ]
 		}
 	}
 }
