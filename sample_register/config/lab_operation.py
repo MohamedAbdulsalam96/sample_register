@@ -48,8 +48,8 @@ def get_data():
 				},
 				{
 					"type": "doctype",
-					"name": "Interfacial Tension Test",
-					"description": _("Interfacial Tension Test"),
+					"name": "Interfacial Tension",
+					"description": _("Interfacial Tension"),
 				},
 				{
 					"type": "doctype",

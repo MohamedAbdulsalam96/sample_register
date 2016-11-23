@@ -7,27 +7,27 @@ cur_frm.add_fetch('fixed_asset_serial_number', 'calibration_status', 'calibratio
 cur_frm.add_fetch('fixed_asset_serial_number', 'next_calibration_date', 'next_calibration_date');
 
 
-cur_frm.fields_dict.lab_equipment_details.grid.get_field("item_code").get_query = function(doc,cdt,cdn) {
-	var d  = locals[cdt][cdn];
-		return {
-			filters: {
-                       "is_asset_item": 1
-               }
-		}
-}
-cur_frm.fields_dict.lab_equipment_details.grid.get_field("fixed_asset_serial_number").get_query = function(doc,cdt,cdn) {
-	var d  = locals[cdt][cdn];
-	if(d.item_code){
-		return {
-			filters: {
-                       "item_code": d.item_code
-               }
-		}
-	}
-}
+// cur_frm.fields_dict.lab_equipment_details.grid.get_field("item_code").get_query = function(doc,cdt,cdn) {
+// 	var d  = locals[cdt][cdn];
+// 		return {
+// 			filters: {
+//                        "is_asset_item": 1
+//                }
+// 		}
+// }
+// cur_frm.fields_dict.lab_equipment_details.grid.get_field("fixed_asset_serial_number").get_query = function(doc,cdt,cdn) {
+// 	var d  = locals[cdt][cdn];
+// 	if(d.item_code){
+// 		return {
+// 			filters: {
+//                        "item_code": d.item_code
+//                }
+// 		}
+// 	}
+// }
 
-frappe.ui.form.on('Interfacial Tension test', {
-	refresh: function(frm) {
+// frappe.ui.form.on('Interfacial Tension test', {
+// 	refresh: function(frm) {
 
-	}
-});
+// 	}
+// });

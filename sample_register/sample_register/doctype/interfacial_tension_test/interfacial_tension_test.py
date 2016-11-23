@@ -7,4 +7,5 @@ import frappe
 from frappe.model.document import Document
 
 class InterfacialTensiontest(Document):
-	pass
+	def validate(self):
+		frappe.msgprint("Test Saved")
