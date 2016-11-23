@@ -8,7 +8,7 @@ from frappe.model.document import Document
 
 class DensityTest(Document):
 	def validate(self):
-		frappe.msgprint("Test Saved")
+		# frappe.msgprint("Test Saved")
 		self.calculate_result()
 
 	def calculate_result(self):
