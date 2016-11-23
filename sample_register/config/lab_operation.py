@@ -48,6 +48,16 @@ def get_data():
 				},
 				{
 					"type": "doctype",
+					"name": "Interfacial Tension",
+					"description": _("Interfacial Tension"),
+				},
+				{
+					"type": "doctype",
+					"name": "Dielectric Dissipation Factor",
+					"description": _("Dielectric Dissipation Factor Test"),
+				},
+				{
+					"type": "doctype",
 					"name": "Neutralisation Value Test",
 					"description": _(" Neutralisation Value Test"),
 				},
@@ -58,8 +68,8 @@ def get_data():
 				},
 				{
 					"type": "doctype",
-					"name": "Interfacial Tension",
-					"description": _("Interfacial Tension"),
+					"name": "Breakdown Voltage",
+					"description": _("Breakdown Voltage Test"),
 				},
 				{
 					"type": "doctype",
