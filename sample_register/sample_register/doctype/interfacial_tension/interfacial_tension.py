@@ -22,7 +22,7 @@ class InterfacialTension(Document):
 		density_of_oil = self.density_of_oil * (1 + 0.00065 * (self.temp_of_oil - 27))
 		factor = 0.725 +  math.sqrt( (0.01452*(10**5)*(ir/1000))/ ( self.circumference_of_ring\
 		 				* self.circumference_of_ring * (self.density_of_water-self.density_of_oil*27) ) +\
-		 				 0.04534 - (1.679/self.radius_ratio)  )
+		 				 0.04534 - (float(1.679)/float(self.radius_ratio)) )
 		interfacial_tension = (ir*factor)/float(1000)
 		self.interfacial_tension = interfacial_tension
 		print "\n\ninterfacial_tension", interfacial_tension
