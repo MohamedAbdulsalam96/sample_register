@@ -43,6 +43,11 @@ def get_data():
 				},
 				{
 					"type": "doctype",
+					"name": "Specific Resistivity",
+					"description": _("Specific Resistivity"),
+				},
+				{
+					"type": "doctype",
 					"name": "Neutralisation Value Test",
 					"description": _(" Neutralisation Value Test"),
 				},
