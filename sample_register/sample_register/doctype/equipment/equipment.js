@@ -6,3 +6,11 @@
 // Fetch customer code , manufactured by on selection of customer and equipmemt make on equipment master type
 cur_frm.add_fetch('customer','customer_code','customer_code');
 cur_frm.add_fetch('equipment_make','manufactured_by','manufactured_by');
+
+cur_frm.fields_dict['code_designation'].get_query = function(doc) {
+	return {
+		filters: {
+				"customer":doc.customer
+		}
+	}
+}

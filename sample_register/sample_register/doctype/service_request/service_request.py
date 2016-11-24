@@ -102,8 +102,8 @@ class ServiceRequest(Document):
 		assign_to = frappe.db.sql("""select owner from `tabToDo` where reference_name = '%s' """%(self.name))
 		if (not self.sales_order) and (not assign_to):
 			frappe.throw("Sales Order reference is not given please assign to someone");
-		if (not self.approved_status == "Approved") and (not "Sales Manager" in user_role):
-			frappe.throw("Only Sales Manager can Approved and submit this");
+		# if (not self.approved_status == "Approved") and (not "Sales Manager" in user_role):
+		# 	frappe.throw("Only Sales Manager can Approved and submit this");
 		else:
 			pass
 
