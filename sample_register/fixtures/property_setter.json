@@ -1,6 +1,19 @@
 [
  {
   "default_value": null, 
+  "doc_type": "Lead", 
+  "docstatus": 0, 
+  "doctype": "Property Setter", 
+  "doctype_or_field": "DocField", 
+  "field_name": "naming_series", 
+  "modified": "2016-11-22 17:40:18.250548", 
+  "name": "Lead-naming_series-options", 
+  "property": "options", 
+  "property_type": "Text", 
+  "value": "LEAD-"
+ }, 
+ {
+  "default_value": null, 
   "doc_type": "Sales Order", 
   "docstatus": 0, 
   "doctype": "Property Setter", 
@@ -154,19 +167,6 @@
   "property": "previous_field", 
   "property_type": "Data", 
   "value": "order_value"
- }, 
- {
-  "default_value": null, 
-  "doc_type": "Container Details", 
-  "docstatus": 0, 
-  "doctype": "Property Setter", 
-  "doctype_or_field": "DocField", 
-  "field_name": "customer_container_id", 
-  "modified": "2016-08-11 13:14:02.071603", 
-  "name": "Container Details-customer_container_id-previous_field", 
-  "property": "previous_field", 
-  "property_type": "Data", 
-  "value": "container_type"
  }, 
  {
   "default_value": null, 
@@ -921,19 +921,6 @@
   "property": "previous_field", 
   "property_type": "Data", 
   "value": "contact_date"
- }, 
- {
-  "default_value": null, 
-  "doc_type": "Quotation", 
-  "docstatus": 0, 
-  "doctype": "Property Setter", 
-  "doctype_or_field": "DocField", 
-  "field_name": "quotation_code", 
-  "modified": "2016-08-11 13:14:48.804144", 
-  "name": "Quotation-quotation_code-previous_field", 
-  "property": "previous_field", 
-  "property_type": "Data", 
-  "value": "customer_name"
  }, 
  {
   "default_value": null, 
@@ -2052,19 +2039,6 @@
   "property": "hidden", 
   "property_type": "Check", 
   "value": "1"
- }, 
- {
-  "default_value": null, 
-  "doc_type": "Opportunity", 
-  "docstatus": 0, 
-  "doctype": "Property Setter", 
-  "doctype_or_field": "DocField", 
-  "field_name": "enquiry_type", 
-  "modified": "2016-07-05 11:13:16.595475", 
-  "name": "Opportunity-enquiry_type-options", 
-  "property": "options", 
-  "property_type": "Text", 
-  "value": "New Business\nAdditional Business\nContract Renewal\nSales\nMaintenance"
  }, 
  {
   "default_value": null, 
@@ -4200,19 +4174,6 @@
  }, 
  {
   "default_value": null, 
-  "doc_type": "Opportunity", 
-  "docstatus": 0, 
-  "doctype": "Property Setter", 
-  "doctype_or_field": "DocType", 
-  "field_name": null, 
-  "modified": "2016-07-06 15:11:46.291273", 
-  "name": "Opportunity-read_only_onload", 
-  "property": "read_only_onload", 
-  "property_type": "Check", 
-  "value": null
- }, 
- {
-  "default_value": null, 
   "doc_type": "Customer", 
   "docstatus": 0, 
   "doctype": "Property Setter", 
@@ -4268,12 +4229,90 @@
   "doc_type": "Quotation", 
   "docstatus": 0, 
   "doctype": "Property Setter", 
+  "doctype_or_field": "DocField", 
+  "field_name": "terms", 
+  "modified": "2016-09-12 11:53:44.584228", 
+  "name": "Quotation-terms-reqd", 
+  "property": "reqd", 
+  "property_type": "Check", 
+  "value": "1"
+ }, 
+ {
+  "default_value": null, 
+  "doc_type": "Quotation", 
+  "docstatus": 0, 
+  "doctype": "Property Setter", 
+  "doctype_or_field": "DocField", 
+  "field_name": "customer_address", 
+  "modified": "2016-09-12 12:16:36.798671", 
+  "name": "Quotation-customer_address-reqd", 
+  "property": "reqd", 
+  "property_type": "Check", 
+  "value": "1"
+ }, 
+ {
+  "default_value": null, 
+  "doc_type": "Quotation", 
+  "docstatus": 0, 
+  "doctype": "Property Setter", 
+  "doctype_or_field": "DocField", 
+  "field_name": "items", 
+  "modified": "2016-09-12 12:18:17.939843", 
+  "name": "Quotation-items-reqd", 
+  "property": "reqd", 
+  "property_type": "Check", 
+  "value": "1"
+ }, 
+ {
+  "default_value": null, 
+  "doc_type": "Opportunity", 
+  "docstatus": 0, 
+  "doctype": "Property Setter", 
   "doctype_or_field": "DocType", 
   "field_name": null, 
-  "modified": "2016-09-09 17:44:31.203840", 
+  "modified": "2016-09-30 15:23:01.082754", 
+  "name": "Opportunity-read_only_onload", 
+  "property": "read_only_onload", 
+  "property_type": "Check", 
+  "value": null
+ }, 
+ {
+  "default_value": null, 
+  "doc_type": "Opportunity", 
+  "docstatus": 0, 
+  "doctype": "Property Setter", 
+  "doctype_or_field": "DocField", 
+  "field_name": "enquiry_type", 
+  "modified": "2016-09-30 15:23:01.109665", 
+  "name": "Opportunity-enquiry_type-options", 
+  "property": "options", 
+  "property_type": "Text", 
+  "value": "New Business\nTender Enquiry\nAdditional Business\nContract Renewal\nMaintenance\nSales"
+ }, 
+ {
+  "default_value": null, 
+  "doc_type": "Quotation", 
+  "docstatus": 0, 
+  "doctype": "Property Setter", 
+  "doctype_or_field": "DocType", 
+  "field_name": null, 
+  "modified": "2016-11-24 14:50:35.746412", 
   "name": "Quotation-read_only_onload", 
   "property": "read_only_onload", 
   "property_type": "Check", 
   "value": null
+ }, 
+ {
+  "default_value": null, 
+  "doc_type": "Quotation", 
+  "docstatus": 0, 
+  "doctype": "Property Setter", 
+  "doctype_or_field": "DocField", 
+  "field_name": "more_info", 
+  "modified": "2016-11-24 14:50:35.811897", 
+  "name": "Quotation-more_info-collapsible", 
+  "property": "collapsible", 
+  "property_type": "Check", 
+  "value": "0"
  }
 ]
