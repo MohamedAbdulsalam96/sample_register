@@ -5,6 +5,7 @@
 from __future__ import unicode_literals
 import frappe
 from frappe.model.document import Document
+import datetime
 
 class FuranContent(Document):
 	def validate(self):
