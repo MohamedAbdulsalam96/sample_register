@@ -19,7 +19,8 @@ class InterfacialTension(Document):
 			if row.test__result_status == "Accept":
 				ir = ir+ row.ir_of_water
 				ir_count = ir_count + 1
-		ir = float(ir/float(ir_count))
+		if ir_count!=0:
+			ir = float(ir/float(ir_count))
 		if ir_count!=0:
 			density_of_oil = self.density_of_oil * (1 + 0.00065 * (self.temp_of_oil - 27))
 			factor = 0.725 +  math.sqrt( (0.01452*(10**5)*(ir/1000))/ ( self.circumference_of_ring\
