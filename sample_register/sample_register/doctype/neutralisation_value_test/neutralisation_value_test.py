@@ -6,10 +6,12 @@ from __future__ import unicode_literals
 import frappe
 from frappe.model.document import Document
 import datetime
+from sample_register.sample_register.trb_common import check_bottle_no
 
 class NeutralisationValueTest(Document):
 	def validate(self):
 		self.set_job_card_status()
+		check_bottle_no(self.bottle_number,self.sample_id)
 		ir=0
 		ir_count=0
 		for row in self.test_details:

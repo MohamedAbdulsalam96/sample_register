@@ -6,12 +6,25 @@ from __future__ import unicode_literals
 import frappe
 from frappe.model.document import Document
 import datetime
+from sample_register.sample_register.trb_common import check_bottle_no
 
 class InterfacialTension(Document):
 	def validate(self):
 		self.calculate_interfacial_tension()
 		self.set_job_card_status()
+		check_bottle_no(self.bottle_number,self.sample_id)
 
+	def on_submit(self):
+		self.set_job_card_status()
+		if self.result_status == "Reject":
+			current_trb = frappe.get_doc(self.doctype, self.name)
+			new_trb = frappe.copy_doc(current_trb, ignore_no_copy=False)
+			new_trb.remarks = " created from "+self.name
+			new_trb.result_status = ""
+			new_trb.trb_batch = ""
+			new_trb.save()
+		self.end_time = datetime.datetime.now()
+		
 	def calculate_interfacial_tension(self):
 		import math
 		ir=0
