@@ -4,6 +4,12 @@
 <table class="table table-bordered">
 	<tbody>
         <tr>
+            <td></td>
+            <td>Result</td>
+            <td>Old Result 1</td>
+            <td>Old Result 2</td>
+        </tr>
+        <tr>
             <td>Date of Test</td>
             <td>
             {{ frappe.utils.get_datetime(dga_test_result.start_time).strftime("%d %b %Y") or "" }}

@@ -85,6 +85,7 @@ class JobCardCreation(Document):
 		self.furan_result = furan_content_result
 		self.oil_screening_tests_result = oil_test_result
 		self.dga_result = abc
+		self.save()
 
 	def before_submit(self):
 		sample_entry_doc=frappe.get_doc("Sample Entry Register",self.sample_id)
