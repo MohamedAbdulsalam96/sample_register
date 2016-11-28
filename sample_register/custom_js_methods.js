@@ -119,6 +119,14 @@ frappe.ui.form.on("Sales Order", {
 				})
 			})
 		}
+		if(frm.doc.docstatus==1 && (frm.doc.total_qty > frm.doc.actual_quantity)) {
+			cur_frm.add_custom_button(__('Create Sales Invoice'), function() {
+				frappe.model.open_mapped_doc({
+					method: "sample_register.custom_py_methods.make_invoice",
+					frm: cur_frm
+				})
+			})
+		}
 		if(frm.doc.__islocal) {
 			cur_frm.set_df_property("actual_closer_date", "read_only", 1);
 		}

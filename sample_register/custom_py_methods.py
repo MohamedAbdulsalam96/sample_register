@@ -156,6 +156,65 @@ def make_order_register(source_name, target_doc=None):
 	return doclist
 
 @frappe.whitelist()
+def make_invoice(source_name, target_doc=None):
+	def update_item(source, target, source_parent):
+		count = frappe.db.sql(""" select 
+					count(jcc_test.item_code) as count,
+					group_concat(jcc_test.name) as jcc_test_detail,
+					group_concat(jcc.name) as job_card
+					from `tabSample Entry Register` ser, `tabService Request` sr, `tabJob Card Creation` jcc, `tabJob Card Creation Test Details` jcc_test 
+					where ser.order_id=sr.name 
+					and ser.job_card=jcc.name 
+					and jcc_test.parent=jcc.name
+					and sr.sales_order = %s
+					and jcc_test.item_code = %s
+		""", (source_name,source.item_code), as_list=1)
+		# print "\n\ncount",count
+		# print "\n\ncount",count[]
+		# print "source_name",source_name
+		# print "item_code",source.item_code
+		target.base_amount = (flt(count[0][0]) - flt(source.delivered_qty)) * flt(source.base_rate)
+		target.amount = (flt(count[0][0]) - flt(source.delivered_qty)) * flt(source.rate)
+		target.qty = flt(count[0][0]) - flt(source.delivered_qty)
+		target.job_card = count[0][2]
+		target.job_card_test_reference = count[0][1]
+		# frappe.msgprint("hiiiiii")
+
+	def set_missing_values(source, target):
+		target.customer = source.customer
+		target.sales_order = source.name
+		target.po_no = source.po_no
+		target.po_date = source.po_date
+		# frappe.msgprint("h111111111set")
+
+	doclist = get_mapped_doc("Sales Order", source_name, {
+			"Sales Order": {
+				"doctype": "Sales Invoice",
+				"validation": {
+					"docstatus": ["=", 1]
+				}
+			},		
+			"Sales Order Item": {
+				"doctype": "Sales Invoice Item",
+				"field_map": {
+					"name": "so_detail",
+					"parent": "sales_order",
+				},
+				"postprocess": update_item,
+				"condition": lambda doc: doc.qty and (doc.base_amount==0 or doc.billed_amt < doc.amount)
+			},
+			"Sales Taxes and Charges": {
+				"doctype": "Sales Taxes and Charges",
+				"add_if_empty": True
+			},
+			"Sales Team": {
+				"doctype": "Sales Team",
+				"add_if_empty": True
+			}
+		}, target_doc, set_missing_values, ignore_permissions=False)
+	return doclist
+
+@frappe.whitelist()
 def bundle_so_present(doc,method):
 	"""check sales order present for product bundle"""
 	query = """select parent from `tabSales Order Item` where item_code = '%s'"""%(doc.name)
