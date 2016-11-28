@@ -1,94 +1,3 @@
-<p><b> Job Card View for Technical Head Approval</b></p>
-<p><b> Oil Screening Tests</b></p>
-<table class="table table-bordered">
-    <tbody>
-        <tr>
-            <td>Date of Test</td><td></td>
-            <td></td><td></td>
-
-        </tr>
-        <tr>
-            <td>Purchase Order</td><td></td>
-            <td></td><td></td>
-        </tr>
-        <tr>
-            <td>Service Request</td><td></td>
-            <td></td><td></td>
-        </tr>
-        <tr>
-            <td>TRB ID</td><td></td>
-            <td></td><td></td>
-        </tr>
-        <tr>
-            <td>Test Conducted By</td><td></td>
-            <td></td><td></td>
-        </tr>
-        <tr>
-            <td>Limiting Value Standard</td><td></td>
-            <td></td><td></td>
-        </tr>
-        <tr>
-            <td>Visual Appearance</td><td></td>
-            <td></td><td></td>
-        </tr>
-        <tr>
-            <td>Density at ##.# °C</td><td></td>
-            <td></td><td></td>
-        </tr>
-        <tr>
-            <td>Dielectric Dissipation Factor at 50 Hz</td><td></td>
-            <td></td><td></td>
-        </tr>
-        <tr>
-            <td>Specific Resistivity at ##.# °C (RT)</td><td></td>
-            <td></td><td></td>
-        </tr>
-        <tr>
-            <td>Specific Resistivity at ##.# °C</td><td></td>
-            <td></td><td></td>
-        </tr>
-        <tr>
-            <td>Interfacial Tension at ##.# °C</td><td></td>
-            <td></td><td></td>
-        </tr>
-        <tr>
-            <td>Dielectric Strength (BDV) at ##.# °C (RT)</td><td></td>
-            <td></td><td></td>
-        </tr>
-        <tr>
-            <td>Dielectric Strength (BDV) at ##.# °C</td><td></td>
-            <td></td><td></td>
-        </tr>
-        <tr>
-            <td>Water Content</td>
-            <td> {{ water_content or "" }} ppm</td>
-            <td></td><td></td>
-        </tr>    
-        <tr>
-            <td>Neutralization Value</td><td></td>
-            <td></td><td></td>
-        </tr>    
-         <tr>
-            <td>Sediments and Precipitable Sludge</td><td>g</td>
-            <td></td><td></td>
-        </tr>    
-         <tr>
-            <td>Flash Point</td><td>###.# °C</td>
-            <td></td><td></td>
-        </tr>    
-         <tr>
-            <td>Kinematic Viscosity at ##.# °C</td><td>##.## cst </td>
-            <td></td><td></td>
-        </tr>    
-         <tr>
-            <td>Pour Point</td><td>###.# °C</td>
-            <td></td><td></td>
-        </tr>    
-   
-                                     
-    </tbody>
-</table>
-
 <p><b> Fault Analysis Tests </b></p>
 
 <p><b> Dissolved Gas Analysis</b></p>
@@ -263,7 +172,7 @@
         </tr>    
          <tr>
             <td>Acetylene</td>
-            <td>{{ "{0:.2f}".format(dga_test_result.acetelene) or "" }} ppm</td>
+            <td>{{ "{0:.2f}".format(dga_test_result.acetelene) or "" }} ppm
             {% if dga_test_result_last1 -%}
             {{ "{0:.2f}".format(dga_test_result_last1.acetelene) or "" }}            
             {%- endif %}ppm
@@ -304,61 +213,5 @@
         </tr>    
    
                                      
-    </tbody>
-</table>
-
-<p><b> Furanic Content Analysis</b></p>
-<table class="table table-bordered">
-    <tbody>
-        <tr>
-            <td>Date of Test</td><td></td>
-            <td></td><td></td>
-        </tr>
-        <tr>
-            <td>Purchase Order</td><td></td>
-            <td></td><td></td>
-        </tr>
-        <tr>
-            <td>Service Request</td><td></td>
-            <td></td><td></td>
-        </tr>
-        <tr>
-            <td>TRB ID</td><td></td>
-            <td></td><td></td>
-        </tr>
-        <tr>
-            <td>Test Conducted By</td><td></td>
-            <td></td><td></td>
-        </tr>
-        <tr>
-            <td>Limiting Value Standard</td><td></td>
-            <td></td><td></td>
-        </tr>
-        <tr>
-            <td>Total Furan Content in Oil</td><td> %</td>
-            <td> %</td><td> %</td>
-        </tr>
-        <tr>
-            <td>5-hydroxymethyle 2-furaldehyde</td><td>µg/ kg</td>
-            <td>µg/ kg</td><td>µg/ kg</td>
-        </tr>
-        <tr>
-            <td>2-furfurol (Furfuryl Alcohal)</td><td> µg/ kg</td>
-            <td>µg/ kg</td><td>µg/ kg</td>
-        </tr>
-        <tr>
-            <td>2-furaldehyde</td><td> µg/ kg</td>
-            <td>µg/ kg</td><td>µg/ kg</td>
-        </tr>
-        <tr>
-            <td>2-acetyle furan</td><td> µg/ kg</td>
-            <td>µg/ kg</td><td>µg/ kg</td>
-
-        </tr>
-        <tr>
-            <td>5-methyle 2-furaldehyde</td><td> µg/ kg</td>
-            <td>µg/ kg</td><td>µg/ kg</td>
-        </tr>
-                                
     </tbody>
 </table>

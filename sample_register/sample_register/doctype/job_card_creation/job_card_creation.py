@@ -78,7 +78,13 @@ class JobCardCreation(Document):
 			abc = frappe.render_template("sample_register/sample_register/doctype/job_card_creation/view_detail_result_with_dga.html",{"water_content":water_content,"dga_test_result":dga_test_result,"dga_test_result_last1":dga_test_result_last1,"dga_test_result_last2":dga_test_result_last2}, is_path=True)
 		else:
 			abc = frappe.render_template("sample_register/sample_register/doctype/job_card_creation/view_result.html",{"water_content":water_content,"dga_test_result":dga_test_result}, is_path=True)
-		frappe.msgprint(abc)
+		# frappe.msgprint(abc)
+
+		oil_test_result = frappe.render_template("sample_register/sample_register/doctype/job_card_creation/view_result_with_oil_test.html",{"water_content":water_content}, is_path=True)
+		furan_content_result = frappe.render_template("sample_register/sample_register/doctype/job_card_creation/view_result_with_furan_content.html",{"water_content":water_content}, is_path=True)
+		self.furan_result = furan_content_result
+		self.oil_screening_tests_result = oil_test_result
+		self.dga_result = abc
 
 	def before_submit(self):
 		sample_entry_doc=frappe.get_doc("Sample Entry Register",self.sample_id)
