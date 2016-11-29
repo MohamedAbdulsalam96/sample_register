@@ -15,8 +15,17 @@
             {{ frappe.utils.get_datetime(dga_test_result.start_time).strftime("%d %b %Y") or "" }}
             </td>
             <td>    
-            {{ frappe.utils.get_datetime(dga_test_result_last1.start_time).strftime("%d %b %Y") or "" }}</td>
-            <td>{{ frappe.utils.get_datetime(dga_test_result_last2.start_time).strftime("%d %b %Y") or "" }}</td>
+            {% if dga_test_result_last1.start_time -%}
+            {{ frappe.utils.get_datetime(dga_test_result_last1.start_time).strftime("%d %b %Y") or "" }}
+
+            {%- endif %}
+            </td>
+            <td>
+            {% if dga_test_result_last2.start_time -%}
+
+                {{ frappe.utils.get_datetime(dga_test_result_last2.start_time).strftime("%d %b %Y") or "" }}
+            {%- endif %}
+            </td>
         </tr>
         <tr>
             <td>Purchase Order</td>

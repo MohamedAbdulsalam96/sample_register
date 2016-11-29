@@ -146,6 +146,24 @@ class JobCardCreation(Document):
 		self.dga_result = abc
 		self.save()
 
+		#update values in Test Certificate
+		test_certificate = frappe.db.get_value('Sample Entry Register','TF-SE-2016-00113','test_certificate')
+		if test_certificate:
+			doc_test_certificate = frappe.get_doc("Test Certificate",test_certificate)
+			doc_test_certificate.density = density["density_of_oil_at_dt1"]
+			doc_test_certificate.dielectric_strength=breakdown_voltage
+			doc_test_certificate.interfacial_tension = interfacial_tension["interfacial_tension"]
+			doc_test_certificate.neutralisation_value = neutralization_value
+			doc_test_certificate.flash_point = flash_point
+			if len(furan)>0:
+				print "\n\nfurans_details",furan["5H2F"]
+				doc_test_certificate.hydroxymethyle = furan["5H2F"]				
+				doc_test_certificate.furfurol = furan["2FUR"]				
+				doc_test_certificate.furaldehyde = furan["2 FURALDEHYDE"]			
+				doc_test_certificate.acetyl_furan = furan["2ACF"]				
+				doc_test_certificate.methyle = furan["5M2F"]				
+			doc_test_certificate.save()
+
 	def before_submit(self):
 		sample_entry_doc=frappe.get_doc("Sample Entry Register",self.sample_id)
 		if(not sample_entry_doc.date_of_collection) or (not sample_entry_doc.date_of_receipt):
