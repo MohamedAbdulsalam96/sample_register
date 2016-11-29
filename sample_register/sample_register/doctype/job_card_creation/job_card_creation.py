@@ -36,7 +36,7 @@ class JobCardCreation(Document):
 		# print "/n/ndl",dl_dga
 		if len(dl_dga)>0:
 			dga_test_result = dl_dga[0]
-			print "/n/n/ndga",dl_dga
+			# print "/n/n/ndga",dl_dga
 			abc = frappe.render_template("sample_register/sample_register/doctype/job_card_creation/view_result_with_dga.html",{"water_content":water_content,"dga_test_result":dga_test_result}, is_path=True)
 		else:
 			abc = frappe.render_template("sample_register/sample_register/doctype/job_card_creation/view_result.html",{"water_content":water_content,"dga_test_result":dga_test_result}, is_path=True)
@@ -45,7 +45,7 @@ class JobCardCreation(Document):
 	def view_detail_result(self):
 		# abc = frappe.render_template("templates/includes/cart/view_result.html",{"context":"aa","aa":"aaaa"})
 		service_request = frappe.db.get_value('Sample Entry Register',self.sample_id,'order_id')
-		print "\nservice request",service_request
+
 		#Current Job Card Test
 		water_content = frappe.db.get_value("Water Content Test",{"sample_id":self.sample_id, "result_status":"Accept", "test_type" : "Sample"},"avg(final_result)")
 		if water_content:
@@ -79,12 +79,22 @@ class JobCardCreation(Document):
 			abc = frappe.render_template("sample_register/sample_register/doctype/job_card_creation/view_detail_result_with_dga.html",{"water_content":water_content,"dga_test_result":dga_test_result,"dga_test_result_last1":dga_test_result_last1,"dga_test_result_last2":dga_test_result_last2,"service_request":service_request}, is_path=True)
 		else:
 			abc = frappe.render_template("sample_register/sample_register/doctype/job_card_creation/view_result.html",{"water_content":water_content,"dga_test_result":dga_test_result,"service_request":service_request}, is_path=True)
-		# frappe.msgprint(abc)
 
-		oil_test_result = frappe.render_template("sample_register/sample_register/doctype/job_card_creation/view_result_with_oil_test.html",{"water_content":water_content,"service_request":service_request}, is_path=True)
+		#oild test result
+		density = frappe.db.sql("""select * from `tabDensity Test` where job_card = '{0}' AND test_type='Sample' and result_status='Accept' LIMIT 1""".format(self.name),as_dict=1)
+		if density:
+			density = density[0]
+
+		ddf = frappe.db.sql("""select dielectric_dissipation_factor_at_dt1 from `tabDielectric Dissipation Factor` where job_card = '{0}' AND test_type='Sample' and result_status='Accept' LIMIT 1""".format(self.name),as_dict=1)
+		if ddf:
+			ddf = ddf[0]["dielectric_dissipation_factor_at_dt1"]
+
+		oil_test_result = frappe.render_template("sample_register/sample_register/doctype/job_card_creation/view_result_with_oil_test.html",{"water_content":water_content,"service_request":service_request,"density":density, "ddf":ddf}, is_path=True)
 		
 		# select avg(concentration) from `tabFuran Content Test Details` where parent = (select name from `tabFuran Content` where job_card='TF-JC-2016-00082') and furans='5H2F'
 		
+		#Fural Content Result
+		furan = frappe.db.sql("""select avg(concentration),furans from `tabFuran Content Test Details` where parent = (select name from `tabFuran Content` where job_card='{0}' AND test_type='Sample' and result_status='Accept' LIMIT 1) group by furans""".format(self.name), as_dict=1)
 		furan = frappe.db.sql("""select avg(concentration),furans from `tabFuran Content Test Details` where parent = (select name from `tabFuran Content` where job_card='{0}' AND test_type='Sample' and result_status='Accept' LIMIT 1) group by furans""".format(self.name), as_dict=1)
 		b  = {}
 		for i in furan:
@@ -95,11 +105,11 @@ class JobCardCreation(Document):
 		furans_details = frappe.db.sql("""select * from `tabFuran Content` where job_card='TF-JC-2016-00082' and test_type='Sample' and result_status='Accept' limit 1""".format(self.name), as_dict=1)
 		
 		# import datetime
-		print "\n\nfurans_details",furans_details
+		# print "\n\nfurans_details",furans_details
 		# test_date = datetime.datetime.strptime(str(furans_details[0]["date_of_testing"]), '%Y-%m-%d')
 		furans_details[0]["date_of_testing"] = furans_details[0]["date_of_testing"].strftime('%d-%m-%Y')
 
-		print "\n\n\nfuran",furan
+		# print "\n\n\nfuran",furan
 		furan_content_result = frappe.render_template("sample_register/sample_register/doctype/job_card_creation/view_result_with_furan_content.html",{"furan":furan, "service_request":service_request,"furans_details":furans_details[0]}, is_path=True)
 		self.furan_result = furan_content_result
 		self.oil_screening_tests_result = oil_test_result

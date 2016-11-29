@@ -40,12 +40,15 @@
             <td></td><td></td>
         </tr>
         <tr>
-            <td>Density at ##.# °C</td><td></td>
+            <td>Density at {{ density["desired_temperature_1"] or "" }} °C</td>
+            <td>{{ density["density_of_oil_at_dt1"] or "" }}</td>
             <td></td><td></td>
         </tr>
         <tr>
-            <td>Dielectric Dissipation Factor at 50 Hz</td><td></td>
-            <td></td><td></td>
+            <td>Dielectric Dissipation Factor at 50 Hz</td>
+            <td>{{ ddf or "" }}</td>
+            <td></td>
+            <td></td>
         </tr>
         <tr>
             <td>Specific Resistivity at ##.# °C (RT)</td><td></td>
