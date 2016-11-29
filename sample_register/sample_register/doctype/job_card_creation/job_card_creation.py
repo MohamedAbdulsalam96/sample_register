@@ -44,7 +44,8 @@ class JobCardCreation(Document):
 
 	def view_detail_result(self):
 		# abc = frappe.render_template("templates/includes/cart/view_result.html",{"context":"aa","aa":"aaaa"})
-
+		service_request = frappe.db.get_value('Sample Entry Register',self.sample_id,'order_id')
+		print "\nservice request",service_request
 		#Current Job Card Test
 		water_content = frappe.db.get_value("Water Content Test",{"sample_id":self.sample_id, "result_status":"Accept", "test_type" : "Sample"},"avg(final_result)")
 		if water_content:
@@ -84,15 +85,22 @@ class JobCardCreation(Document):
 		
 		# select avg(concentration) from `tabFuran Content Test Details` where parent = (select name from `tabFuran Content` where job_card='TF-JC-2016-00082') and furans='5H2F'
 		
-		furan = frappe.db.sql("""select avg(concentration),furans from `tabFuran Content Test Details` where parent = (select name from `tabFuran Content` where job_card='{0}') group by furans""".format(self.name), as_dict=1)
+		furan = frappe.db.sql("""select avg(concentration),furans from `tabFuran Content Test Details` where parent = (select name from `tabFuran Content` where job_card='{0}' AND test_type='Sample' and result_status='Accept' LIMIT 1) group by furans""".format(self.name), as_dict=1)
 		b  = {}
 		for i in furan:
 			b[i["furans"]] = i["avg(concentration)"]
 
 		furan = b
 
+		furans_details = frappe.db.sql("""select * from `tabFuran Content` where job_card='TF-JC-2016-00082' and test_type='Sample' and result_status='Accept' limit 1""".format(self.name), as_dict=1)
+		
+		# import datetime
+		print "\n\nfurans_details",furans_details
+		# test_date = datetime.datetime.strptime(str(furans_details[0]["date_of_testing"]), '%Y-%m-%d')
+		furans_details[0]["date_of_testing"] = furans_details[0]["date_of_testing"].strftime('%d-%m-%Y')
+
 		print "\n\n\nfuran",furan
-		furan_content_result = frappe.render_template("sample_register/sample_register/doctype/job_card_creation/view_result_with_furan_content.html",{"furan":furan}, is_path=True)
+		furan_content_result = frappe.render_template("sample_register/sample_register/doctype/job_card_creation/view_result_with_furan_content.html",{"furan":furan, "service_request":service_request,"furans_details":furans_details[0]}, is_path=True)
 		self.furan_result = furan_content_result
 		self.oil_screening_tests_result = oil_test_result
 		self.dga_result = abc

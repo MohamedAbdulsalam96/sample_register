@@ -85,33 +85,33 @@
         <tr>
             <td>Nitrogen</td>
             <td>
-            {{ "{0:.2f}".format((dga_test_result.nitrogen)) or "" }} 
+            {{ "{0:.2f}".format((dga_test_result.nitrogen)) or "" }} ppm
             </td>
             <td>
             {% if dga_test_result_last1 -%}
-            {{ "{0:.2f}".format((dga_test_result_last1.nitrogen)) or "" }} 
+            {{ "{0:.2f}".format((dga_test_result_last1.nitrogen)) or "" }} ppm
             {%- endif %}ppm
             </td>
             <td>
             {% if dga_test_result_last2 -%}
-            {{ "{0:.2f}".format((dga_test_result_last2.nitrogen)) or "" }}
+            {{ "{0:.2f}".format((dga_test_result_last2.nitrogen)) or "" }} ppm
             {%- endif %}ppm
             </td>            
         </tr>
         <tr>
             <td>Carbon Dioxide</td> 
             <td>
-            {{ "{0:.2f}".format((dga_test_result.carbon)) or "" }} 
+            {{ "{0:.2f}".format((dga_test_result.carbon)) or "" }} ppm
             </td>
             <td>
             {% if dga_test_result_last1 -%}
-            {{ "{0:.2f}".format(dga_test_result_last1.carbon) or "" }}
-            {%- endif %}ppm
+            {{ "{0:.2f}".format(dga_test_result_last1.carbon) or "" }} 
+            {%- endif %} ppm
             </td>        
             <td>
             {% if dga_test_result_last2 -%}
-            {{ "{0:.2f}".format(dga_test_result_last2.carbon) or "" }}
-            {%- endif %}ppm
+            {{ "{0:.2f}".format(dga_test_result_last2.carbon) or "" }} 
+            {%- endif %} ppm
             </td>
         </tr>
         <tr>
@@ -120,12 +120,12 @@
             <td>
             {% if dga_test_result_last1 -%}
             {{ "{0:.2f}".format(dga_test_result_last1.hydrogen) or "" }}
-            {%- endif %}ppm
+            {%- endif %} ppm
             </td>
             <td>
             {% if dga_test_result_last2 -%}
             {{ "{0:.2f}".format(dga_test_result_last2.hydrogen) or "" }}
-            {%- endif %}ppm
+            {%- endif %} ppm
             </td>
         </tr>
         <tr>
@@ -140,12 +140,12 @@
             <td>
             {% if dga_test_result_last1 -%}
             {{ "{0:.2f}".format(dga_test_result_last1.methane) or "" }}
-            {%- endif %}ppm
+            {%- endif %} ppm
             </td>
             <td>
             {% if dga_test_result_last2 -%}
             {{ "{0:.2f}".format(dga_test_result_last2.methane) or "" }}
-            {%- endif %}ppm
+            {%- endif %} ppm
             </td>
         </tr>    
         <tr>
@@ -178,15 +178,18 @@
         </tr>    
          <tr>
             <td>Acetylene</td>
-            <td>{{ "{0:.2f}".format(dga_test_result.acetelene) or "" }} ppm
-            {% if dga_test_result_last1 -%}
-            {{ "{0:.2f}".format(dga_test_result_last1.acetelene) or "" }}            
-            {%- endif %}ppm
+            <td>
+                {{ "{0:.2f}".format(dga_test_result.acetelene) or "" }} ppm
             </td>
             <td>
-            {% if dga_test_result_last2 -%}
-            {{ "{0:.2f}".format(dga_test_result_last2.acetelene) or "" }}            
-            {%- endif %}ppm
+                {% if dga_test_result_last1 -%}
+                {{ "{0:.2f}".format(dga_test_result_last1.acetelene) or "" }}            
+                {%- endif %} ppm
+            </td>
+            <td>
+                {% if dga_test_result_last2 -%}
+                {{ "{0:.2f}".format(dga_test_result_last2.acetelene) or "" }}            
+                {%- endif %} ppm
             </td>
         </tr>    
          <tr>
