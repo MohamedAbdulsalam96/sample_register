@@ -51,7 +51,8 @@
             <td></td>
         </tr>
         <tr>
-            <td>Specific Resistivity at ##.# °C (RT)</td><td></td>
+            <td>Specific Resistivity at ##.# °C (RT)</td>
+            <td>{{ specific_resistivity or ""}}</td>
             <td></td><td></td>
         </tr>
         <tr>
@@ -59,7 +60,9 @@
             <td></td><td></td>
         </tr>
         <tr>
-            <td>Interfacial Tension at ##.# °C</td><td></td>
+            <td>Interfacial Tension at 
+                {{ interfacial_tension["temp_of_oil"] or ""}} °C</td>
+            <td>{{ interfacial_tension["interfacial_tension"] or ""}}</td>
             <td></td><td></td>
         </tr>
         <tr>

@@ -89,7 +89,15 @@ class JobCardCreation(Document):
 		if ddf:
 			ddf = ddf[0]["dielectric_dissipation_factor_at_dt1"]
 
-		oil_test_result = frappe.render_template("sample_register/sample_register/doctype/job_card_creation/view_result_with_oil_test.html",{"water_content":water_content,"service_request":service_request,"density":density, "ddf":ddf}, is_path=True)
+		specific_resistivity = frappe.db.sql("""select specific_resistivity from `tabSpecific Resistivity` where job_card = '{0}' AND test_type='Sample' and result_status='Accept' LIMIT 1""".format(self.name),as_dict=1)
+		if specific_resistivity:
+			specific_resistivity = specific_resistivity[0]["specific_resistivity"]
+
+		it = frappe.db.sql("""select interfacial_tension,temp_of_oil from `tabInterfacial Tension` where job_card = '{0}' AND test_type='Sample' and result_status='Accept' LIMIT 1""".format(self.name),as_dict=1)
+		if it:
+			interfacial_tension = it[0]
+
+		oil_test_result = frappe.render_template("sample_register/sample_register/doctype/job_card_creation/view_result_with_oil_test.html",{"water_content":water_content,"service_request":service_request,"density":density, "ddf":ddf,"specific_resistivity":specific_resistivity, "interfacial_tension":interfacial_tension}, is_path=True)
 		
 		# select avg(concentration) from `tabFuran Content Test Details` where parent = (select name from `tabFuran Content` where job_card='TF-JC-2016-00082') and furans='5H2F'
 		
