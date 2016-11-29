@@ -76,12 +76,12 @@ class JobCardCreation(Document):
 			dga_test_result_last1 = dl_dga_last1[0] if (len(dl_dga_last1)>0) else   {}
 			dga_test_result_last2 = dl_dga_last2[0] if (len(dl_dga_last2)>0) else   {}
 			
-			abc = frappe.render_template("sample_register/sample_register/doctype/job_card_creation/view_detail_result_with_dga.html",{"water_content":water_content,"dga_test_result":dga_test_result,"dga_test_result_last1":dga_test_result_last1,"dga_test_result_last2":dga_test_result_last2}, is_path=True)
+			abc = frappe.render_template("sample_register/sample_register/doctype/job_card_creation/view_detail_result_with_dga.html",{"water_content":water_content,"dga_test_result":dga_test_result,"dga_test_result_last1":dga_test_result_last1,"dga_test_result_last2":dga_test_result_last2,"service_request":service_request}, is_path=True)
 		else:
-			abc = frappe.render_template("sample_register/sample_register/doctype/job_card_creation/view_result.html",{"water_content":water_content,"dga_test_result":dga_test_result}, is_path=True)
+			abc = frappe.render_template("sample_register/sample_register/doctype/job_card_creation/view_result.html",{"water_content":water_content,"dga_test_result":dga_test_result,"service_request":service_request}, is_path=True)
 		# frappe.msgprint(abc)
 
-		oil_test_result = frappe.render_template("sample_register/sample_register/doctype/job_card_creation/view_result_with_oil_test.html",{"water_content":water_content}, is_path=True)
+		oil_test_result = frappe.render_template("sample_register/sample_register/doctype/job_card_creation/view_result_with_oil_test.html",{"water_content":water_content,"service_request":service_request}, is_path=True)
 		
 		# select avg(concentration) from `tabFuran Content Test Details` where parent = (select name from `tabFuran Content` where job_card='TF-JC-2016-00082') and furans='5H2F'
 		
