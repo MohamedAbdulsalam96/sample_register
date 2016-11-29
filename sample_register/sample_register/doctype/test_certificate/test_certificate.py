@@ -86,3 +86,4 @@ def create_test_certificate(sample_id,job_card):
 	frappe.db.set_value("Sample Entry Register", sample_id, "test_certificate_status", "Created")
 	frappe.db.set_value("Sample Entry Register", sample_id, "test_certificate", doc_test_certificate.name)
 
+# select avg(concentration) from `tabFuran Content Test Details` where parent = (select name from `tabFuran Content` where job_card='TF-JC-2016-00082') and furans='5H2F'

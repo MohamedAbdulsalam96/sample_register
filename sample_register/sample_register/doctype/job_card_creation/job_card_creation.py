@@ -81,7 +81,18 @@ class JobCardCreation(Document):
 		# frappe.msgprint(abc)
 
 		oil_test_result = frappe.render_template("sample_register/sample_register/doctype/job_card_creation/view_result_with_oil_test.html",{"water_content":water_content}, is_path=True)
-		furan_content_result = frappe.render_template("sample_register/sample_register/doctype/job_card_creation/view_result_with_furan_content.html",{"water_content":water_content}, is_path=True)
+		
+		# select avg(concentration) from `tabFuran Content Test Details` where parent = (select name from `tabFuran Content` where job_card='TF-JC-2016-00082') and furans='5H2F'
+		
+		furan = frappe.db.sql("""select avg(concentration),furans from `tabFuran Content Test Details` where parent = (select name from `tabFuran Content` where job_card='{0}') group by furans""".format(self.name), as_dict=1)
+		b  = {}
+		for i in furan:
+			b[i["furans"]] = i["avg(concentration)"]
+
+		furan = b
+
+		print "\n\n\nfuran",furan
+		furan_content_result = frappe.render_template("sample_register/sample_register/doctype/job_card_creation/view_result_with_furan_content.html",{"furan":furan}, is_path=True)
 		self.furan_result = furan_content_result
 		self.oil_screening_tests_result = oil_test_result
 		self.dga_result = abc
