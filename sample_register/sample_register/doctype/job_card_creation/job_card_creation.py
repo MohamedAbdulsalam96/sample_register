@@ -108,7 +108,7 @@ class JobCardCreation(Document):
 		if nvt:
 			neutralization_value = nvt[0]["neutralization_value"]
 
-		fp = " "
+		flash_point = " "
 		fp = frappe.db.sql("""select flash_point from `tabFlash point by Penskey Martin` where job_card = '{0}' AND test_type='Sample' and result_status='Accept' LIMIT 1""".format(self.name),as_dict=1)
 		if fp:
 			flash_point = fp[0]["flash_point"]
