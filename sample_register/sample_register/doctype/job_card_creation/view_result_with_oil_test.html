@@ -41,7 +41,7 @@
         </tr>
         <tr>
             <td>Density at {{ density["desired_temperature_1"] or "" }} °C</td>
-            <td>{{ density["density_of_oil_at_dt1"] or "" }}</td>
+            <td>{{ density["density_of_oil_at_dt1"] or "" }} (g/cm 3 )</td>
             <td></td><td></td>
         </tr>
         <tr>
@@ -52,7 +52,7 @@
         </tr>
         <tr>
             <td>Specific Resistivity at ##.# °C (RT)</td>
-            <td>{{ specific_resistivity or ""}}</td>
+            <td>{{ specific_resistivity or ""}} (ohm − cm)</td>
             <td></td><td></td>
         </tr>
         <tr>
@@ -62,12 +62,14 @@
         <tr>
             <td>Interfacial Tension at 
                 {{ interfacial_tension["temp_of_oil"] or ""}} °C</td>
-            <td>{{ interfacial_tension["interfacial_tension"] or ""}}</td>
+            <td>{{ interfacial_tension["interfacial_tension"] or ""}} (N/m)</td>
             <td></td><td></td>
         </tr>
         <tr>
-            <td>Dielectric Strength (BDV) at ##.# °C (RT)</td><td></td>
-            <td></td><td></td>
+            <td>Dielectric Strength (BDV) at ##.# °C (RT)</td>
+            <td>{{ breakdown_voltage or ""}} (kV)</td>
+            <td></td>
+            <td></td>
         </tr>
         <tr>
             <td>Dielectric Strength (BDV) at ##.# °C</td><td></td>
@@ -79,7 +81,8 @@
             <td></td><td></td>
         </tr>    
         <tr>
-            <td>Neutralization Value</td><td></td>
+            <td>Neutralization Value</td>
+            <td>{{ neutralization_value or ""}} (mgKOH/g)</td>
             <td></td><td></td>
         </tr>    
          <tr>
@@ -87,7 +90,8 @@
             <td></td><td></td>
         </tr>    
          <tr>
-            <td>Flash Point</td><td>###.# °C</td>
+            <td>Flash Point</td>
+            <td>{{flash_point or ""}} °C</td>
             <td></td><td></td>
         </tr>    
          <tr>

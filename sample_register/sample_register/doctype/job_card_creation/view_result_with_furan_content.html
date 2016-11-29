@@ -9,7 +9,7 @@
         </tr>
         <tr>
             <td>Date of Test</td>
-            <td>{{ furans_details["date_of_testing"]}}</td>
+            <td>{{ furans_details["date_of_testing"] or ""}}</td>
             <td></td>
             <td></td>
         </tr>
@@ -19,18 +19,18 @@
         </tr>
         <tr>
             <td>Service Request</td>
-            <td>{{service_request}}</td>
+            <td>{{service_request or ""}}</td>
             <td></td><td></td>
         </tr>
         <tr>
             <td>TRB ID</td>
-            <td>{{ furans_details["name"] }}</td>
+            <td>{{ furans_details["name"] or ""}}</td>
             <td></td>
             <td></td>
         </tr>
         <tr>
             <td>Test Conducted By</td>
-            <td>{{ furans_details["tested_by"] }}</td>
+            <td>{{ furans_details["tested_by"] or ""}}</td>
             <td></td>
             <td></td>
         </tr>
@@ -44,31 +44,31 @@
         </tr>
         <tr>
             <td>5-hydroxymethyle 2-furaldehyde</td>
-            <td>{{ furan["5H2F"] }} µg/ kg</td>
+            <td>{{ furan["5H2F"] or ""}} µg/ kg</td>
             <td>  µg/ kg</td><td> µg/ kg</td>
         </tr>
         <tr>
             <td>2-furfurol (Furfuryl Alcohal)</td>
-            <td>{{ furan["2FUR"] }} µg/ kg</td>
+            <td>{{ furan["2FUR"] or ""}} µg/ kg</td>
             <td>  µg/ kg</td>
             <td> µg/ kg</td>
         </tr>
         <tr>
             <td>2-furaldehyde</td>
-            <td>{{ furan["2 FURALDEHYDE"] }} µg/ kg</td>
+            <td>{{ furan["2 FURALDEHYDE"] or ""}} µg/ kg</td>
             <td>  µg/ kg</td>
             <td> µg/ kg</td>
         </tr>
         <tr>
             <td>2-acetyle furan</td>
-            <td>{{ furan["2ACF"] }} µg/ kg</td>
+            <td>{{ furan["2ACF"] or ""}} µg/ kg</td>
             <td>  µg/ kg</td>
             <td> µg/ kg</td>
 
         </tr>
         <tr>
             <td>5-methyle 2-furaldehyde</td>
-            <td>{{ furan["5M2F"] }} µg/ kg</td>
+            <td>{{ furan["5M2F"] or ""}} µg/ kg</td>
             <td>  µg/ kg</td>
             <td> µg/ kg</td>
         </tr>

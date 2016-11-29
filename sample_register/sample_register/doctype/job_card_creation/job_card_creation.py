@@ -94,31 +94,53 @@ class JobCardCreation(Document):
 			specific_resistivity = specific_resistivity[0]["specific_resistivity"]
 
 		it = frappe.db.sql("""select interfacial_tension,temp_of_oil from `tabInterfacial Tension` where job_card = '{0}' AND test_type='Sample' and result_status='Accept' LIMIT 1""".format(self.name),as_dict=1)
+		interfacial_tension = " "
 		if it:
 			interfacial_tension = it[0]
 
-		oil_test_result = frappe.render_template("sample_register/sample_register/doctype/job_card_creation/view_result_with_oil_test.html",{"water_content":water_content,"service_request":service_request,"density":density, "ddf":ddf,"specific_resistivity":specific_resistivity, "interfacial_tension":interfacial_tension}, is_path=True)
+		bdv = frappe.db.sql("""select breakdown_voltage from `tabBreakdown Voltage` where job_card = '{0}' AND test_type='Sample' and result_status='Accept' LIMIT 1""".format(self.name),as_dict=1)
+		breakdown_voltage = " "
+		if bdv:
+			breakdown_voltage = bdv[0]["breakdown_voltage"]
+
+		nvt = frappe.db.sql("""select neutralization_value from `tabNeutralisation Value Test` where job_card = '{0}' AND test_type='Sample' and result_status='Accept' LIMIT 1""".format(self.name),as_dict=1)
+		neutralization_value = " "
+		if nvt:
+			neutralization_value = nvt[0]["neutralization_value"]
+
+		fp = " "
+		fp = frappe.db.sql("""select flash_point from `tabFlash point by Penskey Martin` where job_card = '{0}' AND test_type='Sample' and result_status='Accept' LIMIT 1""".format(self.name),as_dict=1)
+		if fp:
+			flash_point = fp[0]["flash_point"]
+
+		oil_test_result = frappe.render_template("sample_register/sample_register/doctype/job_card_creation/view_result_with_oil_test.html",{"water_content":water_content,"service_request":service_request,"density":density, "ddf":ddf,"specific_resistivity":specific_resistivity, "interfacial_tension":interfacial_tension, "breakdown_voltage":breakdown_voltage, "neutralization_value":neutralization_value, "flash_point":flash_point}, is_path=True)
 		
 		# select avg(concentration) from `tabFuran Content Test Details` where parent = (select name from `tabFuran Content` where job_card='TF-JC-2016-00082') and furans='5H2F'
 		
 		#Fural Content Result
 		furan = frappe.db.sql("""select avg(concentration),furans from `tabFuran Content Test Details` where parent = (select name from `tabFuran Content` where job_card='{0}' AND test_type='Sample' and result_status='Accept' LIMIT 1) group by furans""".format(self.name), as_dict=1)
-		furan = frappe.db.sql("""select avg(concentration),furans from `tabFuran Content Test Details` where parent = (select name from `tabFuran Content` where job_card='{0}' AND test_type='Sample' and result_status='Accept' LIMIT 1) group by furans""".format(self.name), as_dict=1)
 		b  = {}
 		for i in furan:
 			b[i["furans"]] = i["avg(concentration)"]
-
 		furan = b
 
-		furans_details = frappe.db.sql("""select * from `tabFuran Content` where job_card='TF-JC-2016-00082' and test_type='Sample' and result_status='Accept' limit 1""".format(self.name), as_dict=1)
+		furans_details = []
+		furans_details = frappe.db.sql("""select * 
+										from `tabFuran Content` 
+											where job_card='{0}' 
+												and test_type='Sample' 
+												and result_status='Accept' 
+												limit 1""".format(self.name), as_dict=1)
 		
 		# import datetime
 		# print "\n\nfurans_details",furans_details
 		# test_date = datetime.datetime.strptime(str(furans_details[0]["date_of_testing"]), '%Y-%m-%d')
-		furans_details[0]["date_of_testing"] = furans_details[0]["date_of_testing"].strftime('%d-%m-%Y')
-
+		# print "\n\n\n","furans_details",furans_details
+		if len(furans_details)>0:
+			furans_details[0]["date_of_testing"] = furans_details[0]["date_of_testing"].strftime('%d-%m-%Y')
+			furans_details = furans_details[0]
 		# print "\n\n\nfuran",furan
-		furan_content_result = frappe.render_template("sample_register/sample_register/doctype/job_card_creation/view_result_with_furan_content.html",{"furan":furan, "service_request":service_request,"furans_details":furans_details[0]}, is_path=True)
+		furan_content_result = frappe.render_template("sample_register/sample_register/doctype/job_card_creation/view_result_with_furan_content.html",{"furan":furan, "service_request":service_request,"furans_details":furans_details}, is_path=True)
 		self.furan_result = furan_content_result
 		self.oil_screening_tests_result = oil_test_result
 		self.dga_result = abc
