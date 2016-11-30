@@ -150,9 +150,11 @@ class JobCardCreation(Document):
 		test_certificate = frappe.db.get_value('Sample Entry Register','TF-SE-2016-00113','test_certificate')
 		if test_certificate:
 			doc_test_certificate = frappe.get_doc("Test Certificate",test_certificate)
-			doc_test_certificate.density = density["density_of_oil_at_dt1"]
+			if density:
+				doc_test_certificate.density = density["density_of_oil_at_dt1"]
 			doc_test_certificate.dielectric_strength=breakdown_voltage
-			doc_test_certificate.interfacial_tension = interfacial_tension["interfacial_tension"]
+			# if (interfacial_tension>0):
+				# doc_test_certificate.interfacial_tension = interfacial_tension["interfacial_tension"]
 			doc_test_certificate.neutralisation_value = neutralization_value
 			doc_test_certificate.flash_point = flash_point
 			if len(furan)>0:
