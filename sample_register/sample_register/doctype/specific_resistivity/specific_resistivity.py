@@ -6,7 +6,7 @@ from __future__ import unicode_literals
 import frappe
 from frappe.model.document import Document
 import datetime
-from sample_register.sample_register.trb_common import check_bottle_no
+from sample_register.sample_register.trb_common import check_bottle_no,check_open_trb_batch_count
 
 class SpecificResistivity(Document):
 	def validate(self):
@@ -16,6 +16,7 @@ class SpecificResistivity(Document):
 		check_bottle_no(self.bottle_number,self.sample_id)
 
 	def on_submit(self):
+		check_open_trb_batch_count(self.trb_batch)
 		self.set_job_card_status()
 		if self.result_status == "Reject":
 			current_trb = frappe.get_doc(self.doctype, self.name)
