@@ -152,7 +152,7 @@ class JobCardCreation(Document):
 			doc_test_certificate = frappe.get_doc("Test Certificate",test_certificate)
 			if density:
 				doc_test_certificate.density = density["density_of_oil_at_dt1"]
-			doc_test_certificate.dielectric_strength=breakdown_voltage
+				doc_test_certificate.dielectric_strength=breakdown_voltage
 			# if (interfacial_tension>0):
 				# doc_test_certificate.interfacial_tension = interfacial_tension["interfacial_tension"]
 			doc_test_certificate.neutralisation_value = neutralization_value
@@ -164,6 +164,10 @@ class JobCardCreation(Document):
 				doc_test_certificate.furaldehyde = furan["2 FURALDEHYDE"]			
 				doc_test_certificate.acetyl_furan = furan["2ACF"]				
 				doc_test_certificate.methyle = furan["5M2F"]				
+			doc_test_certificate.observation_from_dissolved_gas_analysis = self.observation_from_dissolved_gas_analysis
+			doc_test_certificate.observation_from_furan_analysis = self.observation_from_furan_analysis
+			doc_test_certificate.observations_from_oil_screening_test = self.observations_from_oil_screening_test
+			doc_test_certificate.trufil_remarks = self.trufil_remarks
 			doc_test_certificate.save()
 
 	def before_submit(self):
