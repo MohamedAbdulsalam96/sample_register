@@ -52,7 +52,8 @@ class WaterContentTest(Document):
 			new_trb = frappe.copy_doc(current_trb, ignore_no_copy=False)
 			new_trb.remarks = " created from "+self.name
 			new_trb.water_content_test_details = []
-			new_trb.result_status = ""
+			# new_trb.result_status = ""
+			new_trb.status = "Open"
 			new_trb.trb_batch = ""
 			new_trb.save()
 		self.end_time = datetime.datetime.now()
