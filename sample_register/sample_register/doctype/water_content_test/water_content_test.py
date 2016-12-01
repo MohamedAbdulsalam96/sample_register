@@ -10,8 +10,8 @@ from sample_register.sample_register.trb_common import check_bottle_no,check_ope
 
 class WaterContentTest(Document):
 	def set_job_card_status(self):
-		if not self.result_status:
-			frappe.throw("Please Enter status")
+		# if not self.result_status:
+		# 	frappe.throw("Please Enter status")
 		if self.result_status and (self.result_status == "Accept" or self.result_status == "Reject" or self.result_status == "Select"):
 			cond = """select name from `tabJob Card Creation Test Details` where parent = '%s'"""%(self.job_card)
 			if self.test_group:

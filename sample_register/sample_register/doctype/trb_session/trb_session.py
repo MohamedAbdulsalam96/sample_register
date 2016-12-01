@@ -196,6 +196,14 @@ class TRBSession(Document):
 		trb_batch = frappe.new_doc("TRB Batch")
 		trb_batch.owner = frappe.session.user
 		trb_batch.test_type = self.test_type
+		trb_batch.status = "Open"
+		for de in self.get("lab_equipment_details"):
+			test_req={
+				"doctype": "Lab Equipment Details",
+				"item_code": de.item_code,
+				"fixed_asset_serial_number": de.fixed_asset_serial_number
+			}
+			trb_batch.append("lab_equipment_details",test_req)
 		trb_batch.save()
 		trb_batch_name = trb_batch.name
 		print "\n\ntrb batch",trb_batch.name

@@ -30,4 +30,6 @@ def check_open_trb_batch_count(trb_batch):
 		trb_batch.open_test = test_count
 		if test_count == 0:
 			trb_batch.status = "Close"
+		else:
+			trb_batch.status = "Open"
 		trb_batch.save()
