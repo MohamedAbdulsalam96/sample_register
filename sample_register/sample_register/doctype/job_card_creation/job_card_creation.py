@@ -147,13 +147,16 @@ class JobCardCreation(Document):
 		self.save()
 
 		#update values in Test Certificate
+		print "inte tens\n\n"
+		print len(interfacial_tension)
+		print "\n\n\n\ninterfaciacl tens",interfacial_tension,"\n\n\n"
 		test_certificate = frappe.db.get_value('Sample Entry Register','TF-SE-2016-00113','test_certificate')
 		if test_certificate:
 			doc_test_certificate = frappe.get_doc("Test Certificate",test_certificate)
 			if density:
 				doc_test_certificate.density = density["density_of_oil_at_dt1"]
 				doc_test_certificate.dielectric_strength=breakdown_voltage
-			if interfacial_tension:
+			if len(interfacial_tension) > 1:
 				doc_test_certificate.interfacial_tension = interfacial_tension["interfacial_tension"]
 			doc_test_certificate.neutralisation_value = neutralization_value
 			doc_test_certificate.flash_point = flash_point
