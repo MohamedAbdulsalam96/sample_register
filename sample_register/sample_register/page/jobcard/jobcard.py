@@ -10,9 +10,15 @@ def get_sample_data():
 	}
 
 @frappe.whitelist()
-def get_sample_data_with_job():
+def get_sample_data_with_job(service_request):
 	return {
-	"get_sample_data": frappe.db.sql("""select false, name, customer, type, priority, standards, job_card, job_card_status, test_group, CASE job_card_status WHEN 'Not Available' THEN 1 WHEN 'Created' THEN 2 WHEN 'Submitted' THEN 3 ELSE 5 END as id from `tabSample Entry Register` where job_card_status!='Not Available' order by id,priority, name desc""", as_list=1,debug=1)
+	"get_sample_data": frappe.db.sql("""select false, name, customer, type, 
+			priority, standards, job_card, job_card_status, test_group, 
+				CASE job_card_status WHEN 'Not Available' THEN 1 WHEN 'Created' THEN 2 WHEN 'Submitted' THEN 3 ELSE 5 END as id
+			 from `tabSample Entry Register` 
+			 where job_card_status not in ('Not Available', 'Submitted')
+			 and order_id = '{0}'
+			 order by id,priority, name desc""".format(service_request), as_list=1,debug=1)
 	}
 
 @frappe.whitelist()
@@ -71,6 +77,25 @@ def submit_job_card(selectedData):
 @frappe.whitelist()
 def set_sample_data(priority,standards,selectedData):
 	selectedData_json = json.loads(selectedData)
+	for r in selectedData_json:
+		if r.get("sampleid"):
+			sample_entry_doc=frappe.get_doc("Sample Entry Register",r.get("sampleid"))
+			sample_entry_doc.priority = priority
+			sample_entry_doc.standards = standards
+			sample_entry_doc.save()
+
+@frappe.whitelist()
+def set_priority_standard_in_jcc(priority,standards,selectedData):
+	selectedData_json = json.loads(selectedData)
+	print "\nselected",selectedData_json
+	for r in selectedData_json:
+		if r.get("job_card"):
+			print "\n\njcc",r.get("job_card")
+			sample_entry_doc=frappe.get_doc("Job Card Creation",r.get("job_card"))
+			sample_entry_doc.priority = priority
+			sample_entry_doc.standards = standards
+			sample_entry_doc.save()
+
 	for r in selectedData_json:
 		if r.get("sampleid"):
 			sample_entry_doc=frappe.get_doc("Sample Entry Register",r.get("sampleid"))

@@ -8,6 +8,12 @@ def get_data():
 			"color": "#1abc9c",
 			"icon": "icon-book",
 			"type": "module",
-			"label": _("Sample Register")
+			"label": _("Back Office")
+		},
+		"Lab Operation": {
+			"color": "#3498db",
+			"icon": "icon-list-alt ",
+			"type": "module",
+			"label": _("Lab Operation")
 		}
 	}

@@ -8,6 +8,9 @@ from frappe.model.document import Document
 
 class Equipment(Document):
 	
+	def before_insert(self):
+		self.generate_equipment_code()
+
 	def validate(self):
 		self.generate_equipment_code()
 		self.generate_model_no()

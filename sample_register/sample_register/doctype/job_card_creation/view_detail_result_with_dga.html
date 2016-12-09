@@ -1,0 +1,235 @@
+<p><b> Fault Analysis Tests </b></p>
+
+<p><b> Dissolved Gas Analysis</b></p>
+<table class="table table-bordered">
+	<tbody>
+        <tr>
+            <td></td>
+            <td>Result</td>
+            <td>Old Result 1</td>
+            <td>Old Result 2</td>
+        </tr>
+        <tr>
+            <td>Date of Test</td>
+            <td>
+            {{ frappe.utils.get_datetime(dga_test_result.start_time).strftime("%d %b %Y") or "" }}
+            </td>
+            <td>    
+            {% if dga_test_result_last1.start_time -%}
+            {{ frappe.utils.get_datetime(dga_test_result_last1.start_time).strftime("%d %b %Y") or "" }}
+
+            {%- endif %}
+            </td>
+            <td>
+            {% if dga_test_result_last2.start_time -%}
+
+                {{ frappe.utils.get_datetime(dga_test_result_last2.start_time).strftime("%d %b %Y") or "" }}
+            {%- endif %}
+            </td>
+        </tr>
+        <tr>
+            <td>Purchase Order</td>
+            <td></td>
+            <td></td><td></td>
+        </tr>
+        <tr>
+            <td>Service Request</td>
+            <td>{{service_request}}</td>
+            <td></td><td></td>
+        </tr>
+        
+        <tr>
+            <td>TRB ID</td>
+            <td>{{ dga_test_result.name or "" }}</td>
+            <td>{{ dga_test_result_last1.name or "" }}</td>
+            <td>{{ dga_test_result_last2.name or "" }}</td>
+        </tr>
+        <tr>
+            <td>Test Conducted By</td>
+            <td>{{ dga_test_result.tested_by or "" }}</td>
+            <td>{{ dga_test_result_last1.tested_by or "" }}</td>
+            <td>{{ dga_test_result_last2.tested_by or "" }}</td>
+        </tr>
+        <tr>
+            <td>Limiting Value Standard</td>
+            <td></td>
+            <td></td><td></td>
+        </tr>
+        <tr>
+            <td>Total Gas Content (TGC)</td>
+            <td>{{ dga_test_result.total_gas_contents or "" }}</td>
+            <td>{{ dga_test_result_last1.total_gas_contents or "" }}</td>
+            <td>{{ dga_test_result_last2.total_gas_contents or "" }}</td>
+        </tr>
+        <tr>
+            <td>Total Dissolved Gas Content (TDCG)</td>
+            <td>{{ dga_test_result.tdcg or "" }}</td>
+            <td>{{ dga_test_result_last1.tdcg or "" }}</td>
+            <td>{{ dga_test_result_last2.tdcg or "" }}</td>
+        </tr>
+        <tr>
+            <td>TDCG/TCD</td>
+            <td>{{ dga_test_result.tdcg_per_tgc or "" }}</td>
+            <td>{{ dga_test_result_last1.tdcg_per_tgc or "" }}</td>
+            <td>
+            {% if dga_test_result_last2 -%}
+            {{ dga_test_result_last2.tdcg_per_tgc or "" }}
+            {%- endif %}
+        </td>
+        </tr>
+        <tr>
+            <td>Oxygen</td>
+            <td>{{ "{0:.2f}".format(dga_test_result.oxygen) or "" }} ppm</td>
+            <td>
+            {% if dga_test_result_last1 -%}
+            {{ "{0:.2f}".format(dga_test_result_last1.oxygen) or "" }} ppm
+            {%- endif %}
+            </td>
+            <td>
+            {% if dga_test_result_last2 -%}
+            {{ "{0:.2f}".format(dga_test_result_last2.oxygen) or "" }} ppm
+            {%- endif %}
+            </td>
+        </tr>
+        <tr>
+            <td>Nitrogen</td>
+            <td>
+            {{ "{0:.2f}".format((dga_test_result.nitrogen)) or "" }} ppm
+            </td>
+            <td>
+            {% if dga_test_result_last1 -%}
+            {{ "{0:.2f}".format((dga_test_result_last1.nitrogen)) or "" }} ppm
+            {%- endif %}ppm
+            </td>
+            <td>
+            {% if dga_test_result_last2 -%}
+            {{ "{0:.2f}".format((dga_test_result_last2.nitrogen)) or "" }} ppm
+            {%- endif %}ppm
+            </td>            
+        </tr>
+        <tr>
+            <td>Carbon Dioxide</td> 
+            <td>
+            {{ "{0:.2f}".format((dga_test_result.carbon)) or "" }} ppm
+            </td>
+            <td>
+            {% if dga_test_result_last1 -%}
+            {{ "{0:.2f}".format(dga_test_result_last1.carbon) or "" }} 
+            {%- endif %} ppm
+            </td>        
+            <td>
+            {% if dga_test_result_last2 -%}
+            {{ "{0:.2f}".format(dga_test_result_last2.carbon) or "" }} 
+            {%- endif %} ppm
+            </td>
+        </tr>
+        <tr>
+            <td>Hydrogen</td>
+            <td>{{ "{0:.2f}".format(dga_test_result.hydrogen) or "" }} ppm</td>
+            <td>
+            {% if dga_test_result_last1 -%}
+            {{ "{0:.2f}".format(dga_test_result_last1.hydrogen) or "" }}
+            {%- endif %} ppm
+            </td>
+            <td>
+            {% if dga_test_result_last2 -%}
+            {{ "{0:.2f}".format(dga_test_result_last2.hydrogen) or "" }}
+            {%- endif %} ppm
+            </td>
+        </tr>
+        <tr>
+            <td>Carbon Monoxide</td>
+            <td> ppm</td>
+            <td> ppm</td>
+            <td> ppm</td>
+        </tr>
+        <tr>
+            <td>Methane</td>
+            <td>{{ "{0:.2f}".format(dga_test_result.methane) or "" }} ppm</td>            
+            <td>
+            {% if dga_test_result_last1 -%}
+            {{ "{0:.2f}".format(dga_test_result_last1.methane) or "" }}
+            {%- endif %} ppm
+            </td>
+            <td>
+            {% if dga_test_result_last2 -%}
+            {{ "{0:.2f}".format(dga_test_result_last2.methane) or "" }}
+            {%- endif %} ppm
+            </td>
+        </tr>    
+        <tr>
+            <td>Ethane</td>
+            <td>{{ "{0:.2f}".format(dga_test_result.ethane) or "" }} ppm</td>
+            <td>
+            {% if dga_test_result_last1 -%}
+            {{ "{0:.2f}".format(dga_test_result_last1.ethane) or "" }}
+            {%- endif %}ppm
+            </td>
+            <td>
+            {% if dga_test_result_last2 -%}
+            {{ "{0:.2f}".format(dga_test_result_last2.ethane) or "" }}
+            {%- endif %}ppm
+            </td>
+        </tr>    
+         <tr>
+            <td>Ethylene</td>
+            <td>{{ "{0:.2f}".format((dga_test_result.ethylene))  or "" }} ppm</td>
+            <td>
+            {% if dga_test_result_last1 -%}
+           {{ "{0:.2f}".format((dga_test_result_last1.ethylene))  or "" }}
+            {%- endif %}ppm
+            </td>
+            <td>
+            {% if dga_test_result_last2 -%}
+           {{ "{0:.2f}".format((dga_test_result_last2.ethylene))  or "" }}
+            {%- endif %}ppm
+            </td>
+        </tr>    
+         <tr>
+            <td>Acetylene</td>
+            <td>
+                {{ "{0:.2f}".format(dga_test_result.acetelene) or "" }} ppm
+            </td>
+            <td>
+                {% if dga_test_result_last1 -%}
+                {{ "{0:.2f}".format(dga_test_result_last1.acetelene) or "" }}            
+                {%- endif %} ppm
+            </td>
+            <td>
+                {% if dga_test_result_last2 -%}
+                {{ "{0:.2f}".format(dga_test_result_last2.acetelene) or "" }}            
+                {%- endif %} ppm
+            </td>
+        </tr>    
+         <tr>
+            <td>Propane</td>
+            <td>{{ "{0:.2f}".format(dga_test_result.propane) or "" }} ppm</td>            
+            <td>
+            {% if dga_test_result_last1 -%}
+            {{ "{0:.2f}".format(dga_test_result_last1.propane) or "" }}            
+            {%- endif %}ppm
+            </td>
+            <td>
+            {% if dga_test_result_last2 -%}
+            {{ "{0:.2f}".format(dga_test_result_last2.propane) or "" }}            
+            {%- endif %}ppm
+            </td>
+        </tr>    
+         <tr>
+            <td>Propylene</td>
+            <td>{{ "{0:.2f}".format(dga_test_result.propylene) or "" }} ppm</td>
+            <td>
+            {% if dga_test_result_last1 -%}
+            {{ "{0:.2f}".format(dga_test_result_last1.propylene) or "" }}            
+            {%- endif %}ppm
+            </td>
+            <td>
+            {% if dga_test_result_last2 -%}
+            {{ "{0:.2f}".format(dga_test_result_last2.propylene) or "" }}            
+            {%- endif %}ppm
+            </td>
+        </tr>    
+   
+                                     
+    </tbody>
+</table>

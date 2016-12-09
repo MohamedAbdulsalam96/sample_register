@@ -1,0 +1,19 @@
+{
+ "add_total_row": 0, 
+ "apply_user_permissions": 1, 
+ "creation": "2016-11-22 11:43:05.937867", 
+ "disabled": 0, 
+ "docstatus": 0, 
+ "doctype": "Report", 
+ "idx": 0, 
+ "is_standard": "Yes", 
+ "modified": "2016-11-22 13:36:21.097467", 
+ "modified_by": "Administrator", 
+ "module": "Sample Register", 
+ "name": "Sales Order Test Details", 
+ "owner": "Administrator", 
+ "query": "select sr.sales_order as 'Sales Order:Link/Sales Order:125',\n \tser.order_id as 'Service Request:Link/Service Request:125', \n \tser.name as 'Sample:Link/Sample Entry Register:125', \n \tjcc.name as 'Job Card:Link/Job Card Creation:125', \n \tjcc.status as \"Job Card Status:Data:120\", \n \tjcc_test.item_code as \"Item Code:Link/Item:150\", \n \tjcc_test.test_name as \"Test Name:Dynamic Link/Test Type:145\", \n \tjcc_test.test_type as \"Test Type:Data:145\"\n from `tabSample Entry Register` ser, `tabService Request` sr, `tabJob Card Creation` jcc, `tabJob Card Creation Test Details` jcc_test \n where ser.order_id=sr.name \n and ser.job_card=jcc.name \n and jcc_test.parent=jcc.name", 
+ "ref_doctype": "Sales Order", 
+ "report_name": "Sales Order Test Details", 
+ "report_type": "Query Report"
+}

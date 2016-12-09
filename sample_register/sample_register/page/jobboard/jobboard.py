@@ -2,17 +2,50 @@ from __future__ import unicode_literals
 import frappe
 from frappe.utils import cstr,now,add_days
 import json
+import datetime
 
 @frappe.whitelist()
-def get_sample_data():
+def get_items(sales_order):
+	print "\n\nser_____",sales_order
+	dl = frappe.db.sql("""select sales_order from `tabService Request` where name='{0}'""".format(sales_order),as_list=1)
+	so = dl[0][0]
+
 	return {
-	"get_sample_data": frappe.db.sql("""select false, name, customer, type, priority, standards, test_group from `tabSample Entry Register` where job_card_status="Not Available" order by name""", as_list=1)
+	"get_items": frappe.db.sql("""select soi.item_code, i.test_type from `tabSales Order Item` soi, `tabItem` i
+				where soi.item_code=i.item_code and soi.parent = '{0}'
+				UNION ALL select pi.item_code,item.test_type from `tabPacked Item` pi, tabItem item where pi.item_code=item.item_code and 
+				pi.parent = '{0}'
+				""".format(so), as_list=1)
+	}
+
+@frappe.whitelist()
+def get_sales_order():
+	return {
+	"get_sales_order": frappe.db.sql("""select name from `tabSales Order`""", as_list=1)
+	}
+
+
+@frappe.whitelist()
+def get_sample_data(sales_order):
+	print "in sample get get_sample_data"
+	print sales_order
+	return {
+	"get_sample_data": frappe.db.sql("""select false, name, customer, type, priority, standards, sales_order, test_group,
+		order_id,
+		case when 5!=6 then (select sales_order from `tabService Request` where name=order_id)
+		ELSE ""
+		END AS 'sales_order'
+	 from `tabSample Entry Register` where job_card_status="Not Available" and docstatus = 1 and order_id = '{0}' order by name""".format(sales_order), as_list=1)
 	}
 
 @frappe.whitelist()
 def get_sample_data_with_job():
 	return {
-	"get_sample_data": frappe.db.sql("""select false, name, customer, type, priority, standards, test_group from `tabSample Entry Register` where job_card_status!="" order by name""", as_list=1)
+	"get_sample_data": frappe.db.sql("""select false, name, customer, type, priority, standards, test_group,order_id,
+		case when 5!=6 then (select sales_order from `tabService Request` where name=order_id)
+		ELSE ""
+		END AS 'sales_order'
+	 from `tabSample Entry Register` where job_card_status!="" order by name""", as_list=1)
 	}
 
 @frappe.whitelist()
@@ -22,7 +55,7 @@ def get_test_data(test_group):
 	}
 
 @frappe.whitelist()
-def create_job_card(test_group,selectedData,test_list_unicode):
+def create_job_card(selectedData,test_list_unicode):
 	print test_list_unicode
 	test_list=json.loads(test_list_unicode)
 	# for test in test_list:
@@ -34,6 +67,7 @@ def create_job_card(test_group,selectedData,test_list_unicode):
 	# print selectedData
 	# frappe.msgprint(selectedData)
 	selectedData_json = json.loads(selectedData)
+	print test_list
 	for r in selectedData_json:
 		doc_job_card_creation=frappe.new_doc("Job Card Creation")
 		doc_job_card_creation.sample_id = r.get("sampleid")
@@ -41,11 +75,14 @@ def create_job_card(test_group,selectedData,test_list_unicode):
 		doc_job_card_creation.type = r.get("type")
 		doc_job_card_creation.priority = r.get("priority")
 		doc_job_card_creation.standards = r.get("standard")
-		for test in test_list:
+		doc_job_card_creation.creation_date = datetime.datetime.today()
+		for test_type in test_list:
 			test_req={
 				"doctype": "Job Card Creation Test Details",
-				"test_group": test_group,
-				"test": test
+				"item_code":test_type,
+				"item_name":frappe.db.get_value("Item", test_type, "item_name"),
+				"test_type": frappe.db.get_value("Item", test_type, "test_type"),
+				"test_group": frappe.db.get_value("Item", test_type, "test_group"),
 			}
 			doc_job_card_creation.append("test_details",test_req)
 		doc_job_card_creation.save()

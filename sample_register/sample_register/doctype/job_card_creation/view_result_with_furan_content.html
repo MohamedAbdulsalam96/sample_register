@@ -1,0 +1,77 @@
+<p><b> Furanic Content Analysis</b></p>
+<table class="table table-bordered">
+    <tbody>
+        <tr>
+            <td></td>
+            <td>Result</td>
+            <td>Old Result 1</td>
+            <td>Old Result 2</td>
+        </tr>
+        <tr>
+            <td>Date of Test</td>
+            <td>{{ furans_details["date_of_testing"] or ""}}</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Purchase Order</td><td></td>
+            <td></td><td></td>
+        </tr>
+        <tr>
+            <td>Service Request</td>
+            <td>{{service_request or ""}}</td>
+            <td></td><td></td>
+        </tr>
+        <tr>
+            <td>TRB ID</td>
+            <td>{{ furans_details["name"] or ""}}</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Test Conducted By</td>
+            <td>{{ furans_details["tested_by"] or ""}}</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Limiting Value Standard</td><td></td>
+            <td></td><td></td>
+        </tr>
+        <tr>
+            <td>Total Furan Content in Oil</td><td> %</td>
+            <td> %</td><td> %</td>
+        </tr>
+        <tr>
+            <td>5-hydroxymethyle 2-furaldehyde</td>
+            <td>{{ furan["5H2F"] or ""}} µg/ kg</td>
+            <td>  µg/ kg</td><td> µg/ kg</td>
+        </tr>
+        <tr>
+            <td>2-furfurol (Furfuryl Alcohal)</td>
+            <td>{{ furan["2FUR"] or ""}} µg/ kg</td>
+            <td>  µg/ kg</td>
+            <td> µg/ kg</td>
+        </tr>
+        <tr>
+            <td>2-furaldehyde</td>
+            <td>{{ furan["2 FURALDEHYDE"] or ""}} µg/ kg</td>
+            <td>  µg/ kg</td>
+            <td> µg/ kg</td>
+        </tr>
+        <tr>
+            <td>2-acetyle furan</td>
+            <td>{{ furan["2ACF"] or ""}} µg/ kg</td>
+            <td>  µg/ kg</td>
+            <td> µg/ kg</td>
+
+        </tr>
+        <tr>
+            <td>5-methyle 2-furaldehyde</td>
+            <td>{{ furan["5M2F"] or ""}} µg/ kg</td>
+            <td>  µg/ kg</td>
+            <td> µg/ kg</td>
+        </tr>
+                                
+    </tbody>
+</table>

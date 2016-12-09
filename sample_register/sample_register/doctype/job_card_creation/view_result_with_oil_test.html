@@ -1,0 +1,108 @@
+<p><b> Oil Screening Tests</b></p>
+<table class="table table-bordered">
+    <tbody>
+        <tr>
+            <td></td>
+            <td>Result</td>
+            <td>Old Result 1</td>
+            <td>Old Result 2</td>
+        </tr>
+        <tr>
+            <td>Date of Test</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Purchase Order</td><td></td>
+            <td></td><td></td>
+        </tr>
+        <tr>
+            <td>Service Request</td>
+            <td>{{service_request}}</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>TRB ID</td><td></td>
+            <td></td><td></td>
+        </tr>
+        <tr>
+            <td>Test Conducted By</td><td></td>
+            <td></td><td></td>
+        </tr>
+        <tr>
+            <td>Limiting Value Standard</td><td></td>
+            <td></td><td></td>
+        </tr>
+        <tr>
+            <td>Visual Appearance</td><td></td>
+            <td></td><td></td>
+        </tr>
+        <tr>
+            <td>Density at {{ density["desired_temperature_1"] or "" }} °C</td>
+            <td>{{ density["density_of_oil_at_dt1"] or "" }} (g/cm 3 )</td>
+            <td></td><td></td>
+        </tr>
+        <tr>
+            <td>Dielectric Dissipation Factor at 50 Hz</td>
+            <td>{{ ddf or "" }}</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Specific Resistivity at ##.# °C (RT)</td>
+            <td>{{ specific_resistivity or ""}} (ohm − cm)</td>
+            <td></td><td></td>
+        </tr>
+        <tr>
+            <td>Specific Resistivity at ##.# °C</td><td></td>
+            <td></td><td></td>
+        </tr>
+        <tr>
+            <td>Interfacial Tension at 
+                {{ interfacial_tension["temp_of_oil"] or ""}} °C</td>
+            <td>{{ interfacial_tension["interfacial_tension"] or ""}} (N/m)</td>
+            <td></td><td></td>
+        </tr>
+        <tr>
+            <td>Dielectric Strength (BDV) at ##.# °C (RT)</td>
+            <td>{{ breakdown_voltage or ""}} (kV)</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Dielectric Strength (BDV) at ##.# °C</td><td></td>
+            <td></td><td></td>
+        </tr>
+        <tr>
+            <td>Water Content</td>
+            <td> {{ water_content or "" }} ppm</td>
+            <td></td><td></td>
+        </tr>    
+        <tr>
+            <td>Neutralization Value</td>
+            <td>{{ neutralization_value or ""}} (mgKOH/g)</td>
+            <td></td><td></td>
+        </tr>    
+         <tr>
+            <td>Sediments and Precipitable Sludge</td><td>g</td>
+            <td></td><td></td>
+        </tr>    
+         <tr>
+            <td>Flash Point</td>
+            <td>{{flash_point or ""}} °C</td>
+            <td></td><td></td>
+        </tr>    
+         <tr>
+            <td>Kinematic Viscosity at ##.# °C</td><td>##.## cst </td>
+            <td></td><td></td>
+        </tr>    
+         <tr>
+            <td>Pour Point</td><td>###.# °C</td>
+            <td></td><td></td>
+        </tr>    
+   
+                                     
+    </tbody>
+</table>

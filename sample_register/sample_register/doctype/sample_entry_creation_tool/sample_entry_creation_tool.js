@@ -4,13 +4,13 @@ cur_frm.add_fetch('equipment','equipment_code','equipment_code');
 cur_frm.add_fetch('equipment','equipment_make','equipment_make');
 cur_frm.add_fetch('equipment','serial_number','serial_number');
 
-cur_frm.fields_dict['order'].get_query = function(doc) {
-	return {
-		filters: {			
-			"customer": doc.customer
-		}
-	}
-}
+// cur_frm.fields_dict['order'].get_query = function(doc) {
+// 	return {
+// 		filters: {			
+// 			"customer": doc.customer
+// 		}
+// 	}
+// }
 // Return query for getting technical contact name in link field
 cur_frm.fields_dict['technical_contact'].get_query = function(doc) {
 	return {
@@ -42,12 +42,15 @@ frappe.ui.form.on("Sample Entry Creation Tool", {
 		frm.disable_save();
 	},
 	
-	// update_clearance_date: function(frm) {
-	// 	return frappe.call({
-	// 		method: "update_details",
-	// 		doc: frm.doc
-	// 	});
-	// },
+	set_date_of_receipt: function(frm) {
+		return frappe.call({
+			method: "set_date_of_receipt",
+			doc: frm.doc,
+			callback: function(r, rt){
+				frm.refresh()
+			}
+		});
+	},
 	create_sample_entry: function(frm){
 		return frappe.call({
 			method: "create_sample_entry",
@@ -66,6 +69,15 @@ frappe.ui.form.on("Sample Entry Creation Tool", {
 			}
 		})
 	},
+	submit_sample_entry: function(frm){
+		return frappe.call({
+			method: "submit_sample_entry",
+			doc: frm.doc,
+			callback: function(r, rt){
+				frm.refresh()
+			}
+		})
+	},
 	get_relevant_entries: function(frm) {
 		return frappe.call({
 			method: "get_details",
@@ -75,6 +87,7 @@ frappe.ui.form.on("Sample Entry Creation Tool", {
 			}
 		});
 	},
+
 	date_of_receipt: function(frm){
 		cur_frm.set_value("from_date", frm.doc.date_of_receipt);
 		cur_frm.set_value("to_date", frm.doc.date_of_receipt);

@@ -2,13 +2,13 @@
 from __future__ import unicode_literals
 
 app_name = "sample_register"
-app_title = "Sample Register"
+app_title = "Back Office"
 app_publisher = "indictrans"
 app_description = "Detail Information of collected samples."
 app_icon = "fa-book"
 app_color = "grey"
-app_email = "tejal.s@indictranstech.com"
-app_version = "0.0.1"
+app_email = "sambhaji.k@indictranstech.com"
+app_version = "3.5.1"
 
 # Includes in <head>
 # ------------------
@@ -48,9 +48,9 @@ app_version = "0.0.1"
 # ------------------
 # See frappe.core.notifications.get_notification_config
 
-# notification_config = "sample_register.notifications.get_notification_config"
+notification_config = "sample_register.sample_register.notifications.get_notification_config"
 
-fixtures = ['Custom Field', 'Property Setter']
+fixtures = ['Custom Field', 'Property Setter', "Custom Script","Print Format"]
 
 # Permissions
 # -----------
@@ -73,6 +73,34 @@ doc_events = {
 		"after_insert": "sample_register.sample_register.doctype.sample_entry_register.sample_entry_register.status_updator",
 		"on_submit": "sample_register.sample_register.doctype.sample_entry_register.sample_entry_register.status_updator",
 		"before_cancel": "sample_register.sample_register.doctype.sample_entry_register.sample_entry_register.status_updator"
+	},
+	"Stock Entry":{
+		"on_submit": "sample_register.sample_register.doctype.fixed_asset_serial_number.fixed_asset_serial_number.make_new_asset"
+	},
+	"Purchase Receipt":{
+		"on_submit": "sample_register.sample_register.doctype.fixed_asset_serial_number.fixed_asset_serial_number.new_fixed_asset"
+	},
+	"Employee":{
+		"validate": "sample_register.sample_register.doctype.fixed_asset_serial_number.fixed_asset_serial_number.trufil_id"
+	},
+	"Quality Inspection":{
+		"on_submit": "sample_register.custom_py_methods.send_verified_mail"
+		# "onload":"sample_register.sample_register.doctype.fixed_asset_serial_number.fixed_asset_serial_number.schedular_event"
+	},
+	"Opportunity": {
+		"on_update": "sample_register.custom_py_methods.activity_log",
+		"validate": "sample_register.custom_py_methods.calculate_tot_amount"
+	},
+	"Sales Order": {
+		"on_submit": "sample_register.custom_py_methods.check_attachment",
+		"after_insert": "sample_register.custom_py_methods.add_actual_closure_date"
+	},
+	"Quotation": {
+		"on_submit": "sample_register.custom_py_methods.quot_workflow",
+		"after_insert": "sample_register.custom_py_methods.add_actual_closure_date_in_quote"
+	},
+	"Product Bundle": {
+		"on_trash": "sample_register.custom_py_methods.bundle_so_present"
 	}
 }
 
@@ -87,10 +115,11 @@ doc_events = {
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
-# 	"all": [
-# 		"sample_register.tasks.all"
-# 	],
+scheduler_events = {
+	"daily": [
+		"sample_register.sample_register.doctype.fixed_asset_serial_number.fixed_asset_serial_number.change_calibration_status"
+	]	
+}
 # 	"daily": [
 # 		"sample_register.tasks.daily"
 # 	],
@@ -116,4 +145,3 @@ doc_events = {
 # override_whitelisted_methods = {
 # 	"frappe.desk.doctype.event.event.get_events": "sample_register.event.get_events"
 # }
-

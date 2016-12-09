@@ -1,0 +1,1 @@
+cur_frm.add_fetch('customer','customer_code','customer_code');

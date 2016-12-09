@@ -1,0 +1,92 @@
+[
+ {
+  "docstatus": 0, 
+  "doctype": "Custom Script", 
+  "dt": "Quotation", 
+  "modified": "2016-11-24 15:07:56.446558", 
+  "name": "Quotation-Client", 
+  "script": "cur_frm.add_fetch(\"customer\",\"customer_code\",\"customer_legal_name\");\ncur_frm.add_fetch(\"customer\",\"vendor_code\",\"vendor_code\");\n\nfrappe.ui.form.on(\"Quotation\", \"refresh\", function(frm) {\n    if(cur_frm.doc.status!=0){\n        cur_frm.add_custom_button(__('Add Approval/Reject Reason'), function() {   \n            cur_frm.cscript.convert_to_group(); }, \"icon-exclamation\", \"btn-default\");\n    }\n\n\n    cur_frm.cscript.convert_to_group = function(doc, cdt, cdn) {\n        var d = new frappe.ui.Dialog({\n            title:__('Add Approval/Reject Reason'),\n            fields: [{label:__(\"Approval/Reject Reason\"), fieldtype:\"Text\",\n                                fieldname:\"reason\"},]\n        })\n        \n        var fd = d.fields_dict;\n        d.set_primary_action(__(\"Submit\"), function() {\n            var c = d.get_values()\n            var cmnt = \"<br>Approval/Reject Reason: \"+ c.reason \n\n            var me = frm.doc\n            \n            return frappe.call({\n                    method: \"frappe.desk.form.utils.add_comment\",\n                    args: {\n                        doc:{\n                            doctype: \"Communication\",\n                            communication_type: \"Comment\",\n                            reference_doctype: frm.doc.doctype,\n                            reference_name: frm.doc.name,\n                            comment: \"cmnt\",\n                            subject: \"cmnt\",\n                            content: cmnt,\n                            comment_by: user\n                        }\n                    },\n                    callback: function(r) {\n                                msgprint(\"Approval/Reject reason added\");\n                                cur_frm.reload_doc();\n                                d.hide();\n\n                    if (cur_frm) {\n                                if (cur_frm.docname && (frappe.last_edited_communication[cur_frm.doctype] || {})[cur_frm.docname]) {\n                                    delete frappe.last_edited_communication[cur_frm.doctype][cur_frm.docname];\n                                }\n                                // cur_frm.comments.input.val(\"\");\n                            }\n                    }\n                });\n\n\n        });\n\n        d.show();\n\n    }\n})\n\n", 
+  "script_type": "Client"
+ }, 
+ {
+  "docstatus": 0, 
+  "doctype": "Custom Script", 
+  "dt": "Employee", 
+  "modified": "2016-01-28 13:19:29.205816", 
+  "name": "Employee-Client", 
+  "script": "frappe.ui.form.on(\"Employee\", \"validate\", function(frm,doctype,name) {\n\n    if(frm.doc.permanent_account_no && frm.doc.permanent_account_no.length<10){\n    \tmsgprint(\"PAN number should be at least 10 characters\");\n            validated = false;\n\t}\n    if(frm.doc.provident_fund_account_no && frm.doc.provident_fund_account_no.length<30){\n    \tmsgprint(\"Provident Fund Account should be for at least 30 characters\");\n            validated = false;\n\t}\n    if(frm.doc.esic_no && frm.doc.esic_no.length<30){\n    \tmsgprint(\"ESIC No should be at least 30 characters.\");\n            validated = false;\n\t}\n});", 
+  "script_type": "Client"
+ }, 
+ {
+  "docstatus": 0, 
+  "doctype": "Custom Script", 
+  "dt": "Salary Slip", 
+  "modified": "2016-01-28 19:54:58.332339", 
+  "name": "Salary Slip-Client", 
+  "script": "cur_frm.add_fetch(\"employee\",\"permanent_account_no\", \"permanent_account_no\");\ncur_frm.add_fetch(\"employee\",\"provident_fund_account_no\",\"provident_fund_account_no\");\ncur_frm.add_fetch(\"employee\",\"trufil_id\",\"trufil_id\");\ncur_frm.add_fetch(\"employee\",\"grade\",\"grade\");\ncur_frm.add_fetch(\"employee\",\"location\",\"location\");\ncur_frm.add_fetch(\"employee\",\"esic_no\",\"esis_no\");\ncur_frm.add_fetch(\"employee\",\"cost_center\",\"cost_center\");\ncur_frm.add_fetch(\"employee\",\"bank_ifscode\",\"bank_ifscode\");\ncur_frm.add_fetch(\"employee\",\"department\",\"department\");\ncur_frm.add_fetch(\"employee\",\"designation\",\"designation\");\n\n", 
+  "script_type": "Client"
+ }, 
+ {
+  "docstatus": 0, 
+  "doctype": "Custom Script", 
+  "dt": "Supplier Quotation", 
+  "modified": "2016-01-19 19:12:05.492972", 
+  "name": "Supplier Quotation-Client", 
+  "script": "frappe.ui.form.on(\"Supplier Quotation\", \"onload\", \n\tfunction(frm){\n                if(frm.doc.items && frm.doc.items[0].prevdoc_docname){\n\t\t    if(frm.doc.items[0].prevdoc_docname){\n\t\t\tfrm.set_value(\"material_request\", frm.doc.items[0].prevdoc_docname);\n\t\t  }\n               }\n\t});", 
+  "script_type": "Client"
+ }, 
+ {
+  "docstatus": 0, 
+  "doctype": "Custom Script", 
+  "dt": "Material Request", 
+  "modified": "2016-01-28 18:58:39.425309", 
+  "name": "Material Request-Client", 
+  "script": "frappe.ui.form.on(\"Material Request\", \"refresh\", \n\tfunction(frm){\n                if(frm.doc.workflow_state == \"Rejected\"){\n                      var dialog = new frappe.ui.Dialog({\n\t\t             title: \"Reason\",\n\t\t             fields: [\n\t\t\t    {\"fieldtype\": \"Text\", \"label\": __(\"Reason for rejection\"), \n                            \"fieldname\": \"reason\", \"reqd\": 1 },\n                            {\"fieldtype\": \"Button\", \"label\": __(\"Update\"), \"fieldname\": \"update\"},\n                          ]\n                      });\n                      dialog.fields_dict.update.$input.click(function() {\n\t\t         args = dialog.get_values();\n                         frm.doc.reason_for_rejection = args.reason\n                         frm.comments.insert_comment(\"Material Request Approval\", \"Rejected because- \" + args.reason)\n                         frm.save();\n                         frm.comments.refresh\n                         dialog.hide();\n                    \n                      })\n                      frm.doc.workflow_state = \"Draft\"\n                      frm.save();\n                   dialog.show();\n                 \n       }                 \n })", 
+  "script_type": "Client"
+ }, 
+ {
+  "docstatus": 0, 
+  "doctype": "Custom Script", 
+  "dt": "Leave Application", 
+  "modified": "2016-01-22 19:12:37.633872", 
+  "name": "Leave Application-Client", 
+  "script": "frappe.ui.form.on(\"Leave Application\", {\n\tonload: function(frm) {\n\t\tfrm.set_query(\"leave_approver_two\", function() {\n\t\t\treturn {\n\t\t\tquery:\"erpnext.hr.doctype.leave_application.leave_application.get_approvers\",\n\t\t\tfilters: {\n\t\t\t\t   employee: frm.doc.employee\n\t\t\t      }\n\t\t\t};\n\t\t});\n\t},\n\tleave_approver_two: function(frm) {\n           frm.set_value(\"leave_approver_two_name\",frappe.user.full_name(frm.doc.leave_approver_two));\n        }\n})\n", 
+  "script_type": "Client"
+ }, 
+ {
+  "docstatus": 0, 
+  "doctype": "Custom Script", 
+  "dt": "Order Register", 
+  "modified": "2016-05-05 15:46:20.373605", 
+  "name": "Order Register-Client", 
+  "script": "frappe.ui.form.on(\"Order Register\", \"validate\", function(frm,doctype,name) {\n    if(!frm.doc.order_date){\n       cur_frm.set_value(\"order_date\",frappe.datetime.now_datetime());\n    }\n});", 
+  "script_type": "Client"
+ }, 
+ {
+  "docstatus": 0, 
+  "doctype": "Custom Script", 
+  "dt": "Sales Order", 
+  "modified": "2016-07-04 13:09:48.483897", 
+  "name": "Sales Order-Client", 
+  "script": "cur_frm.add_fetch(\"customer\",\"customer_code\",\"customer_legal_name\");\nfrappe.ui.form.on(\"Sales Order\", \"validate\", function(frm,cdt,cdn) {\n\ttotal_qty=0;\n\tfor(i=0;i<frm.doc.items.length;i++){\n\t\ttotal_qty+=frm.doc.items[i].qty\n\t};\n\tcur_frm.set_value(\"contract_quantities\", total_qty)\n});", 
+  "script_type": "Client"
+ }, 
+ {
+  "docstatus": 0, 
+  "doctype": "Custom Script", 
+  "dt": "Sales Invoice", 
+  "modified": "2016-07-04 13:10:02.365800", 
+  "name": "Sales Invoice-Client", 
+  "script": "cur_frm.add_fetch(\"customer\",\"customer_code\",\"customer_legal_name\");", 
+  "script_type": "Client"
+ }, 
+ {
+  "docstatus": 0, 
+  "doctype": "Custom Script", 
+  "dt": "Opportunity", 
+  "modified": "2016-07-06 16:09:39.821527", 
+  "name": "Opportunity-Client", 
+  "script": "cur_frm.add_fetch(\"customer\",\"customer_code\",\"customer_legal_name\");\nfrappe.ui.form.on(\"Opportunity\", \"validate\", function(frm,cdt,cdn) {\n\tvar eov = (frm.doc.estimated_sale_value*frm.doc.probability)/100;\n\tif(frm.doc.probability>100 || frm.doc.probability<0){\n\t\tmsgprint(\"Probability should be 0 to 100\");\n\t\tvalidated = false;\n\t\tcur_frm.set_value(\"estimated_opportunity_value\",0);\n\t}\n\telse{\n\t\tcur_frm.set_value(\"estimated_opportunity_value\",eov);\n\t}\n});\nfrappe.ui.form.on(\"Opportunity\", \"refresh\", function(frm,cdt,cdn) {\n \tif(frm.doc.customer){\n\t \tif(cur_frm.doc.title == cur_frm.doc.customer){\n\t \t\tvar title = frm.doc.customer+\"-\"+frm.doc.name;\n\t \t\tcur_frm.set_value(\"opportunity_code\",title)\n\t \t\tcur_frm.save()\n\t \t}\n\t\t\n\t}\n\telse if(frm.doc.lead){\n\t\tif(cur_frm.doc.title == cur_frm.doc.lead){\n\t\t\tvar title = frm.doc.lead+\"-\"+frm.doc.name;\n\t \t\tcur_frm.set_value(\"opportunity_code\",title)\n\t \t\tcur_frm.save()\n \t\t}\n\n\t}\n});\nfrappe.ui.form.on(\"Opportunity\", \"probability\", function(frm,cdt,cdn) {\n\tvar eov = (frm.doc.estimated_sale_value*frm.doc.probability)/100;\n\tif(frm.doc.probability>100 || frm.doc.probability<0){\n\t\tmsgprint(\"Probability should be 0 to 100\");\n\t}\n\telse{\n\t\tcur_frm.set_value(\"estimated_opportunity_value\",eov);\n\t}\n});", 
+  "script_type": "Client"
+ }
+]

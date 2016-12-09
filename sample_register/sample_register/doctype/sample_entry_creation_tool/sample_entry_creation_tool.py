@@ -28,10 +28,10 @@ class SampleEntryCreationTool(Document):
 		else:
 			condition +="and job_card_status='Not Available'"
 
-		dl = frappe.db.sql("""select name,customer,date_of_receipt,job_card,functional_location,functional_location_code,
+		dl = frappe.db.sql("""select name,customer,date_of_receipt, date_of_collection,job_card,functional_location,functional_location_code,
 			equipment,equipment_make,serial_number,equipment_code,
 			conservation_protection_system, sample_taken_from, oil_temperature, winding_temperature,
-			remarks from `tabSample Entry Register` where order_id='%s' %s"""%(self.order, condition),as_dict=1, debug=1)
+			remarks from `tabSample Entry Register` where docstatus = 0 and order_id='%s' %s"""%(self.order, condition),as_dict=1, debug=1)
 
 		self.set('sample_entry_creation_tool_details', [])
 
@@ -47,6 +47,7 @@ class SampleEntryCreationTool(Document):
 			nl.serial_number =d.serial_number
 			nl.equipment_code =d.equipment_code
 			nl.date_of_receipt = d.date_of_receipt
+			nl.date_of_collection = d.date_of_collection
 			nl.conservation_protection_system = d.conservation_protection_system
 			nl.sample_taken_from = d.sample_taken_from
 			nl.oil_temperature = d.oil_temperature
@@ -54,6 +55,9 @@ class SampleEntryCreationTool(Document):
 			nl.remarks = d.remarks
 
 	def create_sample_entry(self):
+		if not self.number_of_sample:
+			frappe.throw("Please enter number of sample")
+
 		if not self.date_of_collection:
 			frappe.throw("Please select Date of Collection")
 
@@ -80,8 +84,29 @@ class SampleEntryCreationTool(Document):
 			sample_link="<a href='desk#Form/Sample Entry Register/"+doc_sample_entry.name+"'>"+doc_sample_entry.name+" </a>"
 			frappe.msgprint(sample_link+"created")
 
+		self.number_of_sample =0
+		self.weather_condition = ""
+		self.date_of_collection =""
+		self.technical_contact = ""
+		self.type =""
+		self.drawn_by =""
+
+		self.get_details()
+
 	def update_sample_entry(self):
 		sample_fl = []
+		container_detail = []
+
+		#check duplicate combination for code designation, equipment and sample drawn
+		code_designation_combination_check = []
+
+		for d in self.get("sample_entry_creation_tool_details"):
+			if d.functional_location and d.equipment and d.sample_taken_from:
+				if (d.functional_location+d.equipment+d.sample_taken_from) in code_designation_combination_check:
+					frappe.msgprint("Duplicate Code Designation Combination <br> '%s' is not allowed at row '%s'"%((d.functional_location+"-"+d.equipment+ "-"+d.sample_taken_from),d.idx),raise_exception=1)
+				else:
+					code_designation_combination_check.append(d.functional_location+d.equipment+d.sample_taken_from)
+
 		for d in self.get('sample_entry_creation_tool_details'):
 				sample_entry_doc=frappe.get_doc("Sample Entry Register", d.sample_id)
 				if sample_entry_doc.docstatus == 0: 
@@ -92,13 +117,59 @@ class SampleEntryCreationTool(Document):
 					sample_entry_doc.serial_number = d.serial_number
 					sample_entry_doc.equipment_code = d.equipment_code
 					sample_entry_doc.date_of_receipt = d.date_of_receipt
+					sample_entry_doc.date_of_collection = d.date_of_collection
 					sample_entry_doc.conservation_protection_system = d.conservation_protection_system
 					sample_entry_doc.sample_taken_from = d.sample_taken_from
 					sample_entry_doc.oil_temperature = d.oil_temperature
 					sample_entry_doc.winding_temperature = d.winding_temperature
 					sample_entry_doc.remarks = d.remarks
+					if d.container_type_i and d.container_id_i:
+						del sample_entry_doc.container_details[:]
+						container_detail = {
+								"doctype": "Container Details",
+								"container_type": d.container_type_i,
+								"container_id":d.container_id_i,
+								"customer_container_id":d.customer_container_id
+								}
+						sample_entry_doc.append("container_details", container_detail)
+						if d.container_type_ii and d.container_id_ii:
+							container_detail = {
+									"doctype": "Container Details",
+									"container_type": d.container_type_ii,
+									"container_id":d.container_id_ii,
+									"customer_container_id":d.customer_container_id_ii
+
+									}
+							sample_entry_doc.append("container_details", container_detail)
+						if d.container_type_iii and d.container_id_iii:
+							container_detail = {
+									"doctype": "Container Details",
+									"container_type": d.container_type_iii,
+									"container_id":d.container_id_iii,
+									"customer_container_id":d.customer_container_id_iii
+									}
+							sample_entry_doc.append("container_details", container_detail)
 					sample_entry_doc.save()
 		frappe.msgprint("Sample Entry updated")
+
+	def submit_sample_entry(self):
+		for d in self.get('sample_entry_creation_tool_details'):
+				sample_entry_doc=frappe.get_doc("Sample Entry Register", d.sample_id)
+				if sample_entry_doc.docstatus == 0 and sample_entry_doc.date_of_receipt: 
+					sample_entry_doc.submit()
+		frappe.msgprint("Sample Entry submitted.")
+
+	def set_date_of_receipt(self):
+		samples = []
+		if not self.date_of_receipt:
+			msgprint(_("Please select Date of Receipt."))
+
+		if self.date_of_receipt:
+			for d in self.get('sample_entry_creation_tool_details'):
+				if not d.date_of_receipt:
+					d.date_of_receipt = self.date_of_receipt
+
+			msgprint(_("Date of Receipt set into table, please click on Update Sample Entry button to update Sample"))
 
 		# if d.functional_location:
 		# 	frappe.db.sql("""update `tabSample Entry Register` set functional_location = %s, modified = %s, functional_location_code= %s

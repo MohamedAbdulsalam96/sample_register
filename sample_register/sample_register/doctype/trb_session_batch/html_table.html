@@ -1,0 +1,49 @@
+   
+<br>
+<table class="table table-bordered table-condensed">
+        <tr>
+        <th width="13%">
+             <p align="center" style="margin:2px"><b>Sample ID</b></p>
+        </th>
+        <th align="center" width="12%">
+             <p align="center" style="margin:2px"><b>Test Type</b></p> 
+        </th>
+        <th align="center" width="10%">
+            <p align="center" style="margin:2px"><b>Test Name</b></p> 
+        </th>
+        <th align="center" width="10%">
+            <p align="center" style="margin:2px"><b>Job Card</b></p> 
+        </th>
+        <th align="center" width="10%">
+            <p align="center" style="margin:2px"><b>Priority</b></p> 
+        </th>
+        <th align="center" width="7%">
+            <p align="center" style="margin:2px"><b>Type</b></p> 
+        </th>
+        <th align="center" width="7%">
+            <p align="center" style="margin:2px"><b>Verify</b></p> 
+        </th>
+
+      </tr>
+    {% if (data.length) { %}
+        {% for(var i=0, l=data.length; i < l; i++) { %}
+                <tr>
+                    <td align="center" width="13%">{{ data[i].sample_id  }}</td>
+                    <td align="center" width="12.1%">{{ data[i].test_type }}</td>
+                    <td align="center" width="12.1%">
+                        <a href="desk#Form/{{ data[i].test_type }}/{{ data[i].name }}">
+                            {{ data[i].name }} </a>
+
+                        </td>
+                    <td align="center" width="12.1%">{{ data[i].job_card }}</td>
+                    <td align="center" width="12.1%">{{ data[i].priority }}</td>
+                    <td align="center" width="12.1%">{{ data[i].test_type_purpose }}</td>
+                    <td class="verify" align="center" width="12.1%">
+                    {% if (data[i].test_type_purpose != "Verify" && data[i].docstatus != 0) { %}
+                        <button class="add-comment btn btn-default btn-sm" test-name="{{ data[i].name }}" test-type="{{ data[i].test_type  }}">Verify</button   >
+                    </td>
+                    {% } %} 
+                </tr>
+        {% } %}
+    {% } %} 
+</table>

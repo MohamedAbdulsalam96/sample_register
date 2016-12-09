@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '0.0.1'
+version = '3.5.1'
 
 setup(
     name='sample_register',

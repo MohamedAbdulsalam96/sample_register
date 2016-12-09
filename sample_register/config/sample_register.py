@@ -27,6 +27,12 @@ def get_data():
 					"name": "Test Certificate",
 					"description": _("All Test Certificate related information."),
 				},
+				{
+					"label": _("Service Request"),
+					"type": "doctype",
+					"name": "Service Request",
+					"description": _("Customer Service Request list."),
+				},
 			]
 		},
 		{
@@ -79,6 +85,12 @@ def get_data():
 					"name": "Test",
 					"description":_("Test Master"),
 				},
+				{
+					"type": "doctype",
+					"name": "Standard Operating Procedure",
+					"label": _("Standard Operating Procedure"),
+					"description": _("create Standard Operating Procedure")
+				},
 			]
 		},
 		{
@@ -106,5 +118,4 @@ def get_data():
 				},
 			]
 		},
-
 	]
